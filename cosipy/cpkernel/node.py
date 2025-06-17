@@ -12,7 +12,8 @@ spec['temperature'] = float64
 spec['liquid_water_content'] = float64     
 spec['ice_fraction'] = float64
 spec['refreeze'] = float64
-spec['year'] = float64
+spec['firn_refreeze'] = float64
+spec['hydro_year'] = float64
 
 # =================================================================================================
 
@@ -28,12 +29,10 @@ class Node:
     ----------
         height : float
             Height of the layer [:math:`m`]
-        density : float
-            snow density [:math:`kg~m^{-3}`]
         temperature : float
             temperature of the layer [:math:`K`]
-        liquid_water : float
-            liquid water [:math:`m~w.e.`]
+        liquid_water content: float
+            liquid water content [:math:`m~w.e.`]
 
     Returns
     -------
@@ -45,40 +44,29 @@ class Node:
     # Initialisation:
     # =============== #
 
-    def __init__(self, height, snow_density, temperature, liquid_water_content, ice_fraction=None):
+    def __init__(self, height, snow_density, temperature, liquid_water_content, ice_fraction = None):
 
-        # Initialize state variables 
+        # Initialise state variables 
         self.height = height
         self.temperature = temperature
         self.liquid_water_content = liquid_water_content
         
         if ice_fraction is None:
             # Remove weight of air from density
-            a = snow_density - (1-(snow_density/ice_density))*air_density
-            self.ice_fraction = a/ice_density
+            a = snow_density - (1 - (snow_density / ice_density)) * air_density
+            self.ice_fraction = a / ice_density
         else:
             self.ice_fraction = ice_fraction
 
         self.refreeze = 0.0
-        self.year = 0.0 
+        self.firn_refreeze = 0.0
+        self.hydro_year = 0.0
 
     # ================================================================================================== #
 
     # ======================================== #
-    # GET FUNCTIONS FOR STATE LAYER VARIABLES:
+    # Get Functions for State Layer Variables:
     # ======================================== #
-   
-    def get_layer_year(self):
-        """ Returns the layer year of the node.
-        
-        Returns
-        -------
-            year : float
-                Snow layer year [yyyy]
-        """
-        return self.year
-
-    # ===============================================
 
     def get_layer_height(self):
         """ Returns the layer height of the node.
@@ -89,8 +77,8 @@ class Node:
                 Snow layer height [:math:`m`]
         """
         return self.height
-
-    # ===============================================
+      
+    # -----------------------------------------------
 
     def get_layer_temperature(self):
         """ Returns the snow layer temperature of the node. 
@@ -102,7 +90,7 @@ class Node:
         """
         return self.temperature
 
-    # ===============================================
+    # -----------------------------------------------
     
     def get_layer_ice_fraction(self):
         """ Returns the volumetric ice fraction of the node. 
@@ -114,7 +102,7 @@ class Node:
         """
         return self.ice_fraction
 
-    # ===============================================
+    # -----------------------------------------------
     
     def get_layer_refreeze(self):
         """ Returns the amount of refreezing of the node. 
@@ -122,11 +110,23 @@ class Node:
         Returns
         -------
             refreeze : float
-                Amount of water that has refreezed per time step [:math:`m~w.e.`]
+                Amount of water that has refrozen per time step [:math:`m~w.e.`]
         """
         return self.refreeze
+    
+    # -----------------------------------------------
+    
+    def get_firn_layer_refreeze(self):
+        """ Returns the amount of refreezing of a firn node. 
+        
+        Returns
+        -------
+            refreeze : float
+                Amount of water that has refrozen in firn per time step [:math:`m~w.e.`]
+        """
+        return self.firn_refreeze
 
-    # ===============================================    
+    # -----------------------------------------------   
 
     def get_layer_liquid_water_content(self):
         """ Returns the liquid water content of the node.
@@ -137,11 +137,23 @@ class Node:
                 Liquid water content [-]
         """
         return self.liquid_water_content
+    
+    # -----------------------------------------------
+    
+    def get_layer_hydro_year(self):
+        """ Returns the layer year of the node.
+        
+        Returns
+        -------
+            year : float
+                Snow layer year [yyyy]
+        """
+        return self.hydro_year
 
     # ================================================================================================== #
 
     # ========================================== #
-    # GET FUNCTIONS FOR DERIVED LAYER VARIABLES:
+    # Get Functions for Derived Layer Variables:
     # ========================================== #
 
     def get_layer_density(self):
@@ -154,7 +166,7 @@ class Node:
         """
         return self.get_layer_ice_fraction()*ice_density + self.get_layer_liquid_water_content()*water_density + self.get_layer_air_porosity()*air_density
 
-    # ===============================================
+    # -----------------------------------------------
     
     def get_layer_air_porosity(self):
         """ Returnis the ice fraction of the node.
@@ -166,7 +178,7 @@ class Node:
         """
         return max(0.0, 1 - self.get_layer_liquid_water_content() - self.get_layer_ice_fraction())
 
-    # ===============================================
+    # -----------------------------------------------
     
     def get_layer_specific_heat(self):
         """ Returns the volumetric averaged specific heat of the node. 
@@ -185,7 +197,7 @@ class Node:
             raise ValueError("Specific heat method = \"{:s}\" is not allowed, must be one of {:s}".format(specific_heat_method, ", ".join(SHmethods_allowed)))
         return specific_heat
 
-    # ===============================================
+    # -----------------------------------------------
 
     def get_layer_liquid_water_content(self):
         """ Returns the liquid water content of the node.
@@ -197,7 +209,7 @@ class Node:
         """
         return self.liquid_water_content
 
-    # =============================================== 
+    # ----------------------------------------------- 
     
     def get_layer_irreducible_water_content(self):
         """ Returns the irreducible water content of the node. 
@@ -215,7 +227,7 @@ class Node:
             theta_e = 0.0
         return theta_e
 
-    # =============================================== 
+    # ----------------------------------------------- 
     
     def get_layer_cold_content(self):
         """ Returns the cold content of the node. 
@@ -227,7 +239,7 @@ class Node:
         """
         return -self.get_layer_specific_heat() * self.get_layer_density() * self.get_layer_height() * (self.get_layer_temperature()-zero_temperature)
 
-    # ===============================================
+    # -----------------------------------------------
     
     def get_layer_porosity(self):
         """ Returns the porosity of the node. 
@@ -239,7 +251,7 @@ class Node:
         """
         return 1-self.get_layer_ice_fraction()-self.get_layer_liquid_water_content()
 
-    # ===============================================
+    # -----------------------------------------------
    
     def get_layer_thermal_conductivity(self):
         """ Returns the volumetric weighted thermal conductivity of the node.
@@ -264,7 +276,7 @@ class Node:
             raise ValueError("Thermal conductivity method = \"{:s}\" is not allowed, must be one of {:s}".format(thermal_conductivity_method, ", ".join(methods_allowed)))
         return lam
 
-    # ===============================================
+    # -----------------------------------------------
 
     def get_layer_thermal_diffusivity(self):
         """ Returns the thermal diffusivity of the node. 
@@ -280,7 +292,7 @@ class Node:
     # ===============================================
 
     # ======================================== #
-    # SET FUNCTIONS FOR STATE LAYER VARIABLES:
+    # Set Functions for State Layer Variables:
     # ======================================== #
 
 
@@ -294,19 +306,7 @@ class Node:
         """
         self.height = height
 
-    # ===============================================
-
-    def set_layer_year(self, year):
-        """ Sets the layer height of the node. 
-        
-        Parameters
-        ----------
-            year : float
-                Layer year [yyyy]
-        """
-        self.year = year
-
-    # ===============================================
+    # -----------------------------------------------
 
     def set_layer_temperature(self, T):
         """ Sets the mean temperature of the node.
@@ -318,19 +318,7 @@ class Node:
         """
         self.temperature = T
 
-    # ===============================================
-
-    def set_layer_liquid_water_content(self, lwc):
-        """ Sets the liquid water content of the node.
-
-        Parameters
-        ----------
-            lwc : float
-                Liquid water content [-]
-        """
-        self.liquid_water_content = lwc
-
-    # ===============================================
+    # -----------------------------------------------
     
     def set_layer_ice_fraction(self, ifr):
         """ Sets the ice fraction of the node. 
@@ -342,16 +330,52 @@ class Node:
         """
         self.ice_fraction = ifr
 
-    # ===============================================
+    # -----------------------------------------------
     
-    def set_layer_refreeze(self, refr):
-        """ Sets the amount of water refreezed of the node.
+    def set_layer_refreeze(self, refreeze):
+        """ Sets the amount of water refrozen in the node.
 
         Parameters
         ----------
             refr : float
-                Amount of refreezed water [:math:`m~w.e.`]
+                Amount of refrozen water [:math:`m~w.e.`]
         """
-        self.refreeze = refr
+        self.refreeze = refreeze
+
+    # -----------------------------------------------
+    
+    def set_firn_layer_refreeze(self, firn_refreeze):
+        """ Sets the amount of water refrozen in a firn node.
+
+        Parameters
+        ----------
+            refr : float
+                Amount of refrozen water in a firn node [:math:`m~w.e.`]
+        """
+        self.firn_refreeze = firn_refreeze    
+
+    # -----------------------------------------------
+
+    def set_layer_liquid_water_content(self, lwc):
+        """ Sets the liquid water content of the node.
+
+        Parameters
+        ----------
+            lwc : float
+                Liquid water content [-]
+        """
+        self.liquid_water_content = lwc
+
+    # -----------------------------------------------
+
+    def set_layer_hydro_year(self, hydro_year):
+        """ Sets the layer hydrological year of the node. 
+        
+        Parameters
+        ----------
+            hydrological year : float
+                Layer hydrological year [yyyy]
+        """
+        self.hydro_year = hydro_year
 
     # =============================================================================

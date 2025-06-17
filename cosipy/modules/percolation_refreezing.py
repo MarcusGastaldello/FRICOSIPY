@@ -3,40 +3,64 @@ from numba import njit
 from constants import *
 from parameters import *
 
+# ============================== #
+# Water Percolation & Refreezing
+# ============================== #
 
-def percolation_refreezing(GRID, surface_water, subsurface_melt):
+def percolation_refreezing(GRID, hydro_year, surface_water):
 
-    # =========================================================================
-    # Distribute surface water to sub-surface nodes (Preferential Percolation):
-    # =========================================================================
-
-    # Check if there is any surface water to distribute on this timestep:
+    # Preferential Percolation:
     if surface_water != 0:
         distribute_water(GRID, surface_water)
 
-    # =======================
     # Sub-surface Refreezing:
-    # =======================
+    water_refrozen = refreezing(GRID, hydro_year)
 
-    # Reset output values:
-    water_refrozen = refreezing(GRID)
-
-    # ====================================================
-    # Water Percolation (Bucket Scheme) Storage & Run-off:
-    # ====================================================
-
-    # Check if there is any additional water to percolate:
-    if ((surface_water != 0) | (subsurface_melt != 0)):
-        Q = percolate_water(GRID)
-    else:
-        Q = 0
+    # Water Percolation, Storage & Run-off:
+    Q = percolate_water(GRID)
 
     return Q , water_refrozen
 
 # ====================================================================================================================
 
+# ======================== #
+# Preferential Percolation
+# ======================== #
+
+@njit
+def distribute_water(GRID, surface_water):
+
+    # Import Sub-surface Grid Information:
+    h = np.asarray(GRID.get_height()) 
+    z = np.asarray(GRID.get_depth())
+
+    if preferential_percolation_method == 'Marchenko17':
+        """ Statistical preferential percolation scheme (Gaussian) (Marchenko et al., 2013) """
+
+        # Calculate the Gaussian Probability Density Function (PDF):
+        PDF_normal = 2 * ((np.exp(- (z**2)/(2 * (z_lim / 3)**2))) / ((z_lim/3) * np.sqrt(2 * np.pi)))
+        # Adjust in accordance with sub-surface layer heights:
+        PDF_normal_height = PDF_normal * h
+        # Normalise by dividing by the cumulative sum:
+        Normalise = PDF_normal_height / np.sum(PDF_normal_height)
+        # Update layer water content:
+        water = np.asarray(GRID.get_liquid_water_content()) + ((Normalise * surface_water)/ h)
+        GRID.set_liquid_water_content(water)
+
+    elif preferential_percolation_method == 'disabled':
+
+        # Add all water to the uppermost sub-surface layer:
+        water = surface_water / GRID.get_node_height(0)
+        GRID.set_node_liquid_water_content(0, GRID.get_node_liquid_water_content(0) + float(water))
+
+# ====================================================================================================================
+
+# ====================== #
+# Sub-surface Refreezing
+# ====================== #
+
 # Note: Numba is not compatible with np.min(axis = 0)
-def refreezing(GRID):
+def refreezing(GRID, hydro_year):
 
     # Reset output values:
     water_refrozen = 0
@@ -75,44 +99,22 @@ def refreezing(GRID):
     dT = d_phi_water / (Conversion * np.asarray(GRID.get_ice_fraction()))
     GRID.set_temperature(T + dT)
 
-    # Record amount of refreezing:
-    #GRID.set_refreeze(d_phi_ice * np.asarray(GRID.get_height())) # Note: causes issues with Numba?
+    # Record amount of refreezing in layers:
+    GRID.set_refreeze(d_phi_ice * np.asarray(GRID.get_height()))
+    
+    # Record amount of refreezing in firn layers (i.e. all layers except current accumulation year)
+    GRID.set_firn_refreeze(np.where(np.asarray(GRID.get_hydro_year()) != hydro_year, d_phi_ice * np.asarray(GRID.get_height()), 0))
+    
+    # Record total water refrozen:
     water_refrozen =  np.sum(d_phi_water * np.asarray(GRID.get_height()))
 
     return water_refrozen
 
 # ====================================================================================================================
 
-@njit
-def distribute_water(GRID, surface_water):
-
-    # Import Sub-surface Grid Information:
-    h = np.asarray(GRID.get_height()) 
-
-    # Calculate depth (avoiding extremely slow COSIPY baseline method)
-    z = np.full(len(h),np.nan)
-    z[0]  = 0.5 * h[0]
-    z[1:] = np.cumsum(h)[:-1] + (0.5 * h)[1:]
-
-    if water_percolation_method == 'bucket':
-
-        # Add all water to the uppermost sub-surface layer:
-        water = surface_water / GRID.get_node_height(0)
-        GRID.set_node_liquid_water_content(0, GRID.get_node_liquid_water_content(0) + float(water))
-
-    if water_percolation_method == 'Marchenko17':
-
-        # Calculate the Gaussian Probability Density Function (PDF):
-        PDF_normal = 2 * ((np.exp(- (z**2)/(2 * (z_lim / 3)**2))) / ((z_lim/3) * np.sqrt(2 * np.pi)))
-        # Adjust in accordance with sub-surface layer heights:
-        PDF_normal_height = PDF_normal * h
-        # Normalise by dividing by the cumulative sum:
-        Normalise = PDF_normal_height / np.sum(PDF_normal_height)
-        # Update layer water content:
-        water = np.asarray(GRID.get_liquid_water_content()) + ((Normalise * surface_water)/ h)
-        GRID.set_liquid_water_content(water)
-
-# ====================================================================================================================
+# =================================== #
+# Water Percolation, Storage & Runoff
+# =================================== #
 
 @njit  
 def percolate_water(GRID):
@@ -144,4 +146,6 @@ def percolate_water(GRID):
     GRID.set_node_liquid_water_content(GRID.number_nodes - 1, 0.0)
 
     return Q
+
+# ====================================================================================================================
 

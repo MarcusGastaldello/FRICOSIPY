@@ -1,6 +1,10 @@
 from constants import *
 from parameters import *
 
+# ================= #
+# Surface Roughness
+# ================= #
+
 def update_roughness(GRID):
 
     roughness_allowed = ['Moelg12','constant']
@@ -14,6 +18,10 @@ def update_roughness(GRID):
     return sigma
 
 # ====================================================================================================================
+
+# ========================= #
+# Moelg et al., 2009 Method
+# ========================= #
 
 def method_Moelg(GRID):
 

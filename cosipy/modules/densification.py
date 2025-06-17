@@ -3,7 +3,11 @@ from constants import *
 from parameters import *
 from numba import njit
 
-def densification(GRID,SLOPE,ACCUMULATION,dt):
+# ================= #
+# Dry Densification
+# ================= #
+
+def densification(GRID,ACCUMULATION,dt):
     """ Densification of the snowpack
     Args:
         GRID    ::  GRID-Structure
@@ -12,9 +16,9 @@ def densification(GRID,SLOPE,ACCUMULATION,dt):
 
     densification_allowed = ['Boone', 'Ligtenberg11', 'constant']
     if densification_method == 'Boone':
-        method_Boone(GRID,SLOPE,ACCUMULATION,dt)
+        method_Boone(GRID,dt)
     elif densification_method == 'Ligtenberg11':
-        method_Ligtenberg(GRID,SLOPE,ACCUMULATION,dt)
+        method_Ligtenberg(GRID,ACCUMULATION,dt)
     elif densification_method == 'constant':
         pass
     else:
@@ -22,8 +26,12 @@ def densification(GRID,SLOPE,ACCUMULATION,dt):
 
 # ====================================================================================================================
 
+# ================= #
+# Boone 2002 Method
+# ================= #
+
 @njit
-def method_Boone_Vectorised(GRID,SLOPE,ACCUMULATION,dt):
+def method_Boone(GRID,dt):
     """ Description: Densification through overburden pressure
         after Essery et al. 2013
     """
@@ -68,8 +76,12 @@ def method_Boone_Vectorised(GRID,SLOPE,ACCUMULATION,dt):
 
 # ====================================================================================================================
 
+# ================================================================= #
+# Arthern et al., 2010 (modified by Ligtenberg et al., 2011) Method
+# ================================================================= #
+
 @njit
-def method_Ligtenberg(GRID,SLOPE,ACCUMULATION,dt):
+def method_Ligtenberg(GRID,ACCUMULATION,dt):
     """ Description: Densification based on in situ measurements of Antarctic snow compaction (used in the EBFM)
         after Arthern et al. 2010 (modified by Ligtenberg et al. 2011)
     """

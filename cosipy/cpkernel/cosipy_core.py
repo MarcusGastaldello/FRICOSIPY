@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from numpy import genfromtxt
-from datetime import datetime
 import datetime as dt
 import os
 import sys
@@ -41,9 +40,6 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     # =================== #
     GRID = init_snowpack()
 
-    # hours since the last snowfall (albedo module)
-    hours_since_snowfall = 0
-
     # ========================= #
     # GET STATIC DATA FROM FILE
     # ========================= #
@@ -51,7 +47,6 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     ELEVATION = STATIC.ELEVATION.values
     SLOPE = STATIC.SLOPE.values
     ASPECT = STATIC.ASPECT.values
-    MASK = STATIC.MASK.values
     BASAL = STATIC.BASAL.values
     LATITUDE = STATIC.LATITUDE.values
     LONGITUDE = STATIC.LONGITUDE.values
@@ -65,7 +60,7 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     if 'T2_LAPSE' in list(METEO.keys()):
         T2 = METEO.T2.values + (ELEVATION - station_altitude) * METEO.T2_LAPSE.values
     else:
-        T2 = METEO.T2.values + (ELEVATION - station_altitude) * -0.006
+        T2 = METEO.T2.values + (ELEVATION - station_altitude) * air_temperature_lapse_rate
 
     # Interpolate atmospheric pressure using the barometric equation
     np.seterr(divide = 'ignore') 
@@ -76,14 +71,18 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     else:
         PRES = METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * -0.006)))
     
-    # Standard precipiation data [mm]
+    # Standard precipiation data [mm] (Van Pelt et al., 2019) 
     if 'RRR' in list(METEO.keys()):
-        RRR = METEO.RRR.values
+        RRR = METEO.RRR.values * (1 + (ELEVATION - station_altitude) * precipitation_lapse_rate) * precipitation_multiplier
 
     # Three phase accumulation model (Accumulation climatology [m] * Annual anomaly [-] * Downscaling coefficient) [mm]
     elif ('ACCUMULATION' in list(STATIC.keys())) and ('ACC_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
-        #RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000
-        RRR = ((STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000
+
+        # Correction for sublimation losses (if known):
+        if ('SUBLIMATION' in list(STATIC.keys())) and ('SUB_ANOMALY' in list(METEO.keys())):
+            RRR = ((STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000 * precipitation_multiplier
+        else:
+            RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
 
     else:
         print("Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
@@ -92,7 +91,9 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     # Remaining variables remain constant across the spatial grid
     RH2 = METEO.RH2.values
     U2 = METEO.U2.values
+    MONTH = METEO.time.dt.month.values
     YEAR = METEO.time.dt.year.values
+    HYDRO_YEAR = np.where(MONTH < 10, YEAR, YEAR + 1)
 
     # Radiative fluxes (SWin & LWin):
     if ('SWin' in list(METEO.keys())) and ('LWin' in list(METEO.keys())):
@@ -133,7 +134,7 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     HOUR = METEO.time.dt.hour.values           # Hour
     LEAP = METEO.time.dt.is_leap_year.values   # Leap Year (Boolean)
     HOY = ((DOY - 1) * 24) + HOUR              # Hour of Year    
-    TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM = TOA_insolation(LATITUDE, LONGITUDE, SLOPE, ASPECT, DOY, HOUR, LEAP, HOY)
+    TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM = TOA_insolation(LATITUDE, LONGITUDE, SLOPE, ASPECT, HOUR, LEAP, HOY)
 
     # Illumination
     NODE_ILLUMINATION = np.where(LEAP,ILLUMINATION_LEAP[HOY],ILLUMINATION_NORM[HOY]) 
@@ -196,14 +197,15 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     _RUNOFF = np.full(nt,np.nan, dtype=precision)
     _MB = np.full(nt,np.nan, dtype=precision)
 
-    # Other Information (7):
+    # Other Information (8):
     _SNOW_HEIGHT = np.full(nt,np.nan, dtype=precision)
     _TOTAL_HEIGHT = np.full(nt,np.nan, dtype=precision)
-    _SURF_TEMP = np.full(nt,np.nan, dtype=precision)
-    _ALBEDO = np.full(nt,np.nan, dtype=precision)
+    _SURFACE_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
+    _SURFACE_ALBEDO = np.full(nt,np.nan, dtype=precision)
     _N_LAYERS = np.full(nt,np.nan, dtype=precision)     
     _FIRN_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
     _FIRN_TEMPERATURE_CHANGE = np.full(nt,np.nan, dtype=precision)
+    _FIRN_FACIE = np.full(nt,np.nan, dtype=str)
 
     # Subsurface Variables (11):
     _LAYER_DEPTH = np.full((nt,max_layers), np.nan, dtype=precision)
@@ -216,21 +218,24 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     _LAYER_ICE_FRACTION = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_IRREDUCIBLE_WATER = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_REFREEZE = np.full((nt,max_layers), np.nan, dtype=precision)
-    _LAYER_YEAR = np.full((nt,max_layers), np.nan, dtype=precision)
+    _LAYER_HYDRO_YEAR = np.full((nt,max_layers), np.nan, dtype=precision)
+    _LAYER_ALBEDO = np.full((nt,max_layers), np.nan, dtype=precision)
 
     # ========= #
     # TIME LOOP
     # ========= #
 
     # Initial Variables:
-    MB_cum = 0
+    cumulative_melt = 0
     surface_temperature = 270
-    albedo_snow = albedo_fresh_snow
     Initial_Firn_Temperature = np.nan
+    albedo_snow = albedo_fresh_snow
 
     n = 0
     idx = 0
     for t in np.arange(len(METEO.time.values)):
+
+        print(t)
 
         # ============= #
         # PRECIPITATION
@@ -238,9 +243,6 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
 
         # Check grid
         GRID.grid_check()
-
-        # get seconds since start
-        timestamp = dt * t
 
         # Calc fresh snow density
         if snow_density_method =='Vionnet12':
@@ -264,7 +266,7 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
         if SNOWFALL > 0.0:
             # Add a new snow node on top
            GRID.add_fresh_snow(SNOWFALL, density_fresh_snow, np.minimum(float(T2[t]),zero_temperature), 0.0)
-           GRID.set_node_year(0, float(YEAR[t])) # Set the uppermost subsurface layer as the current year of accumulation
+           GRID.set_node_hydro_year(0, float(HYDRO_YEAR[t])) # Set the uppermost subsurface layer as the current hydrological year of accumulation
         else:
            GRID.set_fresh_snow_props_update_time(dt)
 
@@ -279,11 +281,11 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
         # ALBEDO & SHORTWAVE RADIATION COMPONENTS
         # ======================================= #       
 
-        # Calculate Albedo
-        alpha, albedo_snow = update_albedo(GRID,surface_temperature,albedo_snow)
+        # Update Albedo
+        albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
 
         # Calculate net shortwave radiation
-        SWnet = SWin[t] * (1 - alpha)
+        SWnet = SWin[t] * (1 - albedo)
 
         # Penetrating SW radiation and subsurface melt
         if SWnet > 0.0:
@@ -337,16 +339,21 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
                           sensible_heat_flux + latent_heat_flux)
 
         # Convert melt energy to m w.e.q.
-        melt = melt_energy * dt / (1000 * lat_heat_melting)
+        surface_melt = melt_energy * dt / (1000 * lat_heat_melting)
+        cumulative_melt = cumulative_melt + surface_melt + subsurface_melt
 
         # Remove melt [m w.e.q.]
-        lwc_from_melted_layers = GRID.remove_melt_weq(melt - sublimation - deposition)
+        lwc_from_melted_layers = GRID.remove_melt_weq(surface_melt - sublimation - deposition)
 
         # ======================== #
         # PERCOLATION & REFREEZING
         # ======================== #
-        surface_water = melt + condensation + RAIN/1000.0 + lwc_from_melted_layers
-        Q , water_refrozen = percolation_refreezing(GRID,surface_water,subsurface_melt)
+        
+        # Calculate surface water [m w.e.q.]
+        surface_water = surface_melt + condensation + RAIN/1000.0 + lwc_from_melted_layers # Note: is this correct? Counting melt twice!?
+        
+        # Calculate run-off and refreezing
+        Q , water_refrozen = percolation_refreezing(GRID,HYDRO_YEAR[t],surface_water)
 
         # ================= #
         # THERMAL DIFFUSION
@@ -358,17 +365,14 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
         # DRY DENSIFICATION
         # ================= #
 
-        densification(GRID, SLOPE, ACCUMULATION, dt)
+        densification(GRID, ACCUMULATION, dt)
 
         # ============ #
         # MASS BALANCE
         # ============ #
-        surface_mass_balance = SNOWFALL * (density_fresh_snow / water_density) - melt + sublimation + deposition + evaporation
+        surface_mass_balance = SNOWFALL * (density_fresh_snow / water_density) - surface_melt + sublimation + deposition + evaporation
         internal_mass_balance = water_refrozen - subsurface_melt
         mass_balance = surface_mass_balance + internal_mass_balance
-
-        # Cumulative mass balance for stake evaluation 
-        MB_cum = MB_cum + mass_balance
 
         # ================== #
         # INITIAL CONDITIONS
@@ -432,14 +436,14 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
             SUBLIMATION_AGG[n] = sublimation
             CONDENSATION_AGG[n] = condensation
             DEPOSITION_AGG[n] = Q
-            SURFACE_MELT_AGG[n] = melt
+            SURFACE_MELT_AGG[n] = surface_melt
             SMB_AGG[n] = surface_mass_balance
 
             # Aggregated Subsurface Mass Fluxes (4):
             REFREEZING_AGG[n] = water_refrozen
             SUSBSURFACE_MELT_AGG[n] = subsurface_melt
             RUNOFF_AGG[n] = Q
-            MB_AGG[n] = internal_mass_balance
+            MB_AGG[n] = mass_balance
 
         # ============== #
         # RESULT WRITING
@@ -475,14 +479,24 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
             # Other Information (Instantaneous) (7):
             _SNOW_HEIGHT[idx] = GRID.get_total_snowheight()
             _TOTAL_HEIGHT[idx] = GRID.get_total_height()
-            _SURF_TEMP[idx] = surface_temperature
-            _ALBEDO[idx] = alpha
-            _N_LAYERS[idx] = GRID.get_number_layers()           
+            _SURFACE_TEMPERATURE[idx] = surface_temperature
+            _SURFACE_ALBEDO[idx] = albedo
+            _N_LAYERS[idx] = GRID.get_number_layers()
 
             # Calculate Firn temperatures:
             Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")
             _FIRN_TEMPERATURE[idx] = GRID.get_temperature()[Index_Depth] - zero_temperature
             _FIRN_TEMPERATURE_CHANGE[idx] = _FIRN_TEMPERATURE[idx] - Initial_Firn_Temperature
+
+            # Determine Firn Facie:
+            if GRID.get_temperature()[Index_Depth] - zero_temperature > 0.1:
+                _FIRN_FACIE[idx] = 'Temperate'
+            elif cumulative_melt == 0:
+                _FIRN_FACIE[idx] = 'Re-crystallization'
+            elif sum(GRID.get_firn_refreeze()) == 0:
+                _FIRN_FACIE[idx] = 'Re-crystallization Infiltration'
+            elif sum(GRID.get_firn_refreeze()) > 0:
+                _FIRN_FACIE[idx] = 'Cold-infilitration'
 
             # Subsurface Variables (Instantaneous) (11):
             if full_field:
@@ -497,7 +511,8 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
                     _LAYER_ICE_FRACTION[idx, 0:max_layers] = GRID.get_ice_fraction()[0:max_layers]
                     _LAYER_IRREDUCIBLE_WATER[idx, 0:max_layers] = GRID.get_irreducible_water_content()[0:max_layers]
                     _LAYER_REFREEZE[idx, 0:max_layers] = GRID.get_refreeze()[0:max_layers]
-                    _LAYER_YEAR[idx, 0:max_layers] = GRID.get_year()[0:max_layers]
+                    _LAYER_HYDRO_YEAR[idx, 0:max_layers] = GRID.get_year()[0:max_layers]
+                    _LAYER_ALBEDO[idx, 0:max_layers] = GRID.get_albedo()[0:max_layers]
                 else:
                     _LAYER_DEPTH[idx, 0:GRID.get_number_layers()] = GRID.get_depth()
                     _LAYER_HEIGHT[idx, 0:GRID.get_number_layers()] = GRID.get_height()
@@ -509,7 +524,8 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
                     _LAYER_ICE_FRACTION[idx, 0:GRID.get_number_layers()] = GRID.get_ice_fraction()
                     _LAYER_IRREDUCIBLE_WATER[idx, 0:GRID.get_number_layers()] = GRID.get_irreducible_water_content()
                     _LAYER_REFREEZE[idx, 0:GRID.get_number_layers()] = GRID.get_refreeze()
-                    _LAYER_YEAR[idx, 0:GRID.get_number_layers()] = GRID.get_year()
+                    _LAYER_HYDRO_YEAR[idx, 0:GRID.get_number_layers()] = GRID.get_year()
+                    _LAYER_ALBEDO[idx, 0:GRID.get_number_layers()] = GRID.get_albedo()
         
             else:
                 _LAYER_DEPTH = None
@@ -522,7 +538,8 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
                 _LAYER_ICE_FRACTION = None
                 _LAYER_IRREDUCIBLE_WATER = None
                 _LAYER_REFREEZE = None
-                _LAYER_YEAR = None
+                _LAYER_HYDRO_YEAR = None
+                _LAYER_ALBEDO = None
             
             # Increase result index:
             idx += 1
@@ -568,9 +585,9 @@ def cosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SMB, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MB, \
-            _SNOW_HEIGHT,_TOTAL_HEIGHT,_SURF_TEMP,_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE, \
+            _SNOW_HEIGHT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
-            _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_YEAR)
+            _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_ALBEDO)
 
 
 

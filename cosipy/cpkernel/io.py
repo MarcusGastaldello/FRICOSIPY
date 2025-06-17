@@ -3,17 +3,16 @@
 """
 
 import os
-import sys
 import xarray as xr
-import pandas as pd
 import numpy as np
 from numpy import genfromtxt
-import csv
-import time
-from datetime import timedelta
 from constants import *
 from parameters import *
 from config import * 
+
+# ===================== #
+# Input / Output Class:
+# ===================== #
 
 class IOClass:
 
@@ -31,10 +30,12 @@ class IOClass:
         self.METEO = METEO
         self.STATIC = STATIC
         self.ILLUMINATION = ILLUMINATION
+
+    # =================================================================================================
         
-    # ===============================
+    # =============================== #
     # Loads the Input STATIC Dataset:
-    # ===============================
+    # =============================== #
     def load_static_file(self):
         """ Returns the STATIC xarray dataset"""
 
@@ -51,10 +52,12 @@ class IOClass:
         print('\t Spatial Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
 
         return self.STATIC
+    
+    # =================================================================================================
 
-    # ==============================
+    # ============================== #
     # Loads the Input METEO Dataset:
-    # ==============================
+    # ============================== #
 
     def load_meteo_file(self):
         """ Returns the METEO xarray dataset"""
@@ -80,10 +83,12 @@ class IOClass:
         self.METEO = self.METEO.sel(time=slice(time_start, time_end))   # Select temporal range from config.py
 
         return self.METEO
+    
+    # =================================================================================================
 
-    # =====================================
+    # ===================================== #
     # Loads the Input ILLUMINATION Dataset:
-    # =====================================
+    # ===================================== #
 
     def load_illumination_file(self):
         """ Returns the ILLUMINATION xarray dataset"""
@@ -96,19 +101,21 @@ class IOClass:
             self.ILLUMINATION = self.ILLUMINATION.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
 
         return self.ILLUMINATION
+    
+    # =================================================================================================
 
-    # ==================================
+    # ================================== #
     # Creates the RESULT Xarray Dataset:
-    # ==================================
+    # ================================== #
 
     def create_result_file(self):
         """ Returns the data xarray """
         self.init_result_dataset()
         return self.RESULT
 
-    # ======================================
+    # ====================================== #
     # Initialises the RESULT Xarray Dataset:
-    # ======================================
+    # ====================================== #
 
     def init_result_dataset(self):
 
@@ -131,7 +138,7 @@ class IOClass:
         self.RESULT.attrs['Compression_level'] = compression_level
         self.RESULT.attrs['Full_field'] = str(full_field)
 
-        # Global attributes from constants.py
+        # Global attributes from parameters.py
 
         # Model Parameterisations:
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
@@ -144,7 +151,7 @@ class IOClass:
         self.RESULT.attrs['Saturation_water_vapour_method'] = saturation_water_vapour_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
-        self.RESULT.attrs['Water_percolation_method'] = water_percolation_method
+        self.RESULT.attrs['Water_percolation_method'] = preferential_percolation_method
         self.RESULT.attrs['Sfc_temperature_method'] = sfc_temperature_method        
 
         # Initial Conditions:
@@ -157,15 +164,9 @@ class IOClass:
         self.RESULT.attrs['Initial_temperature_bottom'] = initial_temperature_bottom
         self.RESULT.attrs['Initial_temperature_top'] = initial_temperature_top
 
-        # Subsurface Remeshing Options:
-        self.RESULT.attrs['Remesh_method'] = remesh_method       
+        # Subsurface Remeshing Options:    
         self.RESULT.attrs['Max_layers'] = max_layers
         self.RESULT.attrs['Minimum_snow_layer_height'] = minimum_snow_layer_height
-        self.RESULT.attrs['First_layer_height_log_profile'] = first_layer_height
-        self.RESULT.attrs['Layer_stretching_log_profile'] = layer_stretching
-        self.RESULT.attrs['Merge_max'] = merge_max
-        self.RESULT.attrs['Density_threshold_merging'] = density_threshold_merging
-        self.RESULT.attrs['Temperature_threshold_merging'] = temperature_threshold_merging
         self.RESULT.attrs['Maximum_simulation_layer_height'] = maximum_simulation_layer_height
         self.RESULT.attrs['Maximum_coarse_layer_height'] = maximum_coarse_layer_height
         self.RESULT.attrs['Coarse_layer_threshold'] = coarse_layer_threshold
@@ -207,6 +208,8 @@ class IOClass:
         self.RESULT.attrs['z1'] = z1
         self.RESULT.attrs['z2'] = z2
 
+        # Global attributes from constants.py
+
         # Physical Constants:
         self.RESULT.attrs['lat_heat_melting'] = lat_heat_melting
         self.RESULT.attrs['lat_heat_vaporize'] = lat_heat_vaporize
@@ -240,10 +243,18 @@ class IOClass:
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.MASK, 'MASK', 'boolean', 'Glacier mask')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.SLOPE, 'SLOPE', 'degrees', 'Terrain slope')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ASPECT, 'ASPECT', 'degrees', 'Aspect of slope')
-        self.add_variable_along_northingeasting(self.RESULT, self.STATIC.BASAL, 'BASAL', 'mW m-2', 'Basal Heat Flux')
-        self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ACCUMULATION, 'ACCUMULATION', 'm a-1', 'Annual Accumulation Climatology')
-
+        if 'BASAL' in list(self.STATIC.keys()):
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.BASAL, 'BASAL', 'mW m-2', 'Basal Heat Flux')
+        if 'ACCUMULATION' in list(self.STATIC.keys()):
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ACCUMULATION, 'ACCUMULATION', 'm a-1', 'Annual Accumulation Climatology')
+        if 'SUBLIMATION' in list(self.STATIC.keys()):
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ACCUMULATION, 'SUBLIMATION', 'm a-1', 'Annual Sublimation Climatology')
+        if 'DEPTH' in list(self.STATIC.keys()):    
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.DEPTH, 'DEPTH', 'm a-1', 'Glacier Depth')
+            
         return self.RESULT
+    
+    # =================================================================================================
   
     # ==================== #
     # Global Result Arrays
@@ -299,21 +310,23 @@ class IOClass:
         if ('MB' in self.subsurface_mass_fluxes):
             self.MB = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
 
-        # Other Information (7):
+        # Other Information (8):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
-        if ('SURF_TEMP' in self.other):
-            self.SURF_TEMP = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
-        if ('ALBEDO' in self.other):
-            self.ALBEDO = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_TEMPERATURE' in self.other):
+            self.SURFACE_TEMPERATURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_ALBEDO' in self.other):
+            self.SURFACE_ALBEDO = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
         if ('N_LAYERS' in self.other):
             self.N_LAYERS = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
         if ('FIRN_TEMPERATURE' in self.other):
             self.FIRN_TEMPERATURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
         if ('FIRN_TEMPERATURE_CHANGE' in self.other):
             self.FIRN_TEMPERATURE_CHANGE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+        if ('FIRN_FACIE' in self.other):
+            self.FIRN_FACIE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = str)
 
         # Subsurface Variables (11):
         if full_field:
@@ -337,9 +350,12 @@ class IOClass:
                 self.LAYER_IRREDUCIBLE_WATER = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('REFREEZE' in self.subsurface_variables):
                 self.LAYER_REFREEZE = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
-            if ('YEAR' in self.subsurface_variables):
-                self.LAYER_YEAR = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+            if ('HYDRO_YEAR' in self.subsurface_variables):
+                self.LAYER_HYDRO_YEAR = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+
     
+    # =================================================================================================
+
     # ================================================= #
     # Assign Local Node Results to Global Result Arrays
     # ================================================= #
@@ -348,9 +364,9 @@ class IOClass:
         local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_GROUND,local_RAIN_FLUX,local_MELT_ENERGY, \
         local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SMB, \
         local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MB, \
-        local_SNOW_HEIGHT,local_TOTAL_HEIGHT,local_SURF_TEMP,local_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE, \
+        local_SNOW_HEIGHT,local_TOTAL_HEIGHT,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
         local_LAYER_DEPTH,local_LAYER_HEIGHT,local_LAYER_DENSITY,local_LAYER_TEMPERATURE,local_LAYER_WATER_CONTENT,local_LAYER_COLD_CONTENT,local_LAYER_POROSITY,local_LAYER_ICE_FRACTION, \
-        local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_YEAR):
+        local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_HYDRO_YEAR):
         
         # Surface Energy Fluxes (7):
         if ('SHORTWAVE' in self.surface_energy_fluxes):
@@ -396,23 +412,25 @@ class IOClass:
         if ('MB' in self.subsurface_mass_fluxes):
             self.MB[:,y,x] = local_MB         
 
-        # Other Information (7):
+        # Other Information (8):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT[:,y,x] = local_SNOW_HEIGHT
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT[:,y,x] = local_TOTAL_HEIGHT
-        if ('SURF_TEMP' in self.other):
-            self.SURF_TEMP[:,y,x] = local_SURF_TEMP
-        if ('ALBEDO' in self.other):
-            self.ALBEDO[:,y,x] = local_ALBEDO
+        if ('SURFACE_TEMPERATURE' in self.other):
+            self.SURFACE_TEMPERATURE[:,y,x] = local_SURFACE_TEMPERATURE
+        if ('SURFACE_ALBEDO' in self.other):
+            self.SURFACE_ALBEDO[:,y,x] = local_SURFACE_ALBEDO
         if ('N_LAYERS' in self.other):
             self.N_LAYERS[:,y,x] = local_N_LAYERS
         if ('FIRN_TEMPERATURE' in self.other):
             self.FIRN_TEMPERATURE[:,y,x] = local_FIRN_TEMPERATURE
         if ('FIRN_TEMPERATURE_CHANGE' in self.other):
             self.FIRN_TEMPERATURE_CHANGE[:,y,x] = local_FIRN_TEMPERATURE_CHANGE
+        if ('FIRN_FACIE' in self.other):
+            self.FIRN_FACIE[:,y,x] = local_FIRN_FACIE
         
-        # Subsurface Variables (11):
+        # Subsurface Variables (12):
         if full_field:
             if ('DEPTH' in self.subsurface_variables):
                 self.LAYER_DEPTH[:,y,x,:] = local_LAYER_DEPTH
@@ -434,8 +452,10 @@ class IOClass:
                 self.LAYER_IRREDUCIBLE_WATER[:,y,x,:] = local_LAYER_IRREDUCIBLE_WATER 
             if ('REFREEZE' in self.subsurface_variables):
                 self.LAYER_REFREEZE[:,y,x,:] = local_LAYER_REFREEZE 
-            if ('YEAR' in self.subsurface_variables):
-                self.LAYER_YEAR[:,y,x,:] = local_LAYER_YEAR
+            if ('HYDRO_YEAR' in self.subsurface_variables):
+                self.LAYER_HYDRO_YEAR[:,y,x,:] = local_LAYER_HYDRO_YEAR
+
+    # =================================================================================================
 
     # =================================== #
     # Write Results to Output NETCDF File
@@ -487,23 +507,25 @@ class IOClass:
         if ('MB' in self.subsurface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.MB, 'MB', 'm w.e.', 'Mass Balance')       
 
-        # Other Information (7):
+        # Other Information (8):
         if ('SNOW_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_HEIGHT, 'SNOW_HEIGHT', 'm', 'Snow Height')
         if ('TOTAL_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.TOTAL_HEIGHT, 'TOTAL_HEIGHT', 'm', 'Total Height')
-        if ('SURF_TEMP' in self.other):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.SURF_TEMP, 'SURF_TEMP', 'C', 'Surface Temperature')
-        if ('ALBEDO' in self.other):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.ALBEDO, 'ALBEDO', '-', 'Albedo')
-        if ('NLAYERS' in self.other):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.NLAYERS, 'N_LAYERS', 'n', 'Number of Layers')
+        if ('SURFACE_TEMPERATURE' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_TEMPERATURE, 'SURFACE_TEMPERATURE', 'C', 'Surface Temperature')
+        if ('SURFACE_ALBEDO' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_ALBEDO, 'SURFACE_ALBEDO', '-', 'Surface Albedo')
+        if ('N_LAYERS' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.N_LAYERS, 'N_LAYERS', 'n', 'Number of Layers')
         if ('FIRN_TEMPERATURE' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.FIRN_TEMPERATURE, 'FIRN_TEMPERATURE', 'C', 'Firn Temperature at x m Depth')
         if ('FIRN_TEMPERATURE_CHANGE' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.FIRN_TEMPERATURE_CHANGE, 'FIRN_TEMP_CHANGE', 'ΔC', 'Firn Warming at x m Depth')
+        if ('FIRN_FACIE' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.FIRN_FACIE, 'FIRN_FACIE', '-', 'Firn Facie')
 
-        # Subsurface Variables (11):
+        # Subsurface Variables (12):
         if full_field:
             if ('DEPTH' in self.subsurface_variables):
                 self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_DEPTH, 'LAYER_DEPTH', 'm', 'Layer Depth')
@@ -514,22 +536,24 @@ class IOClass:
             if ('TEMPERATURE' in self.subsurface_variables):
                 self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_TEMPERATURE, 'LAYER_TEMPERATURE', 'K', 'Layer Temperature') 
             if ('WATER_CONTENT' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_WATER_CONTENT, 'LAYER_WATER_CONTENT', 'kg m^-2', 'Liquid Water Content') 
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_WATER_CONTENT, 'LAYER_WATER_CONTENT', '-', 'Layer Liquid Water Content') 
             if ('COLD_CONTENT' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_COLD_CONTENT, 'LAYER_COLD_CONTENT', 'J m^-2', 'Cold Content') 
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_COLD_CONTENT, 'LAYER_COLD_CONTENT', 'J m^-2', 'Layer Cold Content') 
             if ('POROSITY' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_POROSITY, 'LAYER_POROSITY', '-', 'Porosity') 
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_POROSITY, 'LAYER_POROSITY', '-', 'Layer Porosity') 
             if ('ICE_FRACTION' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_ICE_FRACTION, 'LAYER_ICE_FRACTION', '-', 'Ice Fraction') 
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_ICE_FRACTION, 'LAYER_ICE_FRACTION', '-', 'Layer Ice Fraction') 
             if ('IRREDUCIBLE_WATER' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_IRREDUCIBLE_WATER, 'LAYER_IRR_WATER', '-', 'Irreducible Water') 
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_IRREDUCIBLE_WATER, 'LAYER_IRR_WATER', '-', 'Layer Irreducible Water') 
             if ('REFREEZE' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_REFREEZE, 'LAYER_REFREEZE', 'm w.e.', 'Refreezing')   
-            if ('YEAR' in self.subsurface_variables):
-                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_YEAR, 'LAYER_YEAR', 'yyyy', 'Year')       
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_REFREEZE, 'LAYER_REFREEZE', 'm w.e.', 'Layer Refreezing')   
+            if ('HYDRO_YEAR' in self.subsurface_variables):
+                self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_HYDRO_YEAR, 'LAYER_HYDRO_YEAR', 'yyyy', 'Layer Hydrological Year')                   
 
     def get_result(self):
         return self.RESULT
+    
+    # =================================================================================================
 
     # ========================================================= #
     # Auxiliary Functions for Writing Variables to NetCDF Files
@@ -558,4 +582,6 @@ class IOClass:
         ds[name].attrs['long_name'] = long_name
         ds[name].encoding['_FillValue'] = -9999
         return ds
+    
+    # =================================================================================================
     

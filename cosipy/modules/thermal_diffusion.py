@@ -3,14 +3,17 @@ from numba import njit
 from constants import *
 from parameters import *
 
-# ===================================================================================== #
+# ================= #
+# Thermal Diffusion
+# ================= #
+
 @njit
 def thermal_diffusion(GRID, BASAL, dt):
     """ This function solves the one-dimensional heat equation through the subsurface 
         layers T(z) using a first order, finite, central difference scheme:
 
-        Constants:
-                    dt = 3600       Integration time in a model time-step (hour) [s]
+        Parameters:
+                    dt              Integration time in a model time-step [s]
         Input:
                     h(z):           Layer height [m]
                     K(z):           Layer thermal diffusivity [m2 s-1]
@@ -21,16 +24,13 @@ def thermal_diffusion(GRID, BASAL, dt):
                     T(z):           Layer temperature (updated) [K]
     """
 
-    basal_heat_flux = BASAL * (45 / 35) / 1000
+    # Retrieve subsurface layer properties:
+    basal_heat_flux = BASAL / 1000
     z = np.asarray(GRID.get_height())
     K = np.asarray(GRID.get_thermal_diffusivity())
     T = np.asarray(GRID.get_temperature())
     k = np.asarray(GRID.get_thermal_conductivity())
     Tnew = T.copy()
-
-    # =============================================================================
-    # Numerically Solve the Heat Equation using a Finite Central Difference Scheme:
-    # =============================================================================
 
     # Determine integration steps required in the solver to ensure numerical stability:
     dt_stable = 0.5 * min(((z[1:] + z[:-1]) / 2)**2 / ((K[1:] + K[:-1]) / 2)) # Von Neumann Stability Condition
@@ -38,6 +38,7 @@ def thermal_diffusion(GRID, BASAL, dt):
 
     while dt_cumulative < dt:
 
+        # Stable timestep
         dt_step = np.minimum(dt_stable, dt - dt_cumulative)
         dt_cumulative += dt_step
 
@@ -52,3 +53,5 @@ def thermal_diffusion(GRID, BASAL, dt):
 
     # Write results to GRID
     GRID.set_temperature(T)
+
+# ====================================================================================================================

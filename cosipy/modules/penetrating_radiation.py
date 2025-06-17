@@ -3,6 +3,10 @@ from constants import *
 from parameters import *
 from numba import njit
 
+# ===================== #
+# Penetrating Radiation
+# ===================== #
+
 def penetrating_radiation(GRID, SWnet, dt):
     penetrating_allowed = ['Bintanja95','disabled']
     if penetrating_method == 'Bintanja95':
@@ -17,11 +21,12 @@ def penetrating_radiation(GRID, SWnet, dt):
 
 # ====================================================================================================================
 
+# ============================ #
+# Bintanja et al., 1995 Method
+# ============================ #
+
 @njit
 def method_Bintanja(GRID, SWnet, dt):
-
-    # Total height of first layer
-    total_height = 0.0
 
     # Store the total subsurface melt
     subsurface_melt = 0.0

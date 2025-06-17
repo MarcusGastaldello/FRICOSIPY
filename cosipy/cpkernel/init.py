@@ -4,21 +4,18 @@ from constants import *
 from config import *
 from cosipy.cpkernel.grid import *
 
+# =================== #
+# Initialise Snowpack
+# =================== #
+
 def init_snowpack():
 	
-    # =================== #
-    # INITIALISE SNOWPACK
-    # =================== #
-
     layer_heights = []
     layer_densities = []
     layer_T = []
     layer_liquid_water = []
 
-    # =========== #
-    # SNOW / FIRN
-    # =========== #    
-    
+    # Snow / firn layers     
     if (initial_snowheight > 0.0):
         nlayers = int(initial_snowheight / initial_snow_layer_heights)
         dT = (initial_temperature_top-initial_temperature_bottom)/(initial_snowheight+initial_glacier_height)
@@ -34,30 +31,25 @@ def init_snowpack():
             layer_T = np.array([initial_temperature_top-dT*(initial_snowheight/nlayers)*i for i in range(1,nlayers+1)])
             layer_liquid_water = np.zeros(nlayers)
 	    
-        # =========== #
-        # ADD GLACIER
-        # =========== #
-        
+        # Glacier layers
         nlayers = int(initial_glacier_height/initial_glacier_layer_heights)
         layer_heights = np.append(layer_heights, np.ones(nlayers)*initial_glacier_layer_heights)
         layer_densities = np.append(layer_densities, np.ones(nlayers)*ice_density)
         layer_T = np.append(layer_T, [layer_T[-1]-dT*initial_glacier_layer_heights*i for i in range(1,nlayers+1)])
         layer_liquid_water = np.append(layer_liquid_water, np.zeros(nlayers))
     
-    # ============ #
-    # GLACIER ONLY
-    # ============ #
-
+    # Glacier only
     else:
         nlayers = int(initial_glacier_height/initial_glacier_layer_heights)
-        dT = (temperature_top-temperature_bottom)/initial_glacier_height
+        dT = (initial_temperature_top - initial_temperature_bottom)/initial_glacier_height
         layer_heights = np.ones(nlayers)*initial_glacier_layer_heights
         layer_densities = np.ones(nlayers)*ice_density
-        layer_T = np.array([temperature_top-dT*initial_glacier_layer_heights*i for i in range(1,nlayers+1)])
+        layer_T = np.array([initial_temperature_top-dT*initial_glacier_layer_heights*i for i in range(1,nlayers+1)])
         layer_liquid_water = np.zeros(nlayers)
-	
+
+	# Initialise GRID
     GRID = Grid(np.array(layer_heights, dtype=np.float64), np.array(layer_densities, dtype=np.float64), 
                 np.array(layer_T, dtype=np.float64), np.array(layer_liquid_water, dtype=np.float64),
-                None, None, None, None)
+                None, None, None, None, None)
     
     return GRID

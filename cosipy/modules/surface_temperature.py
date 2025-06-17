@@ -5,6 +5,9 @@ from scipy.optimize import minimize, newton
 from numba import njit
 from types import SimpleNamespace
 
+# ========================== #
+# Surface Temperature Solver
+# ========================== #
 
 def update_surface_temperature(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, N = None, LWin = None):
     """ This methods updates the surface temperature and returns the surface fluxes
@@ -14,7 +17,6 @@ def update_surface_temperature(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLO
         GRID    ::  Grid structure
         T0      ::  Surface temperature [K]
 	    dt      ::  Integration time [s] -- can vary in WRF_X_CSPY
-        alpha   ::  Albedo [-]
 	    z       ::  Measurement height [m] -- varies in WRF_X_CSPY
         z0      ::  Roughness length [m]
         T2      ::  Air temperature [K]
@@ -91,42 +93,24 @@ def update_surface_temperature(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLO
     # Return fluxes
     return res.fun, surface_temperature, Li, Lo, H, L, B, Qrr, rho, Lv, MOL, Cs_t, Cs_q, q0, q2
 
-
 @njit
-def interp_subT(GRID):
-    ''' Interpolate subsurface temperature & conductivities to depths used for ground heat flux computation'''
-    
-    # Cumulative layer depths
-    layer_heights_cum = np.cumsum(np.array(GRID.get_height()))
+def eb_optim(T0, GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin=None, N=None):
+    ''' Optimization function to solve for surface temperature T0 '''
 
-    # Find indexes of two depths for temperature interpolation
-    idx1_depth_1 = np.abs(layer_heights_cum - zlt1).argmin()
-    depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt1).argmin()]
+    # Get surface fluxes for surface temperature T0
+    (Li,Lo,H,L,B,Qrr,rho,Lv,MOL,Cs_t,Cs_q,q0,q2) = eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin, N)
 
-    if depth_1 > zlt1:
-        idx2_depth_1 = idx1_depth_1 - 1
+    # Return the residual (is minimized by the optimization function)
+    if sfc_temperature_method == 'Newton':
+        return (SWnet+Li+Lo+H+L+B+Qrr)
     else:
-        idx2_depth_1 = idx1_depth_1 + 1
-    Tz1 = GRID.get_node_temperature(idx1_depth_1) + \
-		((GRID.get_node_temperature(idx1_depth_1) - GRID.get_node_temperature(idx2_depth_1)) / \
-            	(layer_heights_cum[idx1_depth_1] - layer_heights_cum[idx2_depth_1])) * \
-		(zlt1 - layer_heights_cum[idx1_depth_1])
-
-    idx1_depth_2 = np.abs(layer_heights_cum - zlt2).argmin()
-    depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt2).argmin()]
-
-    if depth_2 > zlt2:
-        idx2_depth_2 = idx1_depth_2 - 1
-    else:
-        idx2_depth_2 = idx1_depth_2 + 1
-
-    Tz2 = GRID.get_node_temperature(idx1_depth_2) + \
-		((GRID.get_node_temperature(idx1_depth_2) - GRID.get_node_temperature(idx2_depth_2)) / \
-        	(layer_heights_cum[idx1_depth_2] - layer_heights_cum[idx2_depth_2])) * \
-		(zlt2 - layer_heights_cum[idx1_depth_2])
-
-    return np.array([Tz1,Tz2])
+        return np.abs(SWnet+Li+Lo+H+L+B+Qrr)
     
+# ====================================================================================================================
+
+# ===================== #
+# Surface Energy Fluxes
+# ===================== #
 
 @njit
 def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None, N=None):
@@ -137,7 +121,6 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
         GRID    ::  Grid structure
         T0      ::  Surface temperature [K]
         dt      ::  Integration time [s]
-        alpha   ::  Albedo [-]
 	    z       ::  Measurement height [m]
         z0      ::  Roughness length [m]
         T2      ::  Air temperature [K]
@@ -332,6 +315,52 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
     # Numba: No implementation of function Function(<class 'float'>) found for signature: >>> float(array(float64, 1d, C))
     return (Li.item(), Lo.item(), H.item(), LE.item(), B.item(), QRR.item(), rho, Lv, L, Cs_t, Cs_q, q0, q2)
 
+# ====================================================================================================================
+
+# ============================================================= #
+# Interpolate Temperatures for Subsurface Heat Flux Computation
+# ============================================================= #
+
+@njit
+def interp_subT(GRID):
+    ''' Interpolate subsurface temperature & conductivities to depths used for ground heat flux computation'''
+    
+    # Cumulative layer depths
+    layer_heights_cum = np.cumsum(np.array(GRID.get_height()))
+
+    # Find indexes of two depths for temperature interpolation
+    idx1_depth_1 = np.abs(layer_heights_cum - zlt1).argmin()
+    depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt1).argmin()]
+
+    if depth_1 > zlt1:
+        idx2_depth_1 = idx1_depth_1 - 1
+    else:
+        idx2_depth_1 = idx1_depth_1 + 1
+    Tz1 = GRID.get_node_temperature(idx1_depth_1) + \
+		((GRID.get_node_temperature(idx1_depth_1) - GRID.get_node_temperature(idx2_depth_1)) / \
+            	(layer_heights_cum[idx1_depth_1] - layer_heights_cum[idx2_depth_1])) * \
+		(zlt1 - layer_heights_cum[idx1_depth_1])
+
+    idx1_depth_2 = np.abs(layer_heights_cum - zlt2).argmin()
+    depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt2).argmin()]
+
+    if depth_2 > zlt2:
+        idx2_depth_2 = idx1_depth_2 - 1
+    else:
+        idx2_depth_2 = idx1_depth_2 + 1
+
+    Tz2 = GRID.get_node_temperature(idx1_depth_2) + \
+		((GRID.get_node_temperature(idx1_depth_2) - GRID.get_node_temperature(idx2_depth_2)) / \
+        	(layer_heights_cum[idx1_depth_2] - layer_heights_cum[idx2_depth_2])) * \
+		(zlt2 - layer_heights_cum[idx1_depth_2])
+
+    return np.array([Tz1,Tz2])
+    
+# ====================================================================================================================
+
+# =============== #
+# Extra Functions
+# =============== #
 
 @njit
 def phi_m(z,L):
@@ -381,20 +410,6 @@ def MO(rho, ust, T2, H):
         return ((rho*spec_heat_air*np.power(ust,3)*T2)/(0.41*9.81*H)).item()	#numba: expects a float
     else:
         return 0.0
-
-@njit
-def eb_optim(T0, GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin=None, N=None):
-    ''' Optimization function to solve for surface temperature T0 '''
-
-    # Get surface fluxes for surface temperature T0
-    (Li,Lo,H,L,B,Qrr,rho,Lv,MOL,Cs_t,Cs_q,q0,q2) = eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin, N)
-
-    # Return the residual (is minimized by the optimization function)
-    if sfc_temperature_method == 'Newton':
-        return (SWnet+Li+Lo+H+L+B+Qrr)
-    else:
-        return np.abs(SWnet+Li+Lo+H+L+B+Qrr)
-
 
 @njit
 def method_EW_Sonntag(T):
