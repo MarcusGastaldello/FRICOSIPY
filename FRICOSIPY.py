@@ -11,24 +11,13 @@
 import os
 from datetime import datetime
 from itertools import product
-import itertools
-import logging
-import time
-import yaml
-import dask as da
-import dask
 import sys
 from config import *
 from cosipy.cpkernel.cosipy_core import * 
 from cosipy.cpkernel.io import *
 from distributed import Client, LocalCluster
-from dask import compute, delayed
-from dask.diagnostics import ProgressBar
-from dask.distributed import progress, wait, as_completed
+from dask.distributed import as_completed
 from tornado import gen
-from dask_jobqueue import SLURMCluster
-import scipy
-import cProfile
 
 def main():
 
@@ -79,11 +68,6 @@ def main():
    
     encoding = dict()
     for var in IO.get_result().data_vars:
-        dataMin = IO.get_result()[var].min(skipna=True).values
-        dataMax = IO.get_result()[var].max(skipna=True).values
-        dtype = 'int16'
-        FillValue = -9999 
-        scale_factor, add_offset = compute_scale_and_offset(dataMin, dataMax, 16)
         encoding[var] = dict(zlib=True, complevel=compression_level)
   
     IO.get_result().to_netcdf(os.path.join(data_path,'output',output_netcdf), encoding=encoding, mode = 'w')
@@ -105,14 +89,6 @@ def run_cosipy(cluster, IO, STATIC, METEO, ILLUMINATION, RESULT):
         print('\t',cluster)
         print('\t',client,'\n')
         sys.stdout.flush()
-
-        # Get dimensions of the whole domain
-        ny = STATIC.dims['y']
-        nx = STATIC.dims['x']
-        cp = cProfile.Profile()
-
-        # Get some information about the cluster/nodes
-        total_grid_points = STATIC.dims['y'] * STATIC.dims['x']
 
         # Start simulation timer
         start_time = datetime.now()
@@ -149,17 +125,17 @@ def run_cosipy(cluster, IO, STATIC, METEO, ILLUMINATION, RESULT):
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
                 RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SMB, \
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MB, \
-                SNOW_HEIGHT,TOTAL_HEIGHT,SURF_TEMP,ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE, \
+                SNOW_HEIGHT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
-                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_YEAR = future.result()
+                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR = future.result()
                                 
                 IO.copy_local_to_global(indY,indX, \
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
                 RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SMB, \
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MB, \
-                SNOW_HEIGHT,TOTAL_HEIGHT,SURF_TEMP,ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE, \
+                SNOW_HEIGHT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
-                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_YEAR)
+                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR)
                     
                 # Write results to file
                 IO.write_results_to_file()
@@ -179,7 +155,6 @@ def compute_scale_and_offset(min, max, n):
 
 def report_progress(completed,total_nodes,start_time):
     barLength = 50 # Modify this to change the length of the progress bar
-    status = ""
     progress = completed / total_nodes
     time_delta = datetime.now() - start_time
     block = int(round(barLength*progress))
