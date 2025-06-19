@@ -21,7 +21,7 @@ def thermal_diffusion(GRID, BASAL, dt):
                     T(z):           Layer temperature (updated) [K]
     """
 
-    basal_heat_flux = BASAL * (45 / 35) / 1000
+    basal_heat_flux = BASAL / 1000
     z = np.asarray(GRID.get_height())
     K = np.asarray(GRID.get_thermal_diffusivity())
     T = np.asarray(GRID.get_temperature())
