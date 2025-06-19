@@ -13,8 +13,8 @@ roughness_method = 'constant'                   # Options: ['Moelg12','constant'
 saturation_water_vapour_method = 'Sonntag90'    # Options: ['Sonntag90']
 thermal_conductivity_method = 'Calonne19'       # Options: ['bulk', 'empirical','Sturm97','Calonne19']
 specific_heat_method = 'Yen81'                  # Options: ['bulk','Yen81']
-water_percolation_method = 'bucket'       	# Options: ['bucket,'Marchenko17']
-sfc_temperature_method = 'SLSQP'             	# Options: ['L-BFGS-B','SLSQP','Newton']
+water_percolation_method = 'Marchenko17'       	# Options: ['bucket,'Marchenko17']
+sfc_temperature_method = 'SLSQP'             	  # Options: ['L-BFGS-B','SLSQP','Newton']
 
 # ============================ #
 # SUBSURFACE REMESHING OPTIONS 
