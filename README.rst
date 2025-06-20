@@ -18,5 +18,5 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSI
         :target: https://doi.org/10.5281/zenodo.2579668
 
 :License:
-    .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
+    .. image:: https://img.shields.io/badge/License-GPLv3-green.svg
         :target: http://www.gnu.org/licenses/gpl-3.0.en.html
