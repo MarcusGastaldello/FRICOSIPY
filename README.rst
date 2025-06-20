@@ -1,7 +1,7 @@
 FRICOSIPY
 -----
 
-![CHEESE!](https://github.com/user-attachments/assets/f212261f-6e0d-47a0-9a3b-8bb4e0aa3902)
+.. image:: https://github.com/user-attachments/assets/f212261f-6e0d-47a0-9a3b-8bb4e0aa3902
 
 University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSIPY) (Sauter et al., 2020) developed at the University of FRIbourg (FRICOSIPY).
 
