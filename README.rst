@@ -10,7 +10,7 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSI
         :target: http://doi.org/10.5281/zenodo.13361824
 
 :FRICOSIPY User Guide:
-    ..(coming soon)
+    (coming soon)
 
 :Original COSIPY Model:
     .. image:: https://img.shields.io/badge/Citation-GMD%20paper-orange.svg
