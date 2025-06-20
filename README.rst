@@ -1,4 +1,4 @@
-# FRICOSIPY
+FRICOSIPY
 -----
 
 :Citation:
