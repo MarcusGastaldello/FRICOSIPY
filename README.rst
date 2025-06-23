@@ -28,5 +28,5 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSI
         :target: http://www.gnu.org/licenses/gpl-3.0.en.html
 
 :Support / Contact:
-    .. image:: https://img.shields.io/badge/Contact-Marcus%20Gastaldello-green.svg
+    .. image:: https://img.shields.io/badge/Contact-Marcus%20Gastaldello-brightgreen.svg
         :target: https://www.unifr.ch/directory/en/people/329166/38c19
