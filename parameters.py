@@ -3,51 +3,37 @@
 # MODEL PARAMETERISATIONS 
 # ======================= #
 
-snow_density_method = 'constant'                # Options: ['Vionnet12','constant']
-turbulent_fluxes_method = 'Essery04'   	        # Options: ['Essery04','Default']
-stability_correction = 'Ri'                     # Options: ['Ri','MO']
-albedo_method = 'Bougamont05'                   # Options: ['Oerlemans98','Bougamont05','measured']
-densification_method = 'Ligtenberg11'           # Options: ['Ligtenberg11','Boone','constant']
-penetrating_method = 'Bintanja95'               # Options: ['Bintanja95','disabled']
-roughness_method = 'constant'                   # Options: ['Moelg12','constant']
-saturation_water_vapour_method = 'Sonntag90'    # Options: ['Sonntag90']
-thermal_conductivity_method = 'Calonne19'       # Options: ['bulk', 'empirical','Sturm97','Calonne19']
-specific_heat_method = 'Yen81'                  # Options: ['bulk','Yen81']
-water_percolation_method = 'Marchenko17'       	# Options: ['bucket,'Marchenko17']
-sfc_temperature_method = 'SLSQP'             	  # Options: ['L-BFGS-B','SLSQP','Newton']
-
-# ============================ #
-# SUBSURFACE REMESHING OPTIONS 
-# ============================ #
-
-remesh_method = 'lagrangian_profile'            # Options: ['log_profile','adaptive_profile','lagrangian_profile']
-max_layers = 500                                # Maximum number of subsurface layers 
-minimum_snow_layer_height = 0.0005              # Minimum layer height [m]
-
-# (1) Logarithmic Profile:
-first_layer_height = 0.01                       # First layer height [m] 
-layer_stretching = 1.1                          # Stretching factor for subsequent layers (i.e. 1.1 = 10% incrementally larger)
-
-# (2) Adaptive Profile:
-merge_max = 1                                   # Maximum number of subsurface layer merges per timestep
-density_threshold_merging = 5                   # Density threshold for layer merging [kg m-3]
-temperature_threshold_merging = 0.1             # Temperature threshold for layer merging [K]
-
-# (3) Fixed Lagrangian Profile:
-maximum_simulation_layer_height = 0.10          # Maximum height of fine snow layers [m]
-maximum_coarse_layer_height = 0.3               # Maximum height of coarse snow layers [m]
-coarse_layer_threshold = 21.                    # Threshold depth at which fine near surface layers are merged into coarser deep layers [m]
-maximum_glacier_layer_height = 0.5              # Maximum height of glacial layers [m]
+snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
+turbulent_fluxes_method = 'Essery04'   	          # Options: ['Essery04','Default']
+stability_correction = 'Ri'                       # Options: ['Ri','MO']
+albedo_method = 'Bougamont05'                     # Options: ['Oerlemans98','Bougamont05','measured']
+densification_method = 'Ligtenberg11'             # Options: ['Ligtenberg11','Boone','constant']
+penetrating_method = 'Bintanja95'                 # Options: ['Bintanja95','disabled']
+roughness_method = 'constant'                     # Options: ['Moelg12','constant']
+saturation_water_vapour_method = 'Sonntag90'      # Options: ['Sonntag90']
+thermal_conductivity_method = 'Calonne19'         # Options: ['bulk', 'empirical','Sturm97','Calonne19']
+specific_heat_method = 'Yen81'                    # Options: ['bulk','Yen81']
+preferential_percolation_method = 'Marchenko17'   # Options: ['Marchenko17','disabled']
+sfc_temperature_method = 'Newton'             	  # Options: ['L-BFGS-B','SLSQP','Newton']
 
 # ================ #
 # MODEL PARAMETERS 
 # ================ #
 
-# General Parameters:
+# General Model Parameters:
 dt = 3600                                       # Simulation time step [s]
 max_depth = 50                                  # Maximum simulation depth [m]
+firn_temperature_depth = 20.0                   # Depth at which firn temperature is measured [m]                 
+
+# Meteorological Input Parameters:
 station_altitude = 4560.0                       # Altitude of meteorological station [m a.s.l.]
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
+air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [K m-1]
+precipitation_lapse_rate = 0.002                # Precipitation lapse rate [% m-1]
+precipitation_multiplier = 1.0                  # Scaling factor for adjusting precipitation data in meteorlogical forcing [-]
+minimum_snowfall = 0.00001                      # Minimum snowfall per time step in m which is added as new snow [m]
+
+# Physical Processes Parameters:
 albedo_fresh_snow = 0.81                        # Albedo of fresh snow [-]
 albedo_firn = 0.52                              # Albedo of firn [-]
 albedo_ice = 0.3                                # Albedo of ice [-]
@@ -56,9 +42,9 @@ alpha = 0.233                                   # (Greuell97) Cloud transmissivi
 beta = 0.415                                    # (Greuell97) Cloud transmissivity coefficient beta [-]
 e_clouds = 0.960                                # Emissivity of clouds [-]
 LW_emission_constant = 0.420                    # Constant in the longwave emission formula [-]
-zlt1 = 0.06                                     # First depth for temperature interpolation which is used for calculation of ground heat flux [m]
-zlt2 = 0.10                                     # Second depth for temperature interpolation which is used for calculation of ground heat flux [m]                   
-minimum_snowfall = 0.00001                      # Minimum snowfall per time step in m which is added as new snow [m]
+zlt1 = 0.06                                     # First depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m]
+zlt2 = 0.10                                     # Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m]
+basal_heat_flux = 35                            # Basal / Geothermal heat flux [mW m^(-2)]
 snow_ice_threshold = 900.0                      # Pore close of density [kg m^(-3)]
 surface_emission_coeff = 1.0                    # Surface emission coefficient for snow/ice [-]
 
@@ -79,15 +65,25 @@ roughness_constant = 0.001                      # (Constant - surface_roughness_
 z1 = 10                                         # (Ligtenberg11) First depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
 z2 = 20                                         # (Ligtenberg11) Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
 
+# ============================ #
+# SUBSURFACE REMESHING OPTIONS 
+# ============================ #
+
+max_layers = 500                                # Maximum number of subsurface layers 
+minimum_snow_layer_height = 0.0005              # Minimum layer height [m]
+maximum_simulation_layer_height = 0.10          # Maximum height of fine layers [m]
+maximum_coarse_layer_height = 0.3               # Maximum height of coarse layers [m]
+coarse_layer_threshold = 21.                    # Threshold depth at which fine near surface layers are merged into coarser deep layers [m]
+
 # ================== #
 # INITIAL CONDITIONS
 # ================== #
 
-initial_snowheight = 50.              		# Initial snowheight [m]
+initial_snowheight = 50.                        # Initial snowheight [m]
 initial_snow_layer_heights = 0.10               # Initial thickness of snow layers [m]
-initial_glacier_height = 0.0                   # Initial glacier height (without snowlayers) [m]
+initial_glacier_height = 0.0                    # Initial glacier height (without snowlayers) [m]
 initial_glacier_layer_heights = 1.0             # Initial thickness of glacier ice layers [m]
 initial_top_density_snowpack = 250.0            # Top density for initial snowpack [kg m-3]
 initial_bottom_density_snowpack = 700.0         # Bottom density for initial snowpack [kg m-3]
-initial_temperature_top = 258.80		# Upper boundary condition for initial temperature profile [K]
+initial_temperature_top = 258.80                # Upper boundary condition for initial temperature profile [K]
 initial_temperature_bottom = 259.60             # Lower boundary condition for initial temperature profile [K] 
