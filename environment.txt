@@ -1,0 +1,16 @@
+# This file may be used to create an environment using:
+# $ conda create --name <env> --file <this file>
+dask-core
+distributed
+numba
+numpy
+pandas
+scipy
+sphinx
+xarray
+netcdf4
+hdf5
+matplotlib
+jupyter
+shapely
+rioxarray
