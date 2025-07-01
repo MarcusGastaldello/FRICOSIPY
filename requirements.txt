@@ -1,4 +1,4 @@
-# This file may be used to create an environment using:
+# This file may be used to create an environment to run FRICOSIPY using:
 # $ conda create --name <env> --file <this file>
 dask-core
 distributed
