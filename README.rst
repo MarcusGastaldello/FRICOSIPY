@@ -1,6 +1,6 @@
 .. image:: https://github.com/user-attachments/assets/dc18f29c-701c-457c-ad65-3257fdf42731
 
-University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSIPY) (Sauter et al., 2020) that specialises in detailed modelling of subsurface firn processes.
+University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRICOSIPY) that specialises in detailed modelling of subsurface firn processes. Developed from COSIPY (Sauter et al., 2020).
 
 
 :FRICOSIPY Citation:
