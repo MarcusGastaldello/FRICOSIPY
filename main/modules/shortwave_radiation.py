@@ -109,12 +109,18 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
       # Fractional Cloud Cover:
       if SWin is not None:
 
-            # Quadratic constant
-            c = ((TOA_insol * t_gaseous * t_watervapour * t_aerosol) / SWin) -1
+            # Determine cloud transmissivity at AWS:
+            t_cloud_AWS = SWin / (TOA_insol_flat * t_gaseous * t_watervapour * t_aerosol)
+            t_cloud_AWS = np.minimum(t_cloud_AWS,1)
 
-            # Solve quadratic equation:
-            N = (-alpha + np.sqrt(alpha**2 - (4 * beta * c))) / 2 * beta
-            
+            # Quadratic coefficients:
+            a = -beta
+            b = -alpha
+            c = (1 - t_cloud_AWS)
+
+            # Solve Quadratic Equation to determine fractional Cloud Cover (N):
+            N = (-b - np.sqrt(b**2 - (4 * a * c))) / 2 * a
+
             # Ensure fractional cloud cover remains within physical bounds:
             N = np.clip(N,0,1)
 

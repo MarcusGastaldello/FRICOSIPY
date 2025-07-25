@@ -13,10 +13,15 @@ from datetime import datetime
 from itertools import product
 import sys
 from config import *
+import dask.config
 from main.kernel.fricosipy_core import * 
 from main.kernel.io import *
 from dask.distributed import Client, LocalCluster, as_completed
 from tornado import gen
+import logging
+
+# Suppress notifications from Distributed module (turn-off if debugging)
+logging.getLogger("distributed").setLevel(logging.CRITICAL)
 
 def main():
 
@@ -24,43 +29,60 @@ def main():
     print('\t FRICOSIPY MAIN SIMULATION')
     print('\t =========================\n')
 
+    # Measure time
+    simulation_start_time = datetime.now()
+
     # =============================== #
-    # Create input and output dataset
+    # Create Input and Output Dataset
     # =============================== # 
+    
     IO = IOClass()
+
+    # Print information about the input datasets:
+    print('\t INPUT DATASET INFORMATION:')
+    print('\t ==============================================================')
+    print('\t Input Static Dataset: ',static_netcdf)
+    print('\t Input Meteorological Dataset: ',meteo_netcdf)
+    print('\t Input Illumination Dataset: ',illumination_netcdf)
+    print('\t --------------------------------------------------------------')
+
+    # Load Input NetCDF Datasets:
     METEO = IO.load_meteo_file()
     STATIC = IO.load_static_file()
     ILLUMINATION = IO.load_illumination_file()
-    
-    # Create Global Result Dataset
+
+    # Create Output/Result NetCDF Dataset:
     RESULT = IO.create_result_file()
 
-    print('\t OUTPUT VARIABLES:')
+    # Output timesteps:
+    timesteps = str(RESULT.sizes['time'])
+    
+    # Print information about the output dataset:
+    print('\t OUTPUT DATASET INFORMATION:')
     print('\t ==============================================================')
+    print('\t Output Dataset: ',output_netcdf)
+    if reduced_output == True:
+        print('\t Output Timestamps: ',output_timestamps)
+    print('\t Output Timesteps: %s '% (timesteps))  
+    print('\t --------------------------------------------------------------')
     print('\t Meteorological Variables (',len(IO.meteorological_variables),'):',IO.meteorological_variables)
-    print('\t Surface Energy Fluxes (',len(IO.surface_energy_fluxes),'):',IO.surface_energy_fluxes)
-    print('\t Surface Mass Fluxes (',len(IO.surface_mass_fluxes),'):',IO.surface_mass_fluxes)
-    print('\t Subsurface Mass Fluxes (',len(IO.subsurface_mass_fluxes),'):',IO.subsurface_mass_fluxes)
-    print('\t Other Variables (',len(IO.other),'):',IO.other)
+    print('\t Surface Energy Fluxes    (',len(IO.surface_energy_fluxes),'):',IO.surface_energy_fluxes)
+    print('\t Surface Mass Fluxes      (',len(IO.surface_mass_fluxes),'):',IO.surface_mass_fluxes)
+    print('\t Subsurface Mass Fluxes   (',len(IO.subsurface_mass_fluxes),'):',IO.subsurface_mass_fluxes)
+    print('\t Other Variables          (',len(IO.other),'):',IO.other)
+        
     if full_field == True:
-        print('\t Subsurface Variables (',len(IO.subsurface_variables),'):',IO.subsurface_variables)
+        print('\t Subsurface Variables     (',len(IO.subsurface_variables),'):',IO.subsurface_variables)
     else:
         print('\t Subsurface Variables : (Disabled)')
     print('\t ==============================================================\n')
-
-    # Measure time
-    start_time = datetime.now()
 
     # ============================================ #
     # Create a Client for Distributed Calculations
     # ============================================ #
 
-    print('\t ===========================================')
-    print('\t Running FRICOSIPY simulation on',workers,'cores...')
-    print('\t ===========================================\n')
-
-    with LocalCluster(scheduler_port=local_port, n_workers=workers, threads_per_worker = 1, silence_logs = True) as cluster:
-        run_cosipy(cluster, IO, STATIC, METEO, ILLUMINATION, RESULT)
+    with LocalCluster(scheduler_port = local_port, n_workers = workers, threads_per_worker = 1, silence_logs = True, processes = True) as cluster:
+        run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_time)
 
     # ================== #
     # Write Result File:
@@ -72,103 +94,107 @@ def main():
   
     IO.get_result().to_netcdf(os.path.join(data_path,'output',output_netcdf), encoding=encoding, mode = 'w')
     
-    simulation_time = datetime.now() - start_time
+    simulation_time = int((datetime.now() - simulation_start_time).total_seconds())
     
-    print(f"\n\n\t Total simulation duration: %g hrs %g mins %g secs \n" % (simulation_time.total_seconds()//3660,(simulation_time.total_seconds()%3660)//60,(simulation_time.total_seconds()%3660)%60))
+    print(f"\n\t Total Simulation Duration: {int(simulation_time // 3600):02}:{int((simulation_time % 3600) // 60):02}:{int(simulation_time % 60):02}\n\n")
     print('\t =============================')
     print('\t FRICOSIPY Simulation Complete')
     print('\t =============================')
 
 # =============================================================================================================== #
 
-def run_cosipy(cluster, IO, STATIC, METEO, ILLUMINATION, RESULT):
+def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_time):
 
     with Client(cluster) as client:
 
-        # Log cluster and client information:
-        print('\t',cluster)
-        print('\t',client,'\n')
-        sys.stdout.flush()
-
-        # Start simulation timer
-        start_time = datetime.now()
-
-        # Create numpy arrays which aggregates all local results
+        # Create Global Numpy Arrays which Aggregates all Local Results
         IO.create_global_result_arrays()
 
         # Generate a list of the spatial indexes of all glacial nodes: 
-        nodes = []
-        for y,x in product(range(STATIC.sizes['y']),range(STATIC.sizes['x'])):
-            mask = STATIC.MASK.isel(y=y, x=x)
-            if mask == 1 :
-                nodes.append((y,x))
+        nodes = [(y, x) for y, x in product(range(STATIC.sizes['y']), range(STATIC.sizes['x'])) if STATIC.MASK.isel(y=y, x=x).item() == 1]
 
         # Group nodes according to the number of workers available (i.e. the number that can run simulatenously)
-        groups = [nodes[i:i + workers] for i in range(0, len(nodes), workers)]
+        batches = [nodes[i:i + workers] for i in range(0, len(nodes), workers)]
 
-        # Simulate each group sequentially
-        finished = 0
-        for i in range(len(groups)):
+        # Print paralleslisation information:
+        info = client.scheduler_info()
+        memory_limit = info['workers'][list(info['workers'].keys())[0]]['memory_limit'] / 1e9
+
+        print('\t PARALLELISATION:')
+        print('\t ==============================================================')
+        print('\t',cluster)
+        print('\t',client)
+        print('\t --------------------------------------------------------------')
+        print(f'\t Total memory: {(workers * memory_limit):.2f} GB RAM')
+        print(f'\t Workers: {workers} ({memory_limit:.2f} GB RAM available per worker)')
+        print('\t ==============================================================\n\n')
+
+        print('\t ============================================================')
+        print('\t Running FRICOSIPY simulation on',workers,'workers in',len(batches),'batches...')
+        print('\t ============================================================\n')
+        sys.stdout.flush()
+
+        # Scatter shared meteorological input for faster computation:
+        METEO_future = client.scatter(METEO, broadcast=True)
+
+        # Simulate each batch sequentially
+        completed_nodes = 0
+        for i in range(len(batches)):
+
+            # Start node simulation timer
+            node_start_time = datetime.now()
 
             # Submit the spatial nodes to each worker and run the FRICOSIPY model
             futures = []
-            for y,x in groups[i]:
-                futures.append(client.submit(fricosipy_core, STATIC.isel(y=y, x=x), METEO, ILLUMINATION.isel(y=y, x=x), y, x))
-
-            # Main FRICOSIPY Simulation 
-
+            for y,x in batches[i]:
+                futures.append(client.submit(fricosipy_core, STATIC.isel(y=y, x=x), METEO_future, ILLUMINATION.isel(y=y, x=x), y, x, IO.nt, pure = False))
+            
+            # --- Main FRICOSIPY Simulation ---
+            
             # Write the results collected from each worker to release memory
-            for future in as_completed(futures):
+            for future in futures:
 
                 # Get the results from the workers
                 indY,indX, \
                 AIR_TEMPERATURE,AIR_PRESSURE,RELATIVE_HUMIDITY,WIND_SPEED,FRACTIONAL_CLOUD_COVER, \
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
-                RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SMB, \
-                REFREEZE,SUBSURFACE_MELT,RUNOFF,MB, \
-                SNOW_HEIGHT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
+                RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SURFACE_MASS_BALANCE, \
+                REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
+                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
                 LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR = future.result()
                                 
                 IO.copy_local_to_global(indY,indX, \
                 AIR_TEMPERATURE,AIR_PRESSURE,RELATIVE_HUMIDITY,WIND_SPEED,FRACTIONAL_CLOUD_COVER, \
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
-                RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SMB, \
-                REFREEZE,SUBSURFACE_MELT,RUNOFF,MB, \
-                SNOW_HEIGHT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
+                RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SURFACE_MASS_BALANCE, \
+                REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
+                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
                 LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR)
-                    
-                # Write results to file
-                IO.write_results_to_file()
 
                 # Update progress bar:
-                finished += 1
-                report_progress(finished,len(nodes),start_time)
+                completed_nodes += 1
+                report_progress(completed_nodes,len(nodes),simulation_start_time,node_start_time)
+
+            # Write results to file
+            IO.write_results_to_file()
 
 # =============================================================================================================== #
-    
-def compute_scale_and_offset(min, max, n):
-    # stretch/compress data to the available packed range
-    scale_factor = (max - min) / (2 ** n - 1)
-    # translate the range to be symmetric about zero
-    add_offset = min + 2 ** (n - 1) * scale_factor
-    return (scale_factor, add_offset)
 
-def report_progress(completed,total_nodes,start_time):
+def report_progress(completed,total_nodes,simulation_start_time,node_start_time):
     barLength = 50 # Modify this to change the length of the progress bar
     progress = completed / total_nodes
-    time_delta = datetime.now() - start_time
+    node_time = int((datetime.now() - node_start_time).total_seconds())
+    total_time = int((datetime.now() - simulation_start_time).total_seconds())
     block = int(round(barLength*progress))
-    update = "\t [{0}] | {1} / {2} {3} | {4}% | {5}\n".format( "#"*block + "-"*(barLength-block), completed, total_nodes,
-             "Nodes simulated",round(progress*100,2),"%g hrs %g mins %g secs" % (time_delta.total_seconds()//3660,(time_delta.total_seconds()%3660)//60,(time_delta.total_seconds()%3660)%60))
+    update = (
+    f"\t [{'#' * block + '-' * (barLength - block)}] | {completed} / {total_nodes} Nodes simulated | "
+    f"{round(progress * 100, 2)}% | "
+    f"Node time: {int(node_time // 3600):02}:{int((node_time % 3600) // 60):02}:{int(node_time % 60):02} | "
+    f"Total time: {int(total_time // 3600):02}:{int((total_time % 3600) // 60):02}:{int(total_time % 60):02}\n")
     sys.stdout.write(update)
     sys.stdout.flush()
-
-@gen.coroutine
-def close_everything(scheduler):
-    yield scheduler.retire_workers(workers=scheduler.workers, close_workers=True)
-    yield scheduler.close()
 
 ''' MODEL EXECUTION '''
 if __name__ == "__main__":

@@ -5,10 +5,13 @@
 import os
 import xarray as xr
 import numpy as np
-from numpy import genfromtxt
+import pandas as pd
+import dask.array as da
+import rioxarray 
 from constants import *
 from parameters import *
 from config import * 
+import sys
 
 # ===================== #
 # Input / Output Class:
@@ -44,13 +47,26 @@ class IOClass:
         self.STATIC = xr.open_dataset(os.path.join(data_path,'static',static_netcdf))
 
         # Select spatial extent from config.py
-        if subset == True:
+        if spatial_subset == True:
             self.STATIC = self.STATIC.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
         
+        # Grid Dimensions
         self.ny = self.STATIC.sizes['y']
         self.nx = self.STATIC.sizes['x']
 
-        print('\t Spatial Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
+        # Print information about the spatial grid:
+        if self.ny > 1:
+            grid_resolution = str(abs(self.STATIC.y.values[1] - self.STATIC.y.values[0])) + ' m'
+        elif self.nx > 1:
+            grid_resolution = str(abs(self.STATIC.x.values[1] - self.STATIC.x.values[0])) + ' m'
+        else:
+            grid_resolution = 'N/A (Point simulation)'
+
+        if spatial_subset == True:
+            print('\t Spatial Grid Extent: [X:',x_min,'-',x_max,'| Y: ',y_min,'-',y_max,']. Spatial Resolution:',grid_resolution)
+        else:
+            print('\t Spatial Grid Extent: [X:',str(self.STATIC.x.values[0]),'-',str(self.STATIC.x.values[-1]),'| Y:',str(self.STATIC.y.values[0]),'-',str(self.STATIC.y.values[-1]),']. Spatial Resolution:',grid_resolution)        
+        print('\t Glacier Grid Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
 
         return self.STATIC
     
@@ -67,21 +83,36 @@ class IOClass:
         self.METEO = xr.open_dataset(os.path.join(data_path,'meteo',meteo_netcdf))
         self.METEO['time'] = np.sort(self.METEO['time'].values)
 
+        # Print meteorological information:
         start_interval=str(self.METEO.time.values[0])[0:16]
         end_interval = str(self.METEO.time.values[-1])[0:16]
         time_steps = str(self.METEO.sizes['time'])
+        print('\t Simulation Temporal Range from %s until %s. Simulation Timesteps: %s ' % (start_interval, end_interval, time_steps))      
 
-        print('\t INFORMATION:')
-        print('\t ==============================================================')
-        print('\t Max temporal range from %s until %s. Time steps: %s ' % (start_interval, end_interval, time_steps))
-        print('\t Integration from %s to %s' % (time_start, time_end))
-        print('\t Input Static Dataset: ',static_netcdf)
-        print('\t Input Meteorological Dataset: ',meteo_netcdf)
-        print('\t Input Illumination Dataset: ',illumination_netcdf)
-        print('\t Output Timestamps: ',output_timestamps)       
-        print('\t Output Dataset: ',output_netcdf)        
-        
-        self.METEO = self.METEO.sel(time=slice(time_start, time_end))   # Select temporal range from config.py
+        # Check for datetime errors in config file:
+        if (np.asarray(time_start, dtype = np.datetime64) < self.METEO.time.values[0]) or (np.asarray(time_end, dtype = np.datetime64) < self.METEO.time.values[-1]):
+            print('Error: Selected simulation start and end dates are outside the temporal range of the input meteorological file.')
+            sys.exit
+
+        if model_spin_up == True:
+            if not (time_start < initial_timestamp < time_end):
+                print('Error: Initial timestamp is not contained within the temporal range of the input meteorological file.')
+                sys.exit
+
+        if reduced_output == True:
+            if  (np.asarray(time_start, dtype = np.datetime64) > pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64)).any() or \
+                (pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64) > np.asarray(time_end, dtype = np.datetime64)).any():
+                print('Error: Output timestamps are outside the temporal range of the input meteorological file.')
+                sys.exit
+
+            if model_spin_up == True:
+                if  (np.asarray(initial_timestamp, dtype = np.datetime64) > pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64)).any() or \
+                    (pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64) > np.asarray(time_end, dtype = np.datetime64)).any():
+                    print('Error: Output timestamps are outside the temporal range of the input meteorological file and the model spin-up.')
+                    sys.exit
+
+        # Select Temporal Range
+        self.METEO = self.METEO.sel(time=slice(time_start, time_end))
 
         return self.METEO
     
@@ -98,8 +129,10 @@ class IOClass:
         self.ILLUMINATION = xr.open_dataset(os.path.join(data_path,'illumination',illumination_netcdf))
 
         # Select spatial extent from config.py
-        if subset == True:
+        if spatial_subset == True:
             self.ILLUMINATION = self.ILLUMINATION.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
+
+        print('\t ==============================================================\n')
 
         return self.ILLUMINATION
     
@@ -126,10 +159,28 @@ class IOClass:
         self.RESULT.coords['y'] = self.STATIC.coords['y']
         self.RESULT.coords['x'] = self.STATIC.coords['x'] 
 
-        # Temporal range      
-        self.RESULT.coords['time'] = genfromtxt(os.path.join(data_path,'meteo/Output_Timestamps',output_timestamps), dtype = 'M', delimiter=',', skip_header = True)
-        print('\t Output timestamps:', str(self.RESULT.sizes['time']))
-        print('\t ==============================================================\n')
+        # Temporal range   
+        if reduced_output == True:
+
+            # Output variables are reported on user-defined output timestamps:
+            self.RESULT.coords['time'] = pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64).flatten()
+
+            # Final simulation timestamp must be included in the output timestamps to prevent an error:
+            if pd.to_datetime(time_end).to_numpy()  not in self.RESULT.coords['time']:
+                self.RESULT.coords['time'] = np.append(self.RESULT.coords['time'],np.asarray(time_end, dtype = np.datetime64))
+
+        else:
+            if model_spin_up == True:
+
+                # Output variables are reported on all simulation timestamps after the model has initialised / user-defined model spin-up has completed.
+                self.RESULT.coords['time'] = self.METEO.sel(time=slice(initial_timestamp, time_end)).coords['time']
+            else:
+                
+                # Output variables are reported on all simulation timestamps
+                self.RESULT.coords['time'] = self.METEO.coords['time'] 
+
+        # Output File Temporal Dimension
+        self.nt = self.RESULT.sizes['time']
 
         # ===================================== #
         # Assign Attributes to the NETCDF File:
@@ -256,6 +307,16 @@ class IOClass:
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.SUBLIMATION, 'SUBLIMATION', 'm a-1', 'Annual Sublimation Climatology')
         if 'DEPTH' in list(self.STATIC.keys()):    
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.DEPTH, 'DEPTH', 'm a-1', 'Glacier Depth')
+
+        # Convert to Dask arrays for efficient computation:
+        self.RESULT = self.RESULT.chunk(chunks='auto')
+
+        # ========================================= #
+        # Assign Co-ordinate Reference System (CRS)
+        # ========================================= #
+
+        self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
+        self.RESULT = self.RESULT.rio.write_crs(grid_crs)
             
         return self.RESULT
     
@@ -267,108 +328,106 @@ class IOClass:
 
     def create_global_result_arrays(self):
 
-        # Reduce output reporting frequency
-        result_timestamps = genfromtxt(os.path.join(data_path,'meteo/Output_Timestamps',output_timestamps), dtype = 'M', delimiter=',', skip_header = True)
-        reduced_time = len(result_timestamps)
-
         # Meteorological Variables (5):
         if ('AIR_TEMPERATURE' in self.meteorological_variables):
-            self.AIR_TEMPERATURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.AIR_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('AIR_PRESSURE' in self.meteorological_variables):
-            self.AIR_PRESSURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.AIR_PRESSURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('RELATIVE_HUMIDITY' in self.meteorological_variables):
-            self.RELATIVE_HUMIDITY = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.RELATIVE_HUMIDITY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('WIND_SPEED' in self.meteorological_variables):
-            self.WIND_SPEED = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.WIND_SPEED = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('FRACTIONAL_CLOUD_COVER' in self.meteorological_variables):
-            self.FRACTIONAL_CLOUD_COVER = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.FRACTIONAL_CLOUD_COVER = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
         # Surface Energy Fluxes (7):
         if ('SHORTWAVE' in self.surface_energy_fluxes):
-            self.SHORTWAVE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SHORTWAVE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('LONGWAVE' in self.surface_energy_fluxes):
-            self.LONGWAVE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.LONGWAVE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SENSIBLE' in self.surface_energy_fluxes):
-            self.SENSIBLE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SENSIBLE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('LATENT' in self.surface_energy_fluxes):
-            self.LATENT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.LATENT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('GROUND' in self.surface_energy_fluxes):
-            self.GROUND = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.GROUND = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('RAIN_FLUX' in self.surface_energy_fluxes):
-            self.RAIN_FLUX = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.RAIN_FLUX = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('MELT_ENERGY' in self.surface_energy_fluxes):
-            self.MELT_ENERGY = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.MELT_ENERGY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
         # Surface Mass Fluxes (8):
         if ('RAIN' in self.surface_mass_fluxes):
-            self.RAIN = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.RAIN = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SNOWFALL' in self.surface_mass_fluxes):
-            self.SNOWFALL = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SNOWFALL = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('EVAPORATION' in self.surface_mass_fluxes):
-            self.EVAPORATION = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.EVAPORATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SUBLIMATION' in self.surface_mass_fluxes):
-            self.SUBLIMATION = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SUBLIMATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('CONDENSATION' in self.surface_mass_fluxes):
-            self.CONDENSATION = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.CONDENSATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('DEPOSITION' in self.surface_mass_fluxes):
-            self.DEPOSITION = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.DEPOSITION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_MELT' in self.surface_mass_fluxes):
-            self.SURFACE_MELT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
-        if ('SMB' in self.surface_mass_fluxes):
-            self.SMB = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SURFACE_MELT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_MASS_BALANCE' in self.surface_mass_fluxes):
+            self.SURFACE_MASS_BALANCE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
         # Subsurface Mass Fluxes (4):
         if ('REFREEZE' in self.subsurface_mass_fluxes):
-            self.REFREEZE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.REFREEZE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SUBSURFACE_MELT' in self.subsurface_mass_fluxes):
-            self.SUBSURFACE_MELT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SUBSURFACE_MELT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('RUNOFF' in self.subsurface_mass_fluxes):
-            self.RUNOFF = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
-        if ('MB' in self.subsurface_mass_fluxes):
-            self.MB = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.RUNOFF = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
+            self.MASS_BALANCE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
-        # Other Information (8):
+        # Other Information (9):
         if ('SNOW_HEIGHT' in self.other):
-            self.SNOW_HEIGHT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SNOW_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SNOW_WATER_EQUIVALENT' in self.other):
+            self.SNOW_WATER_EQUIVALENT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('TOTAL_HEIGHT' in self.other):
-            self.TOTAL_HEIGHT = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.TOTAL_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_TEMPERATURE' in self.other):
-            self.SURFACE_TEMPERATURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SURFACE_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_ALBEDO' in self.other):
-            self.SURFACE_ALBEDO = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.SURFACE_ALBEDO = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('N_LAYERS' in self.other):
-            self.N_LAYERS = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.N_LAYERS = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('FIRN_TEMPERATURE' in self.other):
-            self.FIRN_TEMPERATURE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.FIRN_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('FIRN_TEMPERATURE_CHANGE' in self.other):
-            self.FIRN_TEMPERATURE_CHANGE = np.full((reduced_time,self.ny,self.nx), np.nan, dtype = precision)
+            self.FIRN_TEMPERATURE_CHANGE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('FIRN_FACIE' in self.other):
-            self.FIRN_FACIE = np.zeros((reduced_time,self.ny,self.nx), dtype = 'int32')
+            self.FIRN_FACIE = np.zeros((self.nt,self.ny,self.nx), dtype = 'int32')
 
         # Subsurface Variables (11):
         if full_field:
             if ('DEPTH' in self.subsurface_variables):
-                self.LAYER_DEPTH = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_DEPTH = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('HEIGHT' in self.subsurface_variables):
-                self.LAYER_HEIGHT = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_HEIGHT = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('DENSITY' in self.subsurface_variables):
-                self.LAYER_DENSITY = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_DENSITY = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('TEMPERATURE' in self.subsurface_variables):
-                self.LAYER_TEMPERATURE = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_TEMPERATURE = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('WATER_CONTENT' in self.subsurface_variables):
-                self.LAYER_WATER_CONTENT = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_WATER_CONTENT = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('COLD_CONTENT' in self.subsurface_variables):
-                self.LAYER_COLD_CONTENT = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_COLD_CONTENT = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('POROSITY' in self.subsurface_variables):
-                self.LAYER_POROSITY = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_POROSITY = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('ICE_FRACTION' in self.subsurface_variables):
-                self.LAYER_ICE_FRACTION = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_ICE_FRACTION = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('IRREDUCIBLE_WATER' in self.subsurface_variables):
-                self.LAYER_IRREDUCIBLE_WATER = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_IRREDUCIBLE_WATER = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('REFREEZE' in self.subsurface_variables):
-                self.LAYER_REFREEZE = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_REFREEZE = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
             if ('HYDRO_YEAR' in self.subsurface_variables):
-                self.LAYER_HYDRO_YEAR = np.full((reduced_time,self.ny,self.nx,max_layers), np.nan, dtype = precision)
+                self.LAYER_HYDRO_YEAR = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
 
     
     # =================================================================================================
@@ -380,9 +439,9 @@ class IOClass:
     def copy_local_to_global(self,y,x,
         local_AIR_TEMPERATURE,local_AIR_PRESSURE,local_RELATIVE_HUMIDITY,local_WIND_SPEED,local_FRACTIONAL_CLOUD_COVER, \
         local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_GROUND,local_RAIN_FLUX,local_MELT_ENERGY, \
-        local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SMB, \
-        local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MB, \
-        local_SNOW_HEIGHT,local_TOTAL_HEIGHT,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
+        local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SURFACE_MASS_BALANCE, \
+        local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MASS_BALANCE, \
+        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
         local_LAYER_DEPTH,local_LAYER_HEIGHT,local_LAYER_DENSITY,local_LAYER_TEMPERATURE,local_LAYER_WATER_CONTENT,local_LAYER_COLD_CONTENT,local_LAYER_POROSITY,local_LAYER_ICE_FRACTION, \
         local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_HYDRO_YEAR):
 
@@ -429,8 +488,8 @@ class IOClass:
             self.DEPOSITION[:,y,x] = local_DEPOSITION
         if ('SURFACE_MELT' in self.surface_mass_fluxes):
             self.SURFACE_MELT[:,y,x] = local_SURFACE_MELT
-        if ('SMB' in self.surface_mass_fluxes):
-            self.SMB[:,y,x] = local_SMB
+        if ('SURFACE_MASS_BALANCE' in self.surface_mass_fluxes):
+            self.SURFACE_MASS_BALANCE[:,y,x] = local_SURFACE_MASS_BALANCE
 
         # Subsurface Mass Fluxes (4):
         if ('REFREEZE' in self.subsurface_mass_fluxes):
@@ -439,12 +498,14 @@ class IOClass:
             self.SUBSURFACE_MELT[:,y,x] = local_SUBSURFACE_MELT
         if ('RUNOFF' in self.subsurface_mass_fluxes):
             self.RUNOFF[:,y,x] = local_RUNOFF
-        if ('MB' in self.subsurface_mass_fluxes):
-            self.MB[:,y,x] = local_MB         
+        if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
+            self.MASS_BALANCE[:,y,x] = local_MASS_BALANCE         
 
-        # Other Information (8):
+        # Other Information (9):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT[:,y,x] = local_SNOW_HEIGHT
+        if ('SNOW_WATER_EQUIVALENT' in self.other):
+            self.SNOW_WATER_EQUIVALENT[:,y,x] = local_SNOW_WATER_EQUIVALENT
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT[:,y,x] = local_TOTAL_HEIGHT
         if ('SURFACE_TEMPERATURE' in self.other):
@@ -536,8 +597,8 @@ class IOClass:
             self.add_variable_along_northingeastingtime(self.RESULT, self.DEPOSITION, 'DEPOSITION', 'm w.e.', 'Moisture Deposition')
         if ('SURFACE_MELT' in self.surface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_MELT, 'SURFACE_MELT', 'm w.e.', 'Surface Melt')
-        if ('SMB' in self.surface_mass_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.SMB, 'SMB', 'm w.e.', 'Surface Mass Balance')
+        if ('SURFACE_MASS_BALANCE' in self.surface_mass_fluxes):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_MASS_BALANCE, 'SURFACE_MASS_BALANCE', 'm w.e.', 'Surface Mass Balance')
 
         # Subsurface Mass Fluxes (4):
         if ('REFREEZE' in self.subsurface_mass_fluxes):
@@ -546,12 +607,14 @@ class IOClass:
             self.add_variable_along_northingeastingtime(self.RESULT, self.SUBSURFACE_MELT, 'SUBSURFACE_MELT', 'm w.e.', 'Subsurface Melt')
         if ('RUNOFF' in self.subsurface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.RUNOFF, 'RUNOFF', 'm w.e.', 'Surface Runoff')
-        if ('MB' in self.subsurface_mass_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.MB, 'MB', 'm w.e.', 'Mass Balance')       
+        if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.MASS_BALANCE, 'MASS_BALANCE', 'm w.e.', 'Mass Balance')       
 
-        # Other Information (8):
+        # Other Information (9):
         if ('SNOW_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_HEIGHT, 'SNOW_HEIGHT', 'm', 'Snow Height')
+        if ('SNOW_WATER_EQUIVALENT' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_WATER_EQUIVALENT, 'SNOW_WATER_EQUIVALENT', 'm w.e.', 'Snow Water Equivalent')
         if ('TOTAL_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.TOTAL_HEIGHT, 'TOTAL_HEIGHT', 'm', 'Total Height')
         if ('SURFACE_TEMPERATURE' in self.other):
@@ -593,6 +656,7 @@ class IOClass:
                 self.add_variable_along_northingeastinglayertime(self.RESULT, self.LAYER_HYDRO_YEAR, 'LAYER_HYDRO_YEAR', 'yyyy', 'Layer Hydrological Year')                   
 
     def get_result(self):
+
         return self.RESULT
     
     # =================================================================================================

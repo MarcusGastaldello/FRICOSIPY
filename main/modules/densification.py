@@ -15,8 +15,8 @@ def densification(GRID,ACCUMULATION,dt):
 	dt      ::  integration time
     """
 
-    densification_allowed = ['Boone', 'Ligtenberg11', 'constant']
-    if densification_method == 'Boone':
+    densification_allowed = ['Boone02', 'Ligtenberg11', 'constant']
+    if densification_method == 'Boone02':
         method_Boone(GRID,dt)
     elif densification_method == 'Ligtenberg11':
         method_Ligtenberg(GRID,ACCUMULATION,dt)
