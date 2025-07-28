@@ -7,7 +7,6 @@ from numba import njit
 # Dry Densification
 # ================= #
 
-@njit
 def densification(GRID,ACCUMULATION,dt):
     """ Densification of the snowpack
     Args:
