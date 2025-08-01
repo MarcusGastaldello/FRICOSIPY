@@ -65,7 +65,7 @@ def create_illumindation_file(static_file, illumination_file):
         if t < 8760:
             Illumination_Norm[t,:,:] = Topographic_Shading(Latitude,Longitude,Northing,Easting,Elevation,Mask,time_rad[t],hour[t],Illumination_Norm[t,:,:])
         else:
-            Illumination_Norm[t,:,:] = np.nan
+            Illumination_Norm[t,:,:] = 0
 
             
       print('\t Calculating Topographic Shading Illumination Matrix for a Leap Year:\n') 
@@ -208,7 +208,7 @@ def Topographic_Shading(latitude,longitude,northing,easting,height,mask,time_rad
                                     else:
                                           Illumination[y,x] = 1
 
-      mask[mask==0] = np.nan
+      mask[mask==0] = 0
       Illumination = Illumination * mask
 
       return Illumination
