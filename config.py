@@ -11,39 +11,39 @@
 data_path = './data/'            # ('./data' current directory | '../data' parent directory)
 
 # Input Files:
-static_netcdf = 'Static_Colle_Gnifetti_20m.nc'
-meteo_netcdf = 'Meteo_Colle_Gnifetti_1H_1939-23.nc'
-illumination_netcdf = 'Illumination_Colle_Gnifetti_20m.nc'
+static_netcdf = 'Static.nc'
+meteo_netcdf = 'Meteo.nc'
+illumination_netcdf = 'Illumination.nc'
 
 # Output File:
-output_netcdf = 'Output_Colle_Gnifetti.nc'
+output_netcdf = 'Output.nc'
 
 # ================= #
 # SIMULATION PERIOD 
 # ================= #
 
 # Date Range:
-time_start   = '1939-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
-time_end     = '2023-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
+time_start   = '2000-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
+time_end     = '2024-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
 # ========================== #
 # OUTPUT REPORTING FREQUENCY 
 # ========================== #
 
 # Model Spin-up
-model_spin_up = True              # Output variables are not aggregated during an initialisation / spin-up phase.
-initial_timestamp  = '2003-01-01T00:00' # (if unused - 'None')
+model_spin_up = False              # Output variables are not aggregated during an initialisation / spin-up phase.
+initial_timestamp  = None          # (Datetime (yyyy-mm-ddThh:mm) , if unused - 'None')
 
 # Output Timestamps:
-reduced_output = True             # Only report output variables on user-defined output timestamps.
-output_timestamps = 'Output_Timestamps_3H_2002-23.csv' # CSV file with desired output timestamps (if unused - 'None').
+reduced_output = False             # Only report output variables on user-defined output timestamps.
+output_timestamps = None           # CSV file with desired output timestamps (if unused - 'None').
 
 # ======================= #
 # SPATIAL EXTENT / SUBSET 
 # ======================= #
 
 # Grid Co-ordinate Reference System (CRS)
-grid_crs = 'epsg:2056'            # epsg:xxxx (eg. egsg:2056 )
+grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 )
 
 # Reduce Spatial Extent
 spatial_subset = True             # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
@@ -62,7 +62,7 @@ other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT'
 
 # 4-D Output Variables:
 full_field = False                                              
-subsurface_variables =   ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR']
+subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR']
 
 # ========================== #
 # SIMULATION PARALLELIZATION 
