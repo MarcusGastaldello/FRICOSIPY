@@ -32,8 +32,23 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
 Installation
 ------------
 
+
+
+
+
+https://www.anaconda.com/download/success
+
+3.    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' command
+
 .. code-block:: console
 
-conda create --name <env> --file <this file>
+    conda create --name <env> --file <this file>
+
+When launching the FRICOSIPY model, you must always ensure this conda environment is active, 
+
+.. code-block:: console
+
+    conda create --name <env> --file <this file>
+
 
 
