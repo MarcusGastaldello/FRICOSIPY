@@ -29,3 +29,11 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
     .. image:: https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg
         :target: https://orcid.org/0009-0003-2384-3617
 
+Installation
+------------
+
+.. code-block:: console
+
+conda create --name <env> --file <this file>
+
+
