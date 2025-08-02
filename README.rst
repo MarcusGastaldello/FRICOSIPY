@@ -33,22 +33,29 @@ Installation
 ------------
 
 
-
+1. 
 
 
 https://www.anaconda.com/download/success
 
-3.    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' command
+2.    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' (change directory) command:
 
 .. code-block:: console
 
     conda create --name <env> --file <this file>
 
-When launching the FRICOSIPY model, you must always ensure this conda environment is active, 
+3.    
 
 .. code-block:: console
 
     conda create --name <env> --file <this file>
+
+When launching the FRICOSIPY model, you must always ensure this new conda environment is active: 
+
+.. code-block:: console
+
+    conda activate
+
 
 
 
