@@ -101,17 +101,18 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
 -----------
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
-* **T2**
-* **U2**
-* **RH2**
-* **PRES**
-* **RRR**
-* **N**
+* **DATETIME** - Datetime [yyyy-mm-dd hh:mm]
+* **T2**   - Air temperature [K]
+* **U2**   - Wind speed [m s-1]
+* **RH2**  - Relative humidity [%]
+* **PRES** - Atmospheric pressure [hPa]
+* **RRR**  - Precipitation [mm]
+* **N**    - Fractional cloud cover [0-1]
 
 Alternatively, instead of using fractional cloud cover ( N ), the user can specify directly measured radiative fluxes:
 
-* **SWin**
-* **LWin**
+* **SWin** - Shortwave radiation [W m-2]
+* **LWin** - Longwave radiation [W m-2]
 
 An exemplar meteo CSV would therefore have the following format:
 
@@ -162,6 +163,7 @@ To run the FRICOSIPY simulation, simply type the following into the command line
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
