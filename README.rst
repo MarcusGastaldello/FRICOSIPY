@@ -87,7 +87,10 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
     .. code-block:: console
 
         cd utilities/create_STATIC/
-        python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+        python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+
+*Note: A utility program to directly convert a Digital Elevation Model to a static file is currently in development.*
+
 ----
 
 2.    Meteo
@@ -122,17 +125,29 @@ The '*create_METEO.py*' utility program can then convert it into NetCDF format.
     .. code-block:: console
 
         cd utilities/create_METEO/
-        python3 create_meteo_netcdf.py -c ../../<meteo_csv>.csv -s ../../data/meteo/<meteo_netcdf>.nc
+        python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data/meteo/<meteo_netcdf>.nc
 
 ----
 
 3.    Illumination
 -----------
 
+The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
+
+The '*create_ILLUMINATION.py*' utility program can create this file from an existing static file.
+
+    .. code-block:: console
+
+        cd utilities/create_METEO/
+        python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i ../../data/illumination/<illumination_netcdf>.nc
+
+*Note: The illumination file is currently limited to a minimum of an hourly temporal resolution.*
+
 ----
 
 Running a Simulation
 =======
+
 
 
 
