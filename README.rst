@@ -62,14 +62,14 @@ Model Input Files
 
 The FRICOSIPY model requires three input Network Common Data Format (NetCDF) files in order to run a simulation:
 
-Static
+1.    Static
 -----------
+The model static input file contains topographic information across the spatial domain ( 𝑥 , 𝑦 ):
 
-
-* NORTHING
-* EASTING
-* LATITUDE
-* LONGITUDE
+* **NORTHING**
+* **EASTING**
+* **LATITUDE**
+* **LONGITUDE**
 
 An exemplar static CSV would therefore have the following format:
 
@@ -89,6 +89,7 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
         cd utilities/create_STATIC/
         python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ----
+
 
 
 
