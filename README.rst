@@ -60,7 +60,7 @@ Henceforth, when running the FRICOSIPY model you must always ensure this new con
 Model Input Files
 =======
 
-The FRICOSIPY model requires three input Network Common Data Format (NetCDF /.nc) files in order to run a simulation:
+The FRICOSIPY model requires three input Network Common Data Format (NetCDF) files in order to run a simulation:
 
 Static
 -----------
@@ -75,6 +75,7 @@ Static
 
         cd utilities/create_STATIC/
         python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+
 
 
 
