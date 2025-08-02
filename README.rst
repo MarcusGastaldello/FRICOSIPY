@@ -64,7 +64,7 @@ The FRICOSIPY model requires three input Network Common Data Format (NetCDF) fil
 
 1.    Static
 -----------
-The model static input file contains topographic information that varies across the spatial domain ( 𝑥 , 𝑦 ):
+The model static input file contains topographic information that varies across the spatial domain ( 𝑥 , 𝑦 ) and requires the following variables:
 
 * **NORTHING**
 * **EASTING**
@@ -90,11 +90,49 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
         python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ----
 
-1.    Static
+2.    Meteo
 -----------
-The model meteorological input file contains the meteorological data varying through time ( 𝑡 ):
+The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
+* **T2**
+* **U2**
+* **RH2**
+* **PRES**
+* **RRR**
+* **N**
 
+Alternatively, instead of using fractional cloud cover ( N ), the user can specify directly measured radiative fluxes:
+
+* **SWin**
+* **LWin**
+
+An exemplar meteo CSV would therefore have the following format:
+
+============  =====  =======
+  NORTHING      B    A and B
+============  =====  =======
+False         False  False
+True          False  False
+False         True   False
+True          True   True
+============  =====  =======
+
+The '*create_METEO.py*' utility program can then convert it into NetCDF format.
+
+    .. code-block:: console
+
+        cd utilities/create_METEO/
+        python3 create_meteo_netcdf.py -c ../../<meteo_csv>.csv -s ../../data/meteo/<meteo_netcdf>.nc
+
+----
+
+3.    Illumination
+-----------
+
+----
+
+Running a Simulation
+=======
 
 
 
