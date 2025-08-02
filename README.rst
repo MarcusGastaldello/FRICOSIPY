@@ -71,10 +71,25 @@ Static
 * LATITUDE
 * LONGITUDE
 
+An exemplar static CSV would therefore have the following format:
+
+============  =====  =======
+  NORTHING      B    A and B
+============  =====  =======
+False         False  False
+True          False  False
+False         True   False
+True          True   True
+============  =====  =======
+
+The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
+
     .. code-block:: console
 
         cd utilities/create_STATIC/
         python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+----
+
 
 
 
