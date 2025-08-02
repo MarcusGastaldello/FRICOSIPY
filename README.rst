@@ -151,16 +151,27 @@ The '*create_ILLUMINATION.py*' utility program can create this file from an exis
 Running a Simulation
 =======
 
+Configuration
+-----------
+
+Parallelisation
+-----------
+
+Parameters & Paremeterisations
+-----------
 
 
 
-To run the FRICOSIPY simulation, simply type the following into the command line from the main model directory:
+----
+
+Finally, to run the FRICOSIPY simulation, type the following into the command line from the main model directory:
 
     .. code-block:: console
 
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
