@@ -40,9 +40,9 @@ https://www.anaconda.com/download/success
 
 **2.**    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' (change directory) command:
 
-.. code-block:: console
+    .. code-block:: console
 
-    conda create --name <env> --file <this file>
+        cd C:\Users\<username>\Downloads
 
 **3.**    
 
@@ -55,6 +55,7 @@ When launching the FRICOSIPY model, you must always ensure this new conda enviro
 .. code-block:: console
 
     conda activate
+
 
 
 
