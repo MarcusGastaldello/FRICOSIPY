@@ -37,7 +37,7 @@ Installation
 
 **1.**    Download the latest version of the FRICOSIPY model and unpack its contents from the ZIP archive folder.
 
-**2.**    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' (change directory) command:
+**2.**    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' (change directory) command: Eg.
 
     .. code-block:: console
 
@@ -181,6 +181,7 @@ Finally, to run the FRICOSIPY simulation, type the following into the command li
 When initialising, key simulation information will be printed in the terminal. Subsequently, progress updates will be received as nodes simulate until the simulation finishes.
 
 ----
+
 
 
 
