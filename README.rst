@@ -86,7 +86,7 @@ An exemplar static CSV would therefore have the following format:
 
 *Note: FRICOSIPY requires a standard rectilinear grid.*
 
-The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
+The '*create_STATIC.py*' utility program can then convert it into NetCDF format, if required.
 
     .. code-block:: console
 
@@ -123,7 +123,7 @@ An exemplar meteo CSV would therefore have the following format:
   2024-01-00 14:00      274.56      8.71       66.22      672.18      0.00      0.12   
 ====================  ==========  =========  =========  ==========  ========  ========
 
-The '*create_METEO.py*' utility program can then convert it into NetCDF format.
+The '*create_METEO.py*' utility program can then convert it into NetCDF format, if required.
 
     .. code-block:: console
 
@@ -161,6 +161,7 @@ To run the FRICOSIPY simulation, simply type the following into the command line
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
