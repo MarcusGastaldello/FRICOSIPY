@@ -33,10 +33,7 @@ Installation
 ------------
 
 
-**1.**    
-
-
-https://www.anaconda.com/download/success
+**1.**    Download the latest version of the FRICOSIPY model and unpack its contents from the ZIP archive folder.
 
 **2.**    Navigate to the directory where you have downloaded the FRICOSIPY model in the command prompt using the 'cd' (change directory) command:
 
@@ -44,17 +41,18 @@ https://www.anaconda.com/download/success
 
         cd C:\Users\<username>\Downloads\FRICOSIPY
 
-**3.**    Create the conda environment. If you do not have *Miniconda* already installed, you must install it first (https://www.anaconda.com/download)
+**3.**    Create the conda environment. If you do not have *Miniconda* already installed, you must install it first (https://www.anaconda.com/download).
 
 .. code-block:: console
 
     conda create --name <env> --file <this file>
 
-When launching the FRICOSIPY model, you must always ensure this new conda environment is activated: 
+Henceforth, when running the FRICOSIPY model you must always ensure this new conda environment is active: 
 
 .. code-block:: console
 
     conda activate <env>
+
 
 
 
