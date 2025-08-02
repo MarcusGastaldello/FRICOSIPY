@@ -156,13 +156,14 @@ Running a Simulation
 
 
 
-To run the FRICOSIPY simulation, simply type the following into the command line from the FRICOSIPY model directory:
+To run the FRICOSIPY simulation, simply type the following into the command line from the main model directory:
 
     .. code-block:: console
 
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
