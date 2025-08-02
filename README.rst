@@ -64,7 +64,7 @@ Model Input Files
 
 The FRICOSIPY model requires three input Network Common Data Format (NetCDF) files in order to run a simulation:
 
-1.    Static
+1.    Static File
 -----------
 The model static input file contains topographic information that varies across the spatial domain ( 𝑥 , 𝑦 ) and requires the following variables:
 
@@ -99,7 +99,7 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format,
 
 ----
 
-2.    Meteo
+2.    Meteo File
 -----------
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
@@ -134,7 +134,7 @@ The '*create_METEO.py*' utility program can then convert it into NetCDF format, 
 
 ----
 
-3.    Illumination
+3.    Illumination File
 -----------
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
@@ -183,6 +183,7 @@ Finally, to run the FRICOSIPY simulation, type the following into the command li
 When initialising, key simulation information will be printed in the terminal. Subsequently, progress updates will be received as nodes simulate until the simulation finishes.
 
 ----
+
 
 
 
