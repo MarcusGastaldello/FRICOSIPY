@@ -10,9 +10,6 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
     .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3902191.svg
         :target: http://doi.org/10.5281/zenodo.13361824
 
-:FRICOSIPY User Guide:
-    (coming soon)
-
 :Original COSIPY Model:
     .. image:: https://img.shields.io/badge/Citation-GMD%20paper-orange.svg
         :target: https://gmd.copernicus.org/articles/13/5645/2020/
@@ -31,3 +28,4 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
 
     .. image:: https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg
         :target: https://orcid.org/0009-0003-2384-3617
+
