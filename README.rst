@@ -138,7 +138,7 @@ The '*create_ILLUMINATION.py*' utility program can create this file from an exis
 
     .. code-block:: console
 
-        cd utilities/create_METEO/
+        cd utilities/create_ILLUMINATION/
         python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i ../../data/illumination/<illumination_netcdf>.nc
 
 *Note: The illumination file is currently limited to a minimum of an hourly temporal resolution.*
@@ -147,6 +147,18 @@ The '*create_ILLUMINATION.py*' utility program can create this file from an exis
 
 Running a Simulation
 =======
+
+
+
+
+To run the FRICOSIPY simulation, simply type the following into the command line from the FRICOSIPY model directory:
+
+    .. code-block:: console
+
+        python3 FRICOSIPY.py
+
+----
+
 
 
 
