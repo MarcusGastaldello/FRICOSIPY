@@ -70,6 +70,10 @@ The model static input file contains topographic information that varies across 
 * **EASTING**
 * **LATITUDE**
 * **LONGITUDE**
+* **ELEVATION**
+* **ASPECT**
+* **SLOPE**
+* **MASK**
 
 An exemplar static CSV would therefore have the following format:
 
@@ -158,6 +162,7 @@ To run the FRICOSIPY simulation, simply type the following into the command line
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
