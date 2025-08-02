@@ -46,15 +46,16 @@ Installation
 
 **3.**    Create the conda environment. If you do not have *Miniconda* already installed, you must install it first (https://www.anaconda.com/download).
 
-.. code-block:: console
+    .. code-block:: console
 
-    conda create --name <env> --file requirements.txt
+        conda create --name <env> --file requirements.txt
 
 Henceforth, when running the FRICOSIPY model you must always ensure this new conda environment is active: 
 
-.. code-block:: console
+    .. code-block:: console
 
-    conda activate <env>
+        conda activate <env>
+
 
 
 
