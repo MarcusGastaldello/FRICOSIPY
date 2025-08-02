@@ -53,13 +53,12 @@ Henceforth, when running the FRICOSIPY model you must always ensure this new con
 
         conda activate <env>
 
-Installation
+Input
 =======
 
-Installation
+Static
 -----------
 
-And
 
 
 
