@@ -1,4 +1,4 @@
-Overview
+Introduction
 ------------
 
 .. image:: https://github.com/user-attachments/assets/dc18f29c-701c-457c-ad65-3257fdf42731
@@ -55,6 +55,7 @@ Henceforth, when running the FRICOSIPY model you must always ensure this new con
 .. code-block:: console
 
     conda activate <env>
+
 
 
 
