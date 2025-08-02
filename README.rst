@@ -148,21 +148,29 @@ The '*create_ILLUMINATION.py*' utility program can create this file from an exis
 
 ----
 
-Running a Simulation
+Model Setup
 =======
 
 Configuration
 -----------
 
+In order to run a FRICOSIPY simulation, the user must first appropiately edit the configuration file (*config.py*). This file specifies the model input files and the temporal range of the simulation. For greater customisation of the output dataset, the user can also control the output reporting frequency and specify which variables are to be written into the output dataset. 
+
 Parallelisation
 -----------
+
+For improved computational efficiency, FRICOSIPY supports parallel computing using the *Dask Distributed* package; multiple grid nodes can therefore be simulated simultaneously. Within '*config.py*', users can modify the number of workers/processers used in the simulation, however be mindful that memory (RAM) must be shared between the processors. 
 
 Parameters & Paremeterisations
 -----------
 
+The '*parameters.py*' controls all parameters of the model's physical processes - these should be carefully selected and calibrated to site conditions before running a simulation. For more advanced users, there are a selection of alternative parameterisations that can be selected for enhanced model versatility.
 
 
 ----
+
+Running the FRICOSIPY Simulation
+=======
 
 Finally, to run the FRICOSIPY simulation, type the following into the command line from the main model directory:
 
@@ -170,7 +178,10 @@ Finally, to run the FRICOSIPY simulation, type the following into the command li
 
         python3 FRICOSIPY.py
 
+When initialising, key simulation information will be printed in the terminal. Subsequently, progress updates will be received as nodes simulate until the simulation finishes.
+
 ----
+
 
 
 
