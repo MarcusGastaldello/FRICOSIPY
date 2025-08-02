@@ -45,13 +45,14 @@ Installation
 
 .. code-block:: console
 
-    conda create --name <env> --file <this file>
+    conda create --name <env> --file requirements.txt
 
 Henceforth, when running the FRICOSIPY model you must always ensure this new conda environment is active: 
 
 .. code-block:: console
 
     conda activate <env>
+
 
 
 
