@@ -66,6 +66,15 @@ Static
 -----------
 
 
+* NORTHING
+* EASTING
+* LATITUDE
+* LONGITUDE
+
+    .. code-block:: console
+
+        cd utilities/create_STATIC/
+        python3 create_static_netcdf.py -c ../../<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 
 
 
