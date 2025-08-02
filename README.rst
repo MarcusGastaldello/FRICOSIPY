@@ -43,6 +43,8 @@ Installation
 
         cd C:\Users\<username>\Downloads\FRICOSIPY
 
+*Note: it is reccomended to move the model to a more suitable directory.*
+
 **3.**    Create the conda environment. If you do not have *Miniconda* already installed, you must install it first (https://www.anaconda.com/download).
 
     .. code-block:: console
@@ -181,6 +183,7 @@ Finally, to run the FRICOSIPY simulation, type the following into the command li
 When initialising, key simulation information will be printed in the terminal. Subsequently, progress updates will be received as nodes simulate until the simulation finishes.
 
 ----
+
 
 
 
