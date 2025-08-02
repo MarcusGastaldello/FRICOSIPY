@@ -66,25 +66,25 @@ The FRICOSIPY model requires three input Network Common Data Format (NetCDF) fil
 -----------
 The model static input file contains topographic information that varies across the spatial domain ( 𝑥 , 𝑦 ) and requires the following variables:
 
-* **NORTHING**
-* **EASTING**
-* **LATITUDE**
-* **LONGITUDE**
-* **ELEVATION**
-* **ASPECT**
-* **SLOPE**
-* **MASK**
+* **NORTHING** - Northing [m]
+* **EASTING** - Easting [m]
+* **LATITUDE** - Latitude (WGS84) [decimal]
+* **LONGITUDE** - Longitude (WGS84) [decimal]
+* **ELEVATION** - Elevation [m a.s.l.]
+* **ASPECT** - Terrain aspect [°]
+* **SLOPE** - Terrain slope [°]
+* **MASK** - Glacier mask boolean [0 or 1]
 
 An exemplar static CSV would therefore have the following format:
 
-============  =====  =======
-  NORTHING      B    A and B
-============  =====  =======
-False         False  False
-True          False  False
-False         True   False
-True          True   True
-============  =====  =======
+============  ===========  ============  =============  =============  ==========  =========  ======== 
+  NORTHING      EASTING      LATITUDE      LONGITUDE      ELEVATION      ASPECT      SLOPE      MASK  
+============  ===========  ============  =============  =============  ==========  =========  ========
+  1086500       2633800      45.92925      7.874360        4457.10       240.24      2.35         1
+  1086600       2633800      45.93039      7.874485        4456.72       210.12      4.13         1
+============  ===========  ============  =============  =============  ==========  =========  ========
+
+*Note: FRICOSIPY requires a standard rectilinear grid.*
 
 The '*create_STATIC.py*' utility program can then convert it into NetCDF format.
 
@@ -116,14 +116,12 @@ Alternatively, instead of using fractional cloud cover ( N ), the user can speci
 
 An exemplar meteo CSV would therefore have the following format:
 
-============  =====  =======
-  NORTHING      B    A and B
-============  =====  =======
-False         False  False
-True          False  False
-False         True   False
-True          True   True
-============  =====  =======
+====================  ==========  =========  =========  ==========  ========  ========
+  DATETIME                T2         U2         RH2        PRES       RRR        N        
+====================  ==========  =========  =========  ==========  ========  ========
+  2024-01-00 13:00      273.15      6.22       60.54      652.42      1.00      0.32   
+  2024-01-00 14:00      274.56      8.71       66.22      672.18      0.00      0.12   
+====================  ==========  =========  =========  ==========  ========  ========
 
 The '*create_METEO.py*' utility program can then convert it into NetCDF format.
 
@@ -163,6 +161,7 @@ To run the FRICOSIPY simulation, simply type the following into the command line
         python3 FRICOSIPY.py
 
 ----
+
 
 
 
