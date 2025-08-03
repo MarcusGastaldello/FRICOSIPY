@@ -183,6 +183,12 @@ Finally, to run the FRICOSIPY simulation, type the following into the command li
 When initialising, key simulation information will be printed in the terminal. Subsequently, progress updates will be received as nodes simulate until the simulation finishes.
 
 ----
+Result Viewer
+=======
+
+
+----
+
 
 
 
