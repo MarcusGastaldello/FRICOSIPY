@@ -66,7 +66,7 @@ def create_static_input(csv_file, static_file):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
         print('\t Grid Spatial Resolution: ',resolution,' m \n')
     else:
-        raise ValueError('\t Error: Non-square grid detected!')
+        raise ValueError('Error: Non-square grid detected!')
 
     # ======================= #
     # Create Xarray Dataframe 
@@ -177,5 +177,6 @@ if __name__ == "__main__":
     parser.add_argument('-s', '-static_file', dest='static_file', help='Static file containing DEM, Slope etc.')
 
     args = parser.parse_args()
+
 
     create_static_input(args.csv_file, args.static_file)
