@@ -15,9 +15,6 @@ import datetime as dt
 import argparse
 import pandas as pd
 import xarray as xr
-#import rioxarray as rio
-
-sys.path.append('/home/gastalm/Data/static')
 
 def create_static_input(csv_file, static_file):
 
@@ -29,15 +26,30 @@ def create_static_input(csv_file, static_file):
     # Read CSV Static Data
     # ==================== #
 
+    # Check for NaNs:
     df = pd.read_csv(csv_file)
     if df.isnull().values.any() == True:
-        print('\t Warning: NaN Values are in the Dataset! Abort')
-        sys.exit()
-
+        raise ValueError('\t Error: NaN Values are in the Dataset!')
+    
+    # Check input data:
+    required_variables = {'EASTING', 'NORTHING', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'ASPECT', 'SLOPE', 'MASK'}
+    if not required_variables.issubset(df.columns):
+        raise ValueError('\t Error: Missing variables. The static dataset must have the following variables:\n', \
+                         '\t NORTHING  - Northing [m]\n', \
+                         '\t EASTING   - Easting  [m]\n',  \
+                         '\t LATITUDE  - Latitude  (WGS84) [decimal]', \
+                         '\t LONGITUDE - Longitude (WGS84) [decimal]', \
+                         '\t ELEVATION - Elevation [m a.s.l.]\n', \
+                         '\t ASPECT    - Aspect [°]\n', \
+                         '\t SLOPE     - Slope  [°]\n', \
+                         '\t MASK      - Glacier mask boolean [0 or 1]')
+                         
+    # Print Information:
     print('\t INFORMATION:')
     print('\t ==============================================================')
     print('\t Input Static Data CSV: ',csv_file)
     print('\t Output Static NetCDF Dataset: ',static_file)
+    print('\t --------------------------------------------------------------')
     print('\t Minimum Easting:  ',np.min(df["EASTING"]))
     print('\t Maximum Easting:  ',np.max(df["EASTING"]))
     print('\t Minimum Northing: ',np.min(df["NORTHING"]))
@@ -47,13 +59,13 @@ def create_static_input(csv_file, static_file):
     # Spatial Resoultion
     # ================== #
 
+    # Calculate grid spatial resolution:
     if (np.unique(np.diff(np.unique(df["EASTING"]))) == np.unique(np.diff(np.unique(df["NORTHING"])))) and \
     (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
         print('\t Grid Spatial Resolution: ',resolution,' m \n')
     else:
-        print('\t Warning: Non-square grid detected! Abort')
-        sys.exit()
+        raise ValueError('\t Error: Non-square grid detected!')
 
     # ======================= #
     # Create Xarray Dataframe 
@@ -79,7 +91,6 @@ def create_static_input(csv_file, static_file):
     print('\t ==============================================================')
     
     # Elevation [ELEVATION]
-
     print(f"\t 'ELEVATION' - Elevation [m a.s.l.]                  Min: {np.round(df['ELEVATION'].min(),2)} -- Max: {np.round(df['ELEVATION'].max(),2)}")
     ELEVATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ELEVATION").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, ELEVATION, 'ELEVATION', 'm a.s.l.', 'Elevation')
