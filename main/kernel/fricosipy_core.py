@@ -96,7 +96,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
 
     else:
-        raise ValueError("\t Error: Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
+        raise ValueError("Error: Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
 
     # Remaining variables remain constant across the spatial grid
     RH2 = METEO.RH2.values
@@ -129,7 +129,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
     # Radiative fluxes error message:
     else:
-        raise ValueError("\t Error: Either Fractional cloud cover ('N') or incoming Longwave radiation ('LWin') must be supplied in the input METEO file")
+        raise ValueError("Error: Either Fractional cloud cover ('N') or incoming Longwave radiation ('LWin') must be supplied in the input METEO file")
 
     # =============================== #
     # GET ILLUMINATION DATA FROM FILE
