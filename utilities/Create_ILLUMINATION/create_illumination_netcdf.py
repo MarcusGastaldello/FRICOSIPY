@@ -33,7 +33,7 @@ def create_illumindation_file(static_file, illumination_file):
 
       # Ensure there are no glacial nodes on the boundary of the static file:
       if (ds.MASK * ((ds.y == ds.y[0])  | (ds.y == ds.y[-1]) | (ds.x == ds.x[0])  | (ds.x == ds.x[-1]))).sum().values != 0:
-            raise ValueError('\t Error: Glacier nodes cannot exist on the boundary of the static file spatial domain!')
+            raise ValueError('Error: Glacier nodes cannot exist on the boundary of the static file spatial domain!')
 
       # ========================== #
       # Create Auxillary Variables 
