@@ -28,7 +28,12 @@ def create_illumindation_file(static_file, illumination_file):
       print('\t INFORMATION:')
       print('\t ==============================================================')
       print('\t Input Static Dataset: ',static_file)
-      print('\t Output Illumination Dataset: ',illumination_file,'\n')
+      print('\t Output Illumination Dataset: ',illumination_file)
+      print('\t ==============================================================','\n')
+
+      # Ensure there are no glacial nodes on the boundary of the static file:
+      if (ds.MASK * ((ds.y == ds.y[0])  | (ds.y == ds.y[-1]) | (ds.x == ds.x[0])  | (ds.x == ds.x[-1]))).sum().values != 0:
+            raise ValueError('\t Error: Glacier nodes cannot exist on the boundary of the static file spatial domain!')
 
       # ========================== #
       # Create Auxillary Variables 
@@ -117,7 +122,7 @@ def create_illumindation_file(static_file, illumination_file):
       ILLUMINATON_LEAP.long_name = 'Topographic Shading Illumination (Leap Year)'
       ILLUMINATON_LEAP[:] = Illumination_Leap
 
-      print('\n\t =========================')
+      print('\t =========================')
       print('\t Illumination File Created')
       print('\t =========================\n')
             
