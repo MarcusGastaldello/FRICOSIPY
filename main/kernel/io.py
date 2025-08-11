@@ -91,21 +91,21 @@ class IOClass:
 
         # Check for datetime errors in config file:
         if (np.asarray(time_start, dtype = np.datetime64) < self.METEO.time.values[0]) or (np.asarray(time_end, dtype = np.datetime64) > self.METEO.time.values[-1]):
-            raise ValueError('\t Error: Selected simulation start and end dates are outside the temporal range of the input meteorological file.')
+            raise ValueError('Error: Selected simulation start and end dates are outside the temporal range of the input meteorological file.')
 
         if model_spin_up == True:
             if not (time_start < initial_timestamp < time_end):
-                raise ValueError('\t Error: Initial timestamp is not contained within the temporal range of the input meteorological file.')
+                raise ValueError('Error: Initial timestamp is not contained within the temporal range of the input meteorological file.')
 
         if reduced_output == True:
             if  (np.asarray(time_start, dtype = np.datetime64) > pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64)).any() or \
                 (pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64) > np.asarray(time_end, dtype = np.datetime64)).any():
-                raise ValueError('\t Error: Output timestamps are outside the temporal range of the input meteorological file.')
+                raise ValueError('Error: Output timestamps are outside the temporal range of the input meteorological file.')
 
             if model_spin_up == True:
                 if  (np.asarray(initial_timestamp, dtype = np.datetime64) > pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64)).any() or \
                     (pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64) > np.asarray(time_end, dtype = np.datetime64)).any():
-                    raise ValueError('\t Error: Output timestamps are outside the temporal range of the input meteorological file and the model spin-up.')
+                    raise ValueError('Error: Output timestamps are outside the temporal range of the input meteorological file and the model spin-up.')
 
         # Select Temporal Range
         self.METEO = self.METEO.sel(time=slice(time_start, time_end))
