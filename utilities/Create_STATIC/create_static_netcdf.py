@@ -29,20 +29,21 @@ def create_static_input(csv_file, static_file):
     # Check for NaNs:
     df = pd.read_csv(csv_file)
     if df.isnull().values.any() == True:
-        raise ValueError('\t Error: NaN Values are in the Dataset!')
+        raise ValueError('Error: NaN Values are in the Dataset!')
     
     # Check input data:
     required_variables = {'EASTING', 'NORTHING', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'ASPECT', 'SLOPE', 'MASK'}
     if not required_variables.issubset(df.columns):
-        raise ValueError('\t Error: Missing variables. The static dataset must have the following variables:\n', \
-                         '\t NORTHING  - Northing [m]\n', \
-                         '\t EASTING   - Easting  [m]\n',  \
-                         '\t LATITUDE  - Latitude  (WGS84) [decimal]', \
-                         '\t LONGITUDE - Longitude (WGS84) [decimal]', \
-                         '\t ELEVATION - Elevation [m a.s.l.]\n', \
-                         '\t ASPECT    - Aspect [°]\n', \
-                         '\t SLOPE     - Slope  [°]\n', \
-                         '\t MASK      - Glacier mask boolean [0 or 1]')
+        print('Missing variables: The static dataset must have the following variables:\n\n', \
+              '\t NORTHING  - Northing [m]\n', \
+              '\t EASTING   - Easting  [m]\n',  \
+              '\t LATITUDE  - Latitude  (WGS84) [decimal]\n', \
+              '\t LONGITUDE - Longitude (WGS84) [decimal]\n', \
+              '\t ELEVATION - Elevation [m a.s.l.]\n', \
+              '\t ASPECT    - Aspect [°]\n', \
+              '\t SLOPE     - Slope  [°]\n', \
+              '\t MASK      - Glacier mask boolean [0 or 1]\n')
+        raise ValueError('Error: Missing static variables')
                          
     # Print Information:
     print('\t INFORMATION:')
