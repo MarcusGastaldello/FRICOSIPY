@@ -20,8 +20,7 @@ from main.modules.surface_roughness import update_roughness
 from main.kernel.init import init_snowpack
 from main.kernel.io import IOClass
 
-
-def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
+def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     """ Cosipy core function, which perform the calculations on one core.
 
     Variables:
@@ -29,6 +28,9 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     STATIC: Xarray dataset containing topographic/static data (x,y)
     METEO: Xarray dataset containing meteoroligical data (t)
     ILLUMINATION: Xarray dataset containing solar illumination data (x,y,t)
+    indY: Y index of the simulated node
+    indX: X index of the simulated node
+    nt : Temporal dimension of the output result dataset
 
     Returns
     ======
@@ -94,8 +96,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
             RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
 
     else:
-        print("Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
-        sys.exit()
+        raise ValueError("Error: Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
 
     # Remaining variables remain constant across the spatial grid
     RH2 = METEO.RH2.values
@@ -128,8 +129,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
 
     # Radiative fluxes error message:
     else:
-        print("Either Fractional cloud cover ('N') or incoming Longwave radiation ('LWin') must be supplied in the input METEO file")
-        sys.exit()
+        raise ValueError("Error: Either Fractional cloud cover ('N') or incoming Longwave radiation ('LWin') must be supplied in the input METEO file")
 
     # =============================== #
     # GET ILLUMINATION DATA FROM FILE
@@ -158,32 +158,9 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     elif ('N' in list(METEO.keys())):
         SWin, _ = shortwave_radiation_input(PRES, T2, RH2, TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM, NODE_ILLUMINATION, N = N)
     
-    # ==================== #
+    # ====================== #
     # LOCAL RESULT VARIABLES
-    # ==================== #
-    
-    # Extract result timesteps from file:
-    result_timesteps = genfromtxt(os.path.join(data_path,'meteo/Output_Timestamps',output_timestamps), dtype = 'M', delimiter=',', skip_header = True)
-    
-    # Convert from datetime [ns] to simulation index:
-    result_timesteps = ((result_timesteps - METEO.time[0].data).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
-    nt = len(result_timesteps)
-
-    # Spin-up end index:
-    # Convert from datetime [ns] to simulation index:
-    spin_up_end_timestep = ((pd.to_datetime(spin_up_end).to_numpy() - pd.to_datetime(time_start).to_numpy()).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
-    time_end_timestep = ((pd.to_datetime(time_end).to_numpy() - pd.to_datetime(time_start).to_numpy()).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
-    if time_end_timestep in result_timesteps:
-        if model_spin_up == True:
-            aggregation_timestep_range = np.diff(np.insert(result_timesteps,0,spin_up_end_timestep))
-        else:
-            aggregation_timestep_range = np.diff(np.insert(result_timesteps,0,0))
-    else:
-        if model_spin_up == True:
-            aggregation_timestep_range = np.diff(np.insert(np.append(result_timesteps,time_end_timestep),0,spin_up_end_timestep))
-        else:
-            aggregation_timestep_range = np.diff(np.insert(np.append(result_timesteps,time_end_timestep),0,0))
-
+    # ====================== #
 
     # Meteorological Variables (5):
     _AIR_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
@@ -209,16 +186,17 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     _CONDENSATION = np.full(nt,np.nan, dtype=precision)
     _DEPOSITION = np.full(nt,np.nan, dtype=precision)
     _SURFACE_MELT = np.full(nt,np.nan, dtype=precision)
-    _SMB = np.full(nt,np.nan, dtype=precision)
+    _SURFACE_MASS_BALANCE = np.full(nt,np.nan, dtype=precision)
 
     # Subsurface Mass Fluxes (4):
     _REFREEZE = np.full(nt,np.nan, dtype=precision)
     _SUBSURFACE_MELT = np.full(nt,np.nan, dtype=precision)
     _RUNOFF = np.full(nt,np.nan, dtype=precision)
-    _MB = np.full(nt,np.nan, dtype=precision)
+    _MASS_BALANCE = np.full(nt,np.nan, dtype=precision)
 
-    # Other Information (8):
+    # Other Information (9):
     _SNOW_HEIGHT = np.full(nt,np.nan, dtype=precision)
+    _SNOW_WATER_EQUIVALENT = np.full(nt,np.nan, dtype=precision)
     _TOTAL_HEIGHT = np.full(nt,np.nan, dtype=precision)
     _SURFACE_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
     _SURFACE_ALBEDO = np.full(nt,np.nan, dtype=precision)
@@ -240,6 +218,38 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     _LAYER_REFREEZE = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_HYDRO_YEAR = np.full((nt,max_layers), np.nan, dtype=precision)
 
+    # ============================== #
+    # AGGREGATION & OUTPUT REPORTING
+    # ============================== #
+
+    if model_spin_up == True:
+
+        # Convert user-defined initial timestamp from datetime [ns] to timestamp index:
+        initial_index = ((pd.to_datetime(initial_timestamp).to_numpy() - pd.to_datetime(time_start).to_numpy()).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
+
+    else: 
+        # Initial index is equal to the first timestamp in the METEO dataset (0):
+        initial_index = 0
+
+    if reduced_output == True:
+
+        # Output variables are reported on user-defined output timestamps (converting from datetime [ns] to timestamp index):
+        output_indexes = ((pd.read_csv(os.path.join(data_path,'output/output_timestamps',output_timestamps), header = None).to_numpy(dtype = np.datetime64) - \
+                           METEO.time[0].data).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
+        time_end_index = ((METEO.time[-1].data - METEO.time[0].data).astype(dtype = np.float64) / (1e9 * dt)).astype(dtype = np.int32)
+
+        # Final simulation timestamp must be included in the output timestamps to prevent an error:
+        if time_end_index not in output_indexes:
+            output_indexes = np.append(output_indexes, time_end_index)
+
+    else:
+
+        # Output variables are reported on all simulation timestamps:
+        output_indexes = np.arange(initial_index, initial_index + nt)
+
+    # Aggregation timesteps for output variables between output timestamps:
+    aggregation_timesteps = np.diff(np.insert(output_indexes,0,(initial_index - 1)))
+
     # ========= #
     # TIME LOOP
     # ========= #
@@ -250,8 +260,10 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
     Initial_Firn_Temperature = np.nan
     albedo_snow = albedo_fresh_snow
 
-    n = 0
-    idx = 0
+    # Indexes:
+    idx_agg = 0 # Aggregation index (index of the variable aggregation arrays)
+    idx_res = 0 # Result index (index of the output/result variable arrays)
+
     for t in np.arange(len(METEO.time.values)):
 
         # ============= #
@@ -277,7 +289,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
             SNOWFALL = 0.0
 
         # if rainfall is smaller than the threshold
-        if RAIN<(minimum_snowfall*(density_fresh_snow/water_density)*1000.0):
+        if RAIN<(minimum_snowfall*(density_fresh_snow/water_density) * 1000.0):
             RAIN = 0.0
 
         if SNOWFALL > 0.0:
@@ -422,42 +434,42 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
         # ================== #
 
         # Setup Aggregated Variable Arrays:
-        if ((model_spin_up == True) and (t == spin_up_end_timestep)) or ((model_spin_up == False) and (t == 0)):
+        if ((model_spin_up == True) and (t == initial_index)) or ((model_spin_up == False) and (t == 0)):
 
             # Aggregated Meteorological Data (5):
-            AIR_TEMPERATURE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            AIR_PRESSURE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            RELATIVE_HUMIDITY_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            WIND_SPEED_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            FRACTIONAL_CLOUD_COVER_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+            AIR_TEMPERATURE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            AIR_PRESSURE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            RELATIVE_HUMIDITY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            WIND_SPEED_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            FRACTIONAL_CLOUD_COVER_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
             # Aggregated Energy Fluxes (7):
-            SHORTWAVE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            LONGWAVE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SENSIBLE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            LATENT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            GROUND_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            RAIN_FLUX_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            MELT_ENERGY_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+            SHORTWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            LONGWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SENSIBLE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            LATENT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            GROUND_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            RAIN_FLUX_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            MELT_ENERGY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
             # Aggregated Surface Mass Fluxes (8):
-            RAIN_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SNOWFALL_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            EVAPORATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SUBLIMATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            CONDENSATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            DEPOSITION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SURFACE_MELT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SMB_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+            RAIN_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SNOWFALL_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            EVAPORATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SUBLIMATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            CONDENSATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            DEPOSITION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SURFACE_MELT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SURFACE_MASS_BALANCE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
             # Aggregated Subsurface Mass Fluxes (4):
-            REFREEZING_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            SUSBSURFACE_MELT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            RUNOFF_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-            MB_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+            REFREEZING_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SUSBSURFACE_MELT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            RUNOFF_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            MASS_BALANCE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
             # Reset result step index
-            n = -1
+            idx_agg = 0
 
             # Calculate initial firn temperature
             Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")   
@@ -468,126 +480,132 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
         # ================ #
 
         # Store Aggregated Variables:
-        if ((model_spin_up == True) and (t > spin_up_end_timestep)) or (model_spin_up == False):
+        if ((model_spin_up == True) and (t >= initial_index)) or (model_spin_up == False):
 
             # Aggregated Meteorological Data (5):
-            AIR_TEMPERATURE_AGG[n] = T2[t]
-            AIR_PRESSURE_AGG[n] = PRES[t]
-            RELATIVE_HUMIDITY_AGG[n] = RH2[t]
-            WIND_SPEED_AGG[n] = U2[t]
-            FRACTIONAL_CLOUD_COVER_AGG[n] = N[t]
+            AIR_TEMPERATURE_AGG[idx_agg] = T2[t]
+            AIR_PRESSURE_AGG[idx_agg] = PRES[t]
+            RELATIVE_HUMIDITY_AGG[idx_agg] = RH2[t]
+            WIND_SPEED_AGG[idx_agg] = U2[t]
+            FRACTIONAL_CLOUD_COVER_AGG[idx_agg] = N[t]
 
             # Aggregated Energy Fluxes (7):
-            SHORTWAVE_AGG[n] = sw_radiation_net
-            LONGWAVE_AGG[n] = lw_radiation_in + lw_radiation_out
-            SENSIBLE_AGG[n] = sensible_heat_flux
-            LATENT_AGG[n] = latent_heat_flux
-            GROUND_AGG[n] = ground_heat_flux
-            RAIN_FLUX_AGG[n] = rain_heat_flux
-            MELT_ENERGY_AGG[n] = melt_energy
+            SHORTWAVE_AGG[idx_agg] = sw_radiation_net
+            LONGWAVE_AGG[idx_agg] = lw_radiation_in + lw_radiation_out
+            SENSIBLE_AGG[idx_agg] = sensible_heat_flux
+            LATENT_AGG[idx_agg] = latent_heat_flux
+            GROUND_AGG[idx_agg] = ground_heat_flux
+            RAIN_FLUX_AGG[idx_agg] = rain_heat_flux
+            MELT_ENERGY_AGG[idx_agg] = melt_energy
 
             # Aggregated Surface Mass Fluxes (8):
-            RAIN_AGG[n] = RAIN / 1000
-            SNOWFALL_AGG[n] = SNOWFALL * (density_fresh_snow/water_density)
-            EVAPORATION_AGG[n] = evaporation
-            SUBLIMATION_AGG[n] = sublimation
-            CONDENSATION_AGG[n] = condensation
-            DEPOSITION_AGG[n] = deposition
-            SURFACE_MELT_AGG[n] = surface_melt
-            SMB_AGG[n] = surface_mass_balance
+            RAIN_AGG[idx_agg] = RAIN / 1000
+            SNOWFALL_AGG[idx_agg] = SNOWFALL * (density_fresh_snow/water_density)
+            EVAPORATION_AGG[idx_agg] = evaporation
+            SUBLIMATION_AGG[idx_agg] = sublimation
+            CONDENSATION_AGG[idx_agg] = condensation
+            DEPOSITION_AGG[idx_agg] = deposition
+            SURFACE_MELT_AGG[idx_agg] = surface_melt
+            SURFACE_MASS_BALANCE_AGG[idx_agg] = surface_mass_balance
 
             # Aggregated Subsurface Mass Fluxes (4):
-            REFREEZING_AGG[n] = water_refrozen
-            SUSBSURFACE_MELT_AGG[n] = subsurface_melt
-            RUNOFF_AGG[n] = Q
-            MB_AGG[n] = mass_balance   
+            REFREEZING_AGG[idx_agg] = water_refrozen
+            SUSBSURFACE_MELT_AGG[idx_agg] = subsurface_melt
+            RUNOFF_AGG[idx_agg] = Q
+            MASS_BALANCE_AGG[idx_agg] = mass_balance 
+
+            # Note: other variables are instantaneously reported and not aggregated!
+
+            # Increase aggregation index:
+            idx_agg += 1  
 
         # ============== #
         # RESULT WRITING
         # ============== #
 
-        if (t in result_timesteps):
+        if (t in output_indexes):
 
             # Aggregated Meteorological Data (5):
-            _AIR_TEMPERATURE[idx] = AIR_TEMPERATURE_AGG.mean()
-            _AIR_PRESSURE[idx] = AIR_PRESSURE_AGG.mean()
-            _RELATIVE_HUMIDITY[idx] = RELATIVE_HUMIDITY_AGG.mean()
-            _WIND_SPEED[idx] = WIND_SPEED_AGG.mean()
-            _FRACTIONAL_CLOUD_COVER[idx] = FRACTIONAL_CLOUD_COVER_AGG.mean()
+            _AIR_TEMPERATURE[idx_res] = AIR_TEMPERATURE_AGG.mean()
+            _AIR_PRESSURE[idx_res] = AIR_PRESSURE_AGG.mean()
+            _RELATIVE_HUMIDITY[idx_res] = RELATIVE_HUMIDITY_AGG.mean()
+            _WIND_SPEED[idx_res] = WIND_SPEED_AGG.mean()
+            _FRACTIONAL_CLOUD_COVER[idx_res] = FRACTIONAL_CLOUD_COVER_AGG.mean()
 
             # Surface Energy Fluxes (Average Aggregated) (7):
-            _SWnet[idx] = SHORTWAVE_AGG.mean()
-            _LWnet[idx] = LONGWAVE_AGG.mean()
-            _SENSIBLEnet[idx] = SENSIBLE_AGG.mean()
-            _LATENTnet[idx] = LATENT_AGG.mean()
-            _GROUNDnet[idx] = GROUND_AGG.mean()
-            _RAIN_FLUX[idx] = RAIN_FLUX_AGG.mean()
-            _MELT_ENERGY[idx] = MELT_ENERGY_AGG.mean()
+            _SWnet[idx_res] = SHORTWAVE_AGG.mean()
+            _LWnet[idx_res] = LONGWAVE_AGG.mean()
+            _SENSIBLEnet[idx_res] = SENSIBLE_AGG.mean()
+            _LATENTnet[idx_res] = LATENT_AGG.mean()
+            _GROUNDnet[idx_res] = GROUND_AGG.mean()
+            _RAIN_FLUX[idx_res] = RAIN_FLUX_AGG.mean()
+            _MELT_ENERGY[idx_res] = MELT_ENERGY_AGG.mean()
 
             # Surface Mass Fluxes (Cumulative Aggregated) (8):
-            _RAIN[idx] = RAIN_AGG.sum()
-            _SNOWFALL[idx] = SNOWFALL_AGG.sum()
-            _EVAPORATION[idx] = EVAPORATION_AGG.sum()
-            _SUBLIMATION[idx] = SUBLIMATION_AGG.sum()
-            _CONDENSATION[idx] = CONDENSATION_AGG.sum()
-            _DEPOSITION[idx] = DEPOSITION_AGG.sum()
-            _SURFACE_MELT[idx] = SURFACE_MELT_AGG.sum()
-            _SMB[idx] = SMB_AGG.sum()
+            _RAIN[idx_res] = RAIN_AGG.sum()
+            _SNOWFALL[idx_res] = SNOWFALL_AGG.sum()
+            _EVAPORATION[idx_res] = EVAPORATION_AGG.sum()
+            _SUBLIMATION[idx_res] = SUBLIMATION_AGG.sum()
+            _CONDENSATION[idx_res] = CONDENSATION_AGG.sum()
+            _DEPOSITION[idx_res] = DEPOSITION_AGG.sum()
+            _SURFACE_MELT[idx_res] = SURFACE_MELT_AGG.sum()
+            _SURFACE_MASS_BALANCE[idx_res] = SURFACE_MASS_BALANCE_AGG.sum()
 
             # Subsurface Mass Fluxes (Cumulative Aggregated) (4):
-            _REFREEZE[idx] = REFREEZING_AGG.sum()
-            _SUBSURFACE_MELT[idx] = SUSBSURFACE_MELT_AGG.sum()
-            _RUNOFF[idx] = RUNOFF_AGG.sum()
-            _MB[idx] = MB_AGG.sum()
+            _REFREEZE[idx_res] = REFREEZING_AGG.sum()
+            _SUBSURFACE_MELT[idx_res] = SUSBSURFACE_MELT_AGG.sum()
+            _RUNOFF[idx_res] = RUNOFF_AGG.sum()
+            _MASS_BALANCE[idx_res] = MASS_BALANCE_AGG.sum()
 
-            # Other Information (Instantaneous) (7):
-            _SNOW_HEIGHT[idx] = GRID.get_total_snowheight()
-            _TOTAL_HEIGHT[idx] = GRID.get_total_height()
-            _SURFACE_TEMPERATURE[idx] = surface_temperature
-            _SURFACE_ALBEDO[idx] = albedo
-            _N_LAYERS[idx] = GRID.get_number_layers()
+            # Other Information (Instantaneous) (9):
+            _SNOW_HEIGHT[idx_res] = GRID.get_total_snowheight()
+            _SNOW_WATER_EQUIVALENT[idx_res] = np.sum(np.asarray(GRID.get_snow_heights()) * (np.asarray(GRID.get_snow_densities()) / water_density))
+            _TOTAL_HEIGHT[idx_res] = GRID.get_total_height()
+            _SURFACE_TEMPERATURE[idx_res] = surface_temperature
+            _SURFACE_ALBEDO[idx_res] = albedo
+            _N_LAYERS[idx_res] = GRID.get_number_layers()
 
             # Calculate Firn temperatures:
             Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")
-            _FIRN_TEMPERATURE[idx] = GRID.get_temperature()[Index_Depth] - zero_temperature
-            _FIRN_TEMPERATURE_CHANGE[idx] = _FIRN_TEMPERATURE[idx] - Initial_Firn_Temperature
+            _FIRN_TEMPERATURE[idx_res] = GRID.get_temperature()[Index_Depth] - zero_temperature
+            _FIRN_TEMPERATURE_CHANGE[idx_res] = _FIRN_TEMPERATURE[idx_res] - Initial_Firn_Temperature
 
             # Determine Firn Facie:
             if GRID.get_temperature()[Index_Depth] - zero_temperature > 0.1:
-                _FIRN_FACIE[idx] = 4
+                _FIRN_FACIE[idx_res] = 4
             elif cumulative_melt == 0:
-                _FIRN_FACIE[idx] = 1
+                _FIRN_FACIE[idx_res] = 1
             elif not np.any(GRID.get_firn_refreeze()):
-                _FIRN_FACIE[idx] = 2
+                _FIRN_FACIE[idx_res] = 2
             else:
-                _FIRN_FACIE[idx] = 3
+                _FIRN_FACIE[idx_res] = 3
 
             # Subsurface Variables (Instantaneous) (11):
             if full_field:
                 if GRID.get_number_layers() > max_layers:
-                    _LAYER_DEPTH[idx, 0:max_layers] = GRID.get_depth()[0:max_layers]
-                    _LAYER_HEIGHT[idx, 0:max_layers] = GRID.get_height()[0:max_layers]
-                    _LAYER_DENSITY[idx, 0:max_layers] = GRID.get_density()[0:max_layers]
-                    _LAYER_TEMPERATURE[idx, 0:max_layers] = GRID.get_temperature()[0:max_layers]
-                    _LAYER_WATER_CONTENT[idx, 0:max_layers] = GRID.get_liquid_water_content()[0:max_layers]
-                    _LAYER_COLD_CONTENT[idx, 0:max_layers] = GRID.get_cold_content()[0:max_layers]
-                    _LAYER_POROSITY[idx, 0:max_layers] = GRID.get_porosity()[0:max_layers]
-                    _LAYER_ICE_FRACTION[idx, 0:max_layers] = GRID.get_ice_fraction()[0:max_layers]
-                    _LAYER_IRREDUCIBLE_WATER[idx, 0:max_layers] = GRID.get_irreducible_water_content()[0:max_layers]
-                    _LAYER_REFREEZE[idx, 0:max_layers] = GRID.get_refreeze()[0:max_layers]
-                    _LAYER_HYDRO_YEAR[idx, 0:max_layers] = GRID.get_hydro_year()[0:max_layers]
+                    _LAYER_DEPTH[idx_res, 0:max_layers] = GRID.get_depth()[0:max_layers]
+                    _LAYER_HEIGHT[idx_res, 0:max_layers] = GRID.get_height()[0:max_layers]
+                    _LAYER_DENSITY[idx_res, 0:max_layers] = GRID.get_density()[0:max_layers]
+                    _LAYER_TEMPERATURE[idx_res, 0:max_layers] = GRID.get_temperature()[0:max_layers]
+                    _LAYER_WATER_CONTENT[idx_res, 0:max_layers] = GRID.get_liquid_water_content()[0:max_layers]
+                    _LAYER_COLD_CONTENT[idx_res, 0:max_layers] = GRID.get_cold_content()[0:max_layers]
+                    _LAYER_POROSITY[idx_res, 0:max_layers] = GRID.get_porosity()[0:max_layers]
+                    _LAYER_ICE_FRACTION[idx_res, 0:max_layers] = GRID.get_ice_fraction()[0:max_layers]
+                    _LAYER_IRREDUCIBLE_WATER[idx_res, 0:max_layers] = GRID.get_irreducible_water_content()[0:max_layers]
+                    _LAYER_REFREEZE[idx_res, 0:max_layers] = GRID.get_refreeze()[0:max_layers]
+                    _LAYER_HYDRO_YEAR[idx_res, 0:max_layers] = GRID.get_hydro_year()[0:max_layers]
                 else:
-                    _LAYER_DEPTH[idx, 0:GRID.get_number_layers()] = GRID.get_depth()
-                    _LAYER_HEIGHT[idx, 0:GRID.get_number_layers()] = GRID.get_height()
-                    _LAYER_DENSITY[idx, 0:GRID.get_number_layers()] = GRID.get_density()
-                    _LAYER_TEMPERATURE[idx, 0:GRID.get_number_layers()] = GRID.get_temperature()
-                    _LAYER_WATER_CONTENT[idx, 0:GRID.get_number_layers()] = GRID.get_liquid_water_content()
-                    _LAYER_COLD_CONTENT[idx, 0:GRID.get_number_layers()] = GRID.get_cold_content()
-                    _LAYER_POROSITY[idx, 0:GRID.get_number_layers()] = GRID.get_porosity()
-                    _LAYER_ICE_FRACTION[idx, 0:GRID.get_number_layers()] = GRID.get_ice_fraction()
-                    _LAYER_IRREDUCIBLE_WATER[idx, 0:GRID.get_number_layers()] = GRID.get_irreducible_water_content()
-                    _LAYER_REFREEZE[idx, 0:GRID.get_number_layers()] = GRID.get_refreeze()
-                    _LAYER_HYDRO_YEAR[idx, 0:GRID.get_number_layers()] = GRID.get_hydro_year()
+                    _LAYER_DEPTH[idx_res, 0:GRID.get_number_layers()] = GRID.get_depth()
+                    _LAYER_HEIGHT[idx_res, 0:GRID.get_number_layers()] = GRID.get_height()
+                    _LAYER_DENSITY[idx_res, 0:GRID.get_number_layers()] = GRID.get_density()
+                    _LAYER_TEMPERATURE[idx_res, 0:GRID.get_number_layers()] = GRID.get_temperature()
+                    _LAYER_WATER_CONTENT[idx_res, 0:GRID.get_number_layers()] = GRID.get_liquid_water_content()
+                    _LAYER_COLD_CONTENT[idx_res, 0:GRID.get_number_layers()] = GRID.get_cold_content()
+                    _LAYER_POROSITY[idx_res, 0:GRID.get_number_layers()] = GRID.get_porosity()
+                    _LAYER_ICE_FRACTION[idx_res, 0:GRID.get_number_layers()] = GRID.get_ice_fraction()
+                    _LAYER_IRREDUCIBLE_WATER[idx_res, 0:GRID.get_number_layers()] = GRID.get_irreducible_water_content()
+                    _LAYER_REFREEZE[idx_res, 0:GRID.get_number_layers()] = GRID.get_refreeze()
+                    _LAYER_HYDRO_YEAR[idx_res, 0:GRID.get_number_layers()] = GRID.get_hydro_year()
         
             else:
                 _LAYER_DEPTH = None
@@ -601,58 +619,57 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX):
                 _LAYER_IRREDUCIBLE_WATER = None
                 _LAYER_REFREEZE = None
                 _LAYER_HYDRO_YEAR = None
-            
+
             # Increase result index:
-            idx += 1
+            idx_res += 1
 
             # Reset Aggregation Arrays:
-            if idx < nt:
+            if idx_res < nt:
 
                 # Aggregated Meteorological Data (5):
-                AIR_TEMPERATURE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                AIR_PRESSURE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                RELATIVE_HUMIDITY_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                WIND_SPEED_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                FRACTIONAL_CLOUD_COVER_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)                
+                AIR_TEMPERATURE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                AIR_PRESSURE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                RELATIVE_HUMIDITY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                WIND_SPEED_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                FRACTIONAL_CLOUD_COVER_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)                
 
                 # Aggregated Energy Fluxes (7):
-                SHORTWAVE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                LONGWAVE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                SENSIBLE_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                LATENT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                GROUND_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                RAIN_FLUX_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                MELT_ENERGY_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+                SHORTWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                LONGWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SENSIBLE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                LATENT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                GROUND_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                RAIN_FLUX_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                MELT_ENERGY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
                 # Aggregated Surface Mass Fluxes (8):
-                SNOWFALL_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                RAIN_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                EVAPORATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                SUBLIMATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                CONDENSATION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                DEPOSITION_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                SURFACE_MELT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                SMB_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+                SNOWFALL_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                RAIN_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                EVAPORATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SUBLIMATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                CONDENSATION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                DEPOSITION_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SURFACE_MELT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SURFACE_MASS_BALANCE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
                 # Aggregated Subsurface Mass Fluxes (4):
-                REFREEZING_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                SUSBSURFACE_MELT_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                RUNOFF_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
-                MB_AGG = np.full(aggregation_timestep_range[idx], np.nan, dtype=precision)
+                REFREEZING_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SUSBSURFACE_MELT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                RUNOFF_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                MASS_BALANCE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
-                # Reset result step index
-                n = -1
-        
-        n +=1
+                # Reset aggregation index
+                idx_agg = 0
+            
 
     # ============================================================================================================================= #
 
     return (indY,indX, \
             _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
-            _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SMB, \
-            _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MB, \
-            _SNOW_HEIGHT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
+            _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR)
 

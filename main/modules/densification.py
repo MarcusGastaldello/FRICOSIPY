@@ -7,7 +7,6 @@ from numba import njit
 # Dry Densification
 # ================= #
 
-@njit
 def densification(GRID,ACCUMULATION,dt):
     """ Densification of the snowpack
     Args:
@@ -15,12 +14,12 @@ def densification(GRID,ACCUMULATION,dt):
 	dt      ::  integration time
     """
 
-    densification_allowed = ['Boone', 'Ligtenberg11', 'constant']
-    if densification_method == 'Boone':
+    densification_allowed = ['Boone02', 'Ligtenberg11', 'disabled']
+    if densification_method == 'Boone02':
         method_Boone(GRID,dt)
     elif densification_method == 'Ligtenberg11':
         method_Ligtenberg(GRID,ACCUMULATION,dt)
-    elif densification_method == 'constant':
+    elif densification_method == 'disabled':
         pass
     else:
         raise ValueError("Densification method = \"{:s}\" is not allowed, must be one of {:s}".format(densification_method, ", ".join(densification_allowed)))

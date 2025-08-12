@@ -16,8 +16,6 @@ import dateutil
 import argparse
 from itertools import product
 
-sys.path.append('/home/gastalm/Data/meteo')
-
 def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None):
 
     print('\n\t ==========================')
@@ -28,9 +26,33 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     # Read CSV Meteorological Data
     # ============================ #
 
-    print('\t (Note: Timestamps should be of the format: yyyy-mm-dd hh:mm:ss) \n')
+    # Load meteorological data:
+    df = pd.read_csv(csv_file, delimiter = ',')
 
-    df = pd.read_csv(csv_file, delimiter = ',', index_col = ['TIMESTAMP'], parse_dates = ['TIMESTAMP'])
+    # Check input data:
+    required_variables = {'DATETIME','T2', 'PRES', 'U2', 'RH2'}
+    if not (required_variables.issubset(df.columns) and \
+       ({'N'}.issubset(df.columns) or {'SWin', 'LWin'}.issubset(df.columns)) and \
+       ({'RRR'}.issubset(df.columns) or {'D', 'ACC_ANOMALY'}.issubset(df.columns))):    
+        print('\t Missing variables. The meteo dataset must have the following variables:\n\n', \
+              '\t DATETIME - Datetime [yyyy-mm-dd hh:mm]\n', \
+              '\t T2       - Air temperature [K]\n',  \
+              '\t U2       - Wind speed [m s-1]\n', \
+              '\t RH2      - Relative humidity [%]\n', \
+              '\t PRES     - Atmospheric pressure [hPa]\n', \
+              '\t RRR      - Precipitation [mm]\n', \
+              '\t N        - Fractional cloud cover [0-1]\n\n', \
+              '\t Alternatively, instead of using fractional cloud cover (N), the user can specify directly measured radiative fluxes:\n\n', \
+              '\t SWin     - Shortwave radiation [W m-2]\n', \
+              '\t LWin     - Longwave  radiation [W m-2]\n')
+        raise ValueError('Error: Missing meteorological variables')
+
+    # Check for NaNs:
+    if df.isnull().values.any() == True:
+        raise ValueError('Error: NaN Values are in the Dataset!')
+    
+    # Re-load meteorological data with dates parsing:
+    df = pd.read_csv(csv_file, delimiter = ',', index_col = ['DATETIME'], parse_dates = ['DATETIME'])
 
     # ===================== #
     # Select Temporal Range
@@ -44,10 +66,6 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     print('\t Temporal range from %s until %s. Time steps: %s ' % (df.index[0],df.index[-1],len(df)))
     print('\t Input Meteorological Data CSV: ',csv_file)
     print('\t Output Meteorological Dataset: ',meteo_file,'\n')
-
-    if df.isnull().values.any() == True:
-        print('\t Warning: NaN Values are in the Dataset! Abort')
-        sys.exit()
 
     # ======================= #
     # Create Xarray Dataframe 
@@ -130,7 +148,6 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         print(f"\t 'SUB_ANOMALY' - Annual Sublimation Anomaly [-]      Min: {np.round(df['SUB_ANOMALY'].min(),2)} -- Max: {np.round(df['SUB_ANOMALY'].max(),2)}")
         SUB_ANOMALY = np.asarray(df['SUB_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
         add_variable_along_time(ds, SUB_ANOMALY, 'SUB_ANOMALY', '-', 'Annual Sublimation Anomaly')
-
 
     # ============================== #
     # Write Input Meteo File to Disc 

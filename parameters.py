@@ -6,10 +6,10 @@
 snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
 turbulent_fluxes_method = 'Essery04'   	          # Options: ['Essery04','Default']
 stability_correction = 'Ri'                       # Options: ['Ri','MO']
-albedo_method = 'Bougamont05'                     # Options: ['Oerlemans98','Bougamont05','measured']
-densification_method = 'Ligtenberg11'             # Options: ['Ligtenberg11','Boone','constant']
+albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bougamont05','measured']
+densification_method = 'Boone02'                  # Options: ['Boone02','Ligtenberg11','disabled']
 penetrating_method = 'Bintanja95'                 # Options: ['Bintanja95','disabled']
-roughness_method = 'constant'                     # Options: ['Moelg12','constant']
+roughness_method = 'Moelg12'                      # Options: ['Moelg12','constant']
 saturation_water_vapour_method = 'Sonntag90'      # Options: ['Sonntag90']
 thermal_conductivity_method = 'Calonne19'         # Options: ['bulk', 'empirical','Sturm97','Calonne19']
 specific_heat_method = 'Yen81'                    # Options: ['bulk','Yen81']
@@ -21,9 +21,9 @@ sfc_temperature_method = 'Newton'             	  # Options: ['L-BFGS-B','SLSQP',
 # ================ #
 
 # General Model Parameters:
-dt = 3600                                       # Simulation time step [s]
+dt = 3600                                       # Simulation time step [s] (minimum: 3600 / hour)
 max_depth = 50                                  # Maximum simulation depth [m]
-firn_temperature_depth = 20.0                   # Depth at which firn temperature is measured [m]                 
+max_layers = 500                                # Maximum number of subsurface layers               
 
 # Meteorological Input Parameters:
 station_altitude = 4560.0                       # Altitude of meteorological station [m a.s.l.]
@@ -47,6 +47,7 @@ zlt2 = 0.10                                     # Second depth for temperature i
 basal_heat_flux = 35                            # Basal / Geothermal heat flux [mW m^(-2)]
 snow_ice_threshold = 900.0                      # Pore close of density [kg m^(-3)]
 surface_emission_coeff = 1.0                    # Surface emission coefficient for snow/ice [-]
+firn_temperature_depth = 20.0                   # Depth at which firn temperature is measured [m]    
 
 # Parameterisation choice specifc:
 z_lim = 3.0                                     # (Marchenko17) Preferential percolation depth [m]
@@ -69,7 +70,6 @@ z2 = 20                                         # (Ligtenberg11) Second depth fo
 # SUBSURFACE REMESHING OPTIONS 
 # ============================ #
 
-max_layers = 500                                # Maximum number of subsurface layers 
 minimum_snow_layer_height = 0.0005              # Minimum layer height [m]
 maximum_simulation_layer_height = 0.10          # Maximum height of fine layers [m]
 maximum_coarse_layer_height = 0.3               # Maximum height of coarse layers [m]

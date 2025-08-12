@@ -517,7 +517,7 @@ class Grid:
 
     def get_ice_heights(self):
         """ Returns the heights of the ice layers """
-        return [self.grid[idx].get_layer_height() for idx in range(self.number_nodes) if (self.get_node_density(idx)>=snow_ice_threshold)]
+        return [self.grid[idx].get_layer_height() for idx in range(self.number_nodes) if (self.get_node_density(idx) >= snow_ice_threshold)]
 
     def get_node_height(self, idx):
         """ Returns layer height of node idx """
@@ -528,6 +528,10 @@ class Grid:
     def get_node_density(self, idx):
         """ Returns density of node idx """
         return self.grid[idx].get_layer_density()
+    
+    def get_snow_densities(self):
+        """ Returns the densities of the snow layers """
+        return [self.grid[idx].get_layer_density() for idx in range(self.get_number_snow_layers())]
 
     def get_density(self):
         """ Returns the rho profile """
