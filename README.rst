@@ -34,7 +34,7 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
 Citation
 =======
 
-Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.1.0) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
+Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.1) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
 
 ----
 
@@ -203,6 +203,7 @@ Simulation results can be visualised most easily using the '*Xarray*' package wi
 This template contains useful tips for reducing dimensions, producing plots and exporting data to other formats.
 
 ----
+
 
 
 
