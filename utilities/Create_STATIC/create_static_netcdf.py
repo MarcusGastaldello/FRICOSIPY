@@ -110,7 +110,7 @@ def create_static_input(csv_file, static_file):
     print(f"\t 'MASK' - Mask [-]                                   Min: {np.round(df['MASK'].min(),2)} -- Max: {np.round(df['MASK'].max(),2)}")
     MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     MASK[MASK == 0] = -9999
-    add_variable_along_easting_northing(ds, MASK, 'MASK', 'm a.s.l.', 'Mask') 
+    add_variable_along_easting_northing(ds, MASK, 'MASK', 'boolean', 'Mask') 
 
     # Latitude [LATITUDE]
     print(f"\t 'LATITUDE' - Latitude [decimal degree]              Min: {np.round(df['LATITUDE'].min(),2)} -- Max: {np.round(df['LATITUDE'].max(),2)}")
@@ -180,3 +180,4 @@ if __name__ == "__main__":
 
 
     create_static_input(args.csv_file, args.static_file)
+
