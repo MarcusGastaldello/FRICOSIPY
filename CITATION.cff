@@ -4,7 +4,7 @@ authors:
 - family-names: "Gastaldello"
   given-names: "Marcus"
   orcid: "https://orcid.org/0009-0003-2384-3617"
-title: "FRICOSIPY"
+title: "FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python"
 version: 1.1.0
 doi: "https://github.com/MarcusGastaldello/FRICOSIPY"
 date-released: 2025-08-15
