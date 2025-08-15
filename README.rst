@@ -5,7 +5,7 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRIC
 
 :FRICOSIPY Citation:
     .. image:: https://img.shields.io/badge/Citation-TC%20paper-blue.svg
-        :target: https://doi.org/10.5194/egusphere-2024-2892
+        :target: https://doi.org/10.5194/tc-19-2983-2025
 
     .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3902191.svg
         :target: http://doi.org/10.5281/zenodo.13361824
@@ -196,6 +196,7 @@ Simulation results can be visualised most easily using the '*Xarray*' package wi
 This template contains useful tips for reducing dimensions, producing plots and exporting data to other formats.
 
 ----
+
 
 
 
