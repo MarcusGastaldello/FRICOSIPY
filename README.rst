@@ -3,15 +3,12 @@
 University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSIPY) (Sauter et al., 2020) that specialises in detailed modelling of subsurface firn processes.
 
 
-:FRICOSIPY Citation:
+:Colle Gnifetti Paper:
     .. image:: https://img.shields.io/badge/Citation-TC%20paper-blue.svg
-        :target: https://doi.org/10.5194/egusphere-2024-2892
+        :target: https://doi.org/10.5194/tc-19-2983-2025
 
     .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.3902191.svg
         :target: http://doi.org/10.5281/zenodo.13361824
-
-:FRICOSIPY User Guide:
-    (coming soon)
 
 :Original COSIPY Model:
     .. image:: https://img.shields.io/badge/Citation-GMD%20paper-orange.svg
@@ -31,3 +28,12 @@ University of FRIbourg variant of the COupled Snow and Ice Model in Python (COSI
 
     .. image:: https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg
         :target: https://orcid.org/0009-0003-2384-3617
+
+----
+
+Citation
+=======
+
+Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.0) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
+
+----
