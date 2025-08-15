@@ -5,6 +5,6 @@ authors:
   given-names: "Marcus"
   orcid: "https://orcid.org/0009-0003-2384-3617"
 title: "FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python"
-version: 1.1.0
+version: 1.1
 url: "https://github.com/MarcusGastaldello/FRICOSIPY"
 date-released: 2025-08-15
