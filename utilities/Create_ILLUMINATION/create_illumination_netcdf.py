@@ -97,6 +97,7 @@ def create_illumindation_file(static_file, illumination_file):
       f.createDimension('HOY', 8784)
       f.createDimension('y', len(ds.y))
       f.createDimension('x', len(ds.x))
+      hoy_values = np.linspace(1,8784,8784, dtype = np.float32)
       northing_values = ds.y.values
       easting_values = ds.x.values
 
@@ -113,6 +114,12 @@ def create_illumindation_file(static_file, illumination_file):
       EASTINGS.standard_name = 'projection_x_coordinate'
       EASTINGS.axis = 'X'
       EASTINGS[:]  = easting_values
+
+      HOUR_OF_YEAR = f.createVariable('HOY', 'i4', ('HOY',))
+      HOUR_OF_YEAR.units = 'hour'
+      HOUR_OF_YEAR.long_name = 'Hour of Year'
+      HOUR_OF_YEAR.axis = 'T'
+      HOUR_OF_YEAR[:] = hoy_values
 
       ILLUMINATON_NORM = f.createVariable('ILLUMINATION_NORM', np.int8, ('HOY', 'y', 'x'))
       ILLUMINATON_NORM.long_name = 'Topographic Shading Illumination (Normal Year)'
