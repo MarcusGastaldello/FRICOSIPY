@@ -1,3 +1,15 @@
+"""
+    ==================================================================
+
+                            FRICOSIPY CORE FILE
+
+        This file contains the main simulation that is distributed
+        to spatial nodes and executes the main temporal loop. All 
+        physical processes are initiated from within this code.
+
+    ==================================================================
+"""
+
 import numpy as np
 import pandas as pd
 from numpy import genfromtxt
@@ -9,33 +21,98 @@ import sys
 from constants import *
 from parameters import *
 from config import *
-from main.modules.albedo import update_albedo
-from main.modules.thermal_diffusion import thermal_diffusion
-from main.modules.penetrating_radiation import penetrating_radiation
-from main.modules.percolation_refreezing import percolation_refreezing
-from main.modules.densification import densification
-from main.modules.shortwave_radiation import TOA_insolation, shortwave_radiation_input
-from main.modules.surface_temperature import update_surface_temperature
-from main.modules.surface_roughness import update_roughness
-from main.kernel.init import init_snowpack
 from main.kernel.io import IOClass
+from main.modules.shortwave_radiation import TOA_insolation, shortwave_radiation_input
+from main.kernel.init import init_snowpack
+from main.modules.albedo import update_albedo
+from main.modules.penetrating_radiation import penetrating_radiation
+from main.modules.surface_roughness import update_roughness
+from main.modules.surface_temperature import update_surface_temperature
+from main.modules.percolation_refreezing import percolation_refreezing
+from main.modules.thermal_diffusion import thermal_diffusion
+from main.modules.densification import densification
+from main.modules.snow_metamorphism import snow_metamorphism
+
+# ====================================================================================================================
 
 def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
-    """ Cosipy core function, which perform the calculations on one core.
+    """ The FRICOSIPY core function simulates the model on a single spatial node (x,y):
 
-    Variables:
-    ======
-    STATIC: Xarray dataset containing topographic/static data (x,y)
-    METEO: Xarray dataset containing meteoroligical data (t)
-    ILLUMINATION: Xarray dataset containing solar illumination data (x,y,t)
-    indY: Y index of the simulated node
-    indX: X index of the simulated node
-    nt : Temporal dimension of the output result dataset
+        Input:
+                STATIC                          ::    Xarray dataset containing topographic/static data
+                METEO (t)                       ::    Xarray dataset containing meteorological data
+                ILLUMINATION (t)                ::    Xarray dataset containing solar illumination data
+                indY                            ::    Y spatial index of the simulated node [y]
+                indX                            ::    X spatial index of the simulated node [x]
+                nt                              ::    Temporal dimension of the output result dataset [t]
 
-    Returns
-    ======
-    Returns all calculated variables of one grid point
+        Output:
+                indY                            ::    Y spatial index of the simulated node [y]
+                indX                            ::    X spatial index of the simulated node [x]
 
+            # Meteorological Variables (5):
+                
+                AIR_TEMPERATURE (t)             ::    Air temperature [°C]
+                AIR_PRESSURE (t)                ::    Air pressure [hPa]
+                RELATIVE_HUMIDITY (t)           ::    Relative humidity [%]
+                WIND_SPEED (t)                  ::    Wind speed [m s-1]
+                FRACTIONAL_CLOUD_COVER (t)      ::    Fractional cloud cover [-]
+
+            # Surface Energy Fluxes (7):
+            
+                SWnet (t)                       ::    Shortwave radiation flux [W m-2]
+                LWnet (t)                       ::    Longwave radiation flux [W m-2]
+                SENSIBLEnet (t)                 ::    Sensible heat flux [W m-2]
+                LATENTnet (t)                   ::    Latent heat flux [W m-2]
+                GROUNDnet (t)                   ::    Ground heat flux [W m-2] 
+                RAIN_FLUX (t)                   ::    Rain heat flux [W m-2]
+                MELT_ENERGY (t)                 ::    Melt energy flux [W m-2]
+
+            # Surface Mass Fluxes (8):
+
+                RAIN (t)                        ::    Rain [m w.e.]
+                SNOWFALL (t)                    ::    Snowfall [m w.e.]
+                EVAPORATION (t)                 ::    Evaporation [m w.e.]
+                SUBLIMATION (t)                 ::    Sublimation [m w.e.]
+                CONDENSATION (t)                ::    Condensation [m w.e.]
+                DEPOSITION (t)                  ::    Moisture deposition [m w.e.]
+                SURFACE_MELT (t)                ::    Surface melt [m w.e.]
+
+            # Subsurface Mass Fluxes (4):
+
+                SURFACE_MASS_BALANCE (t)        ::    Surface mass balance [m w.e.] 
+                REFREEZE (t)                    ::    Refreezing [m w.e.]
+                SUBSURFACE_MELT (t)             ::    Subsurface melt [m w.e.]
+                RUNOFF (t)                      ::    Surface Runoff [m w.e.]
+                MASS_BALANCE (t)                ::    Mass balance [m w.e.]
+
+            # Other Information (9):
+
+                SNOW_HEIGHT (t)                 ::    Snow height [m]
+                SNOW_WATER_EQUIVALENT (t)       ::    Snow water equivalent [m w.e.]
+                TOTAL_HEIGHT (t)                ::    Total height [m]
+                SURFACE_TEMPERATURE (t)         ::    Surface temperature [°C]
+                SURFACE_ALBEDO (t)              ::    Surface albedo [-]
+                N_LAYERS (t)                    ::    Number of layers [-]
+                FIRN_TEMPERATURE (t)            ::    Firn temperature [°C]
+                FIRN_TEMPERATURE_CHANGE (t)     ::    Firn temperature change [°C]
+                FIRN_FACIE (t)                  ::    Firn facie [1 : Recrystallization | 2 : Recrystallization-Infiltraion | 3 : Cold-Infilitration | 4 : Temperate]
+
+            Subsurface Variables (12):
+
+                LAYER_DEPTH (z,t)               ::    Layer depth [m]
+                LAYER_HEIGHT (z,t)              ::    Layer height [m]
+                LAYER_DENSITY (z,t)             ::    Layer density [kg m-3]
+                LAYER_TEMPERATURE (z,t)         ::    Layer temperature [°C]
+                LAYER_WATER_CONTENT (z,t)       ::    Layer liquid water content [-]
+                LAYER_COLD_CONTENT (z,t)        ::    Layer cold content [J m-2]
+                LAYER_POROSITY (z,t)            ::    Layer porosity [-]
+                LAYER_ICE_FRACTION (z,t)        ::    Layer ice fraction [-]
+                LAYER_IRREDUCIBLE_WATER (z,t)   ::    Layer irreducible water content
+                LAYER_REFREEZE (z,t)            ::    Layer refreezing [m w.e.]
+                LAYER_HYDRO_YEAR (z,t)          ::    Layer hydrological year [yyyy]
+                LAYER_GRAIN_SIZE (z,t)          ::    Layer grain size [mm]
+  
     """
 
     # =================== #
@@ -104,10 +181,6 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     MONTH = METEO.time.dt.month.values
     YEAR = METEO.time.dt.year.values
     HYDRO_YEAR = np.where(MONTH < 10, YEAR, YEAR + 1)
-
-    # Albedo (measured):
-    if 'ALBEDO' in list(METEO.keys()):
-        ALBEDO = METEO.ALBEDO.values
 
     # Radiative fluxes (SWin & LWin):
     if ('SWin' in list(METEO.keys())) and ('LWin' in list(METEO.keys())):
@@ -205,7 +278,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     _FIRN_TEMPERATURE_CHANGE = np.full(nt,np.nan, dtype=precision)
     _FIRN_FACIE = np.zeros(nt, dtype ='int32')
 
-    # Subsurface Variables (11):
+    # Subsurface Variables (12):
     _LAYER_DEPTH = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_HEIGHT = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_DENSITY = np.full((nt,max_layers), np.nan, dtype=precision)
@@ -217,6 +290,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     _LAYER_IRREDUCIBLE_WATER = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_REFREEZE = np.full((nt,max_layers), np.nan, dtype=precision)
     _LAYER_HYDRO_YEAR = np.full((nt,max_layers), np.nan, dtype=precision)
+    _LAYER_GRAIN_SIZE = np.full((nt,max_layers), np.nan, dtype=precision)
 
     # ============================== #
     # AGGREGATION & OUTPUT REPORTING
@@ -270,18 +344,15 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # PRECIPITATION
         # ============= #
 
-        # Check grid
-        GRID.grid_check()
-
         # Calc fresh snow density
         if snow_density_method =='Vionnet12':
             density_fresh_snow = np.maximum(109.0+6.0*(T2[t]-273.16)+26.0*np.sqrt(U2[t]), 50.0)
         elif snow_density_method =='constant':
-            density_fresh_snow = constant_density 
+            density_fresh_snow = constant_fresh_snow_density 
 
         # Derive snowfall [m] and rain rates [m w.e.]
         # Convert total precipitation [mm] to snowheight [m]; liquid/solid fraction
-        SNOWFALL = (RRR[t]/1000.0)*(water_density/density_fresh_snow)*(0.5*(-np.tanh((T2[t]-zero_temperature)) + 1.0))
+        SNOWFALL = (RRR[t]/1000.0) * (water_density/density_fresh_snow) * (0.5*(-np.tanh((T2[t]-zero_temperature)) + 1.0))
         RAIN = RRR[t] - SNOWFALL*(density_fresh_snow/water_density) * 1000.0
 
         # if snowfall is smaller than the threshold
@@ -289,13 +360,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             SNOWFALL = 0.0
 
         # if rainfall is smaller than the threshold
-        if RAIN<(minimum_snowfall*(density_fresh_snow/water_density) * 1000.0):
+        if RAIN<(minimum_snowfall * (density_fresh_snow / water_density) * 1000.0):
             RAIN = 0.0
 
         if SNOWFALL > 0.0:
             # Add a new snow node on top
-           GRID.add_fresh_snow(SNOWFALL, density_fresh_snow, np.minimum(float(T2[t]),zero_temperature), 0.0)
-           GRID.set_node_hydro_year(0, float(HYDRO_YEAR[t])) # Set the uppermost subsurface layer as the current hydrological year of accumulation
+           GRID.add_fresh_snow(SNOWFALL, density_fresh_snow, np.minimum(float(T2[t]),zero_temperature), int(HYDRO_YEAR[t]), grain_size_fresh_snow)
         else:
            GRID.set_fresh_snow_props_update_time(dt)
 
@@ -311,23 +381,20 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # ======================================= #       
 
         # Update Albedo
-        if albedo_method == 'measured':
-            albedo = ALBEDO[t]
-        else:
-            albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
+        albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
 
         # Calculate net shortwave radiation
-        SWnet = SWin[t] * (1 - albedo)
+        SW_net = SWin[t] * (1 - albedo)
 
         # Penetrating SW radiation and subsurface melt
-        if SWnet > 0.0:
-            subsurface_melt, G_penetrating = penetrating_radiation(GRID, SWnet, dt)
+        if SW_net > 0.0:
+            subsurface_melt, SW_penetrating = penetrating_radiation(GRID, SW_net, dt)
         else:
             subsurface_melt = 0.0
-            G_penetrating = 0.0
+            SW_penetrating = 0.0
 
         # Calculate residual net shortwave radiation (penetrating part removed)
-        sw_radiation_net = SWnet - G_penetrating
+        sw_radiation_net = SW_net - SW_penetrating
 
         # ================= #
         # SURFACE ROUGHNESS
@@ -385,7 +452,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # Add mass [m w.e.]
         if net_mass_change > 0:
             pass
-            #GRID.add_mass(net_mass_change)
+            #GRID.add_mass(net_mass_change) 
 
         # Remove mass [m w.e.]
         if net_mass_change < 0:
@@ -403,18 +470,20 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         surface_water = max(surface_melt + condensation - evaporation + RAIN/1000.0, 0) 
         
         # Calculate run-off and refreezing
-        if (np.any(GRID.get_liquid_water_content()) or surface_water != 0):
-            Q , water_refrozen = percolation_refreezing(GRID,HYDRO_YEAR[t],surface_water)
-        else:
-            Q , water_refrozen = 0, 0
+        Q , water_refrozen = percolation_refreezing(GRID, HYDRO_YEAR[t], surface_water)
 
         # ================= #
         # THERMAL DIFFUSION
         # ================= #
     
-        if GRID.get_number_layers() > 1:
-            thermal_diffusion(GRID, BASAL, dt)
-    
+        thermal_diffusion(GRID, BASAL, dt)
+
+        # ================= #
+        # SNOW METAMORPHISM
+        # ================= #
+
+        snow_metamorphism(GRID, dt)
+
         # ================= #
         # DRY DENSIFICATION
         # ================= #
@@ -483,7 +552,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if ((model_spin_up == True) and (t >= initial_index)) or (model_spin_up == False):
 
             # Aggregated Meteorological Data (5):
-            AIR_TEMPERATURE_AGG[idx_agg] = T2[t]
+            AIR_TEMPERATURE_AGG[idx_agg] = T2[t] - zero_temperature
             AIR_PRESSURE_AGG[idx_agg] = PRES[t]
             RELATIVE_HUMIDITY_AGG[idx_agg] = RH2[t]
             WIND_SPEED_AGG[idx_agg] = U2[t]
@@ -561,7 +630,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _SNOW_HEIGHT[idx_res] = GRID.get_total_snowheight()
             _SNOW_WATER_EQUIVALENT[idx_res] = np.sum(np.asarray(GRID.get_snow_heights()) * (np.asarray(GRID.get_snow_densities()) / water_density))
             _TOTAL_HEIGHT[idx_res] = GRID.get_total_height()
-            _SURFACE_TEMPERATURE[idx_res] = surface_temperature
+            _SURFACE_TEMPERATURE[idx_res] = surface_temperature - zero_temperature
             _SURFACE_ALBEDO[idx_res] = albedo
             _N_LAYERS[idx_res] = GRID.get_number_layers()
 
@@ -586,19 +655,19 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                     _LAYER_DEPTH[idx_res, 0:max_layers] = GRID.get_depth()[0:max_layers]
                     _LAYER_HEIGHT[idx_res, 0:max_layers] = GRID.get_height()[0:max_layers]
                     _LAYER_DENSITY[idx_res, 0:max_layers] = GRID.get_density()[0:max_layers]
-                    _LAYER_TEMPERATURE[idx_res, 0:max_layers] = GRID.get_temperature()[0:max_layers]
+                    _LAYER_TEMPERATURE[idx_res, 0:max_layers] = np.asarray(GRID.get_temperature()[0:max_layers]) - zero_temperature
                     _LAYER_WATER_CONTENT[idx_res, 0:max_layers] = GRID.get_liquid_water_content()[0:max_layers]
                     _LAYER_COLD_CONTENT[idx_res, 0:max_layers] = GRID.get_cold_content()[0:max_layers]
                     _LAYER_POROSITY[idx_res, 0:max_layers] = GRID.get_porosity()[0:max_layers]
                     _LAYER_ICE_FRACTION[idx_res, 0:max_layers] = GRID.get_ice_fraction()[0:max_layers]
                     _LAYER_IRREDUCIBLE_WATER[idx_res, 0:max_layers] = GRID.get_irreducible_water_content()[0:max_layers]
                     _LAYER_REFREEZE[idx_res, 0:max_layers] = GRID.get_refreeze()[0:max_layers]
-                    _LAYER_HYDRO_YEAR[idx_res, 0:max_layers] = GRID.get_hydro_year()[0:max_layers]
+                    _LAYER_GRAIN_SIZE[idx_res, 0:max_layers] = GRID.get_grain_size()[0:max_layers]
                 else:
                     _LAYER_DEPTH[idx_res, 0:GRID.get_number_layers()] = GRID.get_depth()
                     _LAYER_HEIGHT[idx_res, 0:GRID.get_number_layers()] = GRID.get_height()
                     _LAYER_DENSITY[idx_res, 0:GRID.get_number_layers()] = GRID.get_density()
-                    _LAYER_TEMPERATURE[idx_res, 0:GRID.get_number_layers()] = GRID.get_temperature()
+                    _LAYER_TEMPERATURE[idx_res, 0:GRID.get_number_layers()] = np.asarray(GRID.get_temperature()) - zero_temperature
                     _LAYER_WATER_CONTENT[idx_res, 0:GRID.get_number_layers()] = GRID.get_liquid_water_content()
                     _LAYER_COLD_CONTENT[idx_res, 0:GRID.get_number_layers()] = GRID.get_cold_content()
                     _LAYER_POROSITY[idx_res, 0:GRID.get_number_layers()] = GRID.get_porosity()
@@ -606,7 +675,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                     _LAYER_IRREDUCIBLE_WATER[idx_res, 0:GRID.get_number_layers()] = GRID.get_irreducible_water_content()
                     _LAYER_REFREEZE[idx_res, 0:GRID.get_number_layers()] = GRID.get_refreeze()
                     _LAYER_HYDRO_YEAR[idx_res, 0:GRID.get_number_layers()] = GRID.get_hydro_year()
-        
+                    _LAYER_GRAIN_SIZE[idx_res, 0:GRID.get_number_layers()] = GRID.get_grain_size()
             else:
                 _LAYER_DEPTH = None
                 _LAYER_HEIGHT = None
@@ -619,6 +688,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 _LAYER_IRREDUCIBLE_WATER = None
                 _LAYER_REFREEZE = None
                 _LAYER_HYDRO_YEAR = None
+                _LAYER_GRAIN_SIZE = None
 
             # Increase result index:
             idx_res += 1
@@ -659,8 +729,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 MASS_BALANCE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
                 # Reset aggregation index
-                idx_agg = 0
-            
+                idx_agg = 0        
 
     # ============================================================================================================================= #
 
@@ -671,8 +740,6 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
             _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
-            _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR)
+            _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
 
-
-
-    
+# ====================================================================================================================

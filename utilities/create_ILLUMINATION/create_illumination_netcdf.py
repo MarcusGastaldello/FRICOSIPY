@@ -1,0 +1,255 @@
+"""
+    ==================================================================
+
+                CREATE INPUT ILLUMINATION INPUT FILE PROGRAM
+
+        This file creates the model input illumination file from a 
+        static file that determines whether grid nodes across the 
+        spatial domain (x,y) are illuminated by the sun for any 
+        given timestep in a standard calendar and leap year (t).
+         
+    ==================================================================
+"""
+
+import sys
+import xarray as xr
+import pandas as pd
+import numpy as np
+import netCDF4 as nc
+import time
+import math as mt
+import dateutil
+from itertools import product
+import argparse
+from numba import njit
+
+# ============================================================================================= #
+
+def create_illumindation_file(static_file, illumination_file):
+    """ The create illumination program creates the input illumination file:
+
+    Input:
+                STATIC (x,y)           ::    Xarray dataset containing topographic/static data
+    Output:
+                ILLUMINATION (x,y,t)   ::    Xarray dataset containing solar illumination data
+
+    """
+
+    print('\n\t ========================')
+    print('\t CREATE ILLUMINATION FILE')
+    print('\t ========================\n')
+
+    # ================ #
+    # Load static data
+    # ================ #
+
+    ds = xr.open_dataset(static_file)   
+
+    print('\t INFORMATION:')
+    print('\t ==============================================================')
+    print('\t Input Static Dataset: ',static_file)
+    print('\t Output Illumination Dataset: ',illumination_file)
+    print('\t ==============================================================','\n')
+
+    # Ensure there are no glacial nodes on the boundary of the static file:
+    if (ds.MASK * ((ds.y == ds.y[0])  | (ds.y == ds.y[-1]) | (ds.x == ds.x[0])  | (ds.x == ds.x[-1]))).sum().values != 0:
+        raise ValueError('Error: Glacier nodes cannot exist on the boundary of the static file spatial domain!')
+
+    # ========================== #
+    # Create Auxillary Variables 
+    # ========================== # 
+
+    # Auxiliary variables
+    Elevation = ds.ELEVATION.values
+    Mask = ds.MASK.values
+    Latitude = np.mean(ds.LATITUDE.values)
+    Longitude = np.mean(ds.LONGITUDE.values)
+    Northing = ds.NORTHING.values
+    Easting = ds.EASTING.values
+
+    # Temporal variables
+    hour = np.tile(np.linspace(0,23,24),731)
+    time_rad_standard = np.linspace(0,2 *np.pi,8760)
+    time_rad_leap_year = np.linspace(0,2 *np.pi,8784)
+    time_rad = np.hstack((time_rad_standard,time_rad_leap_year))
+
+    # =============================== #
+    # Solar Declination: (in radians)   
+    # =============================== #
+
+    Declination = 0.322003 - 22.971 * np.cos(time_rad) - 0.357898 * np.cos(2 * time_rad) - 0.14398 * np.cos(3 * time_rad) + 3.94638 * np.sin(time_rad) + 0.019334 * np.sin(2 * time_rad) + 0.05928 * np.sin(3 *time_rad)
+
+    # ============================== #
+    # Solar Hour Angle: (in degrees)
+    # ============================== #
+
+    Equation_of_time = 229.18 * (0.000075 + 0.001868 * np.cos(time_rad) - 0.032077 * np.sin(time_rad) - 0.014615 * np.cos(2 * time_rad) - 0.040849 * np.sin(2 * time_rad))
+    Time_offset = Equation_of_time + (4 * Longitude)           # in minutes
+    Local_solar_time = hour + (Time_offset / 60)               # in decimal hours
+    Solar_hour_angle = -(15 * (Local_solar_time - 12))         # in degrees (180 at midnight, 90 at sunrise, 0 at midday, 270 at sunset)
+
+    # ====================================== #
+    # Solar Elevation / Zenith: (in radians)
+    # ====================================== #
+
+    Solar_Elevation = np.arcsin(np.sin(np.radians(Declination)) * np.sin(np.radians(Latitude)) + np.cos(np.radians(Declination)) * np.cos(np.radians(Latitude)) * np.cos(np.radians(Solar_hour_angle)))
+
+    # ================================= #
+    # Solar Azimuth Angle: (in radians)
+    # ================================= #
+
+    Azimuth = np.arccos((np.sin(np.radians(Declination)) * np.cos(np.radians(Latitude)) - np.cos(np.radians(Declination)) * np.sin(np.radians(Latitude)) * np.cos(np.radians(Solar_hour_angle))) / np.cos(Solar_Elevation))
+    Azimuth = np.where(Solar_hour_angle < 0, Azimuth * -1, Azimuth)
+
+    # ===================================================== #
+    # Calulcate the Topographic Shading Illumination Matrix
+    # ===================================================== #
+
+    # Calculate the Illumination Values:
+    Illumination = Topographic_Shading(Northing,Easting,Elevation,Mask,Solar_Elevation,Azimuth)
+
+    # Split the Illumination Matricies:
+    Illumination_Norm = np.vstack((Illumination[:8760,:,:],np.zeros((24, len(ds.y), len(ds.x)), dtype = np.int8)))
+    Illumination_Leap = Illumination[8760:,:,:]
+
+    # Save the Calculated Illumination Matrix:
+    f = nc.Dataset(illumination_file, 'w')
+    f.createDimension('HOY', 8784)
+    f.createDimension('y', len(ds.y))
+    f.createDimension('x', len(ds.x))
+    hoy_values = np.linspace(1,8784,8784, dtype = np.float32)
+    northing_values = ds.y.values
+    easting_values = ds.x.values
+
+    # Northings (y) Co-ordinate:
+    NORTHINGS = f.createVariable('y', 'f4', ('y',))
+    NORTHINGS.units = 'm'
+    NORTHINGS.long_name = 'projection_y_coordinate'
+    NORTHINGS.standard_name = 'projection_y_coordinate'
+    NORTHINGS.axis = 'Y'
+    NORTHINGS[:] = northing_values
+        
+    # Eastings (x) Co-ordinate:
+    EASTINGS = f.createVariable('x', 'f4', ('x',))
+    EASTINGS.units = 'm'
+    EASTINGS.long_name = 'projection_x_coordinate'
+    EASTINGS.standard_name = 'projection_x_coordinate'
+    EASTINGS.axis = 'X'
+    EASTINGS[:]  = easting_values
+
+    # Hour of Year (t) Co-ordinate: 
+    HOUR_OF_YEAR = f.createVariable('HOY', 'i4', ('HOY',))
+    HOUR_OF_YEAR.units = 'hour'
+    HOUR_OF_YEAR.long_name = 'Hour of Year'
+    HOUR_OF_YEAR.axis = 'T'
+    HOUR_OF_YEAR[:] = hoy_values
+
+    # Illumination (Normal Year) Variable:
+    ILLUMINATON_NORM = f.createVariable('ILLUMINATION_NORM', np.int8, ('HOY', 'y', 'x'))
+    ILLUMINATON_NORM.long_name = 'Topographic Shading Illumination (Normal Year)'
+    ILLUMINATON_NORM[:] = Illumination_Norm
+
+    # Illumination (Leap Year) Variable:
+    ILLUMINATON_LEAP = f.createVariable('ILLUMINATION_LEAP', np.int8, ('HOY', 'y', 'x'))
+    ILLUMINATON_LEAP.long_name = 'Topographic Shading Illumination (Leap Year)'
+    ILLUMINATON_LEAP[:] = Illumination_Leap
+
+    print('\t =========================')
+    print('\t Illumination File Created')
+    print('\t =========================\n')
+            
+    f.close()
+
+# ============================================================================================= #
+
+@njit
+def Topographic_Shading(Northing,Easting,Elevation,Mask,Solar_Elevation,Azimuth):
+
+    # Acquire grid dimensions:
+    len_y, len_x = Elevation.shape
+
+    # Create the illumination matrix:
+    Illumination = np.zeros((17544, len_y, len_x), dtype = np.int8)
+
+    # Grid parameters:
+    max_northing = np.max(Northing)
+    min_northing = np.min(Northing)
+    max_easting = np.max(Easting)
+    min_easting =  np.min(Easting)   
+    northing_unique = np.unique(Northing)
+    easting_unique = np.unique(Easting)
+
+    # Define maximum radius (of DEM area) in metres
+    rmax = np.sqrt((np.max(Northing) - np.min(Northing)) ** 2 + (np.max(Northing) - np.min(Northing)) ** 2)
+    nums = int(rmax * len(Northing) / (np.max(Northing) - np.min(Northing)))
+
+    # Calculate direction to sun
+    for t in range(17544):
+
+        # Only perform calculations if the sun is present:
+        if Solar_Elevation[t] > 0:
+
+            beta = (mt.pi/2) - Azimuth[t]
+            dy = np.sin(beta) * rmax  # walk into sun direction (y) as far as rmax
+            dx = np.cos(beta) * rmax  # walk into sun direction (x) as far as rmax
+
+            # Extract profile to sun from each (glacier) grid point
+            for y in range(len_y):
+                for x in range(len_x):
+                    if Mask[y,x] == 1:
+
+                        start = (Northing[y,x], Easting[y,x]) 
+                        targ = (start[0] + dy, start[1] + dx)  # find target position
+
+                        # Points along profile (northing/easting)
+                        northing_list = np.linspace(start[0], targ[0], nums)  # equally spread points along profile
+                        easting_list = np.linspace(start[1], targ[1], nums)   # equally spread points along profile
+
+                        # Don't walk outside DEM boundaries
+                        northing_list_reduced = northing_list[(northing_list < max_northing) & (northing_list > min_northing)]
+                        easting_list_reduced  = easting_list[( easting_list  < max_easting)  & (easting_list  > min_easting)]
+
+                        # Cut to same extent
+                        if (len(northing_list_reduced) > len(easting_list_reduced)):
+                            northing_list_reduced = northing_list_reduced[0:len(easting_list_reduced)]
+                        if (len(easting_list_reduced) > len(northing_list_reduced)):
+                            easting_list_reduced = easting_list_reduced[0:len(northing_list_reduced)]
+
+                        # Find indices (instead of northing/easting) at closets gridpoint
+                        idy = (y, (np.abs(northing_unique  - northing_list_reduced[-1])).argmin())
+                        idx = (x, (np.abs(easting_unique   - easting_list_reduced[-1])).argmin())
+
+                        # Points along profile (indices)
+                        y_list = np.round(np.linspace(idy[0], idy[1], len(northing_list_reduced))).astype(np.int32)
+                        x_list = np.round(np.linspace(idx[0], idx[1], len(easting_list_reduced))).astype(np.int32)
+
+                        # Calculate altitude along profile
+                        z = np.empty(len(y_list))
+                        for i in range(len(y_list)):
+                            z[i] = Elevation[y_list[i], x_list[i]]
+
+                        # Calclulate DISTANCE along profile
+                        distance = np.sqrt((northing_list_reduced - start[0]) ** 2 + (easting_list_reduced - start[1]) ** 2)
+
+                        # Topography angle
+                        topography_angle = np.degrees(np.arctan((z[1:len(z)] - z[0]) / distance[1:len(distance)]))
+                        
+                        # Illumination
+                        if np.max(topography_angle) < np.degrees(Solar_Elevation[t]):
+                            Illumination[t,y,x] = 1
+
+    return Illumination
+
+# ============================================================================================= #
+
+if __name__ == "__main__":
+    
+    parser = argparse.ArgumentParser(description='Create illumination file from csv file.')
+    parser.add_argument('-s', '-static_file', dest='static_file', help='Static file containing DEM, Slope etc.')
+    parser.add_argument('-i', '-illumination_file', dest='illumination_file', help='Illumination matrix containing topographic shading boolean')
+
+    args = parser.parse_args()
+
+    create_illumindation_file(args.static_file, args.illumination_file) 
+
+# ============================================================================================= #

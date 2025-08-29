@@ -1,3 +1,15 @@
+"""
+    ==================================================================
+
+                          SURFACE TEMPERATURE MODULE
+
+        This module determines the skin-layer surface temperature 
+        by iteratively equilibriating the surface energy fluxes for
+        a single model timestep.
+
+    ==================================================================
+"""
+
 import numpy as np
 from constants import *
 from parameters import *
@@ -10,42 +22,41 @@ from types import SimpleNamespace
 # ========================== #
 
 def update_surface_temperature(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, N = None, LWin = None):
-    """ This methods updates the surface temperature and returns the surface fluxes
+    """ This module updates the surface temperature and returns the surface energy fluxes
 
-    Given:
+    Input:
 
-        GRID    ::  Grid structure
-        T0      ::  Surface temperature [K]
-	    dt      ::  Integration time [s] -- can vary in WRF_X_CSPY
-	    z       ::  Measurement height [m] -- varies in WRF_X_CSPY
-        z0      ::  Roughness length [m]
-        T2      ::  Air temperature [K]
-        rH2     ::  Relative humidity [%]
-        p       ::  Air pressure [hPa]
-        G       ::  Incoming shortwave radiation [W m^-2]
-        u2      ::  Wind velocity [m S^-1]
-        RAIN    ::  RAIN (mm)
-        SLOPE   ::  Slope of the surface [degree]
-        LWin    ::  Incoming longwave radiation [W m^-2]
-        N       ::  Fractional cloud cover [-]
+        GRID    ::    Grid structure
+	    dt      ::    Integration time [s]
+	    z       ::    Measurement height [m]
+        z0      ::    Surface roughness [m]
+        T2      ::    Air temperature [K]
+        rH2     ::    Relative humidity [%]
+        p       ::    Air pressure [hPa]
+        SWnet   ::    Net shortwave radiation [W m-2]
+        u2      ::    Wind velocity [m s-1]
+        RAIN    ::    RAIN [mm]
+        SLOPE   ::    Slope of the surface [degree]
+        N       ::    Fractional cloud cover [-]        
+        LWin    ::    Incoming longwave radiation [W m-2]
 
-    Returns:
+    Output:
 
-        Li      ::  Incoming longwave radiation [W m^-2]
-        Lo      ::  Outgoing longwave radiation [W m^-2]
-        H       ::  Sensible heat flux [W m^-2]
-        L       ::  Latent heat flux [W m^-2]
-        B       ::  Ground heat flux [W m^-2]
-        Qrr     ::  Rain heat flux [W m^-2]
-        SWnet   ::  Shortwave radiation budget [W m^-2]
-        rho     ::  Air density [kg m^-3]
-        Lv      ::  Latent heat of vaporization [J kg^-1]
-	    MOL     ::  Monin-Obukhov length
-        Cs_t    ::  Stanton number [-]
-        Cs_q    ::  Dalton number [-]
-        q0      ::  Mixing ratio at the surface [kg kg^-1]
-        q2      ::  Mixing ratio at measurement height [kg kg^-1]
-        phi     ::  Stability correction term [-]
+        T0      ::    Surface temperature [K]
+        Li      ::    Incoming longwave radiation [W m-2]
+        Lo      ::    Outgoing longwave radiation [W m-2]
+        H       ::    Sensible heat flux [W m-2]
+        L       ::    Latent heat flux [W m-2]
+        B       ::    Ground heat flux [W m-2]
+        Qrr     ::    Rain heat flux [W m-2]
+        rho     ::    Air density [kg m-3]
+        Lv      ::    Latent heat of vaporization [J kg-1]
+	    MOL     ::    Monin-Obukhov length
+        Cs_t    ::    Stanton number [-]
+        Cs_q    ::    Dalton number [-]
+        q0      ::    Mixing ratio at the surface [kg kg-1]
+        q2      ::    Mixing ratio at measurement height [kg kg-1]
+        
     """
     
     #Interpolate subsurface temperatures to selected subsurface depths for GHF computation
@@ -113,44 +124,46 @@ def eb_optim(T0, GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin
 # ===================== #
 
 @njit
-def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None, N=None):
-    ''' This functions returns the surface fluxes with Monin-Obukhov stability correction.
+def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin = None, N = None):
+    """ This functions returns the surface fluxes 
 
     Given:
 
-        GRID    ::  Grid structure
-        T0      ::  Surface temperature [K]
-        dt      ::  Integration time [s]
-	    z       ::  Measurement height [m]
-        z0      ::  Roughness length [m]
-        T2      ::  Air temperature [K]
-        rH2     ::  Relative humidity [%]
-        p       ::  Air pressure [hPa]
-        G       ::  Incoming shortwave radiation [W m^-2]
-        u2      ::  Wind velocity [m S^-1]
-        RAIN    ::  RAIN (mm)
-        SLOPE   ::  Slope of the surface [degree]
-        LWin    ::  Incoming longwave radiation [W m^-2]
-        N       ::  Fractional cloud cover [-]
+        GRID    ::    Grid structure
+        T0      ::    Surface temperature [K]
+        dt      ::    Integration time [s]
+	    z       ::    Measurement height [m]
+        z0      ::    Roughness length [m]
+        T2      ::    Air temperature [K]
+        rH2     ::    Relative humidity [%]
+        p       ::    Air pressure [hPa]
+        u2      ::    Wind velocity [m s-1]
+        RAIN    ::    RAIN (mm)
+        SLOPE   ::    Slope of the surface [degree]
+        LWin    ::    Incoming longwave radiation [W m-2]
+        N       ::    Fractional cloud cover [-]
 
     Returns:
 
-        Li      ::  Incoming longwave radiation [W m^-2]
-        Lo      ::  Outgoing longwave radiation [W m^-2]
-        H       ::  Sensible heat flux [W m^-2]
-        L       ::  Latent heat flux [W m^-2]
-        B       ::  Ground heat flux [W m^-2]
-        Qrr     ::  Rain heat flux [W m^-2]
-        SWnet   ::  Shortwave radiation budget [W m^-2]
-        rho     ::  Air density [kg m^-3]
-        Lv      ::  Latent heat of vaporization [J kg^-1]
-	    MOL     ::  Monin Obhukov length
-        Cs_t    ::  Stanton number [-]
-        Cs_q    ::  Dalton number [-]
-        q0      ::  Mixing ratio at the surface [kg kg^-1]
-        q2      ::  Mixing ratio at measurement height [kg kg^-1]
-        phi     ::  Stability correction term [-]
-    '''
+        Li      ::    Incoming longwave radiation [W m-2]
+        Lo      ::    Outgoing longwave radiation [W m-2]
+        H       ::    Sensible heat flux [W m-2]
+        L       ::    Latent heat flux [W m-2]
+        B       ::    Ground heat flux [W m-2]
+        Qrr     ::    Rain heat flux [W m-2]
+        rho     ::    Air density [kg m-3]
+        Lv      ::    Latent heat of vaporization [J kg-1]
+	    MOL     ::    Monin Obhukov length
+        Cs_t    ::    Stanton number [-]
+        Cs_q    ::    Dalton number [-]
+        q0      ::    Mixing ratio at the surface [kg kg-1]
+        q2      ::    Mixing ratio at measurement height [kg kg-1]
+    
+    """
+    
+    # ================ #
+    # Turbluent Fluxes
+    # ================ #
 
     # Saturation vapour pressure (hPa)
     if saturation_water_vapour_method == 'Sonntag90':
@@ -174,7 +187,7 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
     # numba has no implementation for power(none, int)
     if (LWin is None) and (N is not None):
         eps_cs = 0.23 + LW_emission_constant * np.power(100*Ea/T2,1.0/8.0)
-        eps_tot = eps_cs * (1 - np.power(N,2)) + e_clouds * np.power(N,2)
+        eps_tot = eps_cs * (1 - np.power(N,2)) + cloud_emissivity * np.power(N,2)
         Li = eps_tot * sigma * np.power(T2,4.0)
     else:
     # otherwise use LW data from file
@@ -187,7 +200,13 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
     q2 = (rH2 * 0.622 * (Ew / (p - Ew))) / 100.0
     q0 = (100.0 * 0.622 * (Ew0 / (p - Ew0))) / 100.0
 
-    if turbulent_fluxes_method == 'Default':
+    # -------------------------------------------------------------------------------------------------------------------- #
+    
+    if turbulent_fluxes_method == 'default':
+
+        # ============== #
+        # Default Method
+        # ============== #
 
         # Moist Air density 
         rho = (p*100.0) / (287.058 * (T2 * (1 + 0.608 * q2)))
@@ -261,8 +280,14 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
 
         else:
             raise ValueError("Stability correction",stability_correction,"is not supported")	#numba refuses to print str(list)
+        
+    # -------------------------------------------------------------------------------------------------------------------- #
 
     elif turbulent_fluxes_method == 'Essery04':
+
+        # ============================== #
+        # Essery & Etchevers 2004 Method
+        # ============================== #
 
         # Dry air density
         rho = (p*100.0) / (287.058 * T2)
@@ -293,29 +318,36 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
         Cs_t = None
         Cs_q = None
 
-    # Outgoing longwave radiation
+    # ======================= #
+    # Longwave Radiation Flux
+    # ======================= #
+
     Lo = -surface_emission_coeff * sigma * np.power(T0, 4.0)
+
+    # ======================================== #
+    # Ground Heat / Subsurface Conduction Flux
+    # ======================================== #
 
     # Get thermal conductivity
     lam = GRID.get_node_thermal_conductivity(0)
 
-    # Ground heat flux
-    hminus = zlt1
-    hplus = zlt2 - zlt1
+    # Calculate ground / subsurface conduction flux
+    hminus = subsurface_interpolation_depth_1
+    hplus = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
     Tz1, Tz2 = B_Ts
+    B = lam * ((hminus/(hplus+hminus)) * ((Tz2-Tz1)/hplus) + (hplus/(hplus+hminus)) * ((Tz1-T0)/hminus))
 
-    #B = lam * ((hminus/(hplus+hminus)) * ((Tz2-Tz1)/hplus) + (hplus/(hplus+hminus)) * ((Tz1-T0)/hminus))
+    #B = lam * (Tz2 - T0) / subsurface_interpolation_depth_2
 
-    B = lam * (Tz2 - T0) / zlt2
+    # ============== #
+    # Rain Heat Flux
+    # ============== #
 
-    # Rain heat flux
     QRR = water_density * spec_heat_water * (RAIN/1000/dt) * (T2 - T0)
 
-    # Return surface fluxes
-    # Numba: No implementation of function Function(<class 'float'>) found for signature: >>> float(array(float64, 1d, C))
     return (Li.item(), Lo.item(), H.item(), LE.item(), B.item(), QRR.item(), rho, Lv, L, Cs_t, Cs_q, q0, q2)
 
-# ====================================================================================================================
+# ==================================================================================================================== # 
 
 # ============================================================= #
 # Interpolate Temperatures for Subsurface Heat Flux Computation
@@ -323,28 +355,28 @@ def eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin=None,
 
 @njit
 def interp_subT(GRID):
-    ''' Interpolate subsurface temperature & conductivities to depths used for ground heat flux computation'''
+    ''' Interpolate subsurface temperature & conductivities to depths used for the subsurface / ground heat flux computation'''
     
     # Cumulative layer depths
     layer_heights_cum = np.cumsum(np.array(GRID.get_height()))
 
     # Find indexes of two depths for temperature interpolation
-    idx1_depth_1 = np.abs(layer_heights_cum - zlt1).argmin()
-    depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt1).argmin()]
+    idx1_depth_1 = np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()
+    depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()]
 
-    if depth_1 > zlt1:
+    if depth_1 > subsurface_interpolation_depth_1:
         idx2_depth_1 = idx1_depth_1 - 1
     else:
         idx2_depth_1 = idx1_depth_1 + 1
     Tz1 = GRID.get_node_temperature(idx1_depth_1) + \
 		((GRID.get_node_temperature(idx1_depth_1) - GRID.get_node_temperature(idx2_depth_1)) / \
             	(layer_heights_cum[idx1_depth_1] - layer_heights_cum[idx2_depth_1])) * \
-		(zlt1 - layer_heights_cum[idx1_depth_1])
+		(subsurface_interpolation_depth_1 - layer_heights_cum[idx1_depth_1])
 
-    idx1_depth_2 = np.abs(layer_heights_cum - zlt2).argmin()
-    depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - zlt2).argmin()]
+    idx1_depth_2 = np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()
+    depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()]
 
-    if depth_2 > zlt2:
+    if depth_2 > subsurface_interpolation_depth_2:
         idx2_depth_2 = idx1_depth_2 - 1
     else:
         idx2_depth_2 = idx1_depth_2 + 1
@@ -352,11 +384,11 @@ def interp_subT(GRID):
     Tz2 = GRID.get_node_temperature(idx1_depth_2) + \
 		((GRID.get_node_temperature(idx1_depth_2) - GRID.get_node_temperature(idx2_depth_2)) / \
         	(layer_heights_cum[idx1_depth_2] - layer_heights_cum[idx2_depth_2])) * \
-		(zlt2 - layer_heights_cum[idx1_depth_2])
+		(subsurface_interpolation_depth_2 - layer_heights_cum[idx1_depth_2])
 
     return np.array([Tz1,Tz2])
     
-# ====================================================================================================================
+# ==================================================================================================================== #
 
 # =============== #
 # Extra Functions
@@ -426,3 +458,4 @@ def method_EW_Sonntag(T):
         Ew = 6.112 * np.exp((22.46*(T-273.16)) / ((T-0.55)))
     return Ew
 
+# ==================================================================================================================== #
