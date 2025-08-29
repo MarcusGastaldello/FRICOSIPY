@@ -1,6 +1,13 @@
 """
- This is the FRICOSIPY simulation configuration file.
- Please make your changes here.
+    ==================================================================
+
+                    FRICOSIPY CONFIGURATION (CONFIG) FILE
+
+        This file enables the user to configure their simulation by 
+        selecting the input files (Static, Meteo & Illumination),
+        simulation time range and output variables. 
+
+    ================================================================== 
 """
 
 # =================== #
@@ -62,7 +69,7 @@ other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT'
 
 # 4-D Output Variables:
 full_field = False                                              
-subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR']
+subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR','GRAIN_SIZE']
 
 # ========================== #
 # SIMULATION PARALLELIZATION 

@@ -1,3 +1,14 @@
+"""
+    ==================================================================
+
+                          DRY DENSIFICATION MODULE
+
+        This module calculates the dry densification of the model's
+        subsurface snow & firn layers during a single model timestep.
+
+    ==================================================================
+"""
+
 import numpy as np
 from constants import *
 from parameters import *
@@ -8,11 +19,7 @@ from numba import njit
 # ================= #
 
 def densification(GRID,ACCUMULATION,dt):
-    """ Densification of the snowpack
-    Args:
-        GRID    ::  GRID-Structure
-	dt      ::  integration time
-    """
+    """ This module calculates the dry densification of the snowpack """
 
     densification_allowed = ['Boone02', 'Ligtenberg11', 'disabled']
     if densification_method == 'Boone02':
@@ -32,15 +39,27 @@ def densification(GRID,ACCUMULATION,dt):
 
 @njit
 def method_Boone(GRID,dt):
-    """ Description: Densification through overburden pressure
-        after Essery et al. 2013
+    """ Densification based on overburden pressure and snow thermal metamorphosis
+        after Boone (2002)
+
+        Parameters:
+                    dt               ::    Integration time in a model time-step [s]
+        Input: 
+                    GRID             ::    Subsurface GRID variables -->
+                    rho (z)          ::    Layer density [kg m-3]
+                    h (z)            ::    Layer height [m]
+                    T (z)            ::    Layer temperature [K]
+                    icf (z)          ::    Layer ice fraction [-]
+        Output:
+                    rho (z)          ::    Layer density (updated) [kg m-3]
+
     """
 
     # Constants
     # Snow Settling Parameters
     c1 = 2.8e-6 # 2.8x10-6 s-1 (Anderson 1976) 
     c2 = 0.042 # 4.2x10-2 K-1 (Anderson 1976)
-    c3 = 0.046 # 460 m3 kg-1 (Anderson 1976) (COSIPY and Essery 2013 0.046)
+    c3 = 0.046 # 460 m3 kg-1 (Anderson 1976) 
     rho0 = 150 # 150 kg m-3 (Anderson 1976)
     # Snow Viscosity Parameters
     c4 = 0.081 # 8.1x10-2 K-1 (Boone 2002 | Kojima 1967 | Mellor 1964) 
@@ -48,16 +67,17 @@ def method_Boone(GRID,dt):
     # Snow Viscosity Coefficient 
     eta0 = 3.7e7 # 3.7x10+7 Pa s (Boone 2002 | Kojima 1967 | Mellor 1964)
 
+    # Extract variables:
     rho = np.array(GRID.get_density())
     h   = np.array(GRID.get_height())
     T   = np.array(GRID.get_temperature())
-    theta_ice = np.array(GRID.get_ice_fraction())
+    icf = np.array(GRID.get_ice_fraction())
 
     # Overburden nodal snow mass (subtract half of layer height to get nodal centre):
     M_s = np.cumsum(rho * h) - (0.5 * h * rho)
 
     # Viscosity
-    eta = eta0 * np.exp(c4 * (zero_temperature - T) + c5 * rho) # checked
+    eta = eta0 * np.exp(c4 * (zero_temperature - T) + c5 * rho) 
 
     # Binary mask for snow/ice determination:
     mask = np.where(rho < snow_ice_threshold,1,0)
@@ -66,10 +86,10 @@ def method_Boone(GRID,dt):
     drho = mask * (((M_s * 9.81) / eta) + c1 * np.exp(-c2 * (zero_temperature - T) - c3 * np.maximum(0.0, rho - rho0))) * dt * rho
 
     # Calculate change in volumetric ice fraction:
-    dtheta_i = drho / ice_density
+    dicf = drho / ice_density
 
     # Set updated volumetric ice fraction:
-    GRID.set_ice_fraction(dtheta_i + theta_ice)
+    GRID.set_ice_fraction(icf + dicf)
 
     # Set updated layer height due to compaction:
     GRID.set_height(np.maximum(minimum_snow_layer_height, h * (rho / (rho + drho))))
@@ -82,8 +102,21 @@ def method_Boone(GRID,dt):
 
 @njit
 def method_Ligtenberg(GRID,ACCUMULATION,dt):
-    """ Description: Densification based on in situ measurements of Antarctic snow compaction (used in the EBFM)
+    """ Densification based on in situ measurements of Antarctic snow compaction (used in the EBFM)
         after Arthern et al. 2010 (modified by Ligtenberg et al. 2011)
+
+        Parameters:
+                    dt               ::    Integration time in a model time-step [s]
+        Input:
+                    GRID             ::    Subsurface GRID variables -->
+                    rho (z)          ::    Layer density [kg m-3]
+                    h (z)            ::    Layer height [m]
+                    T (z)            ::    Layer temperature [K]
+                    icf (z)          ::    Layer ice fraction [-]
+                    z (z)            ::    Layer depth [m]
+                    ACCUMULATION     ::    Grid annual accumulation [m a-1]
+        Output:
+                    rho (z)          ::    Layer density (updated) [kg m-3]
     """
 
     # Constants
@@ -96,7 +129,7 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     rho = np.asarray(GRID.get_density())
     h   = np.asarray(GRID.get_height())
     T   = np.asarray(GRID.get_temperature())
-    theta_ice = np.asarray(GRID.get_ice_fraction())
+    icf = np.asarray(GRID.get_ice_fraction())
     z   = np.asarray(GRID.get_depth())
 
     # Convert units:
@@ -112,12 +145,12 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     C = np.where(rho < 550, C_snow , C_firn)
 
     # Obtain approximate temperatures from interpolation depths z1 & z2
-    Tz1 = T[np.searchsorted(z, z1, side="left")]
-    Tz2 = T[np.searchsorted(z, z2, side="left")]
+    Tz1 = T[np.searchsorted(z, temperature_interpolation_depth_1, side="left")]
+    Tz2 = T[np.searchsorted(z, temperature_interpolation_depth_2, side="left")]
     
     # Calculate linear temperature profile model constants
-    m = (Tz2 - Tz1) / (z2 - z1)
-    q = Tz1 - (m * z1)
+    m = (Tz2 - Tz1) / (temperature_interpolation_depth_2 - temperature_interpolation_depth_1)
+    q = Tz1 - (m * temperature_interpolation_depth_1)
     
     # Calculate approximate annual average temperature from linear gradient interpolation
     T_AVG = z * m + q
@@ -126,10 +159,10 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     drho = mask * dt * C * b * g * (ice_density - rho) * np.exp((-Ec / (R * T)) + (Eg / (R * T_AVG)))
 
     # Calculate change in volumetric ice fraction:
-    dtheta_i = drho / ice_density
+    dicf = drho / ice_density
 
     # Set updated volumetric ice fraction:
-    GRID.set_ice_fraction(dtheta_i + theta_ice)
+    GRID.set_ice_fraction(icf + dicf)
 
     # Set updated layer height due to compaction:
     GRID.set_height(h * (rho / (rho + drho)))

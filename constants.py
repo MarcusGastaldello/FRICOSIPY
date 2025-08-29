@@ -1,9 +1,18 @@
+"""
+    ==================================================================
+
+                        FRICOSIPY CONSTANTS FILE
+
+        This file contains physical constants for calculations 
+        within the model's physical processes. These values should 
+        not be changed / altered.
+
+    ================================================================== 
+"""
 
 # ================== #
 # PHYSICAL CONSTANTS 
 # ================== #
-
-# These are physical constants that are universal and should not be changed!
 
 # Latent Heat:
 lat_heat_melting = 3.34e5                       # Latent heat for melting [J kg-1]
