@@ -1,10 +1,20 @@
 #!/usr/bin/env python
 
 """
-    This is the main code file of the 'FRIbourg COupled Snowpack and Ice surface energy
-    and mass balance glacier model in PYthon' (FRICOSIPY). The original COSIPY model was initially written by
-    Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
-    Marcus Gastaldello into FRICOSIPY for detailed firn modelling at the University of Fribourg.
+    ======================================================================================================================================================
+
+                                                                    FRICOSIPY VERSION 1.2
+
+    This is the main executable file of the 'FRIbourg COupled Snowpack and Ice surface energy and mass balance glacier model in PYthon' (FRICOSIPY). 
+    The original COSIPY model was initially written by Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
+    Marcus Gastaldello into FRICOSIPY at the University of Fribourg (https://doi.org/10.5194/tc-19-2983-2025) for research at Colle Gnifetti, Monte Rosa.
+
+    The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
+
+    Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2) [Computer software]. 
+    https://github.com/MarcusGastaldello/FRICOSIPY
+
+    ======================================================================================================================================================
 """
 
 # Import Modules:
@@ -20,8 +30,10 @@ from dask.distributed import Client, LocalCluster, as_completed
 from tornado import gen
 import logging
 
-# Suppress notifications from Distributed module (turn-off if debugging)
+# Suppress excessive notifications from Distributed module (turn-off if debugging)
 logging.getLogger("distributed").setLevel(logging.CRITICAL)
+
+# =============================================================================================================== #
 
 def main():
 
@@ -104,6 +116,7 @@ def main():
 # =============================================================================================================== #
 
 def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_time):
+    """ This function runs the FRICOSIPY simulation on a distributed computing cluster """
 
     with Client(cluster) as client:
 
@@ -162,7 +175,7 @@ def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_tim
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
                 SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
-                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR = future.result()
+                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR,LAYER_GRAIN_SIZE = future.result()
                                 
                 IO.copy_local_to_global(indY,indX, \
                 AIR_TEMPERATURE,AIR_PRESSURE,RELATIVE_HUMIDITY,WIND_SPEED,FRACTIONAL_CLOUD_COVER, \
@@ -171,7 +184,7 @@ def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_tim
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
                 SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
-                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR)
+                LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR,LAYER_GRAIN_SIZE)
 
                 # Update progress bar:
                 completed_nodes += 1
@@ -199,3 +212,5 @@ def report_progress(completed,total_nodes,simulation_start_time,node_start_time)
 ''' MODEL EXECUTION '''
 if __name__ == "__main__":
     main()
+
+# =============================================================================================================== #
