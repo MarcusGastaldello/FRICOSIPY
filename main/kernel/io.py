@@ -209,8 +209,9 @@ class IOClass:
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
         self.RESULT.attrs['Water_percolation_method'] = preferential_percolation_method
-        self.RESULT.attrs['Sfc_temperature_method'] = sfc_temperature_method
         self.RESULT.attrs['Snow_metamorphism_method'] = snow_metamorphism_method
+        self.RESULT.attrs['Hydraulic_conductivity_method'] = hydraulic_conductivity_method
+        self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver
 
         # Initial Conditions:
         self.RESULT.attrs['Initial_snowheight'] = initial_snowheight

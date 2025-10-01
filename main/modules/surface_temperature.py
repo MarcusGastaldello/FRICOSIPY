@@ -67,13 +67,13 @@ def update_surface_temperature(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLO
     upper_bnd_ts = 330
     initial_guess = min(GRID.get_node_temperature(0),270)
     
-    if sfc_temperature_method == 'L-BFGS-B' or sfc_temperature_method == 'SLSQP':
+    if surface_temperature_solver == 'L-BFGS-B' or surface_temperature_solver == 'SLSQP':
         # Get surface temperature by minimizing the energy balance function (SWnet+Li+Lo+H+L=0)
-        res = minimize(eb_optim, initial_guess, method=sfc_temperature_method,
+        res = minimize(eb_optim, initial_guess, method=surface_temperature_solver,
                        bounds=((lower_bnd_ts, upper_bnd_ts),),tol=1e-2,
                        args=(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin, N))
 		       
-    elif sfc_temperature_method == 'Newton':
+    elif surface_temperature_solver == 'Newton':
         try:
             res = newton(eb_optim, np.array([GRID.get_node_temperature(0)]), tol=1e-2, maxiter=50,
                         args=(GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin, N))
@@ -112,7 +112,7 @@ def eb_optim(T0, GRID, dt, z, z0, T2, rH2, p, SWnet, u2, RAIN, SLOPE, B_Ts, LWin
     (Li,Lo,H,L,B,Qrr,rho,Lv,MOL,Cs_t,Cs_q,q0,q2) = eb_fluxes(GRID, T0, dt, z, z0, T2, rH2, p, u2, RAIN, SLOPE, B_Ts, LWin, N)
 
     # Return the residual (is minimized by the optimization function)
-    if sfc_temperature_method == 'Newton':
+    if surface_temperature_solver == 'Newton':
         return (SWnet+Li+Lo+H+L+B+Qrr)
     else:
         return np.abs(SWnet+Li+Lo+H+L+B+Qrr)

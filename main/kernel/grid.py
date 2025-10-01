@@ -479,149 +479,149 @@ class Grid:
     # ================================= #
 
     def get_node_temperature(self, idx):
-        """ Returns the layer temperature of node idx """
+        """ Returns the layer temperature of node idx [K] """
         return self.grid[idx].get_layer_temperature()
     
     def get_temperature(self):
-        """ Returns the layer temperature profile """
+        """ Returns the layer temperature profile [K] (z) """
         return [self.grid[idx].get_layer_temperature() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_specific_heat(self, idx):
-        """ Returns the layer specific heat of node idx """
+        """ Returns the layer specific heat of node idx [J kg-1 K-1] """
         return self.grid[idx].get_layer_specific_heat()
 
     def get_specific_heat(self):
-        """ Returns the layer specific heat profile """
+        """ Returns the layer specific heat profile [J kg-1 K-1] (z) """
         return [self.grid[idx].get_layer_specific_heat() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_height(self, idx):
-        """ Returns the layer height of node idx """
+        """ Returns the layer height of node idx [m] """
         return self.grid[idx].get_layer_height()
 
     def get_height(self):
-        """ Returns the layer height profile"""
+        """ Returns the layer height profile [m] (z) """
         return [self.grid[idx].get_layer_height() for idx in range(self.number_nodes)]
 
     def get_snow_heights(self):
-        """ Returns the snow layer height profile"""
+        """ Returns the snow layer height profile [m] (z) """
         return [self.grid[idx].get_layer_height() for idx in range(self.get_number_snow_layers())]
 
     def get_ice_heights(self):
-        """ Returns the ice / glacier layer height profile """
+        """ Returns the ice / glacier layer height profile [m] (z) """
         return [self.grid[idx].get_layer_height() for idx in range(self.number_nodes) if (self.get_node_density(idx) >= snow_ice_threshold)]
     
     # ---------------------------------------------- #
 
     def get_node_density(self, idx):
-        """ Returns the layer density of node idx """
+        """ Returns the layer density of node idx [kg m-3] """
         return self.grid[idx].get_layer_density()
     
     def get_snow_densities(self):
-        """ Returns the snow layer density profile """
+        """ Returns the snow layer density profile [kg m-3] (z) """
         return [self.grid[idx].get_layer_density() for idx in range(self.get_number_snow_layers())]
 
     def get_density(self):
-        """ Returns the layer density profile """
+        """ Returns the layer density profile [kg m-3] (z) """
         return [self.grid[idx].get_layer_density() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_liquid_water_content(self, idx):
-        """ Returns the layer liquid water content of node idx """
+        """ Returns the layer liquid water content of node idx [-] """
         return self.grid[idx].get_layer_liquid_water_content()
 
     def get_liquid_water_content(self):
-        """ Returns the layer liquid water content profile """
+        """ Returns the layer liquid water content profile [-] (z) """
         return [self.grid[idx].get_layer_liquid_water_content() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_ice_fraction(self, idx):
-        """ Returns the layer ice fraction of node idx """
+        """ Returns the layer ice fraction of node idx [-] """
         return self.grid[idx].get_layer_ice_fraction()
 
     def get_ice_fraction(self):
-        """ Returns the layer ice fraction profile """
+        """ Returns the layer ice fraction profile [-] (z) """
         return [self.grid[idx].get_layer_ice_fraction() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_irreducible_water_content(self, idx):
-        """ Returns the layer irreducible water content of node idx """
+        """ Returns the layer irreducible water content of node idx [-] """
         return self.grid[idx].get_layer_irreducible_water_content()
 
     def get_irreducible_water_content(self):
-        """ Returns the layer irreducible water content profile """
+        """ Returns the layer irreducible water content profile [-] (z) """
         return [self.grid[idx].get_layer_irreducible_water_content() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 
     def get_node_cold_content(self, idx):
-        """ Returns the layer cold content of node idx """
+        """ Returns the layer cold content of node idx [J m-2] """
         return self.grid[idx].get_layer_cold_content()
 
     def get_cold_content(self):
-        """ Returns the layer cold content profile """
+        """ Returns the layer cold content profile [J m-2] (z) """
         return [self.grid[idx].get_layer_cold_content() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
 
     def get_node_porosity(self, idx):
-        """ Returns the layer porosity of node idx """
+        """ Returns the layer porosity of node idx [-] """
         return self.grid[idx].get_layer_porosity()
 
     def get_porosity(self):
-        """ Returns the layer porosity profile """
+        """ Returns the layer porosity profile [-] (z) """
         return [self.grid[idx].get_layer_porosity() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
 
     def get_node_thermal_conductivity(self, idx):
-        """ Returns the layer thermal conductivity of node idx """
+        """ Returns the layer thermal conductivity of node idx [W m-1 K-1] """
         return self.grid[idx].get_layer_thermal_conductivity()
 
     def get_thermal_conductivity(self):
-        """ Returns the layer thermal conductivity profile """
+        """ Returns the layer thermal conductivity profile [W m-1 K-1] (z) """
         return [self.grid[idx].get_layer_thermal_conductivity() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
 
     def get_node_thermal_diffusivity(self, idx):
-        """ Returns the layer thermal diffusivity of node idx """
+        """ Returns the layer thermal diffusivity of node idx [m2 s-1] """
         return self.grid[idx].get_layer_thermal_diffusivity()
 
     def get_thermal_diffusivity(self):
-        """ Returns the layer thermal diffusivity profile """
+        """ Returns the layer thermal diffusivity profile [m2 s-1] (z) """
         return [self.grid[idx].get_layer_thermal_diffusivity() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
     
     def get_node_refreeze(self, idx):
-        """ Returns the layer refreezing of node idx """
+        """ Returns the layer refreezing of node idx [m w.e.] """
         return self.grid[idx].get_layer_refreeze()
 
     def get_refreeze(self):
-        """ Returns the layer refreezing profile """
+        """ Returns the layer refreezing profile [m w.e.] (z) """
         return [self.grid[idx].get_layer_refreeze() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
     
     def get_firn_node_refreeze(self, idx):
-        """ Returns the firn layer refreezing of node idx """
+        """ Returns the firn layer refreezing of node idx [m w.e.] """
         return self.grid[idx].get_firn_layer_refreeze()    
     
     def get_firn_refreeze(self):
-        """ Returns the firn layer refreezing profile """
+        """ Returns the firn layer refreezing profile [m w.e.] (z) """
         return [self.grid[idx].get_firn_layer_refreeze() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
 
     def get_depth(self):
-        """ Returns the layer depth profile """
+        """ Returns the layer depth profile [m] (z) """
         depth = np.full(len(np.asarray(self.get_height())),np.nan)
         depth[0]  = 0.5 * self.get_node_height(0)
         depth[1:] = np.cumsum(np.asarray(self.get_height()))[:-1] + (0.5 * np.asarray(self.get_height()))[1:]        
@@ -630,44 +630,74 @@ class Grid:
     # ---------------------------------------------- #
 
     def get_total_snowheight(self, verbose=False):
-        """ Returns the total height of snow layers in the subsurface grid """
+        """ Returns the total height of snow layers in the subsurface grid [m] """
         snowheights = [self.grid[idx].get_layer_height() for idx in range(self.number_nodes) if self.get_node_density(idx) < snow_ice_threshold]
         return np.sum(np.array(snowheights))
 
     def get_total_height(self, verbose=False):
-        """ Returns the total height of the subsurface grid """
+        """ Returns the total height of the subsurface grid [m] """
         total = [self.get_node_height(idx) for idx in range(self.number_nodes)]
         return np.sum(np.array(total))
 
     # ---------------------------------------------- #
 
     def get_number_snow_layers(self):
-        """ Returns the number of snow layers in the subsurface grid"""
+        """ Returns the number of snow layers in the subsurface grid [n] """
         nlayers = [1 for idx in range(self.number_nodes) if self.get_node_density(idx)<snow_ice_threshold]
         return int(np.sum(np.array(nlayers)))
 
     def get_number_layers(self):
-        """ Returns the number of layers in the subsurface grid"""
+        """ Returns the number of layers in the subsurface grid [n] (z)"""
         return (self.number_nodes)
     
     # ---------------------------------------------- #
 
     def get_node_hydro_year(self, idx):
-        """ Returns the layer hydrological year of node idx """
+        """ Returns the layer hydrological year of node idx [yyyy] """
         return self.grid[idx].get_layer_hydro_year()
     
     def get_hydro_year(self):
-        """ Returns the layer hydrological year profile """
+        """ Returns the layer hydrological year profile [yyyy] (z) """
         return [self.grid[idx].get_layer_hydro_year() for idx in range(self.number_nodes)]
     
     # ---------------------------------------------- #
 
     def get_node_grain_size(self, idx):
-        """ Returns the layer snow grain_size of node idx """
+        """ Returns the layer snow grain_size of node idx [mm] """
         return self.grid[idx].get_layer_grain_size()
     
     def get_grain_size(self):
-        """ Returns the layer snow grain_sizes profile """
+        """ Returns the layer snow grain_sizes profile [mm] (z) """
         return [self.grid[idx].get_layer_grain_size() for idx in range(self.number_nodes)]
+    
+    # ---------------------------------------------- #
+
+    def get_node_saturation(self, idx):
+        """ Returns the layer water saturation of node idx [-] """
+        return self.grid[idx].get_layer_saturation()
+    
+    def get_saturation(self):
+        """ Returns the layer water saturation profile [-] (z) """
+        return [self.grid[idx].get_layer_saturation() for idx in range(self.number_nodes)]
+
+    # ---------------------------------------------- #
+
+    def get_node_hydraulic_conductivity(self, idx):
+        """ Returns the layer hydraulic_conductivity of node idx [m s-1] """
+        return self.grid[idx].get_layer_hydraulic_conductivity()
+    
+    def get_hydraulic_conductivity(self):
+        """ Returns the layer hydraulic_conductivity profile [m s-1] (z) """
+        return [self.grid[idx].get_layer_hydraulic_conductivity() for idx in range(self.number_nodes)]
+
+    # ---------------------------------------------- #
+
+    def get_node_hydraulic_head(self, idx):
+        """ Returns the layer hydraulic_head of node idx [m] """
+        return self.grid[idx].get_layer_hydraulic_head()
+    
+    def get_hydraulic_head(self):
+        """ Returns the layer hydraulic_head profile [m] (z) """
+        return [self.grid[idx].get_layer_hydraulic_head() for idx in range(self.number_nodes)]
 
     # ================================================================================================== #
