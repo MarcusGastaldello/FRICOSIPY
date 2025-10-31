@@ -40,7 +40,7 @@ station_altitude = 2680.0                       # Altitude of meteorological sta
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
 air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [K m-1] (default = -0.006)
 precipitation_lapse_rate = 0.0002               # Precipitation lapse rate [% m-1] (default = 0.0002)
-precipitation_multiplier = 2.0                  # Scaling factor for adjusting precipitation data in meteorlogical forcing [-]
+precipitation_multiplier = 1.0                  # Scaling factor for adjusting precipitation data in meteorlogical forcing [-]
 minimum_snowfall = 0.00001                      # Minimum snowfall per time step in m which is added as new snow [m]
 
 # Physical Processes Parameters:
