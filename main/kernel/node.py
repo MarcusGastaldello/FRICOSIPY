@@ -154,7 +154,7 @@ class Node:
         """ Returns the layer specific heat capacity """
         SHmethods_allowed = ['bulk','Yen81']
         if specific_heat_method == 'bulk':    
-            specific_heat = self.get_layer_ice_fraction() * spec_heat_ice + self.get_layer_porosity() * spec_heat_air + self.get_layer_liquid_water_content() * spec_heat_water
+            specific_heat = self.get_layer_ice_fraction() * specific_heat_ice + self.get_layer_porosity() * specific_heat_air + self.get_layer_liquid_water_content() * specific_heat_water
         elif specific_heat_method == 'Yen81':
             specific_heat = 152.2 + 7.122 * self.get_layer_temperature()
         else:
@@ -191,7 +191,7 @@ class Node:
         """ Returns the layer thermal conductivity """
         methods_allowed = ['bulk','empirical','Sturm97','Calonne19']
         if thermal_conductivity_method == 'bulk':
-            lam = self.get_layer_ice_fraction() * k_i + self.get_layer_porosity() * k_a + self.get_layer_liquid_water_content() * k_w
+            lam = self.get_layer_ice_fraction() * conductivity_ice + self.get_layer_porosity() * conductivity_air + self.get_layer_liquid_water_content() * conductivity_water
         elif thermal_conductivity_method == 'empirical':
             lam = 0.021 + 2.5 * np.power((self.get_layer_density()/1000),2)
         elif thermal_conductivity_method == 'Sturm97':

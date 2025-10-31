@@ -194,6 +194,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         N = METEO.N.values
         LWin = None
 
+    # Input longwave radiation (LWin) and fractional cloud cover (N):
+    elif ('LWin' in list(METEO.keys())) and ('N' in list(METEO.keys())):
+        SWin = None
+        N = METEO.N.values
+        LWin = METEO.LWin.values
+
     # Fractional cloud cover (N) only:
     elif 'N' in list(METEO.keys()):
         N = METEO.N.values
@@ -227,9 +233,9 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
     # Input Shortwave Radiation
     if ('SWin' in list(METEO.keys())):
-        SWin, N = shortwave_radiation_input(PRES, T2, RH2, TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM, NODE_ILLUMINATION, SWin = SWin)
+        SWin = shortwave_radiation_input(PRES, T2, RH2, TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM, NODE_ILLUMINATION, SWin = SWin)
     elif ('N' in list(METEO.keys())):
-        SWin, _ = shortwave_radiation_input(PRES, T2, RH2, TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM, NODE_ILLUMINATION, N = N)
+        SWin = shortwave_radiation_input(PRES, T2, RH2, TOA_INSOL, TOA_INSOL_FLAT, TOA_INSOL_NORM, NODE_ILLUMINATION, N = N)
     
     # ====================== #
     # LOCAL RESULT VARIABLES
@@ -409,29 +415,27 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if LWin is not None:
             # Find new surface temperature (LW is directly supplied from meteorological data)
             fun, surface_temperature, lw_radiation_in, lw_radiation_out, sensible_heat_flux, latent_heat_flux, \
-            ground_heat_flux, rain_heat_flux, rho, Lv, MOL, Cs_t, Cs_q, q0, q2 \
-            = update_surface_temperature(GRID, dt, z, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, LWin = LWin[t])
+            ground_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, LWinput = LWin[t])
 
         else:
-            # Find new surface temperature (LW is parametrized using cloud fraction)
+            # Find new surface temperature (LW is parametrised using fractional cloud cover)
             fun, surface_temperature, lw_radiation_in, lw_radiation_out, sensible_heat_flux, latent_heat_flux, \
-            ground_heat_flux, rain_heat_flux, rho, Lv, MOL, Cs_t, Cs_q, q0, q2 \
-            = update_surface_temperature(GRID, dt, z, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, N = N[t])
+            ground_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, N = N[t])
 
         # ============================ #
         # SURFACE MASS FLUXES [m w.e.]
         # ============================ #
 
         if surface_temperature < zero_temperature:
-            sublimation = min(latent_heat_flux / (water_density * lat_heat_sublimation), 0) * dt
-            deposition = max(latent_heat_flux / (water_density * lat_heat_sublimation), 0) * dt
+            sublimation = min(latent_heat_flux / (water_density * latent_heat_sublimation), 0) * dt
+            deposition = max(latent_heat_flux / (water_density * latent_heat_sublimation), 0) * dt
             evaporation = 0
             condensation = 0
         else:
             sublimation = 0
             deposition = 0
-            evaporation = min(latent_heat_flux / (water_density * lat_heat_vaporize), 0) * dt
-            condensation = max(latent_heat_flux / (water_density * lat_heat_vaporize), 0) * dt
+            evaporation = min(latent_heat_flux / (water_density * latent_heat_vaporisation), 0) * dt
+            condensation = max(latent_heat_flux / (water_density * latent_heat_vaporisation), 0) * dt
 
         # Ensure melt has occured and this is not just a residual from the SEB solver. 
         if surface_temperature ==  zero_temperature:
@@ -443,11 +447,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             melt_energy = 0.0
 
         # Convert melt energy to melt mass [m w.e.]
-        surface_melt = melt_energy * dt / (water_density * lat_heat_melting)
+        surface_melt = melt_energy * dt / (water_density * latent_heat_melting)
         cumulative_melt = cumulative_melt + surface_melt + subsurface_melt
 
         # Net mass change:
-        net_mass_change = - surface_melt - sublimation + deposition
+        net_mass_change = sublimation + deposition - surface_melt
         
         # Add mass [m w.e.]
         if net_mass_change > 0:
@@ -556,7 +560,8 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             AIR_PRESSURE_AGG[idx_agg] = PRES[t]
             RELATIVE_HUMIDITY_AGG[idx_agg] = RH2[t]
             WIND_SPEED_AGG[idx_agg] = U2[t]
-            FRACTIONAL_CLOUD_COVER_AGG[idx_agg] = N[t]
+            if N is not None:
+                FRACTIONAL_CLOUD_COVER_AGG[idx_agg] = N[t]
 
             # Aggregated Energy Fluxes (7):
             SHORTWAVE_AGG[idx_agg] = sw_radiation_net

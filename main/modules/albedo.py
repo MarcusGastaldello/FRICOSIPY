@@ -40,7 +40,7 @@ def method_Oerlemans(GRID):
         after Oerlemans and Knapp (1998)
 
         Parameters:
-                    albedo_snow                         ::    Fresh snow albedo [-]
+                    albedo_fresh_snow                   ::    Fresh snow albedo [-]
                     albedo_firn                         ::    Firn albedo [-]
                     albedo_ice                          ::    Ice albedo [-]
                     albedo_decay_timescale              ::    Albedo decay timescale [days]
@@ -49,6 +49,7 @@ def method_Oerlemans(GRID):
                     GRID                                ::    Subsurface GRID variables
 
         Output:
+                    albedo_snow                         ::    Snow surface albedo [-]
                     albedo                              ::    Surface albedo (adjusted for snow depth) [-]
            
     """
@@ -70,23 +71,20 @@ def method_Oerlemans(GRID):
         hours_since_snowfall = (fresh_snow_timestamp) / 3600.0
 
     # Check if snow or ice
-    if (GRID.get_node_density(0) <= snow_ice_threshold):
+    if (GRID.get_node_density(0) < snow_ice_threshold):
         
         # Get current snowheight from layer height
         h = GRID.get_total_snowheight() 
 
         # Surface albedo according to Oerlemans & Knap 1998, JGR)
-        alphaSnow = albedo_firn + (albedo_fresh_snow - albedo_firn) *  np.exp((-hours_since_snowfall) / (albedo_decay_timescale * 24.0))
+        albedo_snow = albedo_firn + (albedo_fresh_snow - albedo_firn) *  np.exp((-hours_since_snowfall) / (albedo_decay_timescale * 24.0))
 
         # Adjustment of surface albedo for snow depth:
-        albedo = alphaSnow + (albedo_ice - alphaSnow) *  np.exp((-1.0 * h) / (albedo_characteristic_snow_depth / 100.0))
+        albedo = albedo_snow + (albedo_ice - albedo_snow) *  np.exp((-1.0 * h) / (albedo_characteristic_snow_depth / 100.0))
 
     else:
         # If no snow cover than set albedo to ice albedo
         albedo = albedo_ice
-
-    # Snow albedo
-    albedo_snow = None
 
     return albedo, albedo_snow
 

@@ -15,15 +15,15 @@
 # =================== #
 
 # Filepaths:
-data_path = './data/'            # ('./data' current directory | '../data' parent directory)
+data_path = '../data/'            # ('./data' current directory | '../data' parent directory)
 
 # Input Files:
-static_netcdf = 'Static.nc'
-meteo_netcdf = 'Meteo.nc'
-illumination_netcdf = 'Illumination.nc'
+static_netcdf = '<static_file>.nc'
+meteo_netcdf = '<meteo_file>.nc'
+illumination_netcdf = '<illumination_file>.nc'
 
 # Output File:
-output_netcdf = 'Output.nc'
+output_netcdf = '<output_file>.nc'
 
 # ================= #
 # SIMULATION PERIOD 
@@ -50,11 +50,11 @@ output_timestamps = None           # CSV file with desired output timestamps (if
 # ======================= #
 
 # Grid Co-ordinate Reference System (CRS)
-grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 )
+grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 - Metric Swiss CH1903+/LV95)
 
 # Reduce Spatial Extent
-spatial_subset = True             # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
-[x_min, x_max, y_min, y_max] = [2633810, 2633830, 1086580, 1086600] # (if unused - 'None')
+spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
+[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] # (if unused - 'None')
 
 # ================= #
 # OUTPUT VARIABLES:

@@ -25,7 +25,10 @@ def densification(GRID,ACCUMULATION,dt):
     if densification_method == 'Boone02':
         method_Boone(GRID,dt)
     elif densification_method == 'Ligtenberg11':
-        method_Ligtenberg(GRID,ACCUMULATION,dt)
+        if ACCUMULATION is None:
+            raise ValueError("Error: Annual accumulation ('ACCUMULATION') [m w.e.] must be supplied in the input STATIC file in order to use the Ligtenberg et al. 2011 densification method!")
+        else:
+            method_Ligtenberg(GRID,ACCUMULATION,dt)
     elif densification_method == 'disabled':
         pass
     else:
@@ -89,7 +92,7 @@ def method_Boone(GRID,dt):
     dicf = drho / ice_density
 
     # Set updated volumetric ice fraction:
-    GRID.set_ice_fraction(icf + dicf)
+    GRID.set_ice_fraction(np.minimum(1, icf + dicf))
 
     # Set updated layer height due to compaction:
     GRID.set_height(np.maximum(minimum_snow_layer_height, h * (rho / (rho + drho))))
@@ -162,7 +165,7 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     dicf = drho / ice_density
 
     # Set updated volumetric ice fraction:
-    GRID.set_ice_fraction(icf + dicf)
+    GRID.set_ice_fraction(np.minimum(1, icf + dicf))
 
     # Set updated layer height due to compaction:
     GRID.set_height(h * (rho / (rho + drho)))

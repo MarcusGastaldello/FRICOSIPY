@@ -37,7 +37,7 @@ def snow_metamorphism(GRID,dt):
     # ============================= #
 
 @njit
-def method_Katsushima(GRID,dt):
+def method_Katsushima(GRID, dt):
     """ Snow grain growth based on wet snow metamorphism
         after Katsushima et al. (2009)
         (supported by the GEUS SEB firn model - Vandecrux B. - originally developed on FORTRAN by Peter Langen & Robert Fausto)
