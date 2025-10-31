@@ -103,7 +103,7 @@ def method_Bintanja(GRID, SW_net, dt):
             dT = T - zero_temperature
 
             # Compute conversion factor (1/K)
-            Conversion = (spec_heat_ice * ice_density) / (water_density * lat_heat_melting)
+            Conversion = (specific_heat_ice * ice_density) / (water_density * latent_heat_melting)
 
             # Maximum subsurface melting based on available ice:
             d_lwc_max_ice = GRID.get_node_ice_fraction(Idx) * (ice_density / water_density)
@@ -121,8 +121,11 @@ def method_Bintanja(GRID, SW_net, dt):
             layer_subsurface_melt = d_icf * (ice_density / water_density) * GRID.get_node_height(Idx) # [m w.e.]
             subsurface_melt = subsurface_melt + layer_subsurface_melt
 
+            # Change in subsurface layer height:
+            dh = d_icf / GRID.get_node_ice_fraction(Idx)
+
             # Check if entire layer has melted:
-            if GRID.get_node_ice_fraction(Idx) - d_icf == 0:
+            if dh >= 1.0:
 
                 # Re-allocate layer liquid water content into next layer:
                 GRID.set_node_liquid_water_content(Idx + 1, GRID.get_node_liquid_water_content(Idx + 1) + (layer_subsurface_melt / GRID.get_node_height(Idx + 1)))
@@ -131,14 +134,14 @@ def method_Bintanja(GRID, SW_net, dt):
                 layers_to_remove.append(Idx)
 
             else:
-                # Initial node mass:
-                initial_mass =  GRID.get_node_density(Idx) * GRID.get_node_height(Idx)
 
-                # Update sub-surface node properties (temperature, height, volumetric ice fraction & liquid water content):
+                # Liquid water in subsurface layer [m w.e.]
+                liquid_water = (GRID.get_node_liquid_water_content(Idx) + d_lwc) * GRID.get_node_height(Idx)
+
+                # Update sub-surface node properties (temperature, height & liquid water content):
                 GRID.set_node_temperature(Idx, zero_temperature)
-                GRID.set_node_liquid_water_content(Idx, GRID.get_node_liquid_water_content(Idx) + d_lwc)
-                GRID.set_node_ice_fraction(Idx, GRID.get_node_ice_fraction(Idx) - d_icf)
-                GRID.set_node_height(Idx, initial_mass / GRID.get_node_density(Idx)) # Mass conservation
+                GRID.set_node_height(Idx, (1 - dh) * GRID.get_node_height(Idx))  
+                GRID.set_node_liquid_water_content(Idx, liquid_water /  GRID.get_node_height(Idx))
         
         else:
             

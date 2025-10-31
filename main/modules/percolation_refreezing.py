@@ -157,9 +157,6 @@ def refreezing(GRID, year):
     
     """
 
-    # Maximum snow fractional ice content:
-    icf_max = (snow_ice_threshold - air_density) / (ice_density - air_density)
-
     # Import Sub-surface Grid Information:
     lwc = np.asarray(GRID.get_liquid_water_content())
     icf = np.asarray(GRID.get_ice_fraction())     
@@ -168,13 +165,13 @@ def refreezing(GRID, year):
     hydro_year = np.asarray(GRID.get_hydro_year())
 
     # Volumetric/density limit on refreezing:
-    d_lwc_max_density = ((icf_max - icf) * (ice_density/water_density))
+    d_lwc_max_density = ((1 - icf) * (ice_density/water_density))
 
     # Temperature difference between layer and freezing temperature, cold content in temperature
     dT_max = np.abs(T - zero_temperature) # (Positive T)
 
     # Compute conversion factor (1/K)
-    Conversion = ((spec_heat_ice * ice_density) / (water_density * lat_heat_melting))
+    Conversion = ((specific_heat_ice * ice_density) / (water_density * latent_heat_melting))
 
     # Cold content limit on refreezing:
     d_lwc_max_coldcontent = np.where(dT_max < 0 , 0, (icf * Conversion * dT_max) / (1 - (Conversion * dT_max * (water_density / ice_density))))

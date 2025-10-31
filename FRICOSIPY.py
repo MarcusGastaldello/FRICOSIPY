@@ -11,7 +11,7 @@
 
     The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
 
-    Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2) [Computer software]. 
+    Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. 
     https://github.com/MarcusGastaldello/FRICOSIPY
 
     ======================================================================================================================================================

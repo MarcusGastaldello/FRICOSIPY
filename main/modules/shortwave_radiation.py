@@ -51,7 +51,7 @@ def TOA_insolation(latitude,longitude,slope,aspect,hour,leap,hoy):
     # Top-of-Atmosphere (TOA) radiation on a surface normal to incident beam:   
     TOA_insol_norm = (1353.0 * (1.0 + 0.034 * np.cos(time_rad)))
 
-    # Solar Declination: (in radians)   
+    # Solar Declination: (in degrees)   
     Declination = 0.322003 - 22.971 * np.cos(time_rad) - 0.357898 * np.cos(2 * time_rad) - 0.14398 * np.cos(3 * time_rad) + 3.94638 * np.sin(time_rad) + 0.019334 * np.sin(2 * time_rad) + 0.05928 * np.sin(3 *time_rad)
 
     # Solar Hour Angle: (in degrees)
@@ -104,7 +104,6 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
                 N:                ::    Fractional Cloud Cover [0-1]
                 SWin:             ::    Shortwave Radiation Input on AWS Station [W/m^2]
     Output:
-                N:                ::    Fractional Cloud Cover [0-1]
                 SWin              ::    Shortwave Radiation Input [W/m^2]
     """
       
@@ -113,7 +112,7 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
     t_gaseous = 1.021 - 0.084 * np.sqrt(m * (949 *(PRES/10) * 1e-5 + 0.051))
 
     # Transmissivity after Water Vapor Absorption (McDonald, 1960)
-    tempdew_kelvin = T2 * ((1 - ( T2 * np.log(RH/100) / (lat_heat_sublimation / R_watervapour)))**(-1))
+    tempdew_kelvin = T2 * ((1 - ( T2 * np.log(RH/100) / (latent_heat_sublimation / R_watervapour)))**(-1))
     tempdew_fahrenheit = 32.0 + 1.8 * (tempdew_kelvin - 273.15)					
     u = np.exp(0.1133 - np.log(optical_depth + 1) + 0.0393 * tempdew_fahrenheit)
     t_watervapour = 1 - 0.077 *(u * m)**0.3
@@ -125,7 +124,7 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
     if SWin is not None:
 
         # Determine cloud transmissivity at AWS:
-        t_cloud_AWS = SWin / (TOA_insol_flat * t_gaseous * t_watervapour * t_aerosol)
+        t_cloud_AWS = np.where(TOA_insol_flat == 0, 0, SWin / (TOA_insol_flat * t_gaseous * t_watervapour * t_aerosol))
         t_cloud_AWS = np.minimum(t_cloud_AWS,1)
 
         # Quadratic coefficients:
@@ -134,7 +133,7 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
         c = (1 - t_cloud_AWS)
 
         # Solve Quadratic Equation to determine fractional Cloud Cover (N):
-        N = (-b - np.sqrt(b**2 - (4 * a * c))) / 2 * a
+        N = (-b - np.sqrt(b**2 - (4 * a * c))) / (2 * a)
 
         # Ensure fractional cloud cover remains within physical bounds:
         N = np.clip(N,0,1)
@@ -151,6 +150,6 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
     Transmissivity = t_gaseous * t_watervapour * t_aerosol *  t_cloud
     SWin = TOA_combined *  Transmissivity
 
-    return SWin, N
+    return SWin
 
 # ====================================================================================================================

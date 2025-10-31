@@ -199,30 +199,16 @@ class IOClass:
 
         # Model Parameterisations:
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
-        self.RESULT.attrs['Turbulent_fluxes_method'] = turbulent_fluxes_method
-        self.RESULT.attrs['Stability_correction'] = stability_correction
         self.RESULT.attrs['Albedo_method'] = albedo_method
         self.RESULT.attrs['Densification_method'] = densification_method
         self.RESULT.attrs['Penetrating_method'] = penetrating_method
         self.RESULT.attrs['Roughness_method'] = roughness_method
-        self.RESULT.attrs['Saturation_water_vapour_method'] = saturation_water_vapour_method
+        self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
         self.RESULT.attrs['Water_percolation_method'] = preferential_percolation_method
-        self.RESULT.attrs['Sfc_temperature_method'] = sfc_temperature_method
+        self.RESULT.attrs['Surface_temperature_method'] = surface_temperature_method
         self.RESULT.attrs['Snow_metamorphism_method'] = snow_metamorphism_method
-
-        # Initial Conditions:
-        self.RESULT.attrs['Initial_snowheight'] = initial_snowheight
-        self.RESULT.attrs['Initial_snow_layer_heights'] = initial_snow_layer_heights
-        self.RESULT.attrs['Initial_grain_size'] = initial_snow_grain_size
-        self.RESULT.attrs['Initial_grain_size'] = initial_ice_grain_size
-        self.RESULT.attrs['Initial_glacier_height'] = initial_glacier_height
-        self.RESULT.attrs['Initial_glacier_layer_heights'] = initial_glacier_layer_heights
-        self.RESULT.attrs['Initial_upper_snowpack_density'] = initial_upper_snowpack_density
-        self.RESULT.attrs['Initial_lower_snowpack_density'] = initial_lower_snowpack_density
-        self.RESULT.attrs['Initial_lower_temperature'] = initial_lower_temperature
-        self.RESULT.attrs['Initial_upper_temperature'] = initial_upper_temperature
 
         # Subsurface Remeshing Options:    
         self.RESULT.attrs['Max_layers'] = max_layers
@@ -248,6 +234,7 @@ class IOClass:
         self.RESULT.attrs['Subsurface_interpolation_depth_1'] = subsurface_interpolation_depth_1
         self.RESULT.attrs['Basal_heat_flux'] = basal_heat_flux
         self.RESULT.attrs['Minimum_snowfall'] = minimum_snowfall
+        self.RESULT.attrs['Pore_close-off_density'] = pore_close_off_density
         self.RESULT.attrs['Snow_ice_threshold'] = snow_ice_threshold
         self.RESULT.attrs['Surface_emission_coeff'] = surface_emission_coeff
 
@@ -263,7 +250,7 @@ class IOClass:
             self.RESULT.attrs['Albedo_decay_timescale_adjustment'] = albedo_decay_timescale_dry_adjustment
             self.RESULT.attrs['Albedo_decay_timescale_threshold'] = albedo_decay_timescale_threshold
         elif albedo_method == 'Oerlemans98':
-            self.RESULT.attrs['Albedo_mod_snow_aging'] = albedo_characteristic_snow_depth
+            self.RESULT.attrs['Albedo_mod_snow_aging'] = albedo_decay_timescale
         if roughness_method == 'Moelg12':
             self.RESULT.attrs['Surface_roughness_fresh_snow'] = surface_roughness_fresh_snow
             self.RESULT.attrs['Surface_roughness_ice'] = surface_roughness_ice
@@ -277,18 +264,30 @@ class IOClass:
             self.RESULT.attrs['Temperature_interpolation_depth_1'] = temperature_interpolation_depth_1
             self.RESULT.attrs['Temperature_interpolation_depth_2'] = temperature_interpolation_depth_2
 
+        # Initial Conditions:
+        self.RESULT.attrs['Initial_snowheight'] = initial_snowheight
+        self.RESULT.attrs['Initial_snow_layer_heights'] = initial_snow_layer_heights
+        self.RESULT.attrs['Initial_grain_size'] = initial_snow_grain_size
+        self.RESULT.attrs['Initial_grain_size'] = initial_ice_grain_size
+        self.RESULT.attrs['Initial_glacier_height'] = initial_glacier_height
+        self.RESULT.attrs['Initial_glacier_layer_heights'] = initial_glacier_layer_heights
+        self.RESULT.attrs['Initial_upper_snowpack_density'] = initial_upper_snowpack_density
+        self.RESULT.attrs['Initial_lower_snowpack_density'] = initial_lower_snowpack_density
+        self.RESULT.attrs['Initial_lower_temperature'] = initial_lower_temperature
+        self.RESULT.attrs['Initial_upper_temperature'] = initial_upper_temperature
+
         # Global attributes from constants.py
 
         # Physical Constants:
-        self.RESULT.attrs['Latent_heat_melting'] = lat_heat_melting
-        self.RESULT.attrs['Latent_heat_vaporize'] = lat_heat_vaporize
-        self.RESULT.attrs['Latent_heat_sublimation'] = lat_heat_sublimation
-        self.RESULT.attrs['Specific_heat_capacity_air'] = spec_heat_air
-        self.RESULT.attrs['Specific_heat_capacity_water'] = spec_heat_water
-        self.RESULT.attrs['Specific_heat_capacity_ice'] = spec_heat_ice
-        self.RESULT.attrs['Thermal_conductivity_air'] = k_a
-        self.RESULT.attrs['Thermal_conductivity_water'] = k_w
-        self.RESULT.attrs['Thermal_conductivity_ice'] = k_i
+        self.RESULT.attrs['Latent_heat_of_melting'] = latent_heat_melting
+        self.RESULT.attrs['Latent_heat_of_vaporisation'] = latent_heat_vaporisation
+        self.RESULT.attrs['Latent_heat_of_sublimation'] = latent_heat_sublimation
+        self.RESULT.attrs['Specific_heat_capacity_air'] = specific_heat_air
+        self.RESULT.attrs['Specific_heat_capacity_water'] = specific_heat_water
+        self.RESULT.attrs['Specific_heat_capacity_ice'] = specific_heat_ice
+        self.RESULT.attrs['Thermal_conductivity_air'] = conductivity_air
+        self.RESULT.attrs['Thermal_conductivity_water'] = conductivity_water
+        self.RESULT.attrs['Thermal_conductivity_ice'] = conductivity_ice
         self.RESULT.attrs['Density_air'] = air_density
         self.RESULT.attrs['Density_water'] = water_density
         self.RESULT.attrs['Density_ice'] = ice_density
