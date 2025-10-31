@@ -30,7 +30,7 @@ output_netcdf = '<output_file>.nc'
 # ================= #
 
 # Date Range:
-time_start   = '2018-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
+time_start   = '2000-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
 time_end     = '2024-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
 # ========================== #
@@ -53,7 +53,7 @@ output_timestamps = None           # CSV file with desired output timestamps (if
 grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 - Metric Swiss CH1903+/LV95)
 
 # Reduce Spatial Extent
-spatial_subset = True             # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
+spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
 [x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] # (if unused - 'None')
 
 # ================= #
@@ -68,7 +68,7 @@ subsurface_mass_fluxes =   ['REFREEZE','SUBSURFACE_MELT','RUNOFF','MASS_BALANCE'
 other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT','SURFACE_TEMPERATURE','SURFACE_ALBEDO','N_LAYERS','FIRN_TEMPERATURE','FIRN_TEMPERATURE_CHANGE','FIRN_FACIE']
 
 # 4-D Output Variables:
-full_field = True                                              
+full_field = False                                              
 subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR','GRAIN_SIZE']
 
 # ========================== #
