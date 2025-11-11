@@ -38,6 +38,13 @@ Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Couple
 
 ----
 
+Documentation
+=======
+
+https://fricosipy.readthedocs.io/en/latest/
+
+----
+
 Installation
 =======
 
@@ -203,6 +210,7 @@ Simulation results can be visualised most easily using the '*Xarray*' package wi
 This template contains useful tips for reducing dimensions, producing plots and exporting data to other formats.
 
 ----
+
 
 
 
