@@ -1,14 +1,10 @@
 
-# Welcome to Lumache's documentation!
+# Introduction
 
-**Lumache** (/lu\'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients. It pulls data from the
-[Open Food Facts database](https://world.openfoodfacts.org/) and offers
-a *simple* and *intuitive* API.
+**FRICOSIPY** (University of Fribourg variant of the Coupled Snow & Ice Model in Python) 
 
-Check out the [usage](usage) section for further information, including how to [install](usage#installation) the project.
 
 !!! note
 
-    This project is under active development.
+    This documentation is currently under active development.
 
