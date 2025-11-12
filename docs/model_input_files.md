@@ -18,7 +18,7 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
 ```
 
 !!! note
-A utility program to directly convert a Digital Elevation Model to a static file is currently in development.
+     A utility program to directly convert a Digital Elevation Model to a static file is currently in development.
 
 ---
 
