@@ -18,5 +18,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Model Overview: model_overview.md
-  - Installation: installation.md
+  - "The FRICOSIPY Model":
+    - Model Overview: model_overview.md
+  - "Getting Started":
+    - Installation: installation.md
