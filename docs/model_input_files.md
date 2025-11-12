@@ -6,7 +6,7 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 
 ## Static
 
-The model static input file contains topographic information that varies across the spatial domain ( 𝑥 , 𝑦 ) and requires the following variables:
+The model static input file contains topographic information that varies across the spatial domain  ( 𝑥 , 𝑦 ) and requires the following variables:
 
 ---
 
