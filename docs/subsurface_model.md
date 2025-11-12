@@ -5,7 +5,3 @@
 ## Thermal Diffusion
 
 ## Dry Firn Densification
-
-### Densification Parameterisations
-
-#### A
