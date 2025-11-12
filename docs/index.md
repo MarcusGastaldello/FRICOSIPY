@@ -18,6 +18,7 @@ The latest version of FRICOSIPY is available at: [https://github.com/MarcusGasta
 | **License**                 | [![License](https://img.shields.io/badge/License-GPLv3-red.svg)](http://www.gnu.org/licenses/gpl-3.0.en.html) |
 | **Support / Contact**       | [![Contact](https://img.shields.io/badge/Contact-Marcus%20Gastaldello-blue.svg)](https://www.unifr.ch/directory/en/people/329166/38c19) [![ORCID](https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg)](https://orcid.org/0009-0003-2384-3617) |
 
+---
 
 !!! note
 
