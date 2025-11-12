@@ -20,6 +20,10 @@ The model static input file contains topographic information that varies across 
 
 An exemplar static CSV would therefore have the following format:
 
+| NORTHING | EASTING | LATITUDE | LONGITUDE | ELEVATION | ASPECT | SLOPE | MASK |
+|-----------|----------|-----------|------------|------------|---------|--------|------|
+| 1086500 | 2633800 | 45.92925 | 7.874360 | 4457.10 | 240.24 | 2.35 | 1 |
+| 1086600 | 2633800 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
 
 !!! note
     FRICOSIPY requires a standard rectilinear grid.
