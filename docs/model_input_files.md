@@ -25,7 +25,7 @@ An exemplar static CSV would therefore have the following format:
 | 1086500 | 2633800 | 45.92925 | 7.874360 | 4457.10 | 240.24 | 2.35 | 1 |
 | 1086600 | 2633800 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
 
-!!! note
+!!! attention
     FRICOSIPY requires a standard rectilinear grid.
 
 The '*create_STATIC.py*' utility program can then convert it into NetCDF format, if required.
@@ -41,7 +41,7 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
 
 ---
 
-## Meteo File
+## Meteorological File
 
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
