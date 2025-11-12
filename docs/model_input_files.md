@@ -9,6 +9,20 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 The model static input file contains topographic information that varies across the spatial domain  
 ( 𝑥 , 𝑦 ) and requires the following variables:
 
+* **NORTHING** - Northing [m]
+* **EASTING** - Easting [m]
+* **LATITUDE** - Latitude (WGS84) [decimal]
+* **LONGITUDE** - Longitude (WGS84) [decimal]
+* **ELEVATION** - Elevation [m a.s.l.]
+* **ASPECT** - Terrain aspect [°]
+* **SLOPE** - Terrain slope [°]
+* **MASK** - Glacier mask boolean [0 or 1]
+
+An exemplar static CSV would therefore have the following format:
+
+
+!!! note
+    FRICOSIPY requires a standard rectilinear grid.
 
 The '*create_STATIC.py*' utility program can then convert it into NetCDF format, if required.
 
