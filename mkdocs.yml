@@ -19,6 +19,12 @@ markdown_extensions:
 nav:
   - Home: index.md
   - "The FRICOSIPY Model":
-    - Model Overview: model_overview.md
+    - Introduction: introduction.md
+    - Surface Energy Balance: surface_energy_balance.md
+    - Subsurface Model: subsurface_model.md
   - "Getting Started":
     - Installation: installation.md
+    - Model Input Files: model_input_files.md
+    - Parameter Selection: parameter_selection.md
+    - Running a Simulation: running_a_simulation.md
+    - Result Viewer: result_viewer.md
