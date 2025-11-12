@@ -8,6 +8,8 @@ FRICOSIPY has been developed as an adapation of the original [COSIPY v1.4](https
 
 The latest version of FRICOSIPY is available at: [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
 
+---
+
 ![Alt text](images/FRICOSIPY_Figure_&_Logo.png)
 
 
