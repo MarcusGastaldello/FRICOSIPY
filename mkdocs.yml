@@ -21,6 +21,7 @@ nav:
   - "The FRICOSIPY Model":
     - Introduction: introduction.md
     - Surface Energy Balance: surface_energy_balance.md
+    - Precipitation Model: precipitation.md
     - Subsurface Model: subsurface_model.md
   - "Getting Started":
     - Installation: installation.md
