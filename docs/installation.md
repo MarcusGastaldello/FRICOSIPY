@@ -12,11 +12,15 @@ cd C:\Users\<username>\Downloads\FRICOSIPY
 
     It is reccomended to move the model to a more suitable directory.
 
-**3.**    Create the conda environment. If you do not have *Miniconda* already installed, you must install it first (https://www.anaconda.com/download).
+**3.**    Create the conda environment using the designated packages in the requirements text file.
 
 ```python
 conda create --name <env> --file requirements.txt
 ```
+
+!!! note
+
+     If you do not have *Miniconda* already installed, you must install it first [(https://www.anaconda.com/download)](https://www.anaconda.com/download).
 
 Henceforth, when running the FRICOSIPY model you must always ensure this new conda environment is active: 
 
