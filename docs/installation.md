@@ -8,7 +8,7 @@
 cd C:\Users\<username>\Downloads\FRICOSIPY
 ```
 
-!!!
+!!! note
 
     It is reccomended to move the model to a more suitable directory.
 
