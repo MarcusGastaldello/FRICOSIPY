@@ -18,5 +18,5 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - Model_Overview: model_overview.md
+  - Model Overview: model_overview.md
   - Installation: installation.md
