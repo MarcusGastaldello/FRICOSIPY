@@ -4,7 +4,7 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 
 ---
 
-## Static
+## Static File
 
 The model static input file contains topographic information that varies across the spatial domain  
 ( 𝑥 , 𝑦 ) and requires the following variables:
@@ -41,7 +41,7 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
 
 ---
 
-## Meteo
+## Meteo File
 
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
@@ -74,6 +74,6 @@ python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data
 
 ---
 
-## Illumination
+## Illumination File
 
 ---
