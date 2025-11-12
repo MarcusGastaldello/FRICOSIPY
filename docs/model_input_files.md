@@ -1,6 +1,6 @@
 # Model Input Files
 
-The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset ( 𝑥 , 𝑦 , 𝑡 ) of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution.
+The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset ( 𝑥 , 𝑦 , 𝑡 ) of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution. In *FRICOSIPY*, the meteorological data is instead interpolated across the spatial grid according to topographic variation during the main simulation.
 
 ---
 
@@ -26,7 +26,7 @@ An exemplar static CSV would therefore have the following format:
 | 1086600 | 2633800 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
 
 !!! attention
-    FRICOSIPY requires a standard rectilinear grid.
+    FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
 
 The '*create_STATIC.py*' utility program can then convert it into NetCDF format, if required.
 
@@ -86,7 +86,7 @@ python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i
 ```
 
 !!! attention
-    A
+    In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
 
 !!! note
     The illumination file is currently limited to a minimum of an hourly temporal resolution.
