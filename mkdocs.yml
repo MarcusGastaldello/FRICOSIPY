@@ -1,7 +1,7 @@
 site_name: FRICOSIPY
 theme:
   name: readthedocs
-  custom_dir: overrides
+  custom_dir: docs/overrides
   highlightjs: true
   logo: images/FRICOSIPY_logo.png
 plugins:
