@@ -25,6 +25,6 @@ nav:
   - "Getting Started":
     - Installation: installation.md
     - Model Input Files: model_input_files.md
-    - Parameter Selection: parameter_selection.md
+    - Parameters: parameters.md
     - Running a Simulation: running_a_simulation.md
     - Result Viewer: result_viewer.md
