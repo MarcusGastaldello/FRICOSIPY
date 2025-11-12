@@ -76,4 +76,19 @@ python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data
 
 ## Illumination File
 
+The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
+
+The '*create_ILLUMINATION.py*' utility program can create this file from an existing static file.
+
+```python
+cd utilities/create_ILLUMINATION/
+python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i ../../data/illumination/<illumination_netcdf>.nc
+```
+
+!!! attention
+    A
+
+!!! note
+    The illumination file is currently limited to a minimum of an hourly temporal resolution.
+
 ---
