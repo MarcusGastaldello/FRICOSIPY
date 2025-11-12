@@ -1,7 +1,5 @@
 # Subsurface Model
 
-## Precipitation
-
 ## Percolation & Refreezing
 
 ## Thermal Diffusion
