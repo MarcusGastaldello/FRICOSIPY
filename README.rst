@@ -1,8 +1,9 @@
 .. image:: https://github.com/MarcusGastaldello/FRICOSIPY/blob/main/docs/images/FRICOSIPY_Figure_%26_Logo.png
 
-University of FRIbourg variant of the COupled Snow and Ice Model in Python (FRICOSIPY) that specialises in detailed modelling of subsurface firn processes. Developed from COSIPY v1.4 (https://github.com/cryotools/cosipy).
+The University of Fribourg variant of the Coupled Snow & Ice Model in Python (FRICOSIPY) is a 1-dimensonal, coupled surface energy balance and
+multi-layer subsurface firn model that evaluates the mass balance of a glacier.
 
-A comprehensive user guide for the FRICOSIPY model is available at: https://fricosipy.readthedocs.io/en/latest/.
+FRICOSIPY has been developed as an adapation of the original `COSIPY v1.4 <https://github.com/cryotools/cosipy>`__ model of `Sauter et al. (2020) <https://doi.org/10.5194/gmd-13-5645-2020>`__ and is designed to enhance the modelling of subsurface firn processes and enable greater accessibility for users with limited computational resources - principally by restructuring the core design to greatly improve memory/RAM optimisation.
 
 :Colle Gnifetti Paper:
     .. image:: https://img.shields.io/badge/Citation-TC%20paper-blue.svg
@@ -43,6 +44,7 @@ Citation
 Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
 
 ----
+
 
 
 
