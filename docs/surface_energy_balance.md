@@ -8,6 +8,10 @@
 
 #### (b) Bougamont et al., 2005
 
+### Penetrating Radiation Parameterisations 
+
+#### (a) Bintanja & van den Broeke 1995
+
 ## Longwave Radiation
 
 ## Turbulent Fluxes
