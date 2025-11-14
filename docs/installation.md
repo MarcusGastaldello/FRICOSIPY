@@ -37,4 +37,4 @@ Henceforth, when running the *FRICOSIPY* model you must always ensure this new c
 ```python
 conda activate <env>
 ```
----
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
