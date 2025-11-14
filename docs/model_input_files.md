@@ -2,7 +2,7 @@
 
 The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset ( 𝑥 , 𝑦 , 𝑡 ) of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution. In *FRICOSIPY*, the meteorological data is instead interpolated across the spatial grid according to topographic variation during the main simulation.
 
----
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Static File
 
@@ -39,7 +39,7 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
      A utility program designed to directly convert a Digital Elevation Model (DEM) to a static file (without the need for GIS software)
      is currently in development.
 
----
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Meteorological File
 
@@ -72,7 +72,7 @@ cd utilities/create_METEO/
 python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data/meteo/<meteo_netcdf>.nc
 ```
 
----
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Illumination File
 
@@ -91,4 +91,4 @@ python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i
 !!! note
     The illumination file is currently limited to a minimum of an hourly temporal resolution.
 
----
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
