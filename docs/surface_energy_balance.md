@@ -12,6 +12,8 @@
 
 #### (a) Bintanja & van den Broeke 1995
 
+<hr style="height:4px; background-color:#333; border:none;" />
+
 ## Longwave Radiation
 
 ## Turbulent Fluxes
