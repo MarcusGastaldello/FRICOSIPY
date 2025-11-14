@@ -12,7 +12,7 @@
 
 #### (a) Bintanja & van den Broeke 1995
 
-<hr style="height:4px; background-color:#333; border:none;" />
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Longwave Radiation
 
