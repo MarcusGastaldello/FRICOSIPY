@@ -82,7 +82,9 @@ If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
 \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
-\varepsilon_{atm} =
+$$
+$$    
+    \varepsilon_{atm} =
 $$
 </div>
 
