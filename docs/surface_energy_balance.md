@@ -60,7 +60,7 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation is calculated in accordance with the Stefan–Boltzmann law for grey body emission:
 
-$$ LW_{net} = $$
+$$ LW_{net} = $$ LW_{in} - \varepsilon_{s} \sigma T_{s}^{4}
 
 ### Longwave Radiation Parameterisations 
 
