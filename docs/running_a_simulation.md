@@ -7,7 +7,7 @@
 #### 3-D Output Variables ( 𝑥 , 𝑦 )
 
 
-#### 4-D Output Variables ( 𝑥 , 𝑦 )
+#### 4-D Output Variables ( $x$ , 𝑦 )
 
 * **NORTHING** - Northing [m]
 * **EASTING** - Easting [m]
