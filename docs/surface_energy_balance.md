@@ -11,7 +11,15 @@ $$
 
 <small>where $SW_{net}$  is the net shortwave radiation flux, $Q_{sensible}$  and $Q_{latent}$  are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$  is the net longwave radiation flux, $Q_{rain}$  is the rain heat flux and $Q_{subsurface}$  is the subsurface heat conduction flux.</small>
 
-However, since the surface temperature of a glacier is physically constrained to 0 $^\circ$C
+However, since the surface temperature of a glacier is physically constrained to 0 $^\circ$C, excess energy must be apportioned to melt ($Q_{melt}$) should this situation arise.
+
+<small>if $T_s$ = 0 $^\circ$C</small>
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
+$$
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
