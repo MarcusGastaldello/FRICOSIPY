@@ -90,7 +90,7 @@ $$
 \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
 $$
 </div>
-<small>where $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{atm}, $\varepsilon_{cs} and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $N$ is the relative humidity, $VP_{sat}$ is the saturated vapour pressure, $T_a$ is the air temperature and $c_{emission} = 0.4$ is a calibration parameter.</small>
+<small>where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity, $VP_{sat}$ is the saturated vapour pressure, $T_a$ is the air temperature and $c_{emission} = 0.4$ is a calibration parameter.</small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
