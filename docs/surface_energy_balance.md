@@ -92,7 +92,7 @@ If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the 
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
 
-When the surface temperature is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface - the uppermost subsurface layer of the model. The surface melt, expressed in terms of meter water equivalent (m w.e.) can then be calculated as: 
+When the surface temperature is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface - the uppermost subsurface layer of the model. This surface melt, expressed in terms of meter water equivalent (m w.e.) can then be calculated as: 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
