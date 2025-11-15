@@ -1,5 +1,8 @@
 # Surface Energy Balance
 
+
+$$ SW_{net} = Q_{melt} $$
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Shortwave Radiation
