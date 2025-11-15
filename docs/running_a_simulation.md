@@ -11,8 +11,8 @@
 
 $x$
 
-* **NORTHING** - Northing [m]
-* **EASTING** - Easting [m]
-* **LATITUDE** - Latitude (WGS84) [decimal]
+* **DEPTH** - Northing [m]
+* **HEIGHT** - Easting [m]
+* **DENSITY** - Latitude (WGS84) [decimal]
  
 ### Dask Parallelisation
