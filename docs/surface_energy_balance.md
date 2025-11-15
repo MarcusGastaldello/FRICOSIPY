@@ -1,6 +1,6 @@
 # Surface Energy Balance
 
-Driven by the meteorological data, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$). In order to satisfy energy conservation:
+Driven by the input meteorological data, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$). Based on the principles of energy conservation:
 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
