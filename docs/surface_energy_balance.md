@@ -152,7 +152,7 @@ $$
 Surface\:\:melt = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{f}}
 $$
 </div>
-<small>where $Q_{melt}$  is the melt energy flux, $dt$ is the model time step, $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{m} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
+<small>where $Q_{melt}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{m} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
 
 This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
 
