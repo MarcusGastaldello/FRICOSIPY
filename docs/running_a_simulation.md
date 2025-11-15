@@ -9,6 +9,8 @@
 
 #### 4-D Output Variables ( $x$ , 𝑦 )
 
+$x$
+
 * **NORTHING** - Northing [m]
 * **EASTING** - Easting [m]
 * **LATITUDE** - Latitude (WGS84) [decimal]
