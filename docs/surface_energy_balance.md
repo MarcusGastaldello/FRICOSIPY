@@ -79,6 +79,11 @@ $$
 
 If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiations of [Konzelmann et al., 1994](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+\varepsilon_{cs} = 0.23 + c_{emission}
+$$
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
