@@ -1,7 +1,9 @@
 # Surface Energy Balance
 
-
-$$ SW_{net} = Q_{melt} $$
+!!! math "Equation"
+    $$
+    \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
+    $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
