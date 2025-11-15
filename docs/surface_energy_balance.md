@@ -38,7 +38,7 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-SW_{in} = TOA \: \Delta \: ( $x$ , $y$ )
+SW_{in} = TOA \: \Lambda \: (x,y)
 $$
 </div>
 <small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature.</small>
