@@ -62,9 +62,12 @@ Longwave radiation (otherwise known as terrestrial radiation) is the thermal rad
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-LW_{net} = LW_{in} - \varepsilon_{s} \sigma T_{s}^{4}
+LW_{net} = LW_{in} - \varepsilon_{s} : \sigma : T_{s}^{4}
 $$
 </div>
+<small>where $SW_{net}$  is the net shortwave radiation flux, $Q_{sensible}$  and $Q_{latent}$  are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$  is the net longwave radiation flux, $Q_{rain}$  is the rain heat flux and $Q_{subsurface}$  is the subsurface heat conduction flux.</small>
+
+---
 
 ### Longwave Radiation Parameterisations 
 
