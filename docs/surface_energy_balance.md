@@ -23,12 +23,13 @@ The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; 
 However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt ($Q_{melt}$) should the surface temperature reach 0 $^\circ$C:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative;">
-  <div style="position:absolute; top:2px; left:6px; font-size:12px; color:#555;">
-    if $T_s = 0^\circ\!C$
+  <div style="position:absolute; top:2px; left:6px; font-size:12px; color:#444;">
+    \( \text{if } T_s = 0^\circ\mathrm{C} \)
   </div>
 
   $$
-  SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = Q_{melt}
+  SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net}
+  + Q_{rain} \pm Q_{subsurface} = Q_{melt}
   $$
 </div>
 
