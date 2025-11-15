@@ -15,7 +15,8 @@ markdown_extensions:
   - markdown_include.include:
       base_path: .
   - admonition
-  - pymdownx.arithmatex 
+  - pymdownx.arithmatex
+      generic: true
 
 nav:
   - Home: index.md
