@@ -10,7 +10,7 @@ The latest version of FRICOSIPY is available at: [https://github.com/MarcusGasta
 
 ---
 
-![Alt text](images/Figure_&_Logo.png)
+![Alt text](images/FRICOSIPY_Figure_&_Logo.png)
 
 | Colle Gnifetti Paper    | [![TC paper](https://img.shields.io/badge/Citation-TC%20paper-blue.svg)](https://doi.org/10.5194/tc-19-2983-2025) [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.3902191.svg)](http://doi.org/10.5281/zenodo.13361824) |
 |:---|:---|
