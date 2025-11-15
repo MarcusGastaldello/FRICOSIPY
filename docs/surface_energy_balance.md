@@ -82,14 +82,14 @@ $$
 
 #### (a) Bintanja & van den Broeke 1995
 
-If the user enables the penetrating radiation module, the absorbed radiation at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
 SW_{pen} (z) = SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
 $$
 </div>
-<small>where.</small>
+<small>where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation (0.8 for ice, 0.9 for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
