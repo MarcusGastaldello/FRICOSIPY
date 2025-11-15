@@ -38,10 +38,10 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-SW_{in} = TOA \: \Lambda \: (x,y) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds}  
+SW_{in} = TOA_{insol} \: \Lambda \: (x,y) \: \tau  
 $$
 </div>
-<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature.</small>
+<small>where $SW_{in}$ is the incoming shortwave radiation flux, $TOA_{insol}$ is the unattenuated Top-of-Atmosphere (TOA) insolation (direct & diffuse components), $\Lambda$ is a correction factor for surface inclination (x,y) and topographic shading by any surrounding topography and $\tau$ is the coefficient of atmospheric transmissivity.</small>
 
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ):
