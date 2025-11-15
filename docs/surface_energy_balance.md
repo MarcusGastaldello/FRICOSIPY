@@ -20,7 +20,7 @@ $$
 SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = Q_{melt}
 $$
 </div>
-
+<br> 
 
 The following section explains each of these energy fluxes in greater detail.
 
