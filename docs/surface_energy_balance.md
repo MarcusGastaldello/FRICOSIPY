@@ -100,6 +100,7 @@ If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the 
 
 **Figure 3** shows an exemplar surface energy balance for the *Plaine Morte* glacier, *Valais*, *Switzerland*. As would be anticipated for a mid-latitude alpine glacier, radiative fluxes dominate the annual energy turnover and melt is mostly confined the summer months.
 
+![Alt text](images/Exemplar_SEB.png)
 
 !!! note
 
