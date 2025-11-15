@@ -21,6 +21,7 @@ SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurfa
 $$
 </div>
 
+
 The following section explains each of these energy fluxes in greater detail.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
