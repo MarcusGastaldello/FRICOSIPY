@@ -96,15 +96,15 @@ If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the 
 
 ## Exemplar Surface Energy Balance
 
-
-
-**Figure 3** shows an exemplar surface energy balance for the *Plaine Morte* glacier, *Valais*, *Switzerland*. As would be anticipated for a mid-latitude alpine glacier, radiative fluxes dominate the annual energy turnover and melt is mostly confined the summer months.
+Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. **Figure 3** shows an exemplar surface energy balance for the *Plaine Morte* glacier, *Valais*, *Switzerland*. As would be anticipated for a mid-latitude alpine glacier, radiative fluxes dominate the annual energy turnover and melt is mostly confined the summer months.
 
 ![Alt text](images/Exemplar_SEB.png)
 
+<small> **Figure 3**: Exemplar Surface Energy Balance (SEB) for the *Plaine Morte* glacier, *Valais*, *Switzerland* </small>
+
 !!! note
 
-    The FRICOSIPY *result viewer* 
+    The [*FRICOSIPY *result viewer*](result_viewer.md)
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
