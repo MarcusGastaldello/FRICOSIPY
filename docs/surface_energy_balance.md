@@ -1,5 +1,6 @@
 # Surface Energy Balance
 
+Driven by the meteorological forcing, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$).
 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
