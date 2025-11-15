@@ -45,17 +45,25 @@ The following section explains each of these energy fluxes in greater detail.
 
 ## Turbulent Fluxes
 
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
-## Longwave Radiation
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-## Rain Heat Flux
+### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Subsurface / Ground Heat Flux
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
