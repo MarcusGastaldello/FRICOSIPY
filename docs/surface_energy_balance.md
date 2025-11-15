@@ -96,7 +96,7 @@ If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the 
 
 ## Exemplar Surface Energy Balance
 
-Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. **Figure 3** shows an exemplar surface energy balance for the *Plaine Morte* glacier, *Valais*, *Switzerland*. As would be anticipated for a mid-latitude alpine glacier, radiative fluxes dominate the annual energy turnover and melt is mostly confined the summer months.
+Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. **Figure 3** shows an exemplar surface energy balance for the *Plaine Morte* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. As would be anticipated for a mid-latitude alpine glacier, radiative fluxes dominate the annual energy turnover and melt is mostly confined the summer months.
 
 ![Alt text](images/Exemplar_SEB.png)
 
@@ -104,7 +104,7 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 !!! note
 
-    The [*FRICOSIPY *result viewer*](result_viewer.md)
+    The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface energy balance graph (akin to the figure above) for any output dataset.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
