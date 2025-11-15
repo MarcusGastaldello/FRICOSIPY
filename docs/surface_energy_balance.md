@@ -65,11 +65,7 @@ $$
 LW_{net} = LW_{in} - \varepsilon_{s} \: \sigma \: T_{s}^{4}
 $$
 </div>
-<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s}$ $\approx$ 0.99 is the surface emissivity, $\sigma$ = 5.67 $\times 10^{-11}$ is the *Stefan*-*Boltzmann* constant 
-  
-  
-  
-  .</small>
+<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s}$ $\approx$ 0.99 is the surface emissivity, $\sigma$ = 5.67 $\times 10^{-11}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature.</small>
 
 ---
 
