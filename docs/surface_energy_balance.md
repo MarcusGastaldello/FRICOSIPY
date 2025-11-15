@@ -46,7 +46,7 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### Penetrating Radiation Parameterisations 
+### Penetrating Radiation Parameterisation 
 
 #### (a) Bintanja & van den Broeke 1995
 
@@ -73,11 +73,11 @@ $$
 
 ---
 
-### Longwave Radiation Parameterisations 
+### Longwave Radiation Parameterisation 
 
 #### (a) Konzelmann et al. 1994
 
-If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiations of [Konzelmann et al., 1994](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al., 1994](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
