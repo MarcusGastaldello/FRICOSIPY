@@ -64,7 +64,7 @@ $$
 SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
 $$
 </div>
-<small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating radiation deduction.</small>
+<small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating shortwave radiation deduction.</small>
 
 ---
 
