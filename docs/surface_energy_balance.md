@@ -10,7 +10,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Shortwave Radiation <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
 ### Albedo Parameterisations 
 
