@@ -9,6 +9,8 @@ SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurfa
 $$
 </div>
 
+<small>where $SWnet$ is the net shortwave flux, $LWnet$ is the net longwave flux, $Qsensible$ and $Qlatent$ are the turbulent fluxes for sensible and latent exchange respectively, and $Qsubsurface$ is the subsurface heat conduction flux.</small>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
