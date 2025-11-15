@@ -12,6 +12,8 @@ $$
 
 ## Shortwave Radiation
 
+<span style="background-color: #f28b82; color: white; padding: 2px 4px; border-radius: 2px;">
+
 ### Albedo Parameterisations 
 
 #### (a) Oerlemans & Knapp 1998
