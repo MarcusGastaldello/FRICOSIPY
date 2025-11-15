@@ -9,7 +9,7 @@
 
 #### 4-D Output Variables ( $x$ , 𝑦 )
 
-$x$
+$x_{lost}$
 
 * **DEPTH** - Northing [m]
 * **HEIGHT** - Easting [m]
