@@ -62,7 +62,7 @@ Net longwave radiation is calculated in accordance with the Stefan–Boltzmann l
 
 
 
-If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiations of Konzelmann et al., 1994. This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiations of [Konzelmann et al., 1994](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
