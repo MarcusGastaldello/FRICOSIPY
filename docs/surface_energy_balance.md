@@ -1,5 +1,7 @@
 # Surface Energy Balance
 
+<small> **Figure 2**: FRICOSIPY Surface Energy Balance <small>
+
 Driven by the input meteorological data, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$). Based on the principles of energy conservation:
 
 
