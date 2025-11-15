@@ -1,9 +1,10 @@
 # Surface Energy Balance
 
-!!! math "Equation"
-    $$
-    \nabla \cdot \mathbf{E} = \frac{\rho}{\varepsilon_0}
-    $$
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+E = mc^2
+$$
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
