@@ -96,13 +96,12 @@ When the surface temperature is evaluated to 0 $^\circ$C, the residual energy me
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-
-This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
-
 Surface\:\:melt = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{m}}
 $$
 </div>
 <small>where $Q_{melt}$  is the .</small>
+
+This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
