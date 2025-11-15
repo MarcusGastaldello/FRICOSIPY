@@ -41,7 +41,16 @@ $$
 SW_{in} = TOA_{insol} \: \Lambda \: (x,y) \: \tau  
 $$
 </div>
-<small>where $SW_{in}$ is the incoming shortwave radiation flux, $TOA_{insol}$ is the unattenuated Top-of-Atmosphere (TOA) insolation (direct & diffuse components), $\Lambda$ is a correction factor for surface inclination (x,y) and topographic shading by any surrounding topography and $\tau$ is the coefficient of atmospheric transmissivity.</small>
+<small>where $SW_{in}$ is the incoming shortwave radiation flux, $TOA_{insol}$ is the unattenuated Top-of-Atmosphere (TOA) insolation (direct & diffuse components), $\Lambda$ is a correction factor for surface inclination ($x$,$y$) and topographic shading by any surrounding topography and $\tau$ is the coefficient of atmospheric transmissivity.</small>
+
+The coefficient of atmospheric transmissivity can subdivided into components to represent *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption () and the attenuation by aerosols (). These are modelled after [Kondratyev, 1969](), [McDonald, 1960](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton, 1954](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover is modelled after [Gruell et al., 1997](https://doi.org/10.1029/97JD02083)
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+\tau_{clouds} = 1 - a \: N - b \: N^2
+$$
+</div>
+<small>where.</small>
 
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ):
