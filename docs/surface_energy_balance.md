@@ -62,7 +62,7 @@ Longwave radiation (otherwise known as terrestrial radiation) is the thermal rad
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-$$ LW_{net} = $$ LW_{in} - \varepsilon_{s} \sigma T_{s}^{4}
+$$ LW_{net} = LW_{in} - \varepsilon_{s} \sigma T_{s}^{4} $$
 $$
 </div>
 
