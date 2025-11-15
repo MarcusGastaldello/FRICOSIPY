@@ -24,7 +24,7 @@ However, since the surface temperature of a glacier is physically constrained to
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative;">
   <div style="position:absolute; top:4px; left:10px; font-size:12px; color:#444;">
-    \( \text{if } T_s = 0 \:^\circ\text{C} \)
+    \( \text{if } T_s = 0 \:^\circ\text{C}\: :\)
   </div>
 
   $$
