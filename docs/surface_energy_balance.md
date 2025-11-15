@@ -1,8 +1,10 @@
 # Surface Energy Balance
 
+
+
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-E = mc^2
+SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
 $$
 </div>
 
