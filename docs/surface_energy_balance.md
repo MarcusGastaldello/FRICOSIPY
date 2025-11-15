@@ -34,7 +34,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near ultraviolet (UV), through the visible light (VIS) and to the near infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. The incoming shortwave radiation ($SW_{in}$) for a given spatial node ($x$,$y$) is modelled after [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
+Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near ultraviolet (UV), through the visible light (VIS) and to the near infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. The incoming shortwave radiation ($SW_{in}$) for a given spatial node ( $x$ , $y$ ) is modelled after [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
 
 ### Albedo Parameterisations 
 
