@@ -3,19 +3,20 @@ theme:
   name: readthedocs
   highlightjs: true
   logo: images/FRICOSIPY_logo.png
+
 plugins:
   - search
   - mkdocstrings:
       handlers:
-        # See: https://mkdocstrings.github.io/python/usage/
         python:
           options:
             docstring_style: sphinx
+
 markdown_extensions:
   - markdown_include.include:
       base_path: .
   - admonition
-  - pymdownx.arithmatex
+  - pymdownx.arithmatex:
       generic: true
 
 nav:
