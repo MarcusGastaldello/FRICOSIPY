@@ -78,6 +78,8 @@ The net shortwave radiation ($SW_{net}$) entering the energy balance is calculat
 
 #### (a) Bintanja & van den Broeke 1995
 
+If the user enables the penetrating radiation module, the absorbed radiation at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Turbulent Fluxes
