@@ -99,7 +99,7 @@ $$
 
 This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
 
-Surface melt = \frac{Q_{melt} \: dt}{rho_{w} \: L_{m}}
+Surface\:\:melt = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{m}}
 $$
 </div>
 <small>where $Q_{melt}$  is the .</small>
