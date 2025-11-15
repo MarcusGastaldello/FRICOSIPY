@@ -4,7 +4,6 @@
 
 Driven by the input meteorological data, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$). Based on the principles of energy conservation:
 
-
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
 SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
@@ -12,6 +11,8 @@ $$
 </div>
 
 <small>where $SW_{net}$  is the net shortwave radiation flux, $Q_{sensible}$  and $Q_{latent}$  are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$  is the net longwave radiation flux, $Q_{rain}$  is the rain heat flux and $Q_{subsurface}$  is the subsurface heat conduction flux.</small>
+
+The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
 
 However, since the surface temperature of a glacier is physically constrained to 0 $^\circ$C, excess energy must be apportioned to melt ($Q_{melt}$) should this situation arise.
 
