@@ -24,6 +24,14 @@ However, since the surface temperature of a glacier is physically constrained to
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
+\overset{\text{if } T_s = 0^\circ C}{
+SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = Q_{melt}
+}
+$$
+</div>
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
 SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = Q_{melt}
 $$
 </div>
