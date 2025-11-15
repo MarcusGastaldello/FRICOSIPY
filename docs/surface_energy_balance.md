@@ -16,7 +16,7 @@ $$
 
 !!! note
 
-    By convention, positive values represent energy absorbed by the glacier surface; negative values depict energy emitted from the glacier surface.
+    By convention, positive values $(+)$ represent energy absorbed by the glacier surface; negative values $(-)$ depict energy emitted from the glacier surface.
 
 The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, the Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
 
