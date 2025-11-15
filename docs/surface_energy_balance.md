@@ -56,6 +56,15 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
 
+Net longwave radiation is calculated in accordance with the Stefan–Boltzmann law for grey body emission:
+
+
+
+
+
+If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiations of Konzelmann et al., 1994. This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\epsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
