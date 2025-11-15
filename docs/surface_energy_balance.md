@@ -58,7 +58,7 @@ $$
 <small>where.</small>
 
 
-The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ):
+The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ), that determines the proportion of incoming radiation reflected off the surface:
 
 
 
