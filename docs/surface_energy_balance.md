@@ -36,10 +36,19 @@ The following section explains each of these energy fluxes in greater detail and
 
 Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near ultraviolet (UV), through the visible light (VIS) and to the near infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. The incoming shortwave radiation ($SW_{in}$) for a given spatial node ( $x$ , $y$ ) is modelled after [Iqbal, 1983](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+SW_{in} = TOA \: \Delta \: ( $x$ , $y$ )
+$$
+</div>
+<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature.</small>
 
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ):
 
+
+
+---
 
 ### Albedo Parameterisations 
 
