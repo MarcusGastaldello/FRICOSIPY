@@ -16,7 +16,7 @@ $$
 
 The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, the Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
 
-However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt ($Q_{melt}$) should th0 surface temperature reach $^\circ$C:
+However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt ($Q_{melt}$) should the surface temperature reach 0 $^\circ$C:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
