@@ -55,8 +55,7 @@ $$
 \tau_{clouds} = 1 - a \: N - b \: N^2
 $$
 </div>
-<small>where.</small>
-
+<small>where $a = 0.233$ and $b = 0.415$ are cloud transmissivity coefficients (default values) and $N$ is the fractional cloud cover. </small>
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ( $\alpha$ ), that determines the proportion of incoming radiation reflected off the surface. The user can optionally apportion some of the input shortwave radiation to bypasses the surface energy balance and directly warm the subsurface layers according to the parameterisation [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2).
 
