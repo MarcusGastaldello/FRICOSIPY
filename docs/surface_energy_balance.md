@@ -21,7 +21,6 @@ SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurfa
 $$
 </div>
 <br> 
-
 The following section explains each of these energy fluxes in greater detail and how they are parameterised in the *FRICOSIPY* model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
