@@ -57,7 +57,7 @@ $$
 </div>
 <small>where $a = 0.233$ and $b = 0.415$ are cloud transmissivity coefficients (default values) and $N$ is the fractional cloud cover. </small>
 
-The incoming shortwave radiation ($SW_{in}$) is computed as the sum of the direct and diffuse components of the solar irradiance after [Oerelemans, 1992](); spatial nodes shaded by surrounding topography only receive diffuse radiation.
+The incoming shortwave radiation ($SW_{in}$) is computed as the sum of the direct and diffuse components of the solar irradiance after [Oerlemans, 1992](https://doi.org/10.3189/S0022143000003634); spatial nodes shaded by surrounding topography only receive diffuse radiation.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
