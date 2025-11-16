@@ -59,10 +59,9 @@ $$
 
 The
 
-div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-f_{direct} = 
-f_{diffuse} = 
+SW_{in} = I_{0}       \left( 0.2 + 0.65 (1 - N) \right) + \left( 0.8 - 0.65 (1 - N) \right)
 $$
 </div>
 <small>where $SW_{in}$ is the incoming shortwave radiation 
