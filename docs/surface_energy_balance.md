@@ -81,8 +81,6 @@ $$
 </div>
 <small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating shortwave radiation deduction.</small>
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-
 ---
 
 ### Albedo Parameterisations 
