@@ -176,6 +176,7 @@ $$
 Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{h} \: V_{a} \:(T_{a}-T_{s})
 $$
 </div>
+<small> a </small> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -186,10 +187,13 @@ $$
 Q_{latent} = \rho_{a} \: L_{s,v} \: C_{h} \: V_{a} \:(q_{a}-q_{s})
 $$
 </div>
+<small> a </small> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Turbulent Exchange Parameterisation
+
+The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036)
 
 #### (i) Essery and Etchevers (2004)
 
