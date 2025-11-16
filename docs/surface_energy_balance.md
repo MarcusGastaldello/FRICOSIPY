@@ -61,7 +61,13 @@ The
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-SW_{in} = I_{0} \left[ \left( 0.2 + 0.65 (1 - N) \right) + \left( 0.8 - 0.65 (1 - N) \right) \right]
+SW_{in}
+=
+I_{0}\Bigg[
+\underbrace{\,0.2 + 0.65(1 - N)\,}_{\text{direct}}
+\;+\;
+\underbrace{\,0.8 - 0.65(1 - N)\,}_{\text{diffuse}}
+\Bigg]
 $$
 </div>
 <small>where $SW_{in}$ is the incoming shortwave radiation, $I_{0}$ is the solar irradiance and $N$ is the fractional cloud cover.</small>
