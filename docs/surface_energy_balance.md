@@ -211,7 +211,7 @@ $$
 \Psi_{Ri}  = 
 \begin{cases}
     (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \quad \text{(stable)} \\
-    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0 \quad \text{(stable)} 
+    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0 \quad \text{(unstable)} 
 \end{cases} 
 $$
 $$
