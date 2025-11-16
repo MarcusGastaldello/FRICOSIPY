@@ -173,7 +173,7 @@ $$
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-Q_{\text{sensible}} = \rho_{\text{a}} \: c_{\text{p,a}} \: C_{\text{h}} \: V_{a} \:(T_{\text{$a$}}-T_{\text{s}})
+Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{h} \: V_{a} \:(T_{a}-T_{s})
 $$
 </div>
 
@@ -183,7 +183,7 @@ $$
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-Q_{\text{latent}} = \rho_{\text{a}} \: L_{\text{s,v}} \: C_{\text{h}} \: V_{a} \:(q_{\text{$a$}}-q_{\text{s}})
+Q_{latent} = \rho_{a} \: L_{s,v} \: C_{h} \: V_{a} \:(q_{a}-q_{s})
 $$
 </div>
 
@@ -194,7 +194,7 @@ $$
 #### (i) Essery and Etchevers (2004)
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$ C_{\text{h}} =  C_{\text{hn}} \: \Psi_{Ri} $$
+$$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
 $$ C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \right)\right]^{-2} $$
 </div>
 <small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
