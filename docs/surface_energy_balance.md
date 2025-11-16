@@ -171,6 +171,7 @@ $$
 f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
 $$
 </div>
+<small>where $g$ is the gravitational acceleration (m s$^{-2}$) and $\epsilon$ is the ratio of molecular weights between water and dry air.</small>
         
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
