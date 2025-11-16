@@ -96,7 +96,7 @@ $$
 \alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
 $$
 </div>
-<small>a.</small>
+<small>where $\alpha_{fresh\:snow} = 0.85$ and $\alpha_{firn} = 0.52$ are the albedo of fresh snow and firn respectively (default values), and $t*$ is the characteristic decay timescale parameter (days).</small>
 
 ---
 
