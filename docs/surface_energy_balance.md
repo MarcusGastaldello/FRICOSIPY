@@ -82,7 +82,7 @@ $$
 </div>
 <small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating shortwave radiation deduction.</small>
 
----
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Albedo Parameterisations 
 
@@ -137,7 +137,11 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Turbulent Exchange Parameterisation
 
