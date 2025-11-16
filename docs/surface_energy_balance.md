@@ -88,6 +88,13 @@ $$
 
 #### (a) Oerlemans & Knapp 1998
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+\alpha = \alpha{firn} + \left[ (\alpha{fresh snow} - \alpha{firn}) \: e^{-\frac{t}{t*}}
+$$
+</div>
+<small>a.</small>
+
 ---
 
 #### (b) Bougamont et al., 2005
