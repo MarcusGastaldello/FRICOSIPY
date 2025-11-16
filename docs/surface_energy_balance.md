@@ -151,8 +151,9 @@ $$
 $$ C_{\text{h}} =  C_{\text{hn}} \: \Psi_{Ri} $$
 $$ C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \right)\right]^{-2} $$
 </div>
+<small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
 
-The stability function ($\Phi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents a correction for the stability of the
+The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents a correction for the stability of the
 atmospheric boundary layer.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
