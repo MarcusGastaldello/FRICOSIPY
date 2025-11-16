@@ -222,7 +222,7 @@ $$
 Q_{subsurface} = k_{s} \: \left[ \frac{T_{z\text{\:interp\:2}} - T_{z\text{\:interp\:1}}}{z_\text{\:interp\:2} - z_\text{\:interp\:1}} \right]
 $$
 </div>
-<small> where $k$ is the thermal conductivity (W m$^{-1}$ K$^{-1}$) and $z_\text{\:interp\:1}$ = 0.06 m and $z_\text{\:interp\:2}$ = 0.10 m are prescribed depth values used to calculate subsurface temperatures via linear interpolation between subsurface layers.</small>
+<small> where $k_{s}$ is the surface thermal conductivity (W m$^{-1}$ K$^{-1}$) and $z_{\text{\:interp\:1}} = 0.06$ m and $z_{\text{\:interp\:2}} = 0.10$ m are prescribed depth values used to calculate subsurface temperatures via linear interpolation between subsurface layers.</small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
