@@ -152,6 +152,9 @@ $$ C_{\text{h}} =  C_{\text{hn}} \: \Psi_{Ri} $$
 $$ C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \right)\right]^{-2} $$
 </div>
 
+The stability function ($\Phi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents a correction for the stability of the
+atmospheric boundary layer.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
