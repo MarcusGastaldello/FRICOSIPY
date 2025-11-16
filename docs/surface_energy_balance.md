@@ -156,6 +156,18 @@ $$ C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \r
 The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents a correction for the stability of the
 atmospheric boundary layer.
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+& \Psi_{Ri}  = 
+\begin{cases}
+    (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \\
+    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0  \\
+\end{cases} \\
+& Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] \\
+& f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
+$$
+</div>
+        
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
