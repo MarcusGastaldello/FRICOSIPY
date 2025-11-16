@@ -90,7 +90,7 @@ $$
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-\alpha = \alpha{firn} + \left[ (\alpha{fresh snow} - \alpha{firn}) \: e^{-\frac{t}{t*}}
+\alpha = \alpha{firn} + \left[ (\alpha{fresh snow} - \alpha{firn}) \: e^{-\frac{t}{t*}} \right]
 $$
 </div>
 <small>a.</small>
