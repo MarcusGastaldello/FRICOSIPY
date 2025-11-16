@@ -39,14 +39,14 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near ultraviolet (UV), through the visible light (VIS) and to the near infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. The incoming shortwave radiation ($SW_{in}$) for a given spatial node ( $x$ , $y$ ) is modelled after [Iqbal, 1983](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
+Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near ultraviolet (UV), through the visible light (VIS) and to the near infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. The incoming shortwave radiation ($SW_{in}$) is modelled after [Iqbal, 1983](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
 SW_{in} = TOA_{insol} \: \Lambda \: (x,y) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
 $$
 </div>
-<small>where $SW_{in}$ is the incoming shortwave radiation flux, $TOA_{insol}$ is the unattenuated Top-of-Atmosphere (TOA) insolation on a surface normal to the incident radiation and $\tau$ $\tau$ $\tau$ $\tau$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
+<small>where $SW_{in}$ is the incoming shortwave radiation flux, $TOA_{insol}$ is the unattenuated Top-of-Atmosphere (TOA) insolation on a surface normal to the incident radiation and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
 The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev, 1969](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald, 1960](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton, 1954](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. 
 
