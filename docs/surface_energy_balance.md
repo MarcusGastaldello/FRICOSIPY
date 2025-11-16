@@ -92,7 +92,7 @@ The evolution of the broadband albedo ($\alpha$) is modelled after [Oerlemans an
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-\alpha = \alpha_{firn} + \left[ (\alpha_{fresh snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
+\alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
 $$
 </div>
 <small>a.</small>
