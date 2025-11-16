@@ -43,10 +43,10 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-I_{s} = I_{TOA} \: \Lambda ( x , y ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
+I_{0} = I_{TOA} \: \Lambda ( x , y ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
 $$
 </div>
-<small>where $I$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lamda$ is a correction factor for an inclined surface specific to the topography of a given spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
+<small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lamda$ is a correction factor for an inclined surface specific to the topography of a given spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
 The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev, 1969](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald, 1960](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton, 1954](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al., 1997](https://doi.org/10.1029/97JD02083):
 
@@ -65,16 +65,11 @@ f_{direct} =
 f_{diffuse} = 
 $$
 </div>
-<small>where $SW_{in}$ is the direct and diffuse components of the incoming shorwave radiation respectively and $N$ is the fractional cloud cover.</small>
-
-The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al., 1997](https://doi.org/10.1029/97JD02083):
-
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-\tau_{clouds} = 1 - a \: N - b \: N^2
-$$
-</div>
-<small>where $a = 0.233$ and $b = 0.415$ are cloud transmissivity coefficients (default values) and $N$ is the fractional cloud cover. </small>
+<small>where $SW_{in}$ is the incoming shortwave radiation 
+    
+    
+    
+    is the direct and diffuse components of the incoming shorwave radiation respectively and $N$ is the fractional cloud cover.</small>
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ($\alpha$), that determines the proportion of incoming radiation reflected off the surface. The user can also optionally apportion some of the input shortwave radiation to directly bypass the surface energy balance and directly warm the subsurface layers according to the parameterisation [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2).
 
