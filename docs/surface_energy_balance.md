@@ -176,7 +176,7 @@ $$
 Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{h} \: V_{a} \:(T_{a}-T_{s})
 $$
 </div>
-<small> a </small> 
+<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), V is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively. </small> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -187,13 +187,13 @@ $$
 Q_{latent} = \rho_{a} \: L_{s,v} \: C_{h} \: V_{a} \:(q_{a}-q_{s})
 $$
 </div>
-<small> a </small> 
+<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), V is the wind speed (m s$^{-1}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively.</small> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Turbulent Exchange Parameterisation
 
-The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036)
+The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) ...
 
 #### (i) Essery and Etchevers (2004)
 
