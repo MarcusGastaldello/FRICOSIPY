@@ -215,9 +215,15 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
 
+The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient:
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+Q_{subsurface} = k_{s} \: \left[ \frac{T_{z\text{\:interp\:2}} - T_{z\text{\:interp\:1}}}{z_\text{\:interp\:2} - z_\text{\:interp\:1}} \right]
+$$
+</div>
 
-
+where $k$ is the thermal conductivity (W m$^{-1}$ K$^{-1}$) and $z_\text{\:interp\:1}$ = 0.06 m and $z_\text{\:interp\:2}$ = 0.10 m are prescribed depth values used to calculate subsurface temperatures via linear interpolation between subsurface layers.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
