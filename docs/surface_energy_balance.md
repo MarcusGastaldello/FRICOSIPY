@@ -64,9 +64,9 @@ $$
 SW_{in}
 =
 I_{0}\Bigg[
-\underbrace{\,0.2 + 0.65(1 - N)\,}_{\text{direct radiation}
+\underbrace{\,0.2 + 0.65(1 - N)\,}_{\text{direct_radiation}
 \;+\;
-\underbrace{\,0.8 - 0.65(1 - N)\,}_{\text{diffuse radiation}}
+\underbrace{\,0.8 - 0.65(1 - N)\,}_{\text{diffuse_radiation}}
 \Bigg]
 $$
 </div>
