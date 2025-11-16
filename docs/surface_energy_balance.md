@@ -106,9 +106,10 @@ The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
+t^*= 
 \begin{cases}
-t^*_{wet}, & T_{\text{s}} = \: 0\:^\circ \text{C} \\
-t^*_{dry} +  K \left[ \text{max}(T_{\text{s}},T_{\text{max},\:t^*}) \right] ,&  T_{\text{s}} < \: 0\:^\circ \text{C}
+t^*_{wet}\:, & T_{\text{s}} = \: 0\:^\circ \text{C} \\
+t^*_{dry} +  K \left[ \text{max}(T_{\text{s}},T_{\text{max},\:t^*}) \right]\:,&  T_{\text{s}} < \: 0\:^\circ \text{C}
 \end{cases}
 $$
 </div>
