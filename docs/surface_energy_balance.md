@@ -171,9 +171,20 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+Q_{\text{sensible}} = \rho_{\text{a}} \: c_{\text{p,a}} \: C_{\text{h}} \: V_{a} \:(T_{\text{$a$}}-T_{\text{s}})
+$$
+</div>
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
+
+$$
+Q_{\text{latent}} = \rho_{\text{a}} \: L_{\text{s,v}} \: C_{\text{h}} \: V_{a} \:(q_{\text{$a$}}-q_{\text{s}})
+$$
+</div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
