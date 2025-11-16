@@ -158,15 +158,17 @@ atmospheric boundary layer.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-\begin{align}
-& \Psi_{Ri}  = 
+\Psi_{Ri}  = 
 \begin{cases}
     (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \\
-    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0  \\
-\end{cases} \\
-& Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] \\
-& f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
-\end{align}
+    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0  
+\end{cases} 
+$$
+$$
+Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] 
+$$
+$$
+f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
 $$
 </div>
         
