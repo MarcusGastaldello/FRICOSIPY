@@ -195,7 +195,7 @@ $$
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
-$$ C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \right)\right]^{-2} $$
+$$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}{\mu} \right)\right]^{-2} $$
 </div>
 <small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
 
