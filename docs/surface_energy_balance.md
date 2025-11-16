@@ -46,7 +46,7 @@ $$
 I_{0} = I_{TOA} \: \Lambda ( x , y ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
 $$
 </div>
-<small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface specific to the topography of a given spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
+<small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
 The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev, 1969](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald, 1960](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton, 1954](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al., 1997](https://doi.org/10.1029/97JD02083):
 
@@ -61,14 +61,10 @@ The
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-SW_{in} = I_{0}       \left( 0.2 + 0.65 (1 - N) \right) + \left( 0.8 - 0.65 (1 - N) \right)
+SW_{in} = I_{0} \left[ \left( 0.2 + 0.65 (1 - N) \right) + \left( 0.8 - 0.65 (1 - N) \right) \right]
 $$
 </div>
-<small>where $SW_{in}$ is the incoming shortwave radiation 
-    
-    
-    
-    is the direct and diffuse components of the incoming shorwave radiation respectively and $N$ is the fractional cloud cover.</small>
+<small>where $SW_{in}$ is the incoming shortwave radiation, $I_{0}$ is the solar irradiance and $N$ is the fractional cloud cover.</small>
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ($\alpha$), that determines the proportion of incoming radiation reflected off the surface. The user can also optionally apportion some of the input shortwave radiation to directly bypass the surface energy balance and directly warm the subsurface layers according to the parameterisation [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2).
 
@@ -80,16 +76,6 @@ $$
 <small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating shortwave radiation deduction.</small>
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-SW_{net}
-=
-\underbrace{SW_{in}}_{\text{incoming}}
-\;
-\underbrace{(1 - \alpha)}_{\text{absorbed fraction}}
-\;-\;
-\underbrace{SW_{pen}}_{\text{penetrated}}
-$$
-</div>
 
 ---
 
