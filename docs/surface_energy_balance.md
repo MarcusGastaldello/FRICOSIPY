@@ -109,7 +109,7 @@ $$
 t^*= 
 \begin{cases}
 t^*_{\:wet}\:, & T_{s} = \: 0\:^\circ \text{C} \\
-t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
+t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
 \end{cases}
 $$
 </div>
