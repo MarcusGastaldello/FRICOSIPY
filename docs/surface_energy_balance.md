@@ -40,7 +40,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near-ultraviolet (NUV), through the visible light (VIS) and to the near-infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. In the FRICOSIPY model, shortwave radiation ($SW_{in}$) is modelled after [Iqbal, 1983](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans, 2002](https://doi.org/10.3189/172756502781831133):
+Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near-ultraviolet (NUV), through the visible light (VIS) and to the near-infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. In the FRICOSIPY model, shortwave radiation ($SW_{in}$) is modelled after [Iqbal (1983)](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans (2002)](https://doi.org/10.3189/172756502781831133):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -49,7 +49,7 @@ $$
 </div>
 <small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
-The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev, 1969](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald, 1960](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton, 1954](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al., 1997](https://doi.org/10.1029/97JD02083):
+The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev (1969)](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald (1960)](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton (1954)](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al. (1997)](https://doi.org/10.1029/97JD02083):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -86,7 +86,7 @@ $$
 
 ### Albedo Parameterisations 
 
-#### (a) Oerlemans & Knapp 1998
+#### (a) Oerlemans & Knapp (1998)
 
 Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
 ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
@@ -100,15 +100,17 @@ $$
 
 ---
 
-#### (b) Bougamont et al., 2005
+#### (b) Bougamont et al. (2005)
+
+The parameterisation of [Bougamont et al. (2005)]
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Penetrating Radiation Parameterisation 
 
-#### (a) Bintanja & van den Broeke 1995
+#### (a) Bintanja & van den Broeke (1995)
 
-If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke, 1995](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -142,9 +144,9 @@ $$
 
 ### Longwave Radiation Parameterisation 
 
-#### (a) Konzelmann et al. 1994
+#### (a) Konzelmann et al. (1994)
 
-If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al., 1994](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
