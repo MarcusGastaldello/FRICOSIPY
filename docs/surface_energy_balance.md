@@ -43,7 +43,7 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-I_{s} = I_{TOA} \: \Delta ( $x$ , $y$ ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
+I_{s} = I_{TOA} \: \Delta ( x , y ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
 $$
 </div>
 <small>where $I$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lamda$ is a correction factor for an inclined surface specific to the topography of a given spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
