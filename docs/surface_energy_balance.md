@@ -114,7 +114,7 @@ t^*_{\:dry} +  K \left[ \text{max}\:(T_{\text{s}}\:,\:T_{\text{max}\:,\:t^*}) \r
 $$
 </div>
 <small>where $t^∗_{wet}$ and $t^∗_{dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
-(day $^\circ$C$^{−1}$) and $T_{max}$, $t^∗$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
+(day $^\circ$C$^{−1}$) and $T_{max\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
