@@ -86,7 +86,7 @@ $$
 
 ### Albedo Parameterisations 
 
-#### (a) Oerlemans & Knapp (1998)
+#### (i) Oerlemans & Knapp (1998)
 
 Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
 ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
@@ -100,7 +100,7 @@ $$
 
 ---
 
-#### (b) Bougamont et al. (2005)
+#### (ii) Bougamont et al. (2005)
 
 The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
 
@@ -120,7 +120,7 @@ $$
 
 ### Penetrating Radiation Parameterisation 
 
-#### (a) Bintanja & van den Broeke (1995)
+#### (i) Bintanja & van den Broeke (1995)
 
 If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth '$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
@@ -139,6 +139,17 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
+### Turbulent Exchange Parameterisation
+
+#### (i) Essery and Etchevers (2004)
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+& C_{\text{h}} =  C_{\text{hn}} \: \Psi_{Ri} \\
+& C_{\text{hn}} = \kappa^{2} \left[ \text{log} \left( \frac{z_\text{a}}{\mu} \right)\right]^{-2}
+$$
+</div>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
@@ -156,7 +167,7 @@ $$
 
 ### Longwave Radiation Parameterisation 
 
-#### (a) Konzelmann et al. (1994)
+#### (i) Konzelmann et al. (1994)
 
 If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
@@ -180,6 +191,10 @@ $$
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
+
+
+
+
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
