@@ -108,13 +108,13 @@ The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF
 $$
 t^*= 
 \begin{cases}
-t^*_{\:wet}\:, & T_{\text{s}} = \: 0\:^\circ \text{C} \\
-t^*_{\:dry} +  K \left[ \text{max}\:(T_{\text{s}}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{\text{s}} < \: 0\:^\circ \text{C}
+t^*_{\:wet}\:, & T_{s} = \: 0\:^\circ \text{C} \\
+t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
 \end{cases}
 $$
 </div>
-<small>where $t^∗_{wet}$ and $t^∗_{dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
-(day $^\circ$C$^{−1}$) and $T_{max\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
+<small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
+(day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
