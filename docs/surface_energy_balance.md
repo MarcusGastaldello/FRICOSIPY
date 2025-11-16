@@ -18,8 +18,6 @@ $$
 
     By convention, positive values $(+)$ represent energy absorbed by the glacier surface; negative values $(-)$ depict energy emitted from the glacier surface.
 
-The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, the Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
-
 However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt ($Q_{melt}$) should the surface temperature reach 0 $^\circ$C:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative;">
@@ -33,6 +31,9 @@ However, since the surface temperature of a glacier is physically constrained to
   $$
 </div>
 <div style="height: 20px;"></div>
+
+The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, the Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
+
 The following section explains each of these energy fluxes in greater detail and how they are parameterised in the *FRICOSIPY* model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
