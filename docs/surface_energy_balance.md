@@ -86,8 +86,6 @@ $$
 
 ### Albedo Parameterisations 
 
-```{dropdown} A
-
 #### (i) Oerlemans & Knapp (1998)
 
 Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
@@ -99,8 +97,6 @@ $$
 $$
 </div>
 <small>where $\alpha_{fresh\:snow} = 0.85$ and $\alpha_{firn} = 0.52$ are the albedo of fresh snow and firn respectively (default values), and $t^*$ is the characteristic decay timescale parameter (days).</small>
-
-```
 
 ---
 
