@@ -88,15 +88,17 @@ $$
 
 #### (i) Oerlemans & Knap (1998)
 
-Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
-($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
+???
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-\alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
-$$
-</div>
-<small>where $\alpha_{fresh\:snow} = 0.85$ and $\alpha_{firn} = 0.52$ are the albedo of fresh snow and firn respectively (default values), and $t^*$ is the characteristic decay timescale parameter (days).</small>
+    Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
+    ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    \alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
+    $$
+    </div>
+    <small>where $\alpha_{fresh\:snow} = 0.85$ and $\alpha_{firn} = 0.52$ are the albedo of fresh snow and firn respectively (default values), and $t^*$ is the characteristic decay timescale parameter (days).</small>
 
 
 ---
