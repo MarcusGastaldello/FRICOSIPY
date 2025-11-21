@@ -221,19 +221,21 @@ The mass exchange associated with the latent heat flux depends on the glacier su
     $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
     $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
     </div>
-    <small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
+    <small>
+    where \(C_{hn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m).
+    </small>
 
-    The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents the correction for the stability of the
-    atmospheric boundary layer.
+    The stability function \(\Psi_{Ri}\), derived from the bulk Richardson number \(Ri_b\), corrects for atmospheric stability:
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     \Psi_{Ri} =
     \begin{cases}
-    (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \ge 0 \quad \text{(stable)} \\
-    1 - 10 Ri_{\text{b}} \left(1 + 10 C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z}\right)^{-1}, & Ri_{\text{b}} < 0 \quad \text{(unstable)}
+    (1 + 10 Ri_{\mathrm{b}})^{-1}, & Ri_{\mathrm{b}} \ge 0 \\
+    1 - 10 Ri_{\mathrm{b}} \left(1 + 10 C_{\mathrm{hn}} \frac{\sqrt{-Ri_{\mathrm{b}}}}{f_z}\right)^{-1}, & Ri_{\mathrm{b}} < 0
     \end{cases}
     $$
+    </div>
 
     $$
     Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}} + \epsilon \: (1-\epsilon)} \right]
