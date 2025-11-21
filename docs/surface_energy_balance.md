@@ -125,7 +125,7 @@ $$
 ??? "**$(i)$ Bintanja & van den Broeke (1995)**"
 
     <br>
-    If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth $`z'$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+    If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
