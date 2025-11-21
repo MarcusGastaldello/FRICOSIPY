@@ -229,25 +229,6 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
-    \Psi_{Ri} =
-    \begin{cases}
-    (1 + 10 Ri_{\mathrm{b}})^{-1}, & Ri_{\mathrm{b}} \ge 0 \\
-    1 - 10 Ri_{\mathrm{b}} \left(1 + 10 C_{\mathrm{hn}} \frac{\sqrt{-Ri_{\mathrm{b}}}}{f_z}\right)^{-1}, & Ri_{\mathrm{b}} < 0
-    \end{cases}
-    $$
-    </div>
-
-    $$
-    Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}} + \epsilon \: (1-\epsilon)} \right]
-    $$
-
-    $$
-    f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
-    $$
-    </div>
-
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-    $$
     \Psi_{Ri}  = 
     \begin{cases}
         (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \quad \text{(stable)} \\
