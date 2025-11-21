@@ -86,7 +86,8 @@ $$
 
 ### Albedo Parameterisations 
 
-??? "**(i) Oerlemans & Knap (1998)**"
+??? "**$(i)$ Oerlemans & Knap (1998)**"
+
 
     Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
     ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
@@ -101,9 +102,10 @@ $$
 
 ---
 
-??? "**(ii) Bougamont et al. (2005)**"
+??? "**$(ii)$ Bougamont et al. (2005)**"
 
-    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
+
+    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo       decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
@@ -121,7 +123,7 @@ $$
 
 ### Penetrating Radiation Parameterisation 
 
-??? "**(i) Bintanja & van den Broeke (1995)**"
+??? "**$(i)$ Bintanja & van den Broeke (1995)**"
 
     If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth `$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
