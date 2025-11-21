@@ -175,7 +175,7 @@ within the atmospheric boundary layer
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
-The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient between the atmosphere and the glacier surface.
+The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient ($\Delta T$) between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -188,7 +188,7 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
-The latent heat flux represents the transfer of latent energy and is driven by the moisture gradient between the atmosphere and the glacier surface.
+The latent heat flux represents the transfer of latent energy and is driven by the moisture gradient ($\Delta q$) between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -197,14 +197,14 @@ $$
 </div>
 <small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $V$ is the wind speed (m s$^{-1}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation <br> (J kg$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively.</small> 
 
+The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
 
-
-| NORTHING | EASTING | LATITUDE | LONGITUDE |
+| Process | Energy Exchange | Mass Exchange | Surface Temperature |
 |-----------|----------|-----------|------------|
-| Deposition | 2633800 | 45.92925 | 7.874360 |
-| Condensation | 2633800 | 45.93039 | 7.874485 |
-| Evaporation | 2633800 | 45.93039 | 7.874485 |
-| Sublimation | 2633800 | 45.93039 | 7.874485 |
+| Deposition | Exothermic (+) | Accumulation (+) | 7.874360 |
+| Condensation | Exothermic (+) | Accumulation (+) | 7.874485 |
+| Evaporation | Endothermic (-) | Ablation (-) | 7.874485 |
+| Sublimation | Endothermic (-) | Ablation (-) | 7.874485 |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
