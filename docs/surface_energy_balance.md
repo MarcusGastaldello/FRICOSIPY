@@ -201,10 +201,10 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 | Process | Energy Exchange | Mass Exchange | Surface Temperature |
 |-----------|----------|-----------|------------|
-| Deposition | Exothermic (+) | Accumulation (+) | 7.874360 |
-| Condensation | Exothermic (+) | Accumulation (+) | 7.874485 |
-| Evaporation | Endothermic (-) | Ablation (-) | 7.874485 |
-| Sublimation | Endothermic (-) | Ablation (-) | 7.874485 |
+| **Deposition** | Exothermic (+) | Accumulation (+) | < 0 $^\circ$ C |
+| **Condensation** | Exothermic (+) | Accumulation (+) | = 0 $^\circ$ C |
+| **Evaporation** | Endothermic (-) | Ablation (-) | = 0 $^\circ$ C |
+| **Sublimation** | Endothermic (-) | Ablation (-) | < 0 $^\circ$ C |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
