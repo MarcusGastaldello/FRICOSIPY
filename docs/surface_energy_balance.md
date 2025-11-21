@@ -108,11 +108,22 @@ $$
     The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+
+   
+    $$
+    \Psi_{Ri} =
+    \begin{cases}
+    (1 + 10 Ri_{\mathrm{b}})^{-1}, & Ri_{\mathrm{b}} \ge 0 \\
+    1 - 10 Ri_{\mathrm{b}} \left(1 + 10 C_{\mathrm{hn}} \frac{\sqrt{-Ri_{\mathrm{b}}}}{f_z}\right)^{-1}, & Ri_{\mathrm{b}} < 0
+    \end{cases}
+    $$
+    
+    
     $$
     t^*= 
     \begin{cases}
     t^*_{\:wet}\:, & T_{s} = \: 0\:^\circ \text{C} \\
-    t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
+    t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}\:,\:T_{\text{max}\:,\:t^*}) \right]\:, &  T_{s} < \: 0\:^\circ \text{C}
     \end{cases}
     $$
     </div>
