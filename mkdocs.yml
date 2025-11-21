@@ -18,6 +18,8 @@ markdown_extensions:
   - admonition
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.details
+  - pymdownx.superfences
 
 nav:
   - Home: index.md
