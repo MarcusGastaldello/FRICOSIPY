@@ -88,7 +88,7 @@ $$
 
 ??? "**$(i)$ Oerlemans & Knap (1998)**"
 
-
+    <br>
     Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
     ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
 
@@ -104,8 +104,8 @@ $$
 
 ??? "**$(ii)$ Bougamont et al. (2005)**"
 
-
-    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo       decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
+    <br>
+    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
@@ -116,8 +116,7 @@ $$
     \end{cases}
     $$
     </div>
-    <small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
-    (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
+    <small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -151,22 +150,23 @@ $$
 
 ### Longwave Radiation Parameterisation 
 
-#### (i) Konzelmann et al. (1994)
+??? "**$(i)$ Konzelmann et al. (1994)**"
 
-If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity <br> ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+    <br>
+    If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity <br> ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-LW_{in} = \varepsilon_{atm} \: \sigma \: T_{a}^{4}
-$$
-$$    
-\varepsilon_{atm} = \varepsilon_{cs} \: ( 1 - N^2) + \varepsilon_{clouds} \: N^2
-$$    
-$$
-\varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
-$$
-</div>
-<small>where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter.</small>
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    LW_{in} = \varepsilon_{atm} \: \sigma \: T_{a}^{4}
+    $$
+    $$    
+    \varepsilon_{atm} = \varepsilon_{cs} \: ( 1 - N^2) + \varepsilon_{clouds} \: N^2
+    $$    
+    $$
+    \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
+    $$
+    </div>
+    <small>where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter.</small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
