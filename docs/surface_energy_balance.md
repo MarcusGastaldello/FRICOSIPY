@@ -175,7 +175,7 @@ within the atmospheric boundary layer
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
-The senisble heat flux represents the transfer of heat energy and is driven by the temperature gradient between the atmosphere and the glacier surface.
+The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
