@@ -188,7 +188,7 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
-The senisble heat flux represents the transfer of latent energy and is driven by the moisture gradient between the atmosphere and the glacier surface.
+The latent heat flux represents the transfer of latent energy and is driven by the moisture gradient between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
