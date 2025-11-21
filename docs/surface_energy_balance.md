@@ -170,9 +170,7 @@ $$
 
 ## Turbulent Fluxes
 
-
-
-within the atmospheric boundary layer
+The turbulent fluxes represent heat and moisture exchange between the atmosphere and the glacier surface, driven by the convective, turbulent motions of the air within the atmospheric boundary layer. In the FRICOSIPY model, these exchanges are calculated using bulk aerodynamic equations, which are governed by wind speed, surface roughness, and the gradients of temperature and humidity between the glacier surface and the overlying air.
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
@@ -189,7 +187,7 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
-The latent heat flux represents the transfer of latent energy and is driven by the moisture gradient <br> ($\Delta q$) between the atmosphere and the glacier surface.
+The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient <br> ($\Delta q$) between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
@@ -211,7 +209,10 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 ### Turbulent Exchange Parameterisation
 
-The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) ...
+The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) 
+
+
+
 
 #### (i) Essery and Etchevers (2004)
 
@@ -221,7 +222,7 @@ $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right
 </div>
 <small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
 
-The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents a correction for the stability of the
+The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents the correction for the stability of the
 atmospheric boundary layer.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
