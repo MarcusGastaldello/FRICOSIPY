@@ -212,7 +212,7 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 ### Turbulent Exchange Parameterisation
 
-??? "**$(i)$ Essery and Etchevers (2004)**""
+??? "**$(i)$ Essery and Etchevers (2004)**"
 
     <br>
     The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) 
@@ -225,6 +225,24 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
     The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents the correction for the stability of the
     atmospheric boundary layer.
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    \Psi_{Ri} =
+    \begin{cases}
+    (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \ge 0 \quad \text{(stable)} \\
+    1 - 10 Ri_{\text{b}} \left(1 + 10 C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z}\right)^{-1}, & Ri_{\text{b}} < 0 \quad \text{(unstable)}
+    \end{cases}
+    $$
+
+    $$
+    Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}} + \epsilon \: (1-\epsilon)} \right]
+    $$
+
+    $$
+    f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
+    $$
+    </div>
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
