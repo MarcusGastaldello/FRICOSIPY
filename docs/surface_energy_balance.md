@@ -86,7 +86,7 @@ $$
 
 ### Albedo Parameterisations 
 
-<details>
+```{dropdown} A
 
 #### (i) Oerlemans & Knapp (1998)
 
@@ -99,6 +99,8 @@ $$
 $$
 </div>
 <small>where $\alpha_{fresh\:snow} = 0.85$ and $\alpha_{firn} = 0.52$ are the albedo of fresh snow and firn respectively (default values), and $t^*$ is the characteristic decay timescale parameter (days).</small>
+
+```
 
 ---
 
@@ -119,8 +121,6 @@ $$
 (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
-</details>
 
 ### Penetrating Radiation Parameterisation 
 
