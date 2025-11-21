@@ -197,12 +197,14 @@ $$
 </div>
 <small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $V$ is the wind speed (m s$^{-1}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation <br> (J kg$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively.</small> 
 
-!!! note
 
-    | NORTHING | EASTING | LATITUDE | LONGITUDE | ELEVATION | ASPECT | SLOPE | MASK |
-    |-----------|----------|-----------|------------|------------|---------|--------|------|
-    | 1086500 | 2633800 | 45.92925 | 7.874360 | 4457.10 | 240.24 | 2.35 | 1 |
-    | 1086600 | 2633800 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
+
+| NORTHING | EASTING | LATITUDE | LONGITUDE |
+|-----------|----------|-----------|------------|
+| Deposition | 2633800 | 45.92925 | 7.874360 |
+| Condensation | 2633800 | 45.93039 | 7.874485 |
+| Evaporation | 2633800 | 45.93039 | 7.874485 |
+| Sublimation | 2633800 | 45.93039 | 7.874485 |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
