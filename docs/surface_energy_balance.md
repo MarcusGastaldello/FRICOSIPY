@@ -86,9 +86,7 @@ $$
 
 ### Albedo Parameterisations 
 
-#### (i) Oerlemans & Knap (1998)
-
-??? "My Title"
+??? "**(i) Oerlemans & Knap (1998)**"
 
     Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
     ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
@@ -103,36 +101,36 @@ $$
 
 ---
 
-#### (ii) Bougamont et al. (2005)
+??? "**(ii) Bougamont et al. (2005)**"
 
-The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
+    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach that introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-t^*= 
-\begin{cases}
-t^*_{\:wet}\:, & T_{s} = \: 0\:^\circ \text{C} \\
-t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
-\end{cases}
-$$
-</div>
-<small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
-(day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    t^*= 
+    \begin{cases}
+    t^*_{\:wet}\:, & T_{s} = \: 0\:^\circ \text{C} \\
+    t^*_{\:dry} +  K \left[ \text{max}\:(T_{s}\:,\:T_{\text{max}\:,\:t^*}) \right]\:,&  T_{s} < \: 0\:^\circ \text{C}
+    \end{cases}
+    $$
+    </div>
+    <small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter
+    (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Penetrating Radiation Parameterisation 
 
-#### (i) Bintanja & van den Broeke (1995)
+??? "**(i) Bintanja & van den Broeke (1995)**"
 
-If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth `$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+    If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth `$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-SW_{pen} (z) = \lambda_{abs} \: SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
-$$
-</div>
-<small>where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</small>
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    SW_{pen} (z) = \lambda_{abs} \: SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
+    $$
+    </div>
+    <small>where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
