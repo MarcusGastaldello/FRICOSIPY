@@ -86,6 +86,8 @@ $$
 
 ### Albedo Parameterisations 
 
+<details>
+
 #### (i) Oerlemans & Knapp (1998)
 
 Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
@@ -117,6 +119,8 @@ $$
 (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+</details>
 
 ### Penetrating Radiation Parameterisation 
 
