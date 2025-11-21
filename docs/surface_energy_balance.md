@@ -124,6 +124,7 @@ $$
 
 ??? "**$(i)$ Bintanja & van den Broeke (1995)**"
 
+    <br>
     If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth `$z$' is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
@@ -211,38 +212,36 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 ### Turbulent Exchange Parameterisation
 
-The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) 
+??? "**$(i)$ Essery and Etchevers (2004)**""
 
+    <br>
+    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) 
 
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
+    $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
+    </div>
+    <small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
 
+    The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents the correction for the stability of the
+    atmospheric boundary layer.
 
-#### (i) Essery and Etchevers (2004)
-
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
-$$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
-</div>
-<small>where $C_{hn}$ is the value under neutral conditions, $\kappa$ is the von Karman constant (0.40) and $\mu$ is the surface roughness (m).</small>
-
-The stability function ($\Psi_{Ri}$), derived from the bulk Richardson number ($Ri_{b}$), represents the correction for the stability of the
-atmospheric boundary layer.
-
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-\Psi_{Ri}  = 
-\begin{cases}
-    (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \quad \text{(stable)} \\
-    (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0 \quad \text{(unstable)} 
-\end{cases} 
-$$
-$$
-Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] 
-$$
-$$
-f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
-$$
-</div>
-<small>where $g$ is the gravitational acceleration (m s$^{-2}$) and $\epsilon$ is the ratio of molecular weights between water and dry air.</small>
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    $$
+    \Psi_{Ri}  = 
+    \begin{cases}
+        (1 + 10 Ri_{\text{b}})^{-1}, & Ri_{\text{b}} \geq 0 \quad \text{(stable)} \\
+        (1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0 \quad \text{(unstable)} 
+    \end{cases} 
+    $$
+    $$
+    Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] 
+    $$
+    $$
+    f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
+    $$
+    </div>
+    <small>where $g$ is the gravitational acceleration (m s$^{-2}$) and $\epsilon$ is the ratio of molecular weights between water and dry air.</small>
         
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
