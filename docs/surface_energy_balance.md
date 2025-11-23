@@ -261,7 +261,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
 
-When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface -- the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
+When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface \textendash the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
