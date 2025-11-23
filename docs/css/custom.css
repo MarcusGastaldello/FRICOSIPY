@@ -1,22 +1,23 @@
-.math-caption {
-    font-size: 0.85em;
-    font-style: italic;
-    text-align: center;
-    margin-top: 0.3em;
-    margin-bottom: 1em;
-    color: #555;
-}
-
 .math-block {
     border: 1px solid #ccc;
     background: #f9f9f9;
     padding: 12px;
     margin: 1.5em auto;
+    display: inline-block;   /* Ensures box fits the equation width */
 }
 
 .math-block figcaption {
     font-size: 0.85em;
-    font-style: italic;
+    font-style: normal;      /* make caption non-italic */
     text-align: center;
     margin-top: 0.3em;
+    color: #555;
 }
+
+.math-caption {
+    font-size: 0.85em;
+    font-style: normal;      /* override italic if used elsewhere */
+    text-align: center;
+    margin-top: 0.3em;
+    margin-bottom: 1em;
+    color: #555;
