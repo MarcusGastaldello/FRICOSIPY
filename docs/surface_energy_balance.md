@@ -107,22 +107,17 @@ $$
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
+    A = B
+    $$
+    $$
     t^* = 
     \begin{cases}
-    t^*_{\mathrm{wet}}, & T_s = 0^\circ \mathrm{C} \\
-    t^*_{\mathrm{dry}} + K \left[ \max(T_s, T_{\mathrm{max}, t^*}) \right], & T_s < 0^\circ \mathrm{C}
+    t^*_{wet}, & T_s = 0^\circC \\
+    t^*_{dry} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circC
     \end{cases}
     $$
     </div>
         
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-    $$
-    t^* = 
-    \begin{cases}
-        t^*_{\mathrm{wet}}, & T_s = 0^\circ \mathrm{C} \\
-        t^*_{\mathrm{dry}} + K \left[ \max(T_s, T_{\mathrm{max}, t^*}) \right], & T_s < 0^\circ \mathrm{C}
-    \end{cases}
-    $$
     </div>
     <small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
