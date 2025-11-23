@@ -244,6 +244,15 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
 
+The rain heat flux represents the energy imparted to the glacier surface from the enthalpy of rainfall
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+Q_{rain} = \rho_{w} \: c_{\text{p,w}} \: dt \: (T_{a}-T_{s})
+$$
+</div>
+<small> where $\rho_{w}$ is the density of water (kg m$^{-3}$), $c_{\text{p,w}}$ is the specific heat of water under constant pressure (J kg$^{-1}$ K$^{-1}$), $dt$ is the model time step and the $s$ and $a$ subscripts refer to the surface and air respectively.</small>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
