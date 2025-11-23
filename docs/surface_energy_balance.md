@@ -111,14 +111,17 @@ $$
     B, & \text{if condition 2}
     \end{cases}
     $$
-
+    
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     \begin{cases}
-    A & T_s = 0^\circ C \\
-    B & T_s < 0^\circ C
+    A, & \text{if condition 1} \\
+    B, & \text{if condition 2}
     \end{cases}
     $$
+    </div>
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     t^* = 
     \begin{cases}
