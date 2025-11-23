@@ -164,7 +164,7 @@ $$
     \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
     $$
     </div>
-    <small>where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter.</small>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter. </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -218,13 +218,10 @@ The mass exchange associated with the latent heat flux depends on the glacier su
     $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
     $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
     </div>
-    <small>
-    where \(C_{hn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m).
-    </small>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where \(C_{hn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m). </div>
 
     The stability function \(\Psi_{Ri}\), derived from the bulk Richardson number \(Ri_b\), corrects for atmospheric stability:
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     \Psi_{Ri}  = 
     \begin{cases}
@@ -232,6 +229,8 @@ The mass exchange associated with the latent heat flux depends on the glacier su
     1 - 10 Ri_{\text{b}} \left(1 +10\:C_{\text{hn}} \frac{\sqrt{-Ri_{\text{b}}}}{f_z} \right)^{-1}, & Ri_{b} < 0 \quad \text{(unstable)} 
     \end{cases} 
     $$
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] 
     $$
@@ -239,7 +238,7 @@ The mass exchange associated with the latent heat flux depends on the glacier su
     f_{z} = \frac{1}{4} \sqrt{\frac{\mu}{z_\text{a}}}
     $$
     </div>
-    <small>where $g$ is the gravitational acceleration (m s$^{-2}$) and $\epsilon$ is the ratio of molecular weights between water and dry air.</small>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $g$ is the gravitational acceleration (m s$^{-2}$) and $\epsilon$ is the ratio of molecular weights between water and dry air.</div>
         
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
