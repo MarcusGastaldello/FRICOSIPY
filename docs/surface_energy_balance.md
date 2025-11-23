@@ -129,7 +129,7 @@ $$
     SW_{pen} (z) = \lambda_{abs} \: SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
     $$
     </div>
-    <small>where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</small>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
