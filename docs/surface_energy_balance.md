@@ -100,6 +100,16 @@ $$
 
 ---
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+$$
+t^* = 
+\begin{cases}
+t^*_{wet}, & T_s = 0^\circC \\
+t^*_{dry} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circC
+\end{cases}
+$$
+</div>
+
 ??? "**$(ii)$ Bougamont et al. (2005)**"
 
     <br>
@@ -308,5 +318,13 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
     The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface energy balance graph (akin to the figure above) for any output dataset.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+<script type="text/javascript">
+  document.querySelectorAll('details').forEach(el => {
+    el.addEventListener('toggle', () => {
+      if (el.open) { MathJax.typesetPromise([el]); }
+    });
+  });
+</script>
 
 
