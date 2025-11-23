@@ -104,11 +104,12 @@ $$
 $$
 t^* = 
 \begin{cases}
-t^*_{wet}, & T_s = 0^\circC \\
-t^*_{dry} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circC
+t^*_{wet}, & T_s = 0^\circ \text{C}\\
+t^*_{dry} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C}
 \end{cases}
 $$
 </div>
+<br>
 
 ??? "**$(ii)$ Bougamont et al. (2005)**"
 
