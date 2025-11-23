@@ -108,8 +108,8 @@ $$
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$
     \begin{cases}
-    A & T_s = 0^\circC \\
-    B & T_s < 0^\circC
+    A & T_s = 0^\circ C \\
+    B & T_s < 0^\circ C
     \end{cases}
     $$
     $$
