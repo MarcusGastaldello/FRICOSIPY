@@ -6,9 +6,9 @@ Driven by the input meteorological data, the surface energy fluxes are evaluated
 $$
 SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
 $$
-</figure>
-<figure class = "math-caption">
+<figcaption>
 where $SW_{net}$  is the net shortwave radiation flux, $Q_{sensible}$  and $Q_{latent}$  are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$  is the net longwave radiation flux, $Q_{rain}$  is the rain heat flux and $Q_{subsurface}$  is the subsurface heat conduction flux.
+</figcaption>
 </figure>
 
 ![Alt text](images/FRICOSIPY_SEB.png)
