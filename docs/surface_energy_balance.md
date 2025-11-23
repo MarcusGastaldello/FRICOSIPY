@@ -2,14 +2,15 @@
 
 Driven by the input meteorological data, the surface energy fluxes are evaluated at an infinitesimal skin layer to ascertain the surface temperature ($T_s$). Based on the principles of energy conservation:
 
-<div class = "math-block-wrapper">
+<figure class="math-block">
 $$
 SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
 $$
-<div class = "math-caption">
+<figcaption style = "math-caption">
 where $SW_{net}$ is the net shortwave radiation flux, $Q_{sensible}$ and $Q_{latent}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$ is the net longwave radiation flux, $Q_{rain}$ is the rain heat flux, and $Q_{subsurface}$ is the subsurface heat conduction flux.
-</div>
-</div>
+</figcaption>    
+</figure>
+
 
 ![Alt text](images/FRICOSIPY_SEB.png)
 
