@@ -97,7 +97,7 @@ $$
     $$
     </div>
     
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\alpha_{\text{fresh snow}} = 0.85$ and $\alpha_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic decay timescale parameter (days).</div>
+    <div style="font-size: small; margin-top: 0px; line-height: 1.75;"> where $\alpha_{\text{fresh snow}} = 0.85$ and $\alpha_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic decay timescale parameter (days).</div>
 
 ---
 
