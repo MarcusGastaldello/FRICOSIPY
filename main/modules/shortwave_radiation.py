@@ -34,7 +34,7 @@ def TOA_insolation(latitude,longitude,slope,aspect,hour,leap,hoy):
                 longitude         ::    WGS 84 Longitude Value of X-Position [decimal]
                 slope             ::    Slope Angle of Grid Cell [degrees]
                 aspect            ::    Relative Aspect op Grid Cell [degrees]                   
-                hour              ::    Hour of day [1-24]
+                hour              ::    Hour of day [1-24] (UTC)
                 leap              ::    Leap year boolean [True/False]     
                 hoy               ::    Hour of year [1-8784]           
     Output:
@@ -153,3 +153,4 @@ def shortwave_radiation_input(PRES,T2,RH,TOA_insol,TOA_insol_flat,TOA_insol_norm
     return SWin
 
 # ====================================================================================================================
+
