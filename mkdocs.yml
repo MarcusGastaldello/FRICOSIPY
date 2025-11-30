@@ -3,7 +3,6 @@ theme:
   name: readthedocs
   highlightjs: true
   logo: images/FRICOSIPY_Logo.png
-  custom_dir: overrides
 
 plugins:
   - search
@@ -39,6 +38,7 @@ nav:
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
+  - js/social_meta.js
 
 extra_css:
   - css/custom.css
