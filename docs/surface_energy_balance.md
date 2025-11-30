@@ -153,10 +153,10 @@ The sensible heat flux represents the transfer of heat energy and is driven by t
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{tn} \: V \:(T_{a}-T_{s})
+Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{t} \: V \:(T_{a}-T_{s})
 $$
 </div>
-<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{tn}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively. </small> 
+<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively. </small> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -170,10 +170,10 @@ The latent heat flux represents the transfer of latent energy (associated with p
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
-Q_{latent} = \rho_{a} \: L_{s,v} \: C_{tn} \: V \:(q_{a}-q_{s})
+Q_{latent} = \rho_{a} \: L_{s,v} \: C_{t} \: V \:(q_{a}-q_{s})
 $$
 </div>
-<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $C_{tn}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively.</small> 
+<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a measurement height of 2 metres respectively.</small> 
 
 The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
 
@@ -194,8 +194,8 @@ The mass exchange associated with the latent heat flux depends on the glacier su
     The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient $C_{tn}$ according to the surface roughness and the reference measurement height
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-    $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
-    $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
+    $$ C_{t} =  C_{tn} \: \Psi_{Ri} $$
+    $$ C_{tn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
     </div>
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where \(C_{tn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m). </div>
 
