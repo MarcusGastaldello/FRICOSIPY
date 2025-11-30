@@ -41,6 +41,8 @@ The following section explains each of these energy fluxes in greater detail and
 
 ![Alt text](images/Shortwave.png){width="100px" align=left}
 
+<br style="clear: both;" />
+
 Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near-ultraviolet (NUV), through the visible light (VIS) and to the near-infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. In the FRICOSIPY model, shortwave radiation is modelled after [Iqbal (1983)](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans (2002)](https://doi.org/10.3189/172756502781831133):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
