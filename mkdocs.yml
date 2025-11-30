@@ -2,7 +2,7 @@ site_name: FRICOSIPY
 theme:
   name: readthedocs
   highlightjs: true
-  logo: images/FRICOSIPY_logo.png
+  logo: images/FRICOSIPY_Logo.png
 
 plugins:
   - search
