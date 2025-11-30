@@ -18,7 +18,7 @@ The model is 1-dimensional; spatial nodes are simulated through time independant
 The *FRICOSIPY* model can be classified as a mid-complexity glacier model; it offers 
 
 
-than basic temperature index models (eg. [Hock, 1999](https://doi.org/10.3189/S0022143000003087))
+than basic temperature index models (eg. [Hock, 1999](https://doi.org/10.3189/S0022143000003087) , [Huss & Hock, 2015](https://doi.org/10.3389/feart.2015.00054))
 
 
 albeit being more computationally expensive 
