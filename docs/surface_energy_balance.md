@@ -301,7 +301,7 @@ $$
 
 <br style="clear: both;" />
 
-When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface \textendash the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
+When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface $\textendash$ the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
 $$
