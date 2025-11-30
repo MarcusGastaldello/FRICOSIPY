@@ -11,7 +11,7 @@ $$
 
 ![Alt text](images/FRICOSIPY_SEB.png){width="300px" align=left}
 
-<br>
+<br style="clear: both;" />
 
 <small> ***Figure 2**: FRICOSIPY Surface Energy Balance</small>
 
