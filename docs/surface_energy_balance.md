@@ -180,6 +180,8 @@ $$
 
 The turbulent fluxes represent heat and moisture exchange between the atmosphere and the glacier surface, driven by the convective, turbulent motions of the air within the atmospheric boundary layer. In the *FRICOSIPY* model, these exchanges are calculated using bulk aerodynamic equations, which are governed by wind speed, surface roughness, and the gradients of temperature and humidity between the glacier surface and the overlying air.
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
 ![Alt text](images/Sensible.png){width="125px" align=left}
