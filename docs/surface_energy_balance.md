@@ -191,7 +191,7 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 ??? "**$(i)$ Essery and Etchevers (2004)**"
 
     <br>
-    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient $C_{tn}$ according to the surface roughness ($\mu$) and the reference measurement height ($z_a$):
+    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient ($C_{tn}$) according to the surface roughness ($\mu$) and the reference measurement height ($z_a$):
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$ C_{t} =  C_{tn} \: \Psi_{Ri} $$
