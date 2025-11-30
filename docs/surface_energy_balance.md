@@ -9,9 +9,7 @@ $$
 </div>
 <small> where $SW_{net}$ is the net shortwave radiation flux, $Q_{sensible}$ and $Q_{latent}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$ is the net longwave radiation flux, $Q_{rain}$ is the rain heat flux, and $Q_{subsurface}$ is the subsurface heat conduction flux. </small>
 
-![Alt text](images/FRICOSIPY_SEB.png){width="300px" align=left}
-
-<br style="clear: both;" />
+![Alt text](images/FRICOSIPY_SEB.png)
 
 <small> **Figure 2**: FRICOSIPY Surface Energy Balance</small>
 
@@ -40,6 +38,8 @@ The following section explains each of these energy fluxes in greater detail and
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
+
+![Alt text](images/Shortwave.png){width="100px" align=left}
 
 Shortwave radiation is the thermal radiation supplied directly from the Sun that ranges from the near-ultraviolet (NUV), through the visible light (VIS) and to the near-infrared (NIR) ranges ($\sim$ 0.2 - 3 $\mu$m) of the electromagnetic spectrum. In the FRICOSIPY model, shortwave radiation is modelled after [Iqbal (1983)](https://doi.org/10.1016/B978-0-12-373750-2.X5001-0) and [Klok & Oerlemans (2002)](https://doi.org/10.3189/172756502781831133):
 
