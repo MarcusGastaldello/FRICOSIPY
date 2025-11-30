@@ -158,6 +158,8 @@ $$
 </div>
 <small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively. </small> 
 
+*Eg. If the air temperature is warmer than the glacier, sensible / heat energy convects towards and warms the glacier surface.*
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
