@@ -39,6 +39,8 @@ cd utilities/create_STATIC/
 python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ```
 
+
+
 !!! note
      A utility program designed to directly convert a Digital Elevation Model (DEM) to a static file (without the need for GIS software)
      is currently in development.
@@ -79,6 +81,9 @@ The '*create_METEO.py*' utility program can then convert it into NetCDF format, 
 cd utilities/create_METEO/
 python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data/meteo/<meteo_netcdf>.nc
 ```
+
+In Switzerland, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
+*Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
