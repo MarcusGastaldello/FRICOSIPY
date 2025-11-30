@@ -39,7 +39,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-![Alt text](images/Shortwave.png){width="150px" align=left}
+![Alt text](images/Shortwave.png){width="100px" align=left}
 
 <br style="clear: both;" />
 
@@ -139,6 +139,10 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
 
+![Alt text](images/Longwave.png){width="100px" align=left}
+
+<br style="clear: both;" />
+
 Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation ($LW_{net}$) is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
@@ -178,6 +182,10 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
+![Alt text](images/Sensible.png){width="100px" align=left}
+
+<br style="clear: both;" />
+
 The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient ($\Delta T$) between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
@@ -190,6 +198,10 @@ $$
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
+
+![Alt text](images/Latent.png){width="100px" align=left}
+
+<br style="clear: both;" />
 
 The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient ($\Delta q$) between the atmosphere and the glacier surface.
 
@@ -248,6 +260,10 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
 
+![Alt text](images/Rain.png){width="100px" align=left}
+
+<br style="clear: both;" />
+
 The rain heat flux represents the energy imparted to the surface from the enthalpy of rainfall:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
@@ -278,6 +294,10 @@ $$
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
+
+![Alt text](images/Melt.png){width="100px" align=left}
+
+<br style="clear: both;" />
 
 When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface \textendash the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
 
