@@ -191,13 +191,13 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 ??? "**$(i)$ Essery and Etchevers (2004)**"
 
     <br>
-    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) 
+    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) the turbulent exchange coefficient $C_{tn}$
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
     $$ C_{h} =  C_{hn} \: \Psi_{Ri} $$
     $$ C_{hn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
     </div>
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where \(C_{hn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m). </div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where \(C_{tn}\) is the neutral-condition transfer coefficient, \(\kappa = 0.40\) is the von Kármán constant, and \(\mu\) is the surface roughness (m). </div>
 
     The stability function \(\Psi_{Ri}\), derived from the bulk Richardson number \(Ri_b\), corrects for atmospheric stability:
 
