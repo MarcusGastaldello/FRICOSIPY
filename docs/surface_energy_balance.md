@@ -177,12 +177,12 @@ $$
 
 The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
 
-| Phase Change | Surface Energy Exchange | Surface Mass Exchange | Surface Temperature |
+| Phase Change | Surface Energy Exchange | Surface Mass Exchange | Surface Temp |
 |-----------|----------|-----------|------------|
-| **Deposition** (vapour $\rightarrow$ ) | Absorption $(+)$ | Accumulation $(+)$ | $< 0$ $^\circ$C |
-| **Condensation** (vapour -->) | Absorption $(+)$ | Accumulation $(+)$ | $= 0$ $^\circ$C |
-| **Evaporation** (water --> vapour) | Emission $(-)$ | Ablation $(-)$ | $= 0$ $^\circ$C |
-| **Sublimation** (solid --> vapour) | Emission $(-)$ | Ablation $(-)$ | $< 0$ $^\circ$C |
+| **Deposition** (*vapour* $\rightarrow$ *solid*) | Absorption $(+)$ | Accumulation $(+)$ | $< 0$ $^\circ$C |
+| **Condensation** (*vapour* $\rightarrow$ *liquid*) | Absorption $(+)$ | Accumulation $(+)$ | $= 0$ $^\circ$C |
+| **Evaporation** (*water* $\rightarrow$ *vapour*) | Emission $(-)$ | Ablation $(-)$ | $= 0$ $^\circ$C |
+| **Sublimation** (*solid* $\rightarrow$ *vapour*) | Emission $(-)$ | Ablation $(-)$ | $< 0$ $^\circ$C |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
