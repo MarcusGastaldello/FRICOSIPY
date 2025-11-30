@@ -143,7 +143,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 !!! note
 
-    The
+    The magnitude of turbulence exchange strongly depends on the wind speed as strong turbulent motion in the lower atmosphere is needed to maintain strong convective gradients with the surface. In calm conditions / still air turbulent exchange is often negligible.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -183,7 +183,7 @@ $$
 
 !!! note
 
-    The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
+    The phase change associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
 
 | Phase Change | Surface Energy Exchange | Surface Mass Exchange | Surface Temp |
 |-----------|----------|-----------|------------|
