@@ -6,6 +6,10 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 
 ## $(1)$ Static File
 
+![Alt text](images/Static.png){width="125px" align=left}
+
+<br style="clear: both;" />
+
 The model static input file contains topographic information that varies across the spatial domain  
 ( 𝑥 , 𝑦 ) and requires the following variables:
 
@@ -43,6 +47,10 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
 
 ## $(2)$ Meteorological File
 
+![Alt text](images/Meteo.png){width="125px" align=left}
+
+<br style="clear: both;" />
+
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
 * **DATETIME** - Datetime [yyyy-mm-dd hh:mm]
@@ -75,6 +83,10 @@ python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## $(3)$ Illumination File
+
+![Alt text](images/Illumination.png){width="125px" align=left}
+
+<br style="clear: both;" />
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
 
