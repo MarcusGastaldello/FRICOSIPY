@@ -1,4 +1,4 @@
-# Subsurface Model
+# Multi-layer Subsurface Model
 
 ## Percolation & Refreezing
 
