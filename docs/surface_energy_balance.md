@@ -141,6 +141,10 @@ $$
 
 The turbulent fluxes represent heat and moisture exchange between the atmosphere and the glacier surface, driven by the convective, turbulent motions of the air within the atmospheric boundary layer. In the *FRICOSIPY* model, these exchanges are calculated using bulk aerodynamic equations, which are governed by wind speed, surface roughness, and the gradients of temperature and humidity between the glacier surface and the overlying air.
 
+!!! note
+
+    The
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
@@ -177,7 +181,9 @@ $$
 </div>
 <small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively.</small> 
 
-The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
+!!! note
+
+    The mass exchange associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
 
 | Phase Change | Surface Energy Exchange | Surface Mass Exchange | Surface Temp |
 |-----------|----------|-----------|------------|
