@@ -41,7 +41,7 @@ python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../d
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Meteorological File
+## $(2)$ Meteorological File
 
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
@@ -74,7 +74,7 @@ python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Illumination File
+## $(3)$ Illumination File
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
 
