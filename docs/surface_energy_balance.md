@@ -39,7 +39,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-![Alt text](images/Shortwave.png){width="100px" align=left}
+![Alt text](images/Shortwave.png){width="150px" align=left}
 
 <br style="clear: both;" />
 
