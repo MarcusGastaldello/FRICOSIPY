@@ -39,7 +39,8 @@ cd utilities/create_STATIC/
 python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ```
 
-
+In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* product of the 
+*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
 !!! note
      A utility program designed to directly convert a Digital Elevation Model (DEM) to a static file (without the need for GIS software)
@@ -82,7 +83,7 @@ cd utilities/create_METEO/
 python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data/meteo/<meteo_netcdf>.nc
 ```
 
-In Switzerland, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
+In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
 *Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
