@@ -1,6 +1,6 @@
 # Introduction
 
-The *FRICOSIPY* model combines a surface energy balance with a multi-layer subsurface model.
+The *FRICOSIPY* model combines a [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) with a [multi-layer subsurface model](https://fricosipy.readthedocs.io/en/latest/subsurface_model/).
 
 For each simulation timestep, first the surface temperature of an infinitesimal skin-layer is determined by evaluating the surface energy fluxes – these are phyically derived or parameterised from the input meteorological and topographic data. Subsequently,  . 
 
