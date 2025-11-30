@@ -137,45 +137,6 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
-
-![Alt text](images/Longwave.png){width="125px" align=left}
-
-<br style="clear: both;" />
-
-Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation ($LW_{net}$) is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
-
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-$$
-LW_{net} = LW_{in} - \varepsilon_{s} \: \sigma \: T_{s}^{4}
-$$
-</div>
-<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature (K).</small>
-
----
-
-### Longwave Radiation Parameterisation 
-
-??? "**$(i)$ Konzelmann et al. (1994)**"
-
-    <br>
-    If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity <br> ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
-
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
-    $$
-    LW_{in} = \varepsilon_{atm} \: \sigma \: T_{a}^{4}
-    $$
-    $$    
-    \varepsilon_{atm} = \varepsilon_{cs} \: ( 1 - N^2) + \varepsilon_{clouds} \: N^2
-    $$    
-    $$
-    \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
-    $$
-    </div>
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter. </div>
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
 ## Turbulent Fluxes
 
 The turbulent fluxes represent heat and moisture exchange between the atmosphere and the glacier surface, driven by the convective, turbulent motions of the air within the atmospheric boundary layer. In the *FRICOSIPY* model, these exchanges are calculated using bulk aerodynamic equations, which are governed by wind speed, surface roughness, and the gradients of temperature and humidity between the glacier surface and the overlying air.
