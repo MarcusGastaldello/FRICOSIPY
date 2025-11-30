@@ -186,6 +186,8 @@ The mass exchange associated with the latent heat flux depends on the glacier su
 | **Evaporation** (*water* $\rightarrow$ *vapour*) | Emission $(-)$ | Ablation $(-)$ | $= 0$ $^\circ$C |
 | **Sublimation** (*solid* $\rightarrow$ *vapour*) | Emission $(-)$ | Ablation $(-)$ | $< 0$ $^\circ$C |
 
+*Eg. If the surface temperature is $< 0$ $ and the air is dry (low specific humidity), sublimation will occur on the surface of the glacier - mass will be lost / ablated as vapour to the atmosphere.*
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Turbulent Exchange Parameterisation
