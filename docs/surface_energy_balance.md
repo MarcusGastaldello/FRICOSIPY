@@ -143,7 +143,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 !!! note
 
-    The magnitude of turbulence exchange strongly depends on the wind speed as strong turbulent motion in the lower atmosphere is needed to maintain strong convective gradients with the surface. In calm conditions / still air turbulent exchange is often negligible.
+    The magnitude of turbulent exchange strongly depends on the wind speed as strong turbulent motion in the lower atmosphere is needed to maintain strong convective gradients with the surface. In calm conditions / still air, turbulent exchange remains negligible.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
