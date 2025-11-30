@@ -13,7 +13,7 @@ $$
 
 <br style="clear: both;" />
 
-<small> ***Figure 2**: FRICOSIPY Surface Energy Balance</small>
+<small> **Figure 2**: FRICOSIPY Surface Energy Balance</small>
 
 !!! note
 
