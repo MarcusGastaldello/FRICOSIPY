@@ -334,10 +334,13 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
+**Figure 4** shows an exemplar surface energy balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. 
 
 ## Exemplar Surface Mass Balance
 
 ![Alt text](images/Exemplar_SMB.png)
+
+<small> **Figure 4**: Exemplar Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small>
 
 !!! note
 
