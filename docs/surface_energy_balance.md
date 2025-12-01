@@ -336,7 +336,7 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 ## Exemplar Surface Mass Balance
 
-The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the surface – either accumulation (+) or ablation (-). In contrast to the energy balance, the monthly mass fluxes do not need to be balanced. **Figure 4** shows an exemplar point surface mass balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being situated in a high-altitude accumulation area, the net mass exchange is positive.
+The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the surface – either accumulation $(+)$ or ablation $(-)$. In contrast to the energy balance, the monthly mass fluxes do not need to be balanced. **Figure 4** shows an exemplar point surface mass balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being situated in a high-altitude accumulation area, the net mass exchange is positive.
 
 ![Alt text](images/Exemplar_SMB.png)
 
