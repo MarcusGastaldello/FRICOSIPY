@@ -338,6 +338,12 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
+
+## Exemplar Surface Mass Balance
+
+![Alt text](images/Exemplar_SMB.png)
+
+
 <script type="text/javascript">
   document.querySelectorAll('details').forEach(el => {
     el.addEventListener('toggle', () => {
