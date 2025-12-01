@@ -19,7 +19,7 @@ $$
 
 However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt ($Q_{melt}$) should the surface temperature reach 0 $^\circ$C:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative; max-width:100%; overflow-x:auto;">
   <div style="position:absolute; top:4px; left:10px; font-size:12px; color:#444;">
     \( \text{if } T_s = 0 \:^\circ\text{C}\: :\)
   </div>
@@ -54,7 +54,7 @@ $$
 
 The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption ($\tau_{rg}$), water absorption ($\tau_{w}$) and the attenuation by aerosols ($\tau_{aerosols}$) are modelled after [Kondratyev (1969)](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald (1960)](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton (1954)](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover ($\tau_{clouds}$), is modelled after [Gruell et al. (1997)](https://doi.org/10.1029/97JD02083):
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 \tau_{clouds} = 1 - a \: N - b \: N^2
 $$
@@ -63,7 +63,7 @@ $$
 
 The incoming shortwave radiation ($SW_{in}$) is computed as the sum of the direct and diffuse components of the solar irradiance, after [Oerlemans (1992)](https://doi.org/10.3189/S0022143000003634); spatial nodes shaded by surrounding topography only receive diffuse radiation.
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 SW_{in}
 =
@@ -78,7 +78,7 @@ $$
 
 The net shortwave radiation ($SW_{net}$) entering the energy balance is calculated using a broadband isotropic albedo ($\alpha$), that determines the proportion of incoming radiation reflected off the surface. The user can also optionally apportion some of the input shortwave radiation to directly bypass the surface energy balance and directly warm the subsurface layers.
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
 $$
@@ -95,7 +95,7 @@ $$
     Using the parameterisation of [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574), the evolution of the broadband albedo <br> 
     ($\alpha$) is modelled as an exponentially decreasing function of time $t$ since the last significant snowfall event.
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     \alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
     $$
@@ -128,7 +128,7 @@ $$
     <br>
     If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     SW_{pen} (z) = \lambda_{abs} \: SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
     $$
@@ -155,7 +155,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient ($\Delta T$) between the atmosphere and the glacier surface.
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{t} \: V \:(T_{a}-T_{s})
 $$
@@ -174,7 +174,7 @@ $$
 
 The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient ($\Delta q$) between the atmosphere and the glacier surface.
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 Q_{latent} = \rho_{a} \: L_{s,v} \: C_{t} \: V \:(q_{a}-q_{s})
 $$
@@ -203,7 +203,7 @@ $$
     <br>
     The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient ($C_{t}$) according to the surface roughness ($\mu$) and the reference measurement height ($z_a$):
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$ C_{t} =  C_{tn} \: \Psi_{Ri} $$
     $$ C_{tn} = \kappa^{2} \left[ \text{log} \left( \frac{z_{a}}{\mu} \right) \right] ^{-2} $$
     </div>
@@ -219,7 +219,7 @@ $$
     \end{cases} 
     $$
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     Ri_{\text{b}} = \frac{g \: z_\text{a}}{V_{\text{a}}^2} \left[ \frac{T_{\text{a}} - T_{\text{s}}}{T_{\text{a}}} + \frac{q_{\text{a}} - q_{s}}{q_{\text{a}}+\epsilon \: (1-\epsilon)} \right] 
     $$
@@ -239,7 +239,7 @@ $$
 
 Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation ($LW_{net}$) is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 LW_{net} = LW_{in} - \varepsilon_{s} \: \sigma \: T_{s}^{4}
 $$
@@ -255,7 +255,7 @@ $$
     <br>
     If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity <br> ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     LW_{in} = \varepsilon_{atm} \: \sigma \: T_{a}^{4}
     $$
@@ -278,7 +278,7 @@ $$
 
 The rain heat flux represents the energy imparted to the surface from the enthalpy of rainfall:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 Q_{rain} = \rho_{w} \: c_{\text{p,w}} \: dt \: (T_{a}-T_{s})
 $$
@@ -296,7 +296,7 @@ $$
 
 The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 Q_{subsurface} = k_{s} \: \left[ \frac{T_{z\:\text{interp 2}} - T_{z\:\text{interp 1}}}{z_{\:\text{interp 2}} - z_{\:\text{interp 1}}} \right]
 $$
@@ -313,7 +313,7 @@ $$
 
 When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface – the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9;">
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 \text{Surface melt} = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{f}}
 $$
