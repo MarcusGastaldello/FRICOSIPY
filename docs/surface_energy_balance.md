@@ -326,7 +326,7 @@ This surface melt, combined with any rain or condensation, is then transferred i
 
 ## Exemplar Surface Energy Balance
 
-Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. According to the priniciples of energy conservation, the opposing monthly energy fluxes must always be balanced. **Figure 3** shows an exemplar point surface energy balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being a high-altitude, wind-exposed glacierised saddle, turbulent exchange has a significant contribution to energy turnover and melt is minimal and confined to the summer months.
+Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. According to the priniciples of energy conservation, **the opposing monthly energy fluxes must always be balanced**. **Figure 3** shows an exemplar point surface energy balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being a high-altitude, wind-exposed glacierised saddle, turbulent exchange has a significant contribution to energy turnover and melt is minimal and confined to the summer months.
 
 ![Alt text](images/Exemplar_SEB.png)
 
