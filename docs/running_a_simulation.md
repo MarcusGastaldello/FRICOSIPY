@@ -3,19 +3,26 @@
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Configuration File Setup
+## File Selection
 
+
+
+
+
+
+## Spatial Extent / Subset
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-### Output Variables
+## Output Variables
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-#### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
+### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
----
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-#### 4-D Output Variables ( $x$ , $𝑦$, $z$ , $t$  )
+### 4-D Output Variables ( $x$ , $𝑦$, $z$ , $t$  )
 
 * **DEPTH** - 
 * **HEIGHT** - 
@@ -24,6 +31,13 @@
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-### Dask Parallelisation
+## Output Reporting Frequency
+
+
+
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## Dask Parallelisation
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
