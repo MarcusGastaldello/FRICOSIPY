@@ -19,7 +19,8 @@
 
 * **DEPTH** - 
 * **HEIGHT** - 
-* **DENSITY** - 
+* **DENSITY** -
+* **TEMPERATURE** -
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
