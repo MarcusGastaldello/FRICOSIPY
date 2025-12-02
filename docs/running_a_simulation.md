@@ -13,7 +13,7 @@
 
 #### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+---
 
 #### 4-D Output Variables ( $x$ , $𝑦$, $z$ , $t$  )
 
