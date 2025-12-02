@@ -36,6 +36,7 @@
 
 #### Subsurface Variables (12):
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 * **DEPTH** - 
 * **HEIGHT** - 
 * **DENSITY** -
@@ -48,6 +49,7 @@
 * **REFREEZE** -
 * **HYDRO YEAR** - Layer hydrological year [yyyy]
 * **GRAIN SIZE** - Layer grain size [mm]
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
