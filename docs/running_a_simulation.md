@@ -38,14 +38,14 @@
 
 * **DEPTH** - Layer depth [m]
 * **HEIGHT** - Layer height [m]
-* **DENSITY** - Layer density [kg m$^{-3}$]
-* **TEMPERATURE** - Layer temperature []
+* **DENSITY** - Layer density [kg m$^{-3}$ ]
+* **TEMPERATURE** - Layer temperature [$^\circ$C]
 * **WATER CONTENT** - Layer water content [-]
-* **COLD CONTENT** -
+* **COLD CONTENT** - Layer cold content [J m$^{-3}$ ]
 * **POROSITY** - Layer (volumetric) porosity [-]
 * **ICE FRACTION** - Layer volumetric ice fraction [-]
 * **IRREDUCIBLE WATER** - Layer irreducible water content [-]
-* **REFREEZE** -
+* **REFREEZE** - Layer refreeze [m w.e.]
 * **HYDRO YEAR** - Layer hydrological year [yyyy]
 * **GRAIN SIZE** - Layer grain size [mm]
 
