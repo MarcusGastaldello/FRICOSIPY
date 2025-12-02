@@ -20,14 +20,34 @@
 
 ### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
+#### Meteorological Variables (5):
+
+#### Surface Energy Fluxes (7):
+
+#### Surface Mass Fluxes (8):
+
+#### Subsurface Mass Fluxes (4):
+
+#### Other (9):
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### 4-D Output Variables ( $x$ , $𝑦$, $z$ , $t$  )
+
+#### Subsurface Variables (12):
 
 * **DEPTH** - 
 * **HEIGHT** - 
 * **DENSITY** -
 * **TEMPERATURE** -
+* **WATER CONTENT** -
+* **COLD CONTENT** -
+* **POROSITY** -
+* **ICE FRACTION** -
+* **IRREDUCIBLE WATER** -
+* **REFREEZE** -
+* **HYDRO YEAR** -
+* **GRAIN SIZE** -
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
