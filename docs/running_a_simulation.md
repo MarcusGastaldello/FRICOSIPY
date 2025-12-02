@@ -1,5 +1,11 @@
 # Running a Simulation
 
+
+```python
+def hello():
+    print("Hello world!")
+```
+
 ## Configuration File Setup
 
 ### Output Variables
