@@ -40,14 +40,14 @@
 * **HEIGHT** - 
 * **DENSITY** -
 * **TEMPERATURE** -
-* **WATER CONTENT** -
+* **WATER CONTENT** - 
 * **COLD CONTENT** -
 * **POROSITY** -
 * **ICE FRACTION** -
-* **IRREDUCIBLE WATER** -
+* **IRREDUCIBLE WATER** - Layer irreducible water content [-]
 * **REFREEZE** -
-* **HYDRO YEAR** -
-* **GRAIN SIZE** -
+* **HYDRO YEAR** - Layer hydrological year [yyyy]
+* **GRAIN SIZE** - Layer grain size [mm]
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
