@@ -24,6 +24,10 @@
 
 #### Surface Energy Fluxes (7):
 
+* **SHORTWAVE** - Net shortwave radiation flux [W m$^{-2}$ ]
+
+---
+
 #### Surface Mass Fluxes (8):
 
 #### Subsurface Mass Fluxes (4):
@@ -49,9 +53,8 @@
 * **HYDRO YEAR** - Layer hydrological year [yyyy]
 * **GRAIN SIZE** - Layer grain size [mm]
 
-!!! Attention
-
-  The
+!!! attention
+    Including the subsurface variables in the output dataset 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
