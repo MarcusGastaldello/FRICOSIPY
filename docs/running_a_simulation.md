@@ -20,9 +20,13 @@
 
 ### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
-#### Meteorological Variables (5):
+#### Meteorological Variables (5)
 
-#### Surface Energy Fluxes (7):
+
+
+---
+
+#### Surface Energy Fluxes (7)
 
 * **SHORTWAVE** - Net shortwave radiation flux [W m$^{-2}$ ]
 * **SENSIBLE** - Net sensible radiation flux [W m$^{-2}$ ]
@@ -34,17 +38,24 @@
 
 ---
 
-#### Surface Mass Fluxes (8):
+#### Surface Mass Fluxes (8)
 
-#### Subsurface Mass Fluxes (4):
 
-#### Other (9):
+
+---
+
+#### Subsurface Mass Fluxes (4)
+
+
+---
+
+#### Other (9)
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-#### Subsurface Variables (12):
+#### Subsurface Variables (12)
 
 * **DEPTH** - Layer depth [m]
 * **HEIGHT** - Layer height [m]
