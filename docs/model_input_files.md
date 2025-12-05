@@ -32,11 +32,11 @@ An exemplar static CSV would therefore have the following format:
 !!! attention
     FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
 
-The '*create_STATIC.py*' utility program can then convert it into NetCDF format, if required.
+The '*create_static_netcdf_from_CSV.py*' utility program can then convert it into NetCDF format.
 
 ```python
 cd utilities/create_STATIC/
-python3 create_static_netcdf_CSV.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+python3 create_static_netcdf_from_CSV.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* product of the 
@@ -76,7 +76,7 @@ An exemplar meteo CSV would therefore have the following format:
 | 2024-01-00 13:00   | 273.15 | 6.22 | 60.54 | 652.42 | 1.00 | 0.32 |
 | 2024-01-00 14:00   | 274.56 | 8.71 | 66.22 | 672.18 | 0.00 | 0.12 |
 
-The '*create_METEO.py*' utility program can then convert it into NetCDF format, if required.
+The '*create_meteo_netcdf.py*' utility program can then convert it into NetCDF format.
 
 ```python
 cd utilities/create_METEO/
@@ -96,7 +96,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
 
-The '*create_ILLUMINATION.py*' utility program can create this file from an existing static file.
+The '*create_illumination_netcdf.py*' utility program can create this file from an existing static file.
 
 ```python
 cd utilities/create_ILLUMINATION/
