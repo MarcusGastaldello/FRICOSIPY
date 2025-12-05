@@ -36,7 +36,7 @@ The '*create_STATIC.py*' utility program can then convert it into NetCDF format,
 
 ```python
 cd utilities/create_STATIC/
-python3 create_static_netcdf.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
+python3 create_static_netcdf_CSV.py -c ../../data/static/<static_csv>.csv -s ../../data/static/<static_netcdf>.nc
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* product of the 
