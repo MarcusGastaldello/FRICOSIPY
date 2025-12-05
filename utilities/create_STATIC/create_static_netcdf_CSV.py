@@ -1,7 +1,7 @@
 """
     ==================================================================
 
-                      CREATE STATIC INPUT FILE PROGRAM
+                 CREATE STATIC INPUT FILE PROGRAM (from CSV)
 
         This file creates the model input static file that contains 
         topographic information that varies across the spatial 
@@ -208,5 +208,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     create_static_input(args.csv_file, args.static_file)
+
 
 # ============================================================================================= #
