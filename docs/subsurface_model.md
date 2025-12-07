@@ -47,6 +47,10 @@
 
 ## Dry Firn Densification
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Dry Firn Densification Parameterisations
+
 ??? "**$(i)$ Boone (2002)**"
 
 ---
@@ -64,3 +68,12 @@
 ??? "**$(i)$ Katsushima et al. (2009)**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## Exemplar
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## Exemplar
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
