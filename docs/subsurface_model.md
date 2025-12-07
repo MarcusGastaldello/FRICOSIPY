@@ -28,7 +28,11 @@
 
 ### Specific Heat Capacity Parameterisations
 
+??? "**$(i)$ Bulk-volumetric**"
 
+---
+
+??? "**$(ii)$ Yen (1981)**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
