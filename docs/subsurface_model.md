@@ -69,11 +69,11 @@
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Exemplar
+## Exemplar Temperature-Depth Profile
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Exemplar
+## Exemplar Density-Depth Profile
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
