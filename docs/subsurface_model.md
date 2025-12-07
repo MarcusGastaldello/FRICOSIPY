@@ -38,6 +38,12 @@
 
 ## Dry Firn Densification
 
+??? "**$(i)$ Boone (2002)**"
+
+---
+
+??? "**$(ii)$ Ligtenberg et al. (2011)**"
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Snow Metamorphism
