@@ -1,6 +1,15 @@
 # Multi-layer Subsurface Model
 
 
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## Precipitation
+
+### Standard
+
+### Three Phase Anomaly Method
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Percolation & Refreezing
