@@ -6,9 +6,9 @@
 
 ## Precipitation
 
-### Standard
+### Advanced Methods
 
-### Three Phase Anomaly Method
+??? "**$(i)$ Three-Phase Anomaly**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
