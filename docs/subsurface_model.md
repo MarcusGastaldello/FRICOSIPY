@@ -19,6 +19,14 @@
 ## Thermal Diffusion
 
 
+
+
+In the *FRICOSIPY* model, the heat equation is numerically solved using an implicit second-order central difference scheme, constrained between two boundary conditions; 
+the derived surface temperature ($T_{s}$) from the resolution of the surface energy balance (*Dirichlet*) and a basal / geomethermal heat flux (*Neumann*).
+
+
+
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Thermal Conductivitiy Parameterisations
