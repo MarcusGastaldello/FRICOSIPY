@@ -1,24 +1,26 @@
-.math-block {
-    border: 1px solid #ccc;
-    background: #f9f9f9;
-    padding: 12px;
-    margin: 1.5em auto;
-    display: inline-block;
+/* Header & sidebar like Read the Docs */
+.md-header, .md-header-nav {
+    background-color: #f7f7f7;
 }
 
-.math-block figcaption {
-    font-size: 0.85em;
-    font-style: normal;
-    text-align: center;
-    margin-top: 0.3em;
-    color: #555;
+.md-sidebar {
+    background-color: #f7f7f7;
+    border-right: 1px solid #dfe2e5;
+    box-shadow: none;
 }
 
-.math-caption {
-    font-size: 0.85em;
-    font-style: normal;
-    text-align: center;
-    margin-top: 0.3em;
-    margin-bottom: 1em;
-    color: #555;
+/* Main content background */
+.md-main {
+    background-color: #ffffff;
+}
 
+/* Footer color */
+.md-footer {
+    background-color: #f7f7f7;
+}
+
+/* Font tweaks to match RTD */
+.md-nav__link, .md-nav__title {
+    font-family: "Roboto", sans-serif;
+    font-size: 0.95rem;
+}
