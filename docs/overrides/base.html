@@ -1,0 +1,7 @@
+{# docs/overrides/base.html #}
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  {% include "meta.html" %}
+{% endblock %}
