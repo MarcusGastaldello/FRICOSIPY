@@ -300,14 +300,14 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
 
-The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient:
+The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient ($\frac{\delta T}{\delta z}$):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
 Q_{subsurface} = k_{s} \: \frac{\delta T}{\delta z} 
 $$
 </div>
-
+<small> where $k_{s}$ is the surface thermal conductivity (W m$^{-1}$ K$^{-1}$)
 
 
 
