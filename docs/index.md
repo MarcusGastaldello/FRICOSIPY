@@ -1,3 +1,6 @@
+---
+description: "The University of Fribourg Variant of the Coupled Snow & Ice Model in Python"
+---
 
 # FRICOSIPY
 
