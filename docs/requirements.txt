@@ -1,6 +1,6 @@
 # MkDocs and Material
-mkdocs==1.8.0
-mkdocs-material>=10.0
+mkdocs==1.6.1
+mkdocs-material==9.1.12
 
 # Plugins
 mkdocstrings[python]==0.19.0
