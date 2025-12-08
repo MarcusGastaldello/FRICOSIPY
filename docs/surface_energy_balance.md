@@ -126,7 +126,7 @@ $$
 ??? "**$(i)$ Bintanja & van den Broeke (1995)**"
 
     <br>
-    If the user enables the penetrating radiation module, the absorbed radiation ($SW_{pen}$) at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-            0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+    If the user enables the penetrating radiation module, the absorbed radiation $(SW_{pen})$ at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
@@ -143,7 +143,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 !!! note
 
-    The magnitude of turbulent exchange heavily depends on the wind speed as strong turbulent motion in the lower atmosphere is needed to maintain strong convective gradients with the surface. In calm conditions / still air, turbulent exchange remains negligible.
+    The magnitude of turbulent exchange heavily depends on the wind speed $(V)$ as strong turbulent motion in the lower atmosphere is needed to maintain strong convective gradients with the surface. In calm conditions / still air, turbulent exchange remains negligible.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -153,7 +153,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 <br style="clear: both;" />
 
-The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient ($\Delta T$) between the atmosphere and the glacier surface.
+The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient $(\Delta T)$ between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -172,7 +172,7 @@ $$
 
 <br style="clear: both;" />
 
-The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient ($\Delta q$) between the atmosphere and the glacier surface.
+The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient $(\Delta q)$ between the atmosphere and the glacier surface.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -183,7 +183,7 @@ $$
 
 !!! note
 
-    The phase change associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient ($\Delta q$):
+    The phase change associated with the latent heat flux depends on the glacier surface temperature and the direction of the moisture gradient $(\Delta q)$:
 
 | Phase Change | Surface Energy Exchange | Surface Mass Exchange | Surface Temp |
 |-----------|----------|-----------|------------|
@@ -201,7 +201,7 @@ $$
 ??? "**$(i)$ Essery and Etchevers (2004)**"
 
     <br>
-    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient ($C_{t}$) according to the surface roughness ($\mu$) and the reference measurement height ($z_a$):
+    The parameterisation of [Essery and Etchevers (2004)](https://doi.org/10.1029/2004JD005036) defines the bulk turbulent exchange coefficient $(C_{t})$ according to the surface roughness $(\mu)$ and the reference measurement height $(z_a)$:
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$ C_{t} =  C_{tn} \: \Psi_{Ri} $$
@@ -243,7 +243,7 @@ $$
 
 <br style="clear: both;" />
 
-Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation ($LW_{net}$) is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
+Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation $(LW_{net})$ is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -259,7 +259,7 @@ $$
 ??? "**$(i)$ Konzelmann et al. (1994)**"
 
     <br>
-    If the user is unable to provide incoming longwave radiation ($LW_{in}$) in the input meterological data, it can instead by derived from the fractional cloud cover ($N$) using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature ($T_a$) and atmospheric emissivity <br> ($\varepsilon_{atm}$) into the *Stefan*-*Boltzmann* law:
+    If the user is unable to provide incoming longwave radiation $(LW_{in})$ in the input meterological data, it can instead by derived from the fractional cloud cover $(N)$ using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature $(T_a)$ and atmospheric emissivity <br> $(\varepsilon_{atm})$ into the *Stefan*-*Boltzmann* law:
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
@@ -300,7 +300,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
 
-The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient ($\frac{\delta T}{\delta z}$):
+The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient $(\frac{\delta T}{\delta z})$:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -317,7 +317,7 @@ $$
 
 <br style="clear: both;" />
 
-When the surface temperature ($T_s$) is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface – the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
+When the surface temperature $(T_s)$ is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface – the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
