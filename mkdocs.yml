@@ -1,8 +1,21 @@
 site_name: FRICOSIPY
 theme:
-  name: readthedocs
-  highlightjs: true
+  name: material
   logo: images/FRICOSIPY_Logo.png
+  favicon: images/FRICOSIPY_Logo.png
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'       # similar to Read the Docs default
+    code: 'Roboto Mono'  # similar to Read the Docs
+  features:
+    - navigation.expand        # expand navigation like RTD
+    - navigation.tabs          # or remove if you want side nav
+    - content.code.copy        # optional, copy code button
+    - toc.integrate            # table of contents integrated
+extra_css:
+  - assets/css/custom.css      # optional: fine-tune spacing/colors
 
 plugins:
   - search
