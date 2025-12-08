@@ -1,5 +1,8 @@
 site_name: FRICOSIPY
-site_url: https://fricosipy.readthedocs.io
+site_url: https://fricosipy.readthedocs.io/
+site_author: Marcus Alexander Gastaldello
+site_description: "The University of FRIboug variant of the COupled Snow & Ice model in PYthon"
+
 theme:
   name: readthedocs
   highlightjs: true
