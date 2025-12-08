@@ -6,15 +6,22 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {%- if page and page.is_homepage %}
-      <meta name="description" content="{{ config.site_description }}" />
+
+    {# Per-page description if available, else site description #}
+    {%- if page and page.meta.description %}
+      <meta name="description" content="{{ page.meta.description }}">
+    {%- else %}
+      <meta name="description" content="{{ config.site_description }}">
     {%- endif %}
+
     {%- if config.site_author %}
       <meta name="author" content="{{ config.site_author }}" />
     {%- endif %}
+
     {%- if page and page.canonical_url %}
       <link rel="canonical" href="{{ page.canonical_url }}" />
     {%- endif %}
+
     {%- if config.site_favicon %}
       <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
     {%- else %}
@@ -30,10 +37,10 @@
     <link rel="stylesheet" href="{{ 'css/theme.css'|url }}" />
     <link rel="stylesheet" href="{{ 'css/theme_extra.css'|url }}" />
     {%- if config.theme.highlightjs %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
     {%- endif %}
     {%- for path in config.extra_css %}
-        <link href="{{ path|url }}" rel="stylesheet" />
+      <link href="{{ path|url }}" rel="stylesheet" />
     {%- endfor %}
   {%- endblock %}
 
@@ -58,14 +65,16 @@
   {%- endblock %}
 
   {%- block extrahead %}
-    {# --- Safe place for per-page meta descriptions and Open Graph tags --- #}
-    <meta property="og:title" content="{{ config.site_name }}">
-    <meta property="og:description" content="The University of FRIboug variant of the COupled Snow & Ice model in PYthon">
+    {# --- Open Graph and Google verification --- #}
+    <meta property="og:title" content="{{ page.title if page and page.title else config.site_name }}">
+    <meta property="og:description" content="{{ page.meta.description if page and page.meta.description else config.site_description }}">
     <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ config.site_url }}">
+    <meta property="og:url" content="{{ page.canonical_url if page else config.site_url }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FRICOSIPY logo and branding">
+
     <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
   {%- endblock %}
 
@@ -91,13 +100,14 @@
       </script>
     {% endif %}
   {%- endblock %}
+
 </head>
 
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
 
-    {# Side nav #}
+    {# --- Sidebar navigation --- #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search">
@@ -135,6 +145,7 @@
       </div>
     </nav>
 
+    {# --- Main content --- #}
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation">
         {%- block mobile_nav %}
@@ -155,7 +166,7 @@
           </div>
           {%- block footer %}
             {%- include "footer.html" %}
-          {% endblock %}
+          {%- endblock %}
         </div>
       </div>
     </section>
@@ -173,9 +184,9 @@
       {{ script|script_tag }}
     {%- endfor %}
     <script>
-        jQuery(function () {
-            SphinxRtdTheme.Navigation.enable({{ 'true' if config.theme.sticky_navigation else 'false' }});
-        });
+      jQuery(function () {
+        SphinxRtdTheme.Navigation.enable({{ 'true' if config.theme.sticky_navigation else 'false' }});
+      });
     </script>
   {%- endblock %}
 
