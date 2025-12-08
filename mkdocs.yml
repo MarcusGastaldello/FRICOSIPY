@@ -7,6 +7,8 @@ theme:
   name: readthedocs
   highlightjs: true
   logo: images/FRICOSIPY_Logo.png
+extra_templates:
+  - overrides/meta.html
 
 plugins:
   - search
@@ -39,7 +41,3 @@ nav:
     - Parameters: parameters.md
     - Running a Simulation: running_a_simulation.md
     - Result Viewer: result_viewer.md
-  
-extra:
-  extra_head:
-    - overrides/meta.html
