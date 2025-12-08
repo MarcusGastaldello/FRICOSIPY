@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="{{ config.theme.locale|default('en') }}" >
 <head>
+
   {%- block site_meta %}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {%- if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}" />{%- endif %}
-    {%- if config.site_author %}<meta name="author" content="{{ config.site_author }}" />{%- endif %}
+
+    <!-- Site-wide / per-page description -->
+    <meta name="description" content="{{ page.meta.description|default(config.site_description) }}">
+    <meta name="author" content="{{ config.site_author }}">
+
     {%- if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{%- endif %}
     {%- if config.site_favicon %}
       <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
@@ -18,8 +22,6 @@
   {%- block htmltitle %}
     <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} - {% endif %}{{ config.site_name }}</title>
   {%- endblock %}
-
-
 
   {%- block styles %}
     <link rel="stylesheet" href="{{ 'css/theme.css'|url }}" />
