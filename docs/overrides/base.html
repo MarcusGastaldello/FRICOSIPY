@@ -2,28 +2,22 @@
 <html class="writer-html5" lang="{{ config.theme.locale|default('en') }}" >
 <head>
 
-  {%- block site_meta %}
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Safe meta description handling -->
-    <meta name="description"
+  {%- block extrahead %}
+    <!-- Open Graph for social media -->
+    <meta property="og:title" content="{{ config.site_name }}">
+    <meta property="og:description"
         content="{{ (page.meta.description
                      if page and page.meta and page.meta.description
                      else config.site_description) }}">
+    <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ page.canonical_url if page else config.site_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-    <meta name="author" content="{{ config.site_author }}">
+    <!-- Google Search Console -->
+    <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
 
-    {%- if page and page.canonical_url %}
-      <link rel="canonical" href="{{ page.canonical_url }}" />
-    {%- endif %}
-
-    {%- if config.site_favicon %}
-      <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
-    {%- else %}
-      <link rel="shortcut icon" href="{{ 'img/favicon.ico'|url }}" />
-    {%- endif %}
   {%- endblock %}
 
   {%- block htmltitle %}
