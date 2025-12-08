@@ -298,7 +298,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface / Ground Heat Flux
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface Heat Flux
 
 The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient $(\frac{\delta T}{\delta z})$:
 
