@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="{{ config.theme.locale|default('en') }}" >
-
+<html class="writer-html5" lang="{{ config.theme.locale|default('en') }}">
 <head>
+
   {%- block site_meta %}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -30,10 +30,10 @@
     <link rel="stylesheet" href="{{ 'css/theme.css'|url }}" />
     <link rel="stylesheet" href="{{ 'css/theme_extra.css'|url }}" />
     {%- if config.theme.highlightjs %}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
     {%- endif %}
     {%- for path in config.extra_css %}
-      <link href="{{ path|url }}" rel="stylesheet" />
+        <link href="{{ path|url }}" rel="stylesheet" />
     {%- endfor %}
   {%- endblock %}
 
@@ -57,7 +57,17 @@
     {%- endif %}
   {%- endblock %}
 
-  {%- block extrahead %}{%- endblock %}
+  {%- block extrahead %}
+    {# --- Safe place for per-page meta descriptions and Open Graph tags --- #}
+    <meta property="og:title" content="{{ config.site_name }}">
+    <meta property="og:description" content="The University of FRIboug variant of the COupled Snow & Ice model in PYthon">
+    <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config.site_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
+  {%- endblock %}
 
   {%- block analytics %}
     {%- if config.theme.analytics.gtag %}
@@ -74,24 +84,13 @@
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
         ga('create', {{ config.google_analytics[0]|tojson }}, {{ config.google_analytics[1]|tojson }});
         {%- if config.theme.analytics.anonymize_ip %}ga('set', 'anonymizeIp', true);{%- endif %}
         ga('send', 'pageview');
       </script>
     {% endif %}
   {%- endblock %}
-
-  <!-- Open Graph for social media -->
-  <meta property="og:title" content="{{ config.site_name }}">
-  <meta property="og:description" content="The University of Friboug Variant of the Coupled Snow & Ice Model in Python">
-  <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ config.site_url }}">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-
-  <!-- Google Search Console verification -->
-  <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
 </head>
 
 <body class="wy-body-for-nav" role="document">
