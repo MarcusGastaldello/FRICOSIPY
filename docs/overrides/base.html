@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {{ super() }}
+  <meta property="og:title" content="{{ config.site_name }}">
+  <meta property="og:description" content="FRICOSIPY documentation">
+  <meta property="og:image" content="{{ config.site_url }}/images/FRICOSIPY_Logo.png">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ config.site_name }}">
+  <meta name="twitter:description" content="FRICOSIPY documentation">
+  <meta name="twitter:image" content="{{ config.site_url }}/images/FRICOSIPY_Logo.png">
+{% endblock %}
