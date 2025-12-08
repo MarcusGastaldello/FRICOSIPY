@@ -304,7 +304,7 @@ The subsurface heat conduction flux (otherwise known as the ground heat flux) is
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{subsurface} = k_{s} \: \frac{\delta}{\delta} 
+Q_{subsurface} = k_{s} \: \frac{\delta T}{\delta z} 
 $$
 </div>
 
