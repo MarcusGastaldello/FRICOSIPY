@@ -304,7 +304,7 @@ The subsurface heat conduction flux (otherwise known as the ground heat flux) is
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{subsurface} = k_{s} \: frac{\delta T}{\delta z} \approx  k_{s} \: \left[ \frac{T_{z\:\text{interp 2}} - T_{z\:\text{interp 1}}}{z_{\:\text{interp 2}} - z_{\:\text{interp 1}}} \right]
+Q_{subsurface} = k_{s} \: \frac{\delta T}{\delta z} \approx  k_{s} \: \left[ \frac{T_{z\:\text{interp 2}} - T_{z\:\text{interp 1}}}{z_{\:\text{interp 2}} - z_{\:\text{interp 1}}} \right]
 $$
 </div>
 <small> where $k_{s}$ is the surface thermal conductivity (W m$^{-1}$ K$^{-1}$) and $z_{\:\text{interp 1}} = 0.06$ m and $z_{\:\text{interp 2}} = 0.10$ m are prescribed depth values used to calculate subsurface temperatures via linear interpolation between subsurface layers.</small>
@@ -324,7 +324,7 @@ $$
 \text{Surface melt} = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{f}}
 $$
 </div>
-<small>where $Q_{melt}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{m} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
+<small>where $Q_{melt}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{f} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
 
 This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
 
