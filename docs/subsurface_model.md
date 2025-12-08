@@ -21,7 +21,7 @@
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-\frac{\delta T}{\delta t} = K \: \frac{\delta^{2} T}{\delta z^{2}}
+\frac{\delta T}{\delta t} = K \: \frac{\delta^{2} T}{\delta z^{2}} = \frac{k}{\rho \: c_p} \: \frac{\delta^{2} T}{\delta z^{2}}
 $$
 </div>
 <small>where $K$ is the thermal diffusivity </small>
