@@ -7,11 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Site-wide / per-page description -->
-    <meta name="description" content="{{ page.meta.description|default(config.site_description) }}">
+    <!-- Safe meta description handling -->
+    <meta name="description"
+        content="{{ (page.meta.description
+                     if page and page.meta and page.meta.description
+                     else config.site_description) }}">
+
     <meta name="author" content="{{ config.site_author }}">
 
-    {%- if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{%- endif %}
+    {%- if page and page.canonical_url %}
+      <link rel="canonical" href="{{ page.canonical_url }}" />
+    {%- endif %}
+
     {%- if config.site_favicon %}
       <link rel="shortcut icon" href="{{ config.site_favicon|url }}" />
     {%- else %}
