@@ -1,20 +1,9 @@
 site_name: FRICOSIPY
-
 theme:
-  name: material
+  name: readthedocs
+  highlightjs: true
   logo: images/FRICOSIPY_Logo.png
-  palette:
-    primary: "#f7f7f7"   # Light gray header like RTD
-    accent: indigo
-  font:
-    text: Roboto
-    code: Roboto Mono
-  features:
-    - navigation.expand
-    - navigation.sections
-    - toc.integrate
-    - content.code.copy
-    
+
 plugins:
   - search
   - mkdocstrings:
@@ -22,8 +11,6 @@ plugins:
         python:
           options:
             docstring_style: sphinx
-  - mkdocs-autorefs
-  - markdown-include
 
 markdown_extensions:
   - markdown_include.include:
