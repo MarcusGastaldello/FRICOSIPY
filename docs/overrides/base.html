@@ -7,11 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Safe meta description -->
-    <meta name="description"
-          content="{{ (page.meta.description
-                       if page and page.meta and page.meta.description
-                       else config.site_description) }}">
+    <!-- Simple, safe meta description -->
+    {%- if page and page.description %}
+      <meta name="description" content="{{ page.description }}">
+    {%- else %}
+      <meta name="description" content="{{ config.site_description }}">
+    {%- endif %}
 
     <meta name="author" content="{{ config.site_author }}">
 
@@ -29,10 +30,7 @@
   {%- block extrahead %}
     <!-- Open Graph for social media -->
     <meta property="og:title" content="{{ config.site_name }}">
-    <meta property="og:description"
-          content="{{ (page.meta.description
-                       if page and page.meta and page.meta.description
-                       else config.site_description) }}">
+    <meta property="og:description" content="{{ page.description if page and page.description else config.site_description }}">
     <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="FRICOSIPY logo and branding">
@@ -53,10 +51,10 @@
     <link rel="stylesheet" href="{{ 'css/theme.css'|url }}" />
     <link rel="stylesheet" href="{{ 'css/theme_extra.css'|url }}" />
     {%- if config.theme.highlightjs %}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ config.theme.hljs_style }}.min.css" />
     {%- endif %}
     {%- for path in config.extra_css %}
-        <link href="{{ path|url }}" rel="stylesheet" />
+      <link href="{{ path|url }}" rel="stylesheet" />
     {%- endfor %}
   {%- endblock %}
 
@@ -87,7 +85,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', {{ config.theme.analytics.gtag|tojson }}{%- if config.theme.analytics.anonymize_ip %}, {'anonymize_ip': true}{%- endif %});
       </script>
     {%- elif config.google_analytics %}
@@ -105,85 +102,60 @@
   {%- endblock %}
 
 </head>
-
 <body class="wy-body-for-nav" role="document">
 
   <div class="wy-grid-for-nav">
 
-    {#- SIDE NAV, TOGGLES ON MOBILE #}
+    {# Side nav #}
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-      {%- block site_name %}
-        {%- if config.theme.logo %}
-          <a href="{{ nav.homepage.url|url }}">
-        {%- else %}
-          <a href="{{ nav.homepage.url|url }}" class="icon icon-home"> {{ config.site_name }}
-        {%- endif %}
-        {%- if config.theme.logo %}
-          <img src="{{ config.theme.logo|url }}" class="logo" alt="{% trans %}Logo{% endtrans %}"/>
-        {%- endif %}
-        </a>
-      {%- endblock %}
-      {%- if config.extra.version %}
-        <div class="version">
-          {{ config.extra.version }}
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          {%- block site_name %}
+            {%- if config.theme.logo %}
+              <a href="{{ nav.homepage.url|url }}">
+            {%- else %}
+              <a href="{{ nav.homepage.url|url }}" class="icon icon-home"> {{ config.site_name }}
+            {%- endif %}
+            {%- if config.theme.logo %}
+              <img src="{{ config.theme.logo|url }}" class="logo" alt="Logo"/>
+            {%- endif %}
+            </a>
+          {%- endblock %}
+          {%- if config.extra.version %}
+            <div class="version">{{ config.extra.version }}</div>
+          {%- endif %}
+          {%- block search_button %}
+            {%- if 'search' in config.plugins %}{%- include "searchbox.html" %}{%- endif %}
+          {%- endblock %}
         </div>
-      {%- endif %}
-      {%- block search_button %}
-        {%- if 'search' in config.plugins %}{%- include "searchbox.html" %}{%- endif %}
-      {%- endblock %}
-      </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="{% trans %}Navigation menu{% endtrans %}">
-        {%- block site_nav %}
-          {%- set navlevel = 1 %}
-          {%- for nav_item in nav %}
-            {%- if nav_item.is_section %}
-              {%- if nav_item.is_page %}
-                <ul><li{% if nav_item == page %} class="current-section"{% endif %}>
-                    <a href="{% if nav_item == page %}#{% else %}{{ nav_item.url|url }}{% endif %}" style="padding: 0; font-size: inherit; line-height: inherit">
-              {%- endif %}
-              <p class="caption"><span class="caption-text">{{ nav_item.title }}</span></p>
-              {%- if nav_item.is_page %}
-                    </a>
-                </li></ul>
-              {%- endif %}
-              <ul{% if nav_item.active %} class="current"{% endif %}>
-                {%- for nav_item in nav_item.children %}
-                  <li class="toctree-l{{ navlevel }}{% if nav_item.active %} current{% endif %}">
-                    {%- include 'nav.html' %}
-                  </li>
-                {%- endfor %}
-              </ul>
-            {%- elif config.theme.include_homepage_in_sidebar or (not nav_item == nav.homepage) %}
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+          {%- block site_nav %}
+            {%- set navlevel = 1 %}
+            {%- for nav_item in nav %}
               <ul{% if nav_item.active %} class="current"{% endif %}>
                 <li class="toctree-l{{ navlevel }}{% if nav_item.active %} current{% endif %}">
                   {%- include 'nav.html' %}
                 </li>
               </ul>
-            {%- endif %}
-          {%- endfor %}
-        {%- endblock %}
+            {%- endfor %}
+          {%- endblock %}
+        </div>
       </div>
-    </div>
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      {#- MOBILE NAV, TRIGGLES SIDE NAV ON TOGGLE #}
-      <nav class="wy-nav-top" role="navigation" aria-label="{% trans %}Mobile navigation menu{% endtrans %}">
+      <nav class="wy-nav-top" role="navigation">
         {%- block mobile_nav %}
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="{{ nav.homepage.url|url }}">{{ config.site_name }}</a>
         {% endblock %}
       </nav>
 
-      {#- PAGE CONTENT #}
       <div class="wy-nav-content">
         <div class="rst-content">
           {%- include "breadcrumbs.html" %}
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+          <div role="main" class="document" itemscope itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               {% block content %}
                 {{ page.content }}
@@ -195,7 +167,6 @@
           {% endblock %}
         </div>
       </div>
-
     </section>
 
   </div>
@@ -219,9 +190,3 @@
 
 </body>
 </html>
-{% if page and page.is_homepage %}
-<!--
-MkDocs version : {{ mkdocs_version }}
-Build Date UTC : {{ build_date_utc }}
--->
-{% endif %}
