@@ -38,9 +38,7 @@ nav:
     - Parameters: parameters.md
     - Running a Simulation: running_a_simulation.md
     - Result Viewer: result_viewer.md
-
-extra_javascript:
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
-
-extra_css:
-  - css/custom.css
+  
+extra:
+  extra_head:
+    - overrides/meta.html
