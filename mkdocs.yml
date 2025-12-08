@@ -1,4 +1,5 @@
 site_name: FRICOSIPY
+site_url: https://fricosipy.readthedocs.io
 theme:
   name: readthedocs
   highlightjs: true
