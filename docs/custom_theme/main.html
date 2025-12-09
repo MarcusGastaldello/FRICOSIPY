@@ -11,8 +11,18 @@
   <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
 
   {# --- Open Graph Tags (for LinkedIn, WhatsApp, Facebook, etc.) --- #}
-  <meta property="og:title" content="{{ config.site_name }}">
-  <meta property="og:description" content="{{ config.site_description }}">
+  <meta property="og:title" 
+      content="{% if page.meta.og_title %}
+               {{ page.meta.og_title }}
+               {% else %}
+               {{ config.site_name }}
+               {% endif %}">
+  <meta property="og:description" 
+      content="{% if page.meta.og_description %}
+               {{ page.meta.og_description }}
+               {% else %}
+               {{ config.site_description }}
+               {% endif %}">
   <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.canonical_url }}">
