@@ -10,7 +10,7 @@ theme:
   custom_dir: docs/custom_theme
 
 extra:
-  favicon: images/FRICOSIPY_Favicon.png
+  favicon: img/favicon.ico
   
 plugins:
   - search
