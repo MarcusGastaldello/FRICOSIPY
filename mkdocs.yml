@@ -7,10 +7,8 @@ theme:
   name: readthedocs
   highlightjs: true
   logo: images/FRICOSIPY_Logo.png
+  custom_dir: docs/custom_theme
   
-extra_templates:
-  - docs/overrides/meta.html
-
 plugins:
   - search
   - meta-descriptions
