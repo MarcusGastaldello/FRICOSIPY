@@ -9,7 +9,7 @@ theme:
   logo: images/FRICOSIPY_Logo.png
   
 extra_templates:
-  - overrides/meta.html
+  - docs/overrides/meta.html
 
 plugins:
   - search
