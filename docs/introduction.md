@@ -1,3 +1,9 @@
+---
+# Metadata
+og_title: FRICOSIPY | Introduction
+og_description: An Introduction to the FRICOSIPY Model
+---
+
 # Introduction
 
 The *FRICOSIPY* model combines a [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) with a [multi-layer subsurface model](https://fricosipy.readthedocs.io/en/latest/subsurface_model/). For each simulation timestep, first the surface temperature of an infinitesimal skin-layer is determined by evaluating the surface energy fluxes – these are either phyically-derived or parameterised from the input meteorological and topographic data. Subsequently, the intrinsic properties of firn layers are updated according to subsurface physical process such as meltwater percolation & refreezing, thermal diffusion and dry densification. The subsurface grid is discretised according to a Lagrangian scheme with layers translating vertically according to mass exchange at the surface.
