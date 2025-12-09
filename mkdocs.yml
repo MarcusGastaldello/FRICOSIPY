@@ -8,6 +8,9 @@ theme:
   highlightjs: true
   logo: images/FRICOSIPY_Logo.png
   custom_dir: docs/custom_theme
+
+extra:
+  favicon: images/FRICOSIPY_Favicon.png
   
 plugins:
   - search
