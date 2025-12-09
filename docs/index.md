@@ -1,5 +1,7 @@
 ---
-description: "The University of Fribourg Variant of the Coupled Snow & Ice Model in Python"
+# Metadata
+og_title: FRICOSIPY 
+og_description: The University of Fribourg Variant of the Coupled Snow & Ice Model In Python
 ---
 
 # FRICOSIPY
