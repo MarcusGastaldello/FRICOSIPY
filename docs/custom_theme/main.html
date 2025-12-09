@@ -12,17 +12,19 @@
 
   {# --- Open Graph Tags (for LinkedIn, WhatsApp, Facebook, etc.) --- #}
   <meta property="og:title" 
-      content="{% if page.meta.og_title %}
-               {{ page.meta.og_title }}
-               {% else %}
-               {{ config.site_name }}
-               {% endif %}">
+          content="{% if page.meta.og_title %}
+                   {{ page.meta.og_title }}
+                   {% else %}
+                   {{ config.site_name }}
+                   {% endif %}">
+
+  {# Open Graph Description: Safely check for custom description, falling back to site_description #}
   <meta property="og:description" 
-      content="{% if page.meta.og_description %}
-               {{ page.meta.og_description }}
-               {% else %}
-               {{ config.site_description }}
-               {% endif %}">
+          content="{% if page.meta.og_description %}
+                   {{ page.meta.og_description }}
+                   {% else %}
+                   {{ config.site_description }}
+                   {% endif %}">
   <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY_Social.png">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ page.canonical_url }}">
