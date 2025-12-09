@@ -6,7 +6,7 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 
 ## $(1)$ Static File
 
-![Alt text](images/Static.png){width="125px" align=left}
+![Alt text](icons/Static.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -50,7 +50,7 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 
 ## $(2)$ Meteorological File
 
-![Alt text](images/Meteo.png){width="125px" align=left}
+![Alt text](icons/Meteo.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -90,7 +90,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
 ## $(3)$ Illumination File
 
-![Alt text](images/Illumination.png){width="125px" align=left}
+![Alt text](icons/Illumination.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
