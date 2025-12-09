@@ -1,3 +1,9 @@
+---
+# Metadata
+og_title: FRICOSIPY | The Model Input Files
+og_description: Explanation of the three model model input files required to run a FRICOSIPY simulation
+---
+
 # Model Input Files
 
 The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset ( 𝑥 , 𝑦 , 𝑡 ) of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution. In *FRICOSIPY*, the meteorological data is instead interpolated across the spatial grid according to topographic variation during the main simulation.
