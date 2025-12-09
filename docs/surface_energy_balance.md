@@ -45,7 +45,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
 
-![Alt text](images/Shortwave.png){width="125px" align=left}
+![Alt text](icons/Shortwave.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -155,7 +155,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
 
-![Alt text](images/Sensible.png){width="125px" align=left}
+![Alt text](icons/Sensible.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -174,7 +174,7 @@ $$
 
 ### <span style="display: inline-block; width: 1em; height: 1em;background-color: #9FCBE1; border: 2px solid #404040; border-radius: 4px; "></span> Latent Heat Flux
 
-![Alt text](images/Latent.png){width="125px" align=left}
+![Alt text](icons/Latent.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -245,7 +245,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
 
-![Alt text](images/Longwave.png){width="125px" align=left}
+![Alt text](icons/Longwave.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -284,7 +284,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
 
-![Alt text](images/Rain.png){width="125px" align=left}
+![Alt text](icons/Rain.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -319,7 +319,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
 
-![Alt text](images/Melt.png){width="125px" align=left}
+![Alt text](icons/Melt.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
