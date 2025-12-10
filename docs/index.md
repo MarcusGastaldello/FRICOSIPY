@@ -36,6 +36,6 @@ Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Couple
 
 !!! note
 
-    This user guide is currently under active development. Completetion is scheduled for February 2026.
+    This user guide is currently under development. Completetion is scheduled for February 2026.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
