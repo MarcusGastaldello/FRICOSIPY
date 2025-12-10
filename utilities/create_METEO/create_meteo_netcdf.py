@@ -37,7 +37,6 @@ import time
 import dateutil
 import argparse
 from itertools import product
-from parameters import *
 
 # ============================================================================================= #
 
