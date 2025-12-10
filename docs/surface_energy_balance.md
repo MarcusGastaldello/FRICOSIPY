@@ -163,7 +163,7 @@ The sensible heat flux represents the transfer of heat energy and is driven by t
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{t} \cdot V \: \underbrace{\,(T_{a}-T_{s})\,}_{\text{temperature gradient}}
+Q_{sensible} = \rho_{a} \cdot c_{p,a} \cdot C_{t} \cdot V \cdot \underbrace{\,(T_{a}-T_{s})\,}_{\text{temperature gradient}}
 $$
 </div>
 <small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively. </small> 
