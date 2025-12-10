@@ -37,12 +37,14 @@ nav:
     - Introduction: introduction.md
     - Surface Energy Balance: surface_energy_balance.md
     - Multi-layer Subsurface Model: subsurface_model.md
-  - "Getting Started":
+  - "Walkthrough":
     - Installation: installation.md
     - Model Input Files: model_input_files.md
     - Parameters: parameters.md
     - Running a Simulation: running_a_simulation.md
     - Result Viewer: result_viewer.md
+  - "Advanced":
+    - Model Architecture: model_architecture.md
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
