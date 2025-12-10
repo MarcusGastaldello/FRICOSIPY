@@ -13,6 +13,8 @@ FRICOSIPY has been developed as an adapation of the original [COSIPY v1.4](https
 
 The latest version of FRICOSIPY is available at: [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
 
+Citation: Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
+
 ---
 
 ![Alt text](images/FRICOSIPY_Figure_&_Logo.png)
@@ -25,14 +27,6 @@ The latest version of FRICOSIPY is available at: [https://github.com/MarcusGasta
 | **Documentation**           | [![Documentation](https://img.shields.io/badge/Docs-FRICOSIPY%20User%20Guide-red.svg)](https://fricosipy.readthedocs.io/en/latest/) |
 | **License**                 | [![License](https://img.shields.io/badge/License-GPLv3-red.svg)](http://www.gnu.org/licenses/gpl-3.0.en.html) |
 | **Support / Contact**       | [![Contact](https://img.shields.io/badge/Contact-Marcus%20Gastaldello-blue.svg)](https://www.unifr.ch/directory/en/people/329166/38c19) [![ORCID](https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg)](https://orcid.org/0009-0003-2384-3617) |
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-<div style="font-size: 1.75em; font-weight: 700; color: #333; margin-top: 20px; margin-bottom: 10px; font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-    Citation
-</div>
-
-Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
 
 ---
 
