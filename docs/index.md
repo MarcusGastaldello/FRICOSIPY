@@ -13,13 +13,13 @@ FRICOSIPY has been developed as an adapation of the original [COSIPY v1.4](https
 
 The latest version of FRICOSIPY is available at: [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
 
-Citation: Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).
-
 ---
 
 ![Alt text](images/FRICOSIPY_Figure_&_Logo.png)
 
 <small> **Main Figure**: The FRICOSIPY Model & Logo </small>
+
+**Citation:** *Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).*
 
 | Colle Gnifetti Paper    | [![TC paper](https://img.shields.io/badge/Citation-TC%20paper-blue.svg)](https://doi.org/10.5194/tc-19-2983-2025) [![Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.3902191.svg)](http://doi.org/10.5281/zenodo.13361824) |
 |:---|:---|
