@@ -28,7 +28,7 @@ The latest version of FRICOSIPY is available at: [https://github.com/MarcusGasta
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-<div style="font-size: 1.75em; font-weight: 600; padding-bottom: 5px; margin-top: 25px;">
+<div style="font-size: 1.75em; font-weight: 700; color: #333; margin-top: 20px; margin-bottom: 10px; font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
     Citation
 </div>
 
