@@ -1,4 +1,3 @@
-
 ---
 # Metadata
 og_title: FRICOSIPY | The Surface Energy Balance
