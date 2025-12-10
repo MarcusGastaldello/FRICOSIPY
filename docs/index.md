@@ -34,6 +34,6 @@ Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Couple
 
 ---
 
-!!! note
+!!! attention
 
     This user guide is currently under active development.
