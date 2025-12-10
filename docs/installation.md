@@ -1,3 +1,9 @@
+---
+# Metadata
+og_title: FRICOSIPY  
+og_description: The University of Fribourg Variant of the Coupled Snow & Ice Model In Python
+---
+
 # Installation
 
 The *FRICOSIPY* model can be installed by following the proceeding three steps:
