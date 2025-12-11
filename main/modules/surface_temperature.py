@@ -55,7 +55,10 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     """
     
     # Interpolate subsurface temperatures to selected subsurface depths for subsurface / ground heat flux computation:
-    B_Ts = interpolate_Tz(GRID)
+    if GRID.get_number_layers() > 1:
+		B_Ts = interpolate_Tz(GRID)
+	else:
+		B_Ts = None
 
     # Inital bounds:
     lower_bound = 220
@@ -313,4 +316,5 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
+
 
