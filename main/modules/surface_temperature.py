@@ -226,14 +226,16 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
     # Get thermal conductivity:
     k = GRID.get_node_thermal_conductivity(0)
 	
-    # Calculate ground / subsurface conduction flux:
-	if GRID.get_number_layers() == 1:
-        GROUND = k * GRID.get_node_temperature(0) / GRID.get_depth[0]
-    else:
+    # Calculate ground / subsurface conduction flux using linear interpolation:
+    if GRID.get_number_layers() > 1:
     	x1 = subsurface_interpolation_depth_1
     	x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
         Tz1, Tz2 = B_Ts
         GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
+
+	# Otherwise, if there is only a single subsurface layer:
+	else:
+		GROUND = k * GRID.get_node_temperature(0) / GRID.get_depth[0]
 
     # ============== #
     # Rain Heat Flux
@@ -311,3 +313,4 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
+
