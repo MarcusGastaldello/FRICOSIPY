@@ -225,12 +225,15 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
 
     # Get thermal conductivity:
     k = GRID.get_node_thermal_conductivity(0)
-
+	
     # Calculate ground / subsurface conduction flux:
-    x1 = subsurface_interpolation_depth_1
-    x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
-    Tz1, Tz2 = B_Ts
-    GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
+	if GRID.get_number_layers() == 1:
+        GROUND = k * GRID.get_node_temperature(0) / GRID.get_depth[0]
+    else:
+    	x1 = subsurface_interpolation_depth_1
+    	x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
+        Tz1, Tz2 = B_Ts
+        GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
 
     # ============== #
     # Rain Heat Flux
@@ -305,5 +308,6 @@ def method_Sonntag(T):
     else:
         VPsat = 6.112 * np.exp((22.46 * (T - 273.16)) / ((T - 0.55)))  # VPsat over ice
     return VPsat
+
 
 # ==================================================================================================================== #
