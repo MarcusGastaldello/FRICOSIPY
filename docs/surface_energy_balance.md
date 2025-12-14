@@ -15,7 +15,7 @@ $$
 </div>
 <small> where $SW_{net}$ is the net shortwave radiation flux, $Q_{sensible}$ and $Q_{latent}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$ is the net longwave radiation flux, $Q_{rain}$ is the rain heat flux, and $Q_{subsurface}$ is the subsurface heat conduction flux. </small>
 
-![Alt text](images/FRICOSIPY_SEB.png)
+![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-SEB.png)
 
 <small> **Figure 2**: FRICOSIPY Surface Energy Balance</small>
 
