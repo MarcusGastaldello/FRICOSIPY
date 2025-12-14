@@ -15,7 +15,7 @@ The latest version of *FRICOSIPY* is available at: [https://github.com/MarcusGas
 
 ---
 
-![Alt text](images/FRICOSIPY_Figure_&_Logo.png)
+![Main FRICOSIPY diagram showing surface energy balance and multilayer subsurface model with logo](images/FRICOSIPY-figure-logo.png)
 
 <small> **Main Figure**: The FRICOSIPY Model & Logo </small>
 
