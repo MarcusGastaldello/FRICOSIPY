@@ -12,7 +12,7 @@ The model is 1-dimensional in space; each grid cell (or spatial node) is simulat
 
 *FRICOSIPY* is best characterised as a mid-complexity glacier model. It represents physical processes more comprehensively than basic temperature-index models (eg. [Hock, 1999](https://doi.org/10.3189/S0022143000003087) , [Huss & Hock, 2015](https://doi.org/10.3389/feart.2015.00054)) yet is less computationally expensive than more complex 3-dimensional, thermomechanically-coupled, *Stokes* ice flow models. However, it does still require high resolution meteorological data and model performance is greatly influenced by the quality of this input data.
 
-![Alt text](images/FRICOSIPY_Figure.png)
+![Main FRICOSIPY model diagram](images/FRICOSIPY-figure.png)
 
 <small> **Figure 1**: The FRICOSIPY Model </small>
 
