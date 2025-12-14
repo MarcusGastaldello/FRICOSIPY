@@ -340,7 +340,7 @@ This surface melt, combined with any rain or condensation, is then transferred i
 
 Visualising the Surface Energy Balance (SEB) is important for understanding and analysing the energy exchanges occuring at the glacier surface. According to the priniciples of energy conservation, **the opposing monthly energy fluxes must always be balanced**. **Figure 3** shows an exemplar point surface energy balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being a high-altitude, wind-exposed glacierised saddle, turbulent exchange has a significant contribution to energy turnover and melt is minimal and confined to the summer months.
 
-![Alt text](images/Exemplar_SEB.png)
+![Exemplar FRICOSIPY SEB (Surface Energy Balance) Colle Gnifetti](images/Exemplar-SEB.png)
 
 <small> **Figure 3**: Exemplar point Surface Energy Balance (SEB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small>
 
@@ -350,7 +350,7 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the surface – either accumulation $(+)$ or ablation $(-)$. In contrast to the energy balance, the monthly mass fluxes do not need to be balanced. **Figure 4** shows an exemplar point surface mass balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being situated in a high-altitude accumulation area, the net mass exchange is positive.
 
-![Alt text](images/Exemplar_SMB.png)
+![Exemplar FRICOSIPY SMB (Surface Mass Balance) Colle Gnifetti](images/Exemplar-SMB.png)
 
 <small> **Figure 4**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small>
 
