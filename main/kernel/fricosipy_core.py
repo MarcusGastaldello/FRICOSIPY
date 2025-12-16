@@ -474,7 +474,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         surface_water = max(surface_melt + condensation - evaporation + RAIN/1000.0, 0) 
         
         # Calculate run-off and refreezing
-        Q , water_refrozen = percolation_refreezing(GRID, HYDRO_YEAR[t], surface_water)
+        Q , water_refrozen = percolation_refreezing(GRID, HYDRO_YEAR[t], surface_water, dt)
 
         # ================= #
         # THERMAL DIFFUSION
