@@ -22,9 +22,9 @@ def densification(GRID,ACCUMULATION,dt):
     """ This module calculates the dry densification of the snowpack """
 
     densification_allowed = ['Boone02', 'Ligtenberg11', 'disabled']
-    if densification_method == 'Boone02':
+    if dry_densification_method == 'Boone02':
         method_Boone(GRID,dt)
-    elif densification_method == 'Ligtenberg11':
+    elif dry_densification_method == 'Ligtenberg11':
         if ACCUMULATION is None:
             raise ValueError("Error: Annual accumulation ('ACCUMULATION') [m w.e.] must be supplied in the input STATIC file in order to use the Ligtenberg et al. 2011 densification method!")
         else:
@@ -32,7 +32,7 @@ def densification(GRID,ACCUMULATION,dt):
     elif densification_method == 'disabled':
         pass
     else:
-        raise ValueError("Densification method = \"{:s}\" is not allowed, must be one of {:s}".format(densification_method, ", ".join(densification_allowed)))
+        raise ValueError("Densification method = \"{:s}\" is not allowed, must be one of {:s}".format(dry_densification_method, ", ".join(densification_allowed)))
 
 # ====================================================================================================================
 
