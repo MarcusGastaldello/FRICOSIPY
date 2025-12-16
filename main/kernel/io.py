@@ -198,16 +198,22 @@ class IOClass:
         # Global attributes from parameters.py
 
         # Model Parameterisations:
+        ## (Surface Energy Balance):
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Albedo_method'] = albedo_method
-        self.RESULT.attrs['Densification_method'] = densification_method
+        self.RESULT.attrs['Dry_Densification_method'] = dry_densification_method
         self.RESULT.attrs['Penetrating_method'] = penetrating_method
         self.RESULT.attrs['Roughness_method'] = roughness_method
         self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
+        self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
+        
+        ## (Surface Energy Balance):
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
-        self.RESULT.attrs['Water_percolation_method'] = preferential_percolation_method
-        self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver
+        self.RESULT.attrs['Heterogeneous_percolation_method'] = heterogeneous_percolation_method
+        self.RESULT.attrs['Preferential_percolation_method'] = preferential_percolation_method
+        self.RESULT.attrs['Hydraulic_conductivity_method'] = hydraulic_conductivity_method
+        self.RESULT.attrs['Irreducible_water_content_method'] = irreducible_water_content_method 
         self.RESULT.attrs['Snow_metamorphism_method'] = snow_metamorphism_method
 
         # Subsurface Remeshing Options:    
@@ -239,11 +245,8 @@ class IOClass:
         self.RESULT.attrs['Surface_emission_coeff'] = surface_emission_coeff
 
         # Model Parameters (Parameterisation-specific):
-        if preferential_percolation_method == 'Marchenko17':
-            self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
-        if penetrating_method == 'Bintanja95':
-            self.RESULT.attrs['Extinction_coeff_snow'] = extinction_coeff_snow
-            self.RESULT.attrs['Extinction_coeff_ice'] = extinction_coeff_ice
+        if snow_density_method == 'constant':
+            self.RESULT.attrs['Constant_fresh_snow_density'] = constant_fresh_snow_density
         if albedo_method == 'Bougamont05':
             self.RESULT.attrs['Albedo_decay_timescale_wet_snow_surface'] = albedo_decay_timescale_wet
             self.RESULT.attrs['Albedo_decay_timescale_dry_snow_surface'] = albedo_decay_timescale_dry
@@ -251,16 +254,22 @@ class IOClass:
             self.RESULT.attrs['Albedo_decay_timescale_threshold'] = albedo_decay_timescale_threshold
         elif albedo_method == 'Oerlemans98':
             self.RESULT.attrs['Albedo_mod_snow_aging'] = albedo_decay_timescale
+        if penetrating_method == 'Bintanja95':
+            self.RESULT.attrs['Extinction_coeff_snow'] = extinction_coeff_snow
+            self.RESULT.attrs['Extinction_coeff_ice'] = extinction_coeff_ice
         if roughness_method == 'Moelg12':
             self.RESULT.attrs['Surface_roughness_fresh_snow'] = surface_roughness_fresh_snow
             self.RESULT.attrs['Surface_roughness_ice'] = surface_roughness_ice
             self.RESULT.attrs['Surface_roughness_firn'] = surface_roughness_firn
             self.RESULT.attrs['Surface_roughness_timescale'] = surface_roughness_timescale
         elif roughness_method == 'constant':
-            self.RESULT.attrs['Constant_fresh_snow_density'] = constant_fresh_snow_density
-        if snow_density_method == 'constant':
-            self.RESULT.attrs['Constant_surface_roughness'] = constant_surface_roughness
-        if densification_method == 'Ligtenberg11':
+            self.RESULT.attrs['Constant_fresh_snow_density'] = constant_surface_roughness
+
+        if preferential_percolation_method == 'Marchenko17':
+            self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
+        if irreducible_water_content_method == 'constant':
+            self.RESULT.attrs['constant_irreducible_water_content'] = constant_irreducible_water_content
+        if dry_densification_method == 'Ligtenberg11':
             self.RESULT.attrs['Temperature_interpolation_depth_1'] = temperature_interpolation_depth_1
             self.RESULT.attrs['Temperature_interpolation_depth_2'] = temperature_interpolation_depth_2
 

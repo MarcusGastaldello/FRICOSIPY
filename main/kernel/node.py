@@ -93,49 +93,49 @@ class Node:
     # ======================================== #
 
     def get_layer_height(self):
-        """ Returns the layer height """        
+        """ Returns the layer height [m] """        
         return self.height
     
     # -----------------------------------------------
 
     def get_layer_temperature(self):
-        """ Returns the layer temperature """
+        """ Returns the layer temperature [K] """
         return self.temperature
     
     # -----------------------------------------------
     
     def get_layer_ice_fraction(self):
-        """ Returns the layer volumetric ice fraction """
+        """ Returns the layer volumetric ice fraction [-] """
         return self.ice_fraction
     
     # -----------------------------------------------
     
     def get_layer_refreeze(self):
-        """ Returns the layer refreezing """
+        """ Returns the layer refreezing [m w.e.] """
         return self.refreeze
     
     # -----------------------------------------------
     
     def get_firn_layer_refreeze(self):
-        """ Returns the firn layer refreezing """
+        """ Returns the firn layer refreezing [m w.e.] """
         return self.firn_refreeze 
     
     # -----------------------------------------------
 
     def get_layer_liquid_water_content(self):
-        """ Returns the layer liquid water content """
+        """ Returns the layer liquid water content [-] """
         return self.liquid_water_content
     
     # -----------------------------------------------
     
     def get_layer_hydro_year(self):
-        """ Returns the layer hydrological year """
+        """ Returns the layer hydrological year [yyyy] """
         return self.hydro_year
     
     # -----------------------------------------------
     
     def get_layer_grain_size(self):
-        """ Returns the layer grain size"""
+        """ Returns the layer grain size [mm] """
         return self.grain_size
 
     # ================================================================================================== #
@@ -145,53 +145,59 @@ class Node:
     # ========================================== #
 
     def get_layer_density(self):
-        """ Returns the layer density """
+        """ Returns the layer density [kg m-3] """
         return self.get_layer_ice_fraction() * ice_density + self.get_layer_liquid_water_content() * water_density + self.get_layer_porosity() * air_density
     
     # -----------------------------------------------
 
     def get_layer_specific_heat(self):
-        """ Returns the layer specific heat capacity """
-        SHmethods_allowed = ['bulk','Yen81']
+        """ Returns the layer specific heat capacity [J kg-1 K-1] """
+        methods_allowed = ['bulk','Yen81']
         if specific_heat_method == 'bulk':    
             specific_heat = self.get_layer_ice_fraction() * specific_heat_ice + self.get_layer_porosity() * specific_heat_air + self.get_layer_liquid_water_content() * specific_heat_water
         elif specific_heat_method == 'Yen81':
             specific_heat = 152.2 + 7.122 * self.get_layer_temperature()
         else:
-            raise ValueError("Specific heat method = \"{:s}\" is not allowed, must be one of {:s}".format(specific_heat_method, ", ".join(SHmethods_allowed)))
+            raise ValueError("Specific heat method = \"{:s}\" is not allowed, must be one of {:s}".format(specific_heat_method, ", ".join(methods_allowed)))
         return specific_heat
 
     # ----------------------------------------------- 
     
     def get_layer_irreducible_water_content(self):
-        """ Returns the layer irreducible water content """
-        if (self.get_layer_ice_fraction() <= 0.23):
-            theta_e = 0.0264 + 0.0099*((1-self.get_layer_ice_fraction())/self.get_layer_ice_fraction()) 
-        elif (self.get_layer_ice_fraction() > 0.23) & (self.get_layer_ice_fraction() <= 0.812):
-            theta_e = 0.08 - 0.1023*(self.get_layer_ice_fraction()-0.03)
+        """ Returns the layer irreducible water content [-] """
+        methods_allowed = ['Coleou98','constant']
+        if irreducible_water_content_method == 'Coleou98':
+            if (self.get_layer_ice_fraction() <= 0.23):
+                irr = 0.0264 + 0.0099*((1-self.get_layer_ice_fraction())/self.get_layer_ice_fraction()) 
+            elif (self.get_layer_ice_fraction() > 0.23) & (self.get_layer_ice_fraction() <= 0.812):
+                irr = 0.08 - 0.1023*(self.get_layer_ice_fraction()-0.03)
+            else:
+                irr = 0.0
+        elif irreducible_water_content_method == 'constant':
+            irr = constant_irreducible_water_content 
         else:
-            theta_e = 0.0
-        return theta_e
+            raise ValueError("Irreducible water content method = \"{:s}\" is not allowed, must be one of {:s}".format(irreducible_water_content_method, ", ".join(methods_allowed)))
+        return irr
 
     # ----------------------------------------------- 
     
     def get_layer_cold_content(self):
-        """ Returns the layer cold content """
+        """ Returns the layer cold content [J m-2] """
         return -self.get_layer_specific_heat() * self.get_layer_density() * self.get_layer_height() * (self.get_layer_temperature()-zero_temperature)
 
     # -----------------------------------------------
     
     def get_layer_porosity(self):
-        """ Returns the layer porosity """
+        """ Returns the layer porosity [-] """
         return 1 - self.get_layer_ice_fraction() - self.get_layer_liquid_water_content()
 
     # -----------------------------------------------
    
     def get_layer_thermal_conductivity(self):
-        """ Returns the layer thermal conductivity """
+        """ Returns the layer thermal conductivity [W m-1 K-1] """
         methods_allowed = ['bulk','empirical','Sturm97','Calonne19']
         if thermal_conductivity_method == 'bulk':
-            lam = self.get_layer_ice_fraction() * conductivity_ice + self.get_layer_porosity() * conductivity_air + self.get_layer_liquid_water_content() * conductivity_water
+            lam = self.get_layer_ice_fraction() * k_i + self.get_layer_porosity() * k_a + self.get_layer_liquid_water_content() * k_w
         elif thermal_conductivity_method == 'empirical':
             lam = 0.021 + 2.5 * np.power((self.get_layer_density()/1000),2)
         elif thermal_conductivity_method == 'Sturm97':
@@ -207,9 +213,56 @@ class Node:
     # -----------------------------------------------
 
     def get_layer_thermal_diffusivity(self):
-        """ Returns the layer thermal diffusivity """
-        K = self.get_layer_thermal_conductivity() / (self.get_layer_density() * self.get_layer_specific_heat())
-        return K
+        """ Returns the layer thermal diffusivity [m2 s-1] """
+        return self.get_layer_thermal_conductivity() / (self.get_layer_density() * self.get_layer_specific_heat())
+    
+    # -----------------------------------------------
+
+    def get_layer_saturation(self):
+        """ Returns the layer water saturation [-] 
+            Hirashima et al., 2010 (https://doi.org/10.1016/j.coldregions.2010.09.003) - Eqn. (5) 
+            Yamaguchi et al., 2010 (https://doi.ord/10.1016/j.coldregions.2010.05.008) - """
+        residual_water_content = 0.02
+        return min(1,max(0,((self.get_layer_liquid_water_content() - residual_water_content) / \
+                  (((snow_ice_threshold - self.get_layer_ice_fraction() * ice_density) / water_density) - residual_water_content))))
+    
+    # -----------------------------------------------
+
+    def get_layer_saturated_hydraulic_conductivity(self):
+        """ Returns the layer saturated hydraulic conductivity [m s-1] 
+            Shimizu, 1970 (http://hdl.handle.net/2115/20234) OR
+            Calonne et al., 2012 (https://doi.org/10.5194/tc-6-939-2012) """
+        methods_allowed = ['Shimizu70','Calonne12']
+        if hydraulic_conductivity_method == 'Shimizu70':
+            Ks = 0.077 * (self.get_layer_grain_size() / 10) **2 * np.exp(-0.0078 * self.get_layer_density())
+        if hydraulic_conductivity_method == 'Calonne12':
+            Ks = 3 * (self.get_layer_grain_size() / 2000) ** 2 * 9.82 / 1.79e-06 * np.exp(-0.013 * self.get_layer_density())
+        else:
+            raise ValueError("Saturated hydraulic conductivity method = \"{:s}\" is not allowed, must be one of {:s}".format(hydraulic_conductivity_method, ", ".join(methods_allowed)))    
+        return Ks
+    
+    # -----------------------------------------------
+
+    def get_layer_hydraulic_conductivity(self):
+        """ Returns the layer hydraulic conductivity [m s-1]
+            Hirashima et al., 2010 (https://doi.org/10.1016/j.coldregions.2010.09.003),
+            Mualem, 1976 (https://doi.org/10.1029/WR012i003p00513),
+            van Genuchten, 1980 (https://doi.org/10.2136/sssaj1980.03615995004400050002x) """
+        n = 15.68 * np.exp(-0.46 * self.get_layer_grain_size()) + 1
+        m = 1 - 1 / n
+        Kr = self.get_layer_saturation() ** 0.5 * (1.0 - (1.0 - self.get_layer_saturation() ** (1.0 / m)) ** m) ** 2
+        return self.get_layer_saturated_hydraulic_conductivity() * Kr
+    
+        # Note: could be further developed to represent ice lenses according to Colbeck 1975 (https://doi.org/10.1029/WR011i002p00261).
+    
+    # -----------------------------------------------
+
+    def get_layer_hydraulic_head(self):
+        """ Returns the layer hydraulic suction head [m]
+            Hirashima et al., 2010 (http://dx.doi.org/10.1016/j.coldregions.2010.09.003) - Eqns. (9) & (17) """
+        n = 15.68 * np.exp(-0.46 * self.get_layer_grain_size()) + 1
+        m = 1 - 1 / n
+        return 1 / (7.3 * np.exp(1.9)) * (max(self.get_layer_saturation(), 1e-12) ** (-1 / m) - 1) ** (1 / n)
 
     # ===============================================
 
@@ -219,49 +272,49 @@ class Node:
 
 
     def set_layer_height(self, height):
-        """ Sets the layer height """
+        """ Sets the layer height [m] """
         self.height = height
 
     # -----------------------------------------------
 
     def set_layer_temperature(self, T):
-        """ Sets the layer temperature """
+        """ Sets the layer temperature [K] """
         self.temperature = T
 
     # -----------------------------------------------
     
     def set_layer_ice_fraction(self, ifr):
-        """ Sets the layer volumetric ice fraction """
+        """ Sets the layer volumetric ice fraction [-] """
         self.ice_fraction = ifr
 
     # -----------------------------------------------
     
     def set_layer_refreeze(self, refreeze):
-        """ Sets the layer refreeze  """
+        """ Sets the layer refreeze [m w.e.] """
         self.refreeze = refreeze
 
     # -----------------------------------------------
     
     def set_firn_layer_refreeze(self, firn_refreeze):
-        """ Sets the firn layer refreeze"""
+        """ Sets the firn layer refreeze [m w.e.]"""
         self.firn_refreeze = firn_refreeze    
 
     # -----------------------------------------------
 
     def set_layer_liquid_water_content(self, lwc):
-        """ Sets the layer volumetric liquid water content """
+        """ Sets the layer volumetric liquid water content [-] """
         self.liquid_water_content = lwc
 
     # -----------------------------------------------
 
     def set_layer_hydro_year(self, hydro_year):
-        """ Sets the layer hydrological year """
+        """ Sets the layer hydrological year [yyyy] """
         self.hydro_year = hydro_year
 
         # -----------------------------------------------
 
     def set_layer_grain_size(self, grain_size):
-        """ Sets the layer grain size """
+        """ Sets the layer grain size [mm] """
         self.grain_size = grain_size
 
     # =============================================================================
