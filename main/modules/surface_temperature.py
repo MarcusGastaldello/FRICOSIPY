@@ -56,9 +56,9 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     
     # Interpolate subsurface temperatures to selected subsurface depths for subsurface / ground heat flux computation:
     if GRID.get_number_layers() > 1:
-		B_Ts = interpolate_Tz(GRID)
-	else:
-		B_Ts = None
+        B_Ts = interpolate_Tz(GRID)
+    else:
+        B_Ts = None
 
     # Inital bounds:
     lower_bound = 220
@@ -69,13 +69,13 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     surface_temperature_methods_allowed = ['L-BFGS-B','SLSQP','Newton']
 
     # Limited Broyden–Fletcher–Goldfarb–Shanno (L-BFGS-B) / Sequential Least Squares Programming (SLSQP) methods: 
-    if surface_temperature_method == 'L-BFGS-B' or surface_temperature_method == 'SLSQP':
-        res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_method,
+    if surface_temperature_solver == 'L-BFGS-B' or surface_temperature_solver == 'SLSQP':
+        res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_solver,
                        bounds = ((lower_bound, upper_bound),), tol = 1e-2,
                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
 
     # Netwon-Raphson method: 	       
-    elif surface_temperature_method == 'Newton':
+    elif surface_temperature_solver == 'Newton':
         try:
             res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-2, maxiter = 50,
                         args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
@@ -89,7 +89,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
                        bounds=((lower_bound, upper_bound),),tol=1e-2,
                        args=(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
     else:
-        raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_method, ", ".join(surface_temperature_methods_allowed)))
+        raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_solver, ", ".join(surface_temperature_methods_allowed)))
 
     # Set surface temperature (T0):
     T0 = min(zero_temperature,float(res.x))
@@ -115,7 +115,7 @@ def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SL
     (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LWinput, N)
 
     # Return the minimised residual:
-    if surface_temperature_method == 'Newton':
+    if surface_temperature_solver == 'Newton':
         return (SWnet + LWin + LWout + SENSIBLE + LATENT + GROUND + RAIN_HEAT)
     else:
         return np.abs(SWnet + LWin + LWout + SENSIBLE + LATENT + GROUND + RAIN_HEAT)
@@ -231,14 +231,14 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
 	
     # Calculate ground / subsurface conduction flux using linear interpolation:
     if GRID.get_number_layers() > 1:
-    	x1 = subsurface_interpolation_depth_1
-    	x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
+        x1 = subsurface_interpolation_depth_1
+        x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
         Tz1, Tz2 = B_Ts
         GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
 
 	# Otherwise, if there is only a single subsurface layer:
-	else:
-		GROUND = k * GRID.get_node_temperature(0) / GRID.get_depth[0]
+    else:
+        GROUND = k * GRID.get_node_temperature(0) / GRID.get_depth[0]
 
     # ============== #
     # Rain Heat Flux
