@@ -16,12 +16,13 @@ import numpy as np
 from numba import njit
 from constants import *
 from parameters import *
+from main.modules.darcy_fluxes import *
 
 # ============================== #
 # Water Percolation & Refreezing
 # ============================== #
 
-def percolation_refreezing(GRID, hydro_year, surface_water):
+def percolation_refreezing(GRID, hydro_year, surface_water, dt):
     """ This module percolates and refreezes subsurface water """
 
     # Preferential Percolation:
@@ -35,13 +36,22 @@ def percolation_refreezing(GRID, hydro_year, surface_water):
             raise ValueError("Preferential percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(preferential_percolation_method, ", ".join(preferential_percolation_allowed)))
 
     # Only run percolation and refreezing modules if water present:
-    if (np.any(GRID.get_liquid_water_content()) or surface_water != 0):
-
-        # Water Percolation, Storage & Run-off:
-        Q = percolate_water(GRID)
+    if (np.any(GRID.get_liquid_water_content()) != 0):
 
         # Sub-surface Refreezing:
         water_refrozen = refreezing(GRID, hydro_year)
+
+        # Water Percolation, Storage & Run-off:
+        heterogeneous_percolation_allowed = ['bucket','Darcy']
+        if heterogeneous_percolation_method == 'bucket':
+            Q = method_bucket_scheme(GRID)
+        elif heterogeneous_percolation_method == 'Darcy':
+            Q = method_Darcy(GRID, dt)
+        else:
+            raise ValueError("Heterogeneous percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(heterogeneous_percolation_method, ", ".join(heterogeneous_percolation_allowed)))
+
+        # Sub-surface Refreezing:
+        #water_refrozen = refreezing(GRID, hydro_year)
 
     else:
         Q , water_refrozen = 0, 0
@@ -91,8 +101,12 @@ def method_Marchenko(GRID, surface_water):
 # Water Percolation, Storage & Runoff
 # =================================== #
 
+# ====================== #
+# 'Bucket' Scheme Method
+# ====================== #
+
 @njit  
-def percolate_water(GRID):
+def method_bucket_scheme(GRID):
     """ Percolation of water according to a 'bucket' approach.
     
         Input:
@@ -134,6 +148,43 @@ def percolate_water(GRID):
 
     return Q
 
+# --------------------------------------------------------------------------------------------------------------------
+
+# ================= #
+# Darcy Flow Method
+# ================= #
+
+@njit  
+def method_Darcy(GRID, dt):
+
+    # Determine integration steps required in the solver to ensure numerical stability:
+    dt_stable =  60        # Test Value (60 seconds?)
+    dt_cumulative = 0.0
+
+    while dt_cumulative < dt:
+
+
+        # Integration timestep:
+        dt_step = np.minimum(dt_stable, dt - dt_cumulative)
+        dt_cumulative += dt_step
+
+        # Calculate water fluxes according to Darcy's law:
+        D = darcy_fluxes(GRID, dt_step)
+
+        for Idx in range(0, GRID.number_nodes - 1):
+
+            # Subtract Darcy-derived water flux from (current) upper layer:
+            GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) - D[Idx]) / GRID.get_node_height(Idx))
+
+            # Add Darcy-derived water flux to (proceeding / next) lower layer:
+            GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx + 1) * GRID.get_node_height(Idx + 1) + D[Idx]) / GRID.get_node_height(Idx + 1))
+    
+    # Water in the last sub-surface node is allocated to run-off:
+    Q = GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1)
+    GRID.set_node_liquid_water_content(GRID.number_nodes - 1, 0.0)
+
+    return Q
+
 # ====================================================================================================================
 
 # ====================== #
@@ -157,6 +208,9 @@ def refreezing(GRID, year):
     
     """
 
+    # Maximum snow fractional ice content:
+    icf_max = (snow_ice_threshold - air_density) / (ice_density - air_density)
+
     # Import Sub-surface Grid Information:
     lwc = np.asarray(GRID.get_liquid_water_content())
     icf = np.asarray(GRID.get_ice_fraction())     
@@ -165,13 +219,13 @@ def refreezing(GRID, year):
     hydro_year = np.asarray(GRID.get_hydro_year())
 
     # Volumetric/density limit on refreezing:
-    d_lwc_max_density = ((1 - icf) * (ice_density/water_density))
+    d_lwc_max_density = ((icf_max - icf) * (ice_density/water_density))
 
     # Temperature difference between layer and freezing temperature, cold content in temperature
     dT_max = np.abs(T - zero_temperature) # (Positive T)
 
     # Compute conversion factor (1/K)
-    Conversion = ((specific_heat_ice * ice_density) / (water_density * latent_heat_melting))
+    Conversion = ((spec_heat_ice * ice_density) / (water_density * lat_heat_melting))
 
     # Cold content limit on refreezing:
     d_lwc_max_coldcontent = np.where(dT_max < 0 , 0, (icf * Conversion * dT_max) / (1 - (Conversion * dT_max * (water_density / ice_density))))
