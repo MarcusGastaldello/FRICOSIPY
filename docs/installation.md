@@ -20,7 +20,7 @@ The *FRICOSIPY* model can be installed by following the proceeding three steps:
 cd C:\Users\<username>\Downloads\FRICOSIPY
 ```
 
-!!! tip
+!!! note
 
     It is reccomended to move the model to a more suitable working directory.
 
