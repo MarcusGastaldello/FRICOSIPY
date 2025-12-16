@@ -14,16 +14,22 @@
 # MODEL PARAMETERISATIONS 
 # ======================= #
 
+# Surface Energy Balance
 snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
 albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bougamont05','measured']
-densification_method = 'Boone02'                  # Options: ['Boone02','Ligtenberg11','disabled']
 penetrating_method = 'Bintanja95'                 # Options: ['Bintanja95','disabled']
 roughness_method = 'Moelg12'                      # Options: ['Moelg12','constant']
 saturation_vapour_pressure_method = 'Sonntag90'   # Options: ['Sonntag90']
-thermal_conductivity_method = 'Calonne19'         # Options: ['bulk', 'empirical','Sturm97','Calonne19']
+surface_temperature_solver = 'Newton'             # Options: ['L-BFGS-B','SLSQP','Newton'] [slowest <--> fastest]
+
+# Subsurface Model
+thermal_conductivity_method = 'Calonne19'         # Options: ['bulk','Sturm97','Calonne19']
 specific_heat_method = 'Yen81'                    # Options: ['bulk','Yen81']
+heterogeneous_percolation_method = 'bucket'       # Options: ['bucket','Darcy']
 preferential_percolation_method = 'disabled'      # Options: ['Marchenko17','disabled']
-surface_temperature_method = 'Newton'             # Options: ['L-BFGS-B','SLSQP','Newton'] [slowest <--> fastest]
+hydraulic_conductivity_method = 'Calonne12'       # Options: ['Shimizu70','Calonne12'] (Darcy only)
+irreducible_water_content_method = 'Coleou98'     # Options: ['Coleou98','constant']
+dry_densification_method = 'Boone02'                  # Options: ['Boone02','Ligtenberg11','disabled']
 snow_metamorphism_method = 'Katsushima09'         # Options: ['Katsushima09','disabled']
 
 # ================ #
@@ -36,7 +42,7 @@ max_depth = 50                                  # Maximum simulation depth [m]
 max_layers = 500                                # Maximum number of subsurface layers               
 
 # Meteorological Input Parameters:
-station_altitude = 2680.0                       # Altitude of meteorological station [m a.s.l.]
+station_altitude = 3000.0                       # Altitude of meteorological station [m a.s.l.]
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
 air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [K m-1] (default = -0.006)
 precipitation_lapse_rate = 0.0002               # Precipitation lapse rate [% m-1] (default = 0.0002)
@@ -76,6 +82,7 @@ surface_roughness_firn = 4.0                    # (Moelg12) Surface roughness le
 surface_roughness_timescale = 0.0026            # (Moelg12) Roughness length timescale [hours]
 constant_fresh_snow_density = 250.              # (Constant - snow_density_method) Constant density of freshly fallen snow [kg m-3]
 constant_surface_roughness = 0.001              # (Constant - surface_roughness_method) Surface roughness constant [m]
+constant_irreducible_water_content = 0.02       # (Constant - irreducible_water_content_method) [-]
 temperature_interpolation_depth_1 = 10          # (Ligtenberg11) First depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
 temperature_interpolation_depth_2 = 20          # (Ligtenberg11) Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
 
