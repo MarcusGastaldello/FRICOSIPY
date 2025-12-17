@@ -28,6 +28,10 @@ The model static input file contains topographic information that varies across 
 * **SLOPE** - Terrain slope [°]
 * **MASK** - Glacier mask boolean [0 or 1]
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### (i) Conversion from CSV to NetCDF
+
 An exemplar static CSV would therefore have the following format:
 
 | NORTHING | EASTING | LATITUDE | LONGITUDE | ELEVATION | ASPECT | SLOPE | MASK |
