@@ -15,7 +15,7 @@
 # =================== #
 
 # Filepaths:
-data_path = '../data/'            # ('./data' current directory | '../data' parent directory)
+data_path = './data/'            # ('./data' current directory | '../data' parent directory)
 
 # Input Files:
 static_netcdf = '<static_file>.nc'
