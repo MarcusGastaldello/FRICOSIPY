@@ -1,7 +1,7 @@
 """
     ==================================================================
 
-              CREATE METEOROLOGICAL (METEO) INPUTFILE PROGRAM
+              CREATE METEOROLOGICAL (METEO) INPUT FILE PROGRAM
 
         This file creates the model input meteo file that contains 
         contains the meteorological data varying through time (t)
