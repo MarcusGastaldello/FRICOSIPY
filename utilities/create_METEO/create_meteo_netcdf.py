@@ -210,8 +210,8 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Create meteo input file from csv file.')
     parser.add_argument('-c', '-csv_file', dest='csv_file', help='Csv file(see readme for file convention)')
-    parser.add_argument('-o', '-meteo_file', dest='meteo_file', help='Meteo file')
-    parser.add_argument('-b', '-start_date', dest='start_date', help='Start date')
+    parser.add_argument('-m', '-meteo_file', dest='meteo_file', help='Meteo file')
+    parser.add_argument('-s', '-start_date', dest='start_date', help='Start date')
     parser.add_argument('-e', '-end_date', dest='end_date', help='End date')
 
     args = parser.parse_args()
