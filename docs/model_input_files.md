@@ -30,7 +30,7 @@ The model static input file contains topographic information that varies across 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### (i) Conversion from CSV to NetCDF
+### $(i)$ Conversion from CSV to NetCDF
 
 An exemplar static CSV would therefore have the following format:
 
