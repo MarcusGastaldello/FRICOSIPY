@@ -71,6 +71,11 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 
+Flag,Parameter,Description
+-g,<static_dem>.tif,input GeoTIFF file name
+-s,<static_netcdf>.nc,output static NetCDF file name
+-m,<mask\>.shp,input glacier mask shapefile name
+
 ```text
 cd utilities/create_STATIC/
 python3 create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
