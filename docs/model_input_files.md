@@ -122,6 +122,11 @@ The model illumination input file determines whether grid nodes across the spati
 
 The ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) utility program can create this file from an existing static file.
 
+The program is launched, by navigating to the *utilities/create_ILLUMINATION/* directory on the command line and executing the program ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) with the following arguments:
+
+* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file*
+* &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file*
+
 ```python
 cd utilities/create_ILLUMINATION/
 python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i ../../data/illumination/<illumination_netcdf>.nc
