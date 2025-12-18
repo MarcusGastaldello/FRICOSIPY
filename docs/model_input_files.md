@@ -28,18 +28,11 @@ The model static input file contains topographic information that varies across 
 * **SLOPE** - Terrain slope [°]
 * **MASK** - Glacier mask boolean [0 or 1]
 
-The static file can either be directly created from a Digital Elevation Model (DEM) in .GeoTIFF format or from point grid data in .CSV format. The former approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
+The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### $(i)$ Conversion from GeoTIFF to NetCDF
-
-!!! note
-    Currently under development.
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
-### $(ii)$ Conversion from CSV to NetCDF
+### $(i)$ Conversion from CSV to NetCDF
 
 An exemplar static CSV would have the following format:
 
@@ -64,6 +57,22 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 ```python
 cd utilities/create_STATIC/
 python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
+```
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### $(ii)$ Conversion from GeoTIFF to NetCDF
+
+Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* directory and then the ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) utility program can then convert it into NetCDF format. 
+
+The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) with the following arguments:
+
+* &emsp; **-g** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input GeoTIFF file name*
+* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
+
+```python
+cd utilities/create_STATIC/
+python3 create_static_netcdf_from_CSV.py -g <dem>.tif -s <static_netcdf>.nc
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
