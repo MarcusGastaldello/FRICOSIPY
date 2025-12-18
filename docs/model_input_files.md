@@ -89,7 +89,7 @@ Alternatively, instead of using fractional cloud cover ( N ), the user can speci
 An exemplar meteo CSV would therefore have the following format:
 
 | DATETIME          | T2     | U2   | RH2   | PRES   | RRR  | N    |
-|--------------------|--------|------|-------|--------|------|------|
+|:--------------------:|:--------:|:------:|:-------:|:--------:|:------:|:------:|
 | 2024-01-00 13:00   | 273.15 | 6.22 | 60.54 | 652.42 | 1.00 | 0.32 |
 | 2024-01-00 14:00   | 274.56 | 8.71 | 66.22 | 672.18 | 0.00 | 0.12 |
 | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ |
