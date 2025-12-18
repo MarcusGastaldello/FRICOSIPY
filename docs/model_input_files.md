@@ -54,7 +54,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 
-```python
+```bash
 cd utilities/create_STATIC/
 python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
 ```
