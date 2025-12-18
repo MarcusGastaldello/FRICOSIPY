@@ -30,13 +30,20 @@ The model static input file contains topographic information that varies across 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-The static file can either be directly created from a Digital Elevation Model (DEM) in .GeoTIFF format or from point grid data in .CSV format.
+The static file can either be directly created from a Digital Elevation Model (DEM) in .GeoTIFF format or from point grid data in .CSV format. The former approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
 
 ### $(i)$ Conversion from GeoTIFF to NetCDF
 
+
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+!!! note
+    The static file will be generated at the same spatial resolution as the input DEM. 
+
 ### $(ii)$ Conversion from CSV to NetCDF
 
-An exemplar static CSV would therefore have the following format:
+An exemplar static CSV would have the following format:
 
 | NORTHING | EASTING | LATITUDE | LONGITUDE | ELEVATION | ASPECT | SLOPE | MASK |
 |-----------|----------|-----------|------------|------------|---------|--------|------|
@@ -83,6 +90,9 @@ An exemplar meteo CSV would therefore have the following format:
 
 | DATETIME          | T2     | U2   | RH2   | PRES   | RRR  | N    |
 |--------------------|--------|------|-------|--------|------|------|
+| 2024-01-00 13:00   | 273.15 | 6.22 | 60.54 | 652.42 | 1.00 | 0.32 |
+| 2024-01-00 14:00   | 274.56 | 8.71 | 66.22 | 672.18 | 0.00 | 0.12 |
+| ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ |
 | 2024-01-00 13:00   | 273.15 | 6.22 | 60.54 | 652.42 | 1.00 | 0.32 |
 | 2024-01-00 14:00   | 274.56 | 8.71 | 66.22 | 672.18 | 0.00 | 0.12 |
 
