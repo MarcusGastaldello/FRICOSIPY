@@ -63,18 +63,26 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     # Inital bounds:
     lower_bound = 220
     upper_bound = 330
-    initial_guess = min(GRID.get_node_temperature(0), 270)
+    initial_guess = float(min(GRID.get_node_temperature(0), 270))
 
     # Determine surface temperature by equalising the energy balance (SWnet + LWnet + LATENT + SENSIBLE + GROUND + RAIN_HEAT = 0)
     surface_temperature_methods_allowed = ['L-BFGS-B','SLSQP','Newton']
 
-    # Limited Broyden–Fletcher–Goldfarb–Shanno (L-BFGS-B) / Sequential Least Squares Programming (SLSQP) methods: 
+    # ========================================================================================================== #
+    # Limited Broyden-Fletcher-Goldfarb-Shanno (L-BFGS-B) / Sequential Least Squares Programming (SLSQP) methods
+    # ========================================================================================================== #
+
     if surface_temperature_solver == 'L-BFGS-B' or surface_temperature_solver == 'SLSQP':
         res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_solver,
                        bounds = ((lower_bound, upper_bound),), tol = 1e-2,
                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
 
-    # Netwon-Raphson method: 	       
+    # -------------------------------------------------------------------------------------------------------------------- #
+
+    # ===================== #
+    # Newton-Raphson method
+    # ===================== #
+
     elif surface_temperature_solver == 'Newton':
         try:
             res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-2, maxiter = 50,
@@ -84,12 +92,14 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
             res = SimpleNamespace(**{'x':min(np.array([zero_temperature]),res),'fun':None})
 	    
         except (RuntimeError,ValueError):
-             #Workaround for non-convergence and unboundedness
+             # Workaround for non-convergence and unboundedness (revert to SLSQP)
              res = minimize(energy_balance_optimisation, initial_guess, method='SLSQP',
                        bounds=((lower_bound, upper_bound),),tol=1e-2,
                        args=(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
     else:
         raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_solver, ", ".join(surface_temperature_methods_allowed)))
+    
+    # -------------------------------------------------------------------------------------------------------------------- #
 
     # Set surface temperature (T0):
     T0 = min(zero_temperature,float(res.x))
@@ -157,6 +167,9 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
     # Turbluent Fluxes
     # ================ #
 
+    # Ensure surface temperature is a scalar value (Numba compatabilitiy):
+    T0 = np.asarray(T0).flat[0]
+
     # Saturation vapour pressure [Pa]:
     saturation_vapour_pressure_methods_allowed = ['Sonntag90']
 
@@ -199,10 +212,12 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
     C_te = C_hn * psi
 
     # Sensible heat flux:
-    SENSIBLE = rho * specific_heat_air * C_te * U2 * (T2-T0) * np.cos(np.radians(SLOPE))
+    SENSIBLE = rho * specific_heat_air * C_te * U2 * (T2 - T0) * np.cos(np.radians(SLOPE))
         
     # Latent heat flux:
     LATENT = rho * L * C_te * U2 * (q2 - q0) * np.cos(np.radians(SLOPE))
+
+    # -------------------------------------------------------------------------------------------------------------------- #
 
     # ======================= #
     # Longwave Radiation Flux
@@ -222,6 +237,8 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
     # Calculate outgoing longwave radiation.
     LWout = -surface_emission_coeff * sigma * np.power(T0, 4.0)
 
+    # -------------------------------------------------------------------------------------------------------------------- #
+
     # ======================================== #
     # Ground Heat / Subsurface Conduction Flux
     # ======================================== #
@@ -238,13 +255,17 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
 
 	# Otherwise, if there is only a single subsurface layer:
     else:
-        GROUND = k * GRID.get_node_temperature(0) / (GRID.get_node_height(0) * 0.5)
+        GROUND = k * GRID.get_node_temperature(0) / (0.5 *  GRID.get_node_height(0))
+
+    # -------------------------------------------------------------------------------------------------------------------- #
 
     # ============== #
     # Rain Heat Flux
     # ============== #
 
     RAIN_HEAT = water_density * specific_heat_water * (RAIN / 1000 / dt) * (T2 - T0)
+
+    # -------------------------------------------------------------------------------------------------------------------- #
 
     return (LWin.item(), LWout.item(), SENSIBLE.item(), LATENT.item(), GROUND.item(), RAIN_HEAT.item())
 
@@ -258,14 +279,13 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
 def interpolate_Tz(GRID):
     """ Interpolate subsurface temperature to depths used for the subsurface / ground heat flux computation """
     
-    # Cumulative layer depths:
+    # Cumulative layer depths
     layer_heights_cum = np.cumsum(np.array(GRID.get_height()))
 
-    # Find indexes of two depths for temperature interpolation:
+    # Find indexes of two depths for temperature interpolation
     idx1_depth_1 = np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()
     depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()]
 
-    # First interpolation depth temperature (Tz1):
     if depth_1 > subsurface_interpolation_depth_1:
         idx2_depth_1 = idx1_depth_1 - 1
     else:
@@ -275,7 +295,6 @@ def interpolate_Tz(GRID):
             	(layer_heights_cum[idx1_depth_1] - layer_heights_cum[idx2_depth_1])) * \
 		(subsurface_interpolation_depth_1 - layer_heights_cum[idx1_depth_1])
 
-    # Second interpolation depth temperature (Tz2):
     idx1_depth_2 = np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()
     depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()]
 
@@ -289,7 +308,7 @@ def interpolate_Tz(GRID):
         	(layer_heights_cum[idx1_depth_2] - layer_heights_cum[idx2_depth_2])) * \
 		(subsurface_interpolation_depth_2 - layer_heights_cum[idx1_depth_2])
 
-    return np.array([Tz1,Tz2])
+    return (float(Tz1), float(Tz2))
     
 # ==================================================================================================================== #
 
@@ -316,7 +335,5 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
-
-
 
 
