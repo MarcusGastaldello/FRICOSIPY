@@ -108,8 +108,8 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 
 * &emsp; **-c** &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
 * &emsp; **-m** &emsp; *&lt;meteo_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output meteo NetCDF file name*
-* &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;*.csv &emsp; &ndash; &emsp; *(optional) start datetime*
-* &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;*.nc &emsp; &ndash; &emsp; *(optional) end datetime*
+* &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
+* &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
 ```python
 cd utilities/create_METEO/
