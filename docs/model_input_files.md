@@ -68,12 +68,12 @@ Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* direct
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) with the following arguments:
 
 * &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
-* &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
+* &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 
-```python
+```bash
 cd utilities/create_STATIC/
-python3 create_static_netcdf_from_CSV.py -g <static_dem>.tif -m <glacier_mask>.shp -s <static_netcdf>.nc
+python3 create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
@@ -121,7 +121,7 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 * &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
 * &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
-```python
+```bash
 cd utilities/create_METEO/
 python3 create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
 ```
@@ -146,7 +146,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
-```python
+```bash
 cd utilities/create_ILLUMINATION/
 python3 create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
 ```
