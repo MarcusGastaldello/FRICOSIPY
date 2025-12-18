@@ -58,8 +58,8 @@ Place the input CSV file in the *data/static/CSV/* directory and then the '*crea
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program '*create_static_netcdf_from_CSV.py*' with the following arguments:
 
-* **-c** &emsp; static_csv.csv
-* **-s** &emsp; static_netcdf.nc
+* **-c** &emsp; \<static_csv\>.csv &emsp;
+* **-s** &emsp; \<static_netcdf\>.nc &emsp;
 
 ```python
 cd utilities/create_STATIC/
