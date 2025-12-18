@@ -67,7 +67,7 @@ Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* direct
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) with the following arguments:
 
-* &emsp; **-g** &emsp; *&lt;static_dem&gt;*.csv &emsp; &ndash; &emsp; *input GeoTIFF file name*
+* &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 
 ```python
