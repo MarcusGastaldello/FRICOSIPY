@@ -58,10 +58,10 @@ The '*create_static_netcdf_from_CSV.py*' utility program can then convert it int
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program '*create_static_netcdf_from_CSV.py*' with the following arguments:
 
-* **-c**   'static_csv>.csv'
-* **-s**   '<static_netcdf>.nc'
+* **-c**   '*<static_csv>.csv*'    (Input CSV file)
+* **-s**   '*<static_netcdf>.nc*'    (Output NetCDF static file)
 
-*Ex.*
+*Example.*
 
 ```python
 cd utilities/create_STATIC/
