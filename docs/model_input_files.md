@@ -55,8 +55,8 @@ Place the input CSV file in the *data/static/CSV/* directory and then the ['*cre
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_CSV.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_CSV.py) with the following arguments:
 
-* &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file*
-* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file*
+* &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file name*
+* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 
 ```python
 cd utilities/create_STATIC/
@@ -99,12 +99,18 @@ An exemplar meteo CSV would therefore have the following format:
 | 2024-12-31 22:00   | 268.34 | 1.42 | 82.45 | 643.61 | 0.00 | 0.00 |
 | 2024-12-31 23:00   | 269.21 | 2.20 | 81.56 | 644.22 | 0.00 | 0.00 |
 
-The '*create_meteo_netcdf.py*' utility program can then convert it into NetCDF format.
+Place the input CSV file in the *data/meteo/CSV/* directory and then the ['*create_meteo_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_METEO/create_meteo_netcdf.py) utility program can then convert it into NetCDF format.
 
+The program is launched, by navigating to the *utilities/create_METEO/* directory on the command line and executing the program ['*create_meteo_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_METEO/create_meteo_netcdf.py) with the following arguments:
+
+* &emsp; **-c** &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
+* &emsp; **-m** &emsp; *&lt;meteo_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output meteo NetCDF file name*
+* &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;*.csv &emsp; &ndash; &emsp; *(optional) start datetime*
+* &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;*.nc &emsp; &ndash; &emsp; *(optional) end datetime*
 
 ```python
 cd utilities/create_METEO/
-python3 create_meteo_netcdf.py -c ../../data/meteo/<meteo_csv>.csv -m ../../data/meteo/<meteo_netcdf>.nc
+python3 create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
 ```
 
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
@@ -124,8 +130,8 @@ The ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRI
 
 The program is launched, by navigating to the *utilities/create_ILLUMINATION/* directory on the command line and executing the program ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) with the following arguments:
 
-* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file*
-* &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file*
+* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
+* &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
 ```python
 cd utilities/create_ILLUMINATION/
