@@ -56,7 +56,7 @@ An exemplar static CSV would have the following format:
 
 The '*create_static_netcdf_from_CSV.py*' utility program can then convert it into NetCDF format. Place the input CSV file in the *data/static/CSV/* directory and the static file will be generated in *data/static/*.
 
-The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program '*create_static_netcdf_from_CSV.py*' with the following two arguments:
+The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program '*create_static_netcdf_from_CSV.py*' with the following arguments:
 
 * **-c**   'static_csv>.csv'
 * **-s**   '<static_netcdf>.nc'
