@@ -56,8 +56,8 @@ An exemplar static CSV would have the following format:
 
 The '*create_static_netcdf_from_CSV.py*' utility program can then convert it into NetCDF format. This program has the following arguments:
 
-* -c - ../../data/static/<static_csv>.csv 
-* -s - ../../data/static/<static_netcdf>.nc
+* -c   `../../data/static/<static_csv>.csv`
+* -s   `../../data/static/<static_netcdf>.nc`
 
 *Ex.*
 
