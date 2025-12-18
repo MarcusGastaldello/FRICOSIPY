@@ -63,16 +63,17 @@ python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.
 
 ### $(ii)$ Conversion from GeoTIFF to NetCDF
 
-Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* directory and then the ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) utility program can then convert it into NetCDF format. 
+Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* directory and then the ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) utility program can then convert it into NetCDF format. A shapefile (.shp) is also required to deliniate the boundary of the glacier (the glacier mask) which should be placed in the *data/static/SHP/* directory.
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) with the following arguments:
 
 * &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
+* &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 
 ```python
 cd utilities/create_STATIC/
-python3 create_static_netcdf_from_CSV.py -g <static_dem>.tif -s <static_netcdf>.nc
+python3 create_static_netcdf_from_CSV.py -g <static_dem>.tif -m <glacier_mask>.shp -s <static_netcdf>.nc
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
