@@ -54,9 +54,10 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 
-```bash
+```text
 cd utilities/create_STATIC/
 python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
+```
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -70,9 +71,10 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 
-```bash
+```text
 cd utilities/create_STATIC/
 python3 create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
+```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
@@ -119,7 +121,7 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 * &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
 * &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
-```bash
+```text
 cd utilities/create_METEO/
 python3 create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
 ```
@@ -144,7 +146,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
-```bash
+```text
 cd utilities/create_ILLUMINATION/
 python3 create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
 ```
