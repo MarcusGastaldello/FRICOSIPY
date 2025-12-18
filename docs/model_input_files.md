@@ -28,17 +28,14 @@ The model static input file contains topographic information that varies across 
 * **SLOPE** - Terrain slope [°]
 * **MASK** - Glacier mask boolean [0 or 1]
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
 The static file can either be directly created from a Digital Elevation Model (DEM) in .GeoTIFF format or from point grid data in .CSV format. The former approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### $(i)$ Conversion from GeoTIFF to NetCDF
 
-
-
-
 !!! note
-    The static file will be generated at the same spatial resolution as the input DEM. 
+    Currently under development.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -58,8 +55,8 @@ Place the input CSV file in the *data/static/CSV/* directory and then the '*crea
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program '*create_static_netcdf_from_CSV.py*' with the following arguments:
 
-* &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; - *input static CSV file*
-* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; - *output static NetCDF file*
+* &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file*
+* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file*
 
 ```python
 cd utilities/create_STATIC/
