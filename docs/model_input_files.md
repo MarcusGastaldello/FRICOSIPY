@@ -129,7 +129,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 
 ```python
 cd utilities/create_ILLUMINATION/
-python3 create_illumination_netcdf.py -s ../../data/static/<static_netcdf>.nc -i ../../data/illumination/<illumination_netcdf>.nc
+python3 create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
 ```
 
 !!! attention
