@@ -123,7 +123,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
 
-The ['create_illumination_netcdf.py'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) utility program can create this file from an existing static file.
+The ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) utility program can create this file from an existing static file.
 
 ```python
 cd utilities/create_ILLUMINATION/
