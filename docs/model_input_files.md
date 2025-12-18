@@ -36,10 +36,11 @@ The static file can either be directly created from a Digital Elevation Model (D
 
 
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 !!! note
     The static file will be generated at the same spatial resolution as the input DEM. 
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### $(ii)$ Conversion from CSV to NetCDF
 
