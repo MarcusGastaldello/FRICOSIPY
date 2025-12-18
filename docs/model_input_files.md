@@ -66,7 +66,7 @@ cd utilities/create_STATIC/
 python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
 ```
 
-In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* product of the 
+In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
