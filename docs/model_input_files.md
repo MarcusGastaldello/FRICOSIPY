@@ -30,7 +30,11 @@ The model static input file contains topographic information that varies across 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### $(i)$ Conversion from CSV to NetCDF
+The static file can either be directly created from a Digital Elevation Model (DEM) in .GeoTIFF format or from point grid data in .CSV format.
+
+### $(i)$ Conversion from GeoTIFF to NetCDF
+
+### $(ii)$ Conversion from CSV to NetCDF
 
 An exemplar static CSV would therefore have the following format:
 
@@ -51,10 +55,6 @@ python3 create_static_netcdf_from_CSV.py -c ../../data/static/<static_csv>.csv -
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
-
-!!! note
-     A utility program designed to directly convert a Digital Elevation Model (DEM) to a static file (without the need for GIS software)
-     is currently in development.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
