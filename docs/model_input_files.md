@@ -44,9 +44,12 @@ The static file can either be directly created from a Digital Elevation Model (D
 An exemplar static CSV would have the following format:
 
 | NORTHING | EASTING | LATITUDE | LONGITUDE | ELEVATION | ASPECT | SLOPE | MASK |
-|-----------|----------|-----------|------------|------------|---------|--------|------|
+|:-----------:|:----------:|:-----------:|:------------:|:------------:|:---------:|:--------:|:------:|
 | 1086500 | 2633800 | 45.92925 | 7.874360 | 4457.10 | 240.24 | 2.35 | 1 |
-| 1086600 | 2633800 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
+| 1086500 | 2633850 | 45.93039 | 7.874485 | 4456.72 | 210.12 | 4.13 | 1 |
+| ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ | ⋮ |
+| 1086800 | 2633800 | 45.93208 | 7.874285 | 4388.20 | 30.26 | 20.12 | 1 |
+| 1086800 | 2633850 | 45.93195 | 7.875026 | 4358.10 | 36.78 | 23.21 | 1 |
 
 !!! attention
     FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
