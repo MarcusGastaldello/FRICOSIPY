@@ -10,7 +10,7 @@ theme:
   custom_dir: docs/custom_theme
 
 extra:
-  favicon: img/favicon_v2.ico
+  favicon: img/favicon.ico
   
 plugins:
   - search
