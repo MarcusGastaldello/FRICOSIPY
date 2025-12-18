@@ -54,7 +54,13 @@ An exemplar static CSV would have the following format:
 !!! attention
     FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
 
-The '*create_static_netcdf_from_CSV.py*' utility program can then convert it into NetCDF format.
+The '*create_static_netcdf_from_CSV.py*' utility program can then convert it into NetCDF format. This program has the following arguments:
+
+* -c -
+* -s - 
+
+
+Ex.
 
 ```python
 cd utilities/create_STATIC/
