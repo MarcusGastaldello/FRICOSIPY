@@ -225,7 +225,7 @@ def refreezing(GRID, year):
     dT_max = np.abs(T - zero_temperature) # (Positive T)
 
     # Compute conversion factor (1/K)
-    Conversion = ((spec_heat_ice * ice_density) / (water_density * lat_heat_melting))
+    Conversion = ((specific_heat_ice * ice_density) / (water_density * latent_heat_melting))
 
     # Cold content limit on refreezing:
     d_lwc_max_coldcontent = np.where(dT_max < 0 , 0, (icf * Conversion * dT_max) / (1 - (Conversion * dT_max * (water_density / ice_density))))
