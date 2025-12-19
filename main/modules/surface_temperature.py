@@ -55,10 +55,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     """
     
     # Interpolate subsurface temperatures to selected subsurface depths for subsurface / ground heat flux computation:
-    if GRID.get_number_layers() > 1:
-        B_Ts = interpolate_Tz(GRID)
-    else:
-        B_Ts = None
+    Tz = interpolate_Tz(GRID) if GRID.get_number_layers() > 1 else (0,0)
 
     # Inital bounds:
     lower_bound = 220
@@ -75,7 +72,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     if surface_temperature_solver == 'L-BFGS-B' or surface_temperature_solver == 'SLSQP':
         res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_solver,
                        bounds = ((lower_bound, upper_bound),), tol = 1e-2,
-                       args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
+                       args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
 
     # -------------------------------------------------------------------------------------------------------------------- #
 
@@ -86,7 +83,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     elif surface_temperature_solver == 'Newton':
         try:
             res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-2, maxiter = 50,
-                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
+                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
             if res < lower_bound:
                 raise ValueError("Error: Surface temperature is out of physical bounds.")
             res = SimpleNamespace(**{'x':min(np.array([zero_temperature]),res),'fun':None})
@@ -95,7 +92,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
              # Workaround for non-convergence and unboundedness (revert to SLSQP)
              res = minimize(energy_balance_optimisation, initial_guess, method='SLSQP',
                        bounds=((lower_bound, upper_bound),),tol=1e-2,
-                       args=(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput, N))
+                       args=(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
     else:
         raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_solver, ", ".join(surface_temperature_methods_allowed)))
     
@@ -106,7 +103,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     GRID.set_node_temperature(0, T0)
  
     # Determine the surface energy fluxes:
-    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LWinput, N,)
+    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N,)
      
     # Consistency check:
     if (T0 > zero_temperature) or (T0 < lower_bound):
@@ -118,11 +115,11 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
 # ====================================================================================================================
 
 @njit
-def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, B_Ts, LWinput = None, N = None):
+def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput = None, N = None):
     """ Optimisation function to resolve the surface temperature (T0) """
 
     # Determine the surface energy fluxes for a given surface temperature (T0):
-    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LWinput, N)
+    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N)
 
     # Return the minimised residual:
     if surface_temperature_solver == 'Newton':
@@ -137,7 +134,7 @@ def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SL
 # ===================== #
 
 @njit
-def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LWinput = None, N = None):
+def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput = None, N = None):
     """ This functions returns the surface energy fluxes from a given estimate for the surface temperature (T0)
 
     Input:
@@ -250,7 +247,7 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
     if GRID.get_number_layers() > 1:
         x1 = subsurface_interpolation_depth_1
         x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
-        Tz1, Tz2 = B_Ts
+        Tz1, Tz2 = Tz
         GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
 
 	# Otherwise, if there is only a single subsurface layer:
@@ -279,34 +276,27 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, B_Ts, LW
 def interpolate_Tz(GRID):
     """ Interpolate subsurface temperature to depths used for the subsurface / ground heat flux computation """
     
-    # Cumulative layer depths
-    layer_heights_cum = np.cumsum(np.array(GRID.get_height()))
+    # Retrieve subsurface layer properties:
+    z = np.asarray(GRID.get_depth())
+    T = np.asarray(GRID.get_temperature())
+    n = GRID.get_number_layers()
 
-    # Find indexes of two depths for temperature interpolation
-    idx1_depth_1 = np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()
-    depth_1 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_1).argmin()]
+    def interpolate(target_z):
+    
+        # Determine the closest subsurface node index:
+        idx_1 = np.abs(z - target_z).argmin()
 
-    if depth_1 > subsurface_interpolation_depth_1:
-        idx2_depth_1 = idx1_depth_1 - 1
-    else:
-        idx2_depth_1 = idx1_depth_1 + 1
-    Tz1 = GRID.get_node_temperature(idx1_depth_1) + \
-		((GRID.get_node_temperature(idx1_depth_1) - GRID.get_node_temperature(idx2_depth_1)) / \
-            	(layer_heights_cum[idx1_depth_1] - layer_heights_cum[idx2_depth_1])) * \
-		(subsurface_interpolation_depth_1 - layer_heights_cum[idx1_depth_1])
+        # Determine the adjacent subsurface node index that bounds the target depth: 
+        idx_2 = max(0, idx_1 - 1) if z[idx_1] > target_z else min(n - 1, idx_1 + 1)
 
-    idx1_depth_2 = np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()
-    depth_2 = layer_heights_cum.flat[np.abs(layer_heights_cum - subsurface_interpolation_depth_2).argmin()]
-
-    if depth_2 > subsurface_interpolation_depth_2:
-        idx2_depth_2 = idx1_depth_2 - 1
-    else:
-        idx2_depth_2 = idx1_depth_2 + 1
-
-    Tz2 = GRID.get_node_temperature(idx1_depth_2) + \
-		((GRID.get_node_temperature(idx1_depth_2) - GRID.get_node_temperature(idx2_depth_2)) / \
-        	(layer_heights_cum[idx1_depth_2] - layer_heights_cum[idx2_depth_2])) * \
-		(subsurface_interpolation_depth_2 - layer_heights_cum[idx1_depth_2])
+        # Linearly interpolate the target subsurface temperature (ensuring no division by zero error):
+        dz = z[idx_1] - z[idx_2]
+        Tz = T[idx_1] if dz == 0 else T[idx_1] + (T[idx_1] - T[idx_2]) / dz * (target_z - z[idx_1])  
+        return Tz
+    
+    # Determine subsurface temperatures using linear interpolation:
+    Tz1 = interpolate(subsurface_interpolation_depth_1)
+    Tz2 = interpolate(subsurface_interpolation_depth_2)
 
     return (float(Tz1), float(Tz2))
     
