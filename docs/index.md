@@ -32,6 +32,6 @@ The latest version of *FRICOSIPY* is available at: [https://github.com/MarcusGas
 
 !!! note
 
-    This user guide is currently under development. Completetion is scheduled for February 2026.
+    This user guide is currently under development for the new v1.3 release of *FRICOSIPY*. Completetion is scheduled for February 2026.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
