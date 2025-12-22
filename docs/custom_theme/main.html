@@ -1,71 +1,37 @@
 {% extends "base.html" %}
 
-{# ----- 0. BROWSER TITLE ------ #}
 {% block htmltitle %}
   <title>
     {%- if page.meta.og_title -%}
-      {{ page.meta.og_title }}
+      {{ page.meta.og_title | trim }}
     {%- else -%}
-      {{ config.site_name }}{% if page.title %} - {{ page.title }}{% endif %}
+      {{ config.site_name }}{% if page.title %} | {{ page.title }}{% endif %}
     {%- endif -%}
   </title>
 {% endblock %}
 
-{# ----- 1. CORE SEARCH METADATA (Google Search) ----- #}
-
 {% block site_meta %}
-
-    {# Meta Data #}
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" 
-          content="{% if page and page.meta and page.meta.og_description %}{{ page.meta.og_description }}{% elif config.site_description %}{{ config.site_description }}{% endif %}" />
-    {% if config.site_author %}
-        <meta name="author" content="{{ config.site_author }}" />
-    {% endif %}
-    {% if page and page.canonical_url %}
-        <link rel="canonical" href="{{ page.canonical_url }}" />
-    {% endif %}
-    
-    {# Favicon #}
+          content="{%- if page and page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- elif config.site_description -%}{{ config.site_description }}{%- endif -%}" />
+    {% if config.site_author %}<meta name="author" content="{{ config.site_author }}" />{% endif %}
+    {% if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{% endif %}
     <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
 {% endblock %}
 
-{# ----- 2. EXTRA HEAD (Google Search Console verification and Open Graph ) ----- #}
-
 {% block extrahead %}
   {{ super() }}
-
-  {# --- Google Search Indexing / SEO --- #}
-  {# MkDocs uses the site_description from mkdocs.yml for the standard description meta tag, which is good for Google Indexing. #}
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
-
-  {# --- Open Graph Tags (for LinkedIn, WhatsApp, Facebook, etc.) --- #}
-  {% if page %}
-    
-    {# Open Graph Title: #}
+  {%- if page -%}
     <meta property="og:title" 
-          content="{% if page.meta.og_title %}
-                   {{ page.meta.og_title }}
-                   {% else %}
-                   {{ config.site_name }}
-                   {% endif %}">
-
-    {# Open Graph Description: #}
+          content="{%- if page.meta.og_title -%}{{ page.meta.og_title | trim }}{%- else -%}{{ config.site_name }}{%- endif -%}">
     <meta property="og:description" 
-          content="{% if page.meta.og_description %}
-                   {{ page.meta.og_description }}
-                   {% else %}
-                   {{ config.site_description }}
-                   {% endif %}">    
+          content="{%- if page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- else -%}{{ config.site_description }}{%- endif -%}">
     <meta property="og:url" content="{{ page.canonical_url }}">
-  {% endif %}
-
+  {%- endif -%}
   <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY-social.png">
   <meta property="og:type" content="website">
-  <meta property="og:image:width" content="3179">
-  <meta property="og:image:height" content="1671">
-
 {% endblock %}
