@@ -10,6 +10,8 @@
   </title>
 {% endblock %}
 
+{% block favicon %}{% endblock %}
+
 {% block site_meta %}
     {{ super() }}
     <meta name="description" content="{%- if page and page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- elif config.site_description -%}{{ config.site_description }}{%- endif -%}" />
