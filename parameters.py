@@ -15,21 +15,22 @@
 # ======================= #
 
 # Surface Energy Balance
-snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
 albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bougamont05','measured']
-penetrating_method = 'Bintanja95'                 # Options: ['Bintanja95','disabled']
-roughness_method = 'Moelg12'                      # Options: ['Moelg12','constant']
+penetrating_radiation_method = 'Bintanja95'       # Options: ['Bintanja95','disabled']
+surface_roughness_method = 'Moelg12'              # Options: ['Moelg12','constant']
 saturation_vapour_pressure_method = 'Sonntag90'   # Options: ['Sonntag90']
 surface_temperature_solver = 'Newton'             # Options: ['L-BFGS-B','SLSQP','Newton'] [slowest <--> fastest]
 
-# Subsurface Model
+# Multi-layer Subsurface Model
+precipitation_method = 'standard'                 # Options: ['standard','three-phase anomaly']
+snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
 thermal_conductivity_method = 'Calonne19'         # Options: ['bulk','Sturm97','Calonne19']
 specific_heat_method = 'Yen81'                    # Options: ['bulk','Yen81']
 heterogeneous_percolation_method = 'bucket'       # Options: ['bucket','Darcy']
 preferential_percolation_method = 'disabled'      # Options: ['Marchenko17','disabled']
 hydraulic_conductivity_method = 'Calonne12'       # Options: ['Shimizu70','Calonne12'] (Darcy only)
 irreducible_water_content_method = 'Coleou98'     # Options: ['Coleou98','constant']
-dry_densification_method = 'Boone02'                  # Options: ['Boone02','Ligtenberg11','disabled']
+dry_densification_method = 'Boone02'              # Options: ['Boone02','Ligtenberg11','disabled']
 snow_metamorphism_method = 'Katsushima09'         # Options: ['Katsushima09','disabled']
 
 # ================ #
