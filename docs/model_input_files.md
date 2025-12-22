@@ -19,14 +19,14 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 The model static input file contains topographic information that varies across the spatial domain  
 ( 𝑥 , 𝑦 ) and requires the following variables:
 
-* **NORTHING** - Northing [m]
-* **EASTING** - Easting [m]
-* **LATITUDE** - Latitude (WGS84) [decimal]
-* **LONGITUDE** - Longitude (WGS84) [decimal]
-* **ELEVATION** - Elevation [m a.s.l.]
-* **ASPECT** - Terrain aspect [°]
-* **SLOPE** - Terrain slope [°]
-* **MASK** - Glacier mask boolean [0 or 1]
+* **NORTHING** – Northing [m]
+* **EASTING** – Easting [m]
+* **LATITUDE** – Latitude (WGS84) [decimal]
+* **LONGITUDE** – Longitude (WGS84) [decimal]
+* **ELEVATION** – Elevation [m a.s.l.]
+* **ASPECT** – Terrain aspect [°]
+* **SLOPE** – Terrain slope [°]
+* **MASK** – Glacier mask boolean [0 or 1]
 
 ??? "** Optional Variables**"
 
@@ -39,7 +39,7 @@ The model static input file contains topographic information that varies across 
 
     The following optional variables can also be used:
 
-    * **BASAL** - Basal / geothermal heat flux [Wm$^{-2}$] 
+    * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] 
     *(enables a spatially-variable basal/geothermal heat flux)*
 
 <br>
@@ -104,18 +104,18 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 
 The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
 
-* **DATETIME** - Datetime [yyyy-mm-dd hh:mm]
-* **T2**   - Air temperature [K]
-* **U2**   - Wind speed [m s-1]
-* **RH2**  - Relative humidity [%]
-* **PRES** - Atmospheric pressure [hPa]
-* **RRR**  - Precipitation [mm]
-* **N**    - Fractional cloud cover [0-1]
+* **DATETIME** – Datetime [yyyy-mm-dd hh:mm]
+* **T2**   – Air temperature [K]
+* **U2**   – Wind speed [m s-1]
+* **RH2**  – Relative humidity [%]
+* **PRES** – Atmospheric pressure [hPa]
+* **RRR**  – Precipitation [mm]
+* **N**    – Fractional cloud cover [0-1]
 
 Alternatively, instead of using fractional cloud cover ( N ), the user can specify directly measured radiative fluxes:
 
-* **SWin** - Shortwave radiation [W m-2]
-* **LWin** - Longwave radiation [W m-2]
+* **SWin** – Shortwave radiation [W m-2]
+* **LWin** – Longwave radiation [W m-2]
 
 An exemplar meteo CSV would therefore have the following format:
 
