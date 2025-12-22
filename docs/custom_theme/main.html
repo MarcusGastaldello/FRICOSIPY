@@ -1,11 +1,27 @@
 {% extends "base.html" %}
 
-{# Override the specific metadata block to swap the favicon tag #}
+{# ----- 1. CORE SEARCH METADATA (Google Search) ----- #}
+
 {% block site_meta %}
-  {{ super() }}
-  {# This replaces/adds the modern tag Google wants in 2025 #}
-  <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
+
+    {# Meta Data #}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" 
+          content="{% if page and page.meta and page.meta.og_description %}{{ page.meta.og_description }}{% elif config.site_description %}{{ config.site_description }}{% endif %}" />
+    {% if config.site_author %}
+        <meta name="author" content="{{ config.site_author }}" />
+    {% endif %}
+    {% if page and page.canonical_url %}
+        <link rel="canonical" href="{{ page.canonical_url }}" />
+    {% endif %}
+    
+    {# Favicon #}
+    <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
 {% endblock %}
+
+{# ----- 2. EXTRA HEAD (Google Search Console verification and Open Graph ) ----- #}
 
 {% block extrahead %}
   {{ super() }}
@@ -18,7 +34,7 @@
   {# --- Open Graph Tags (for LinkedIn, WhatsApp, Facebook, etc.) --- #}
   {% if page %}
     
-    {# Open Graph Title: Safely check for custom title, falling back to site_name #}
+    {# Open Graph Title: #}
     <meta property="og:title" 
           content="{% if page.meta.og_title %}
                    {{ page.meta.og_title }}
@@ -26,15 +42,14 @@
                    {{ config.site_name }}
                    {% endif %}">
 
-    {# Open Graph Description: Safely check for custom description, falling back to site_description #}
+    {# Open Graph Description: #}
     <meta property="og:description" 
           content="{% if page.meta.og_description %}
                    {{ page.meta.og_description }}
                    {% else %}
                    {{ config.site_description }}
-                   {% endif %}">
-    
-    <meta property="og:url" content="{{ page.canonical_url }}">  {# THIS LINE IS NOW PROTECTED #}
+                   {% endif %}">    
+    <meta property="og:url" content="{{ page.canonical_url }}">
   {% endif %}
 
   <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY-social.png">
