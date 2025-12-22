@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
+{# ----- 0. BROWSER TITLE ------ #}
+{% block htmltitle %}
+  <title>
+    {%- if page.meta.og_title -%}
+      {{ page.meta.og_title }}
+    {%- else -%}
+      {{ config.site_name }}{% if page.title %} - {{ page.title }}{% endif %}
+    {%- endif -%}
+  </title>
+{% endblock %}
+
 {# ----- 1. CORE SEARCH METADATA (Google Search) ----- #}
 
 {% block site_meta %}
