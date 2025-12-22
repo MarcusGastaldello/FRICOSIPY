@@ -1,11 +1,9 @@
-{% extends "base.html" %}
-
 {% block htmltitle %}
   <title>
-    {%- if page.meta.og_title -%}
+    {%- if page and page.meta and page.meta.og_title -%}
       {{ page.meta.og_title | trim }}
     {%- else -%}
-      {{ config.site_name }}{% if page.title %} | {{ page.title }}{% endif %}
+      {{ config.site_name }}{% if page and page.title %} | {{ page.title }}{% endif %}
     {%- endif -%}
   </title>
 {% endblock %}
@@ -26,12 +24,12 @@
   <meta name="robots" content="index, follow">
   <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
   {%- if page -%}
-    <meta property="og:title" 
-          content="{%- if page.meta.og_title -%}{{ page.meta.og_title | trim }}{%- else -%}{{ config.site_name }}{%- endif -%}">
-    <meta property="og:description" 
-          content="{%- if page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- else -%}{{ config.site_description }}{%- endif -%}">
+    <meta property="og:title" content="{%- if page.meta and page.meta.og_title -%}{{ page.meta.og_title | trim }}{%- else -%}{{ config.site_name }}{%- endif -%}">
+    <meta property="og:description" content="{%- if page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- else -%}{{ config.site_description }}{%- endif -%}">
     <meta property="og:url" content="{{ page.canonical_url }}">
+    <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY-social.png">
+    <meta property="og:image:width" content="3179">
+    <meta property="og:image:height" content="1671">    
+    <meta property="og:type" content="website">
   {%- endif -%}
-  <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY-social.png">
-  <meta property="og:type" content="website">
 {% endblock %}
