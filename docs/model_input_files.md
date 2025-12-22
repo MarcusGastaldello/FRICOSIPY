@@ -29,7 +29,7 @@ The model static input file contains topographic information that varies across 
 * **MASK** - Glacier mask boolean [ 0 or 1 ]
 
 ??? "** Optional Variables**"
-
+   
    <br>
    The following optional variables can also be :
    
