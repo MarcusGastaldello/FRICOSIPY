@@ -172,17 +172,11 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         D = np.asarray(df['D'].apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_time(ds, D, 'D', '-', 'Precipitation Downscaling Coefficient')
 
-    # Annual Accumulation Anomaly [-]
-    if 'ACC_ANOMALY' in df.columns:
-        print(f"\t 'ACC_ANOMALY' - Annual Accumulation Anomaly [-]     Min: {np.round(df['ACC_ANOMALY'].min(),2)} -- Max: {np.round(df['ACC_ANOMALY'].max(),2)}")
-        ACC_ANOMALY = np.asarray(df['ACC_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
-        add_variable_along_time(ds, ACC_ANOMALY, 'ACC_ANOMALY', '-', 'Annual Accumulation Anomaly')
-    
-    # Annual Sublimation Anomaly [-]
-    if 'SUB_ANOMALY' in df.columns:
-        print(f"\t 'SUB_ANOMALY' - Annual Sublimation Anomaly [-]      Min: {np.round(df['SUB_ANOMALY'].min(),2)} -- Max: {np.round(df['SUB_ANOMALY'].max(),2)}")
-        SUB_ANOMALY = np.asarray(df['SUB_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
-        add_variable_along_time(ds, SUB_ANOMALY, 'SUB_ANOMALY', '-', 'Annual Sublimation Anomaly')
+    # Annual Precipitation Anomaly [-]
+    if 'PRECIPITATION_ANOMALY' in df.columns:
+        print(f"\t 'PRECIPITATION_ANOMALY' - Annual Precipitation Anomaly [-]     Min: {np.round(df['PRECIPITATION_ANOMALY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_ANOMALY'].max(),2)}")
+        PRECIPITATION_ANOMALY = np.asarray(df['PRECIPITATION_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
+        add_variable_along_time(ds, PRECIPITATION_ANOMALY, 'PRECIPITATION_ANOMALY', '-', 'Annual Precipitation Anomaly')
 
     # ============================== #
     # Write Input Meteo File to Disc 
