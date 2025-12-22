@@ -118,8 +118,8 @@ Alternatively, instead of using fractional cloud cover ( N ), the user can speci
     The following optional variables can also be used:
 
     * **T2_LAPSE** – Air temperature lapse rate [K m$^{-1}$] <br> *(enables a spatially-variable basal/geothermal heat flux and overrides the 'basal heat flux' parameter)*
-    * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height and overrides the 'initial height' parameters)*
-    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
+    * **D** – Precipitation downscaling coefficient [-] <br> *(hourly precipitation downscaling coefficient for the three-phase anomaly model)*
+    * **PRECIPITATION_ANOMALY** – Precipitation anomaly [-] <br> *(annual precipitation variance / anomaly for the three-phase anomaly model)*
 
 <br>
 An exemplar meteo CSV would therefore have the following format:
