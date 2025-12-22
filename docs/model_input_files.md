@@ -101,7 +101,7 @@ The model meteorological input file contains the meteorological data varying thr
 
 * **DATETIME** – Datetime [yyyy-mm-dd hh:mm]
 * **T2**   – Air temperature [K]
-* **U2**   – Wind speed [m s-1]
+* **U2**   – Wind speed [m s$^{-1}$]
 * **RH2**  – Relative humidity [%]
 * **PRES** – Atmospheric pressure [hPa]
 * **RRR**  – Precipitation [mm]
@@ -109,9 +109,19 @@ The model meteorological input file contains the meteorological data varying thr
 
 Alternatively, instead of using fractional cloud cover ( N ), the user can specify directly measured radiative fluxes:
 
-* **SWin** – Shortwave radiation [W m-2]
-* **LWin** – Longwave radiation [W m-2]
+* **SWin** – Shortwave radiation [W m$^{-2}$]
+* **LWin** – Longwave radiation [W m$^{-2}$]
 
+??? "**Optional Variables:**"
+
+    <br>
+    The following optional variables can also be used:
+
+    * **T2_LAPSE** – Air temperature lapse rate [K m$^{-1}$] <br> *(enables a spatially-variable basal/geothermal heat flux and overrides the 'basal heat flux' parameter)*
+    * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height and overrides the 'initial height' parameters)*
+    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
+
+<br>
 An exemplar meteo CSV would therefore have the following format:
 
 | DATETIME          | T2     | U2   | RH2   | PRES   | RRR  | N    |
