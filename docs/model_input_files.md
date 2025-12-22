@@ -28,11 +28,14 @@ The model static input file contains topographic information that varies across 
 * **SLOPE** – Terrain slope [°]
 * **MASK** – Glacier mask boolean [0 or 1]
 
-??? "**Optional Variables**"
+??? "**Optional Variables:**"
 
+    <br>
     The following optional variables can also be used:
 
     * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] <br> *(enables a spatially-variable basal/geothermal heat flux)*
+    * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height)*
+    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
 The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
