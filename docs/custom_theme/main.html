@@ -5,6 +5,10 @@
 
   {{ super() }}
 
+  {# --- 1. Modern Favicon Tag (For Google 2025) --- #}
+  {# We use 'rel="icon"' because Google now prioritizes it over 'shortcut icon' #}
+  <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
+
   {# --- Google Search Indexing / SEO --- #}
   {# MkDocs uses the site_description from mkdocs.yml for the standard description meta tag, which is good for Google Indexing. #}
   <meta name="robots" content="index, follow">
