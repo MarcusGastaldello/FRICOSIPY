@@ -124,21 +124,23 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     # GET STATIC DATA FROM FILE
     # ========================= #
 
+    # Required Variables:
     ELEVATION = STATIC.ELEVATION.values
     SLOPE = STATIC.SLOPE.values
     ASPECT = STATIC.ASPECT.values
     LATITUDE = STATIC.LATITUDE.values
     LONGITUDE = STATIC.LONGITUDE.values
 
+    # Optional Variables:
     if 'BASAL' in list(STATIC.keys()):
         BASAL = STATIC.BASAL.values
     else:
         BASAL = basal_heat_flux
 
-    if 'ACCUMULATION' in list(STATIC.keys()):
-        ACCUMULATION = STATIC.ACCUMULATION.values
+    if 'PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys()):
+        PRECIPITATION_CLIMATOLOGY = STATIC.PRECIPITATION_CLIMATOLOGY.values
     else:
-        ACCUMULATION = None
+        PRECIPITATION_CLIMATOLOGY = None
 
     # ================================= #
     # GET METEOROLOGICAL DATA FROM FILE
@@ -159,21 +161,25 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     else:
         PRES = METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * -0.006)))
     
-    # Standard precipiation data [mm] (Van Pelt et al., 2019) 
-    if 'RRR' in list(METEO.keys()):
-        RRR = METEO.RRR.values * (1 + (ELEVATION - station_altitude) * precipitation_lapse_rate) * precipitation_multiplier
+    # Precipitation:
+    precipitation_allowed = ['standard','three-phase anomaly']
 
-    # Three phase accumulation model (Accumulation climatology [m] * Annual anomaly [-] * Downscaling coefficient) [mm]
-    elif ('ACCUMULATION' in list(STATIC.keys())) and ('ACC_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
-
-        # Correction for sublimation losses (if known):
-        if ('SUBLIMATION' in list(STATIC.keys())) and ('SUB_ANOMALY' in list(METEO.keys())):
-            RRR = ((STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000 * precipitation_multiplier
+    # Standard precipiation data [mm] (Van Pelt et al., 2019)
+    if precipitation_method == 'standard':
+        if 'RRR' in list(METEO.keys()):
+            RRR = METEO.RRR.values * (1 + (ELEVATION - station_altitude) * precipitation_lapse_rate) * precipitation_multiplier
         else:
-            RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+            raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
+
+    # Three-phase precipitation model (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
+    elif precipitation_method == 'three-phase anomaly':
+        if ('PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys())) and ('PRECIPITATION_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
+            RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+        else:
+            raise ValueError("Error: All three variables of the three phase precipitation model ('PRECIPITATION_CLIMATOLOGY', 'PRECIPITATION_ANOMALY','D') must be supplied in the input STATIC & METEO files")
 
     else:
-        raise ValueError("Error: Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
+        raise ValueError("Precipitation method = \"{:s}\" is not allowed, must be one of {:s}".format(precipitation_method, ", ".join(precipitation_allowed)))
 
     # Remaining variables remain constant across the spatial grid
     RH2 = METEO.RH2.values

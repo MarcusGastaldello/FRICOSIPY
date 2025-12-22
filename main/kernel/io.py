@@ -199,15 +199,16 @@ class IOClass:
 
         # Model Parameterisations:
         ## (Surface Energy Balance):
-        self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Albedo_method'] = albedo_method
-        self.RESULT.attrs['Dry_Densification_method'] = dry_densification_method
-        self.RESULT.attrs['Penetrating_method'] = penetrating_method
-        self.RESULT.attrs['Roughness_method'] = roughness_method
+        self.RESULT.attrs['Dry_densification_method'] = dry_densification_method
+        self.RESULT.attrs['Penetrating_radiation_method'] = penetrating_radiation_method
+        self.RESULT.attrs['Roughness_method'] = surface_roughness_method
         self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
         self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
         
-        ## (Surface Energy Balance):
+        ## (Multi-layer Subsurface Model):
+        self.RESULT-attrs['Precipitation_method'] = precipitation_method
+        self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
         self.RESULT.attrs['Heterogeneous_percolation_method'] = heterogeneous_percolation_method
@@ -264,7 +265,6 @@ class IOClass:
             self.RESULT.attrs['Surface_roughness_timescale'] = surface_roughness_timescale
         elif roughness_method == 'constant':
             self.RESULT.attrs['Constant_fresh_snow_density'] = constant_surface_roughness
-
         if preferential_percolation_method == 'Marchenko17':
             self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
         if irreducible_water_content_method == 'constant':
@@ -326,10 +326,8 @@ class IOClass:
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.LATITUDE, 'LATITUDE', 'm', 'degrees')
         if 'BASAL' in list(self.STATIC.keys()):
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.BASAL, 'BASAL', 'mW m\u207b\xb2', 'Basal Heat Flux')
-        if 'ACCUMULATION' in list(self.STATIC.keys()):
-            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ACCUMULATION, 'ACCUMULATION', 'm a\u207b\xb9', 'Annual Accumulation Climatology')
-        if 'SUBLIMATION' in list(self.STATIC.keys()):
-            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.SUBLIMATION, 'SUBLIMATION', 'm a\u207b\xb9', 'Annual Sublimation Climatology')
+        if 'PRECIPITATION_CLIMATOLOGY' in list(self.STATIC.keys()):
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Annual Precipitation Climatology')
         if 'THICKNESS' in list(self.STATIC.keys()):    
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
 
