@@ -19,27 +19,27 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 The model static input file contains topographic information that varies across the spatial domain  
 ( 𝑥 , 𝑦 ) and requires the following variables:
 
-* **NORTHING** - Northing [ m ]
-* **EASTING** - Easting [ m ]
-* **LATITUDE** - Latitude (WGS84) [ decimal ]
-* **LONGITUDE** - Longitude (WGS84) [ decimal ]
-* **ELEVATION** - Elevation [ m a.s.l. ]
-* **ASPECT** - Terrain aspect [ ° ]
-* **SLOPE** - Terrain slope [ ° ]
-* **MASK** - Glacier mask boolean [ 0 or 1 ]
+* **NORTHING** - Northing [m]
+* **EASTING** - Easting [m]
+* **LATITUDE** - Latitude (WGS84) [decimal]
+* **LONGITUDE** - Longitude (WGS84) [decimal]
+* **ELEVATION** - Elevation [m a.s.l.]
+* **ASPECT** - Terrain aspect [°]
+* **SLOPE** - Terrain slope [°]
+* **MASK** - Glacier mask boolean [0 or 1]
 
 ??? "** Optional Variables**"
 
    <br>
    The following optional variables can also be :
    
-    * **BASAL** - Basal / geothermal heat flux [ Wm$^{-2}$ ] *(enables a spatially-variable basal/geothermal heat flux)*
+    * **BASAL** - Basal / geothermal heat flux [Wm$^{-2}$] *(enables a spatially-variable basal/geothermal heat flux)*
 
 ???+ info "**Optional Variables**"
 
     The following optional variables can also be used:
 
-    * **BASAL** - Basal / geothermal heat flux [ $Wm^{-2}$ ] 
+    * **BASAL** - Basal / geothermal heat flux [Wm$^{-2}$] 
     *(enables a spatially-variable basal/geothermal heat flux)*
 
 <br>
