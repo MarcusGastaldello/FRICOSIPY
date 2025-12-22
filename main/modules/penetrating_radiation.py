@@ -23,14 +23,14 @@ from numba import njit
 @njit
 def penetrating_radiation(GRID, SW_net, dt):
     """ This module calculates the amount of subsurface melt from penetrating shortwave radiation """
-    penetrating_allowed = ['Bintanja95','disabled']
-    if penetrating_method == 'Bintanja95':
+    penetrating_radiation_allowed = ['Bintanja95','disabled']
+    if penetrating_radiation_method == 'Bintanja95':
         subsurface_melt, SW_penetrating = method_Bintanja(GRID, SW_net, dt)
-    elif penetrating_method == 'disabled':
+    elif penetrating_radiation_method == 'disabled':
         subsurface_melt = 0.
         SW_penetrating = 0.
     else:
-        raise ValueError("Penetrating method = \"{:s}\" is not allowed, must be one of {:s}".format(penetrating_method, ", ".join(penetrating_allowed)))
+        raise ValueError("Penetrating radiation method = \"{:s}\" is not allowed, must be one of {:s}".format(penetrating_radiation_method, ", ".join(penetrating_radiation_allowed)))
 
     return subsurface_melt, SW_penetrating
 
