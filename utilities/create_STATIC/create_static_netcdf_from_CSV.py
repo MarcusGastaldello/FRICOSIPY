@@ -151,17 +151,11 @@ def create_static_input(csv_file, static_file):
     LONGITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LONGITUDE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
-    # Accumulation Climatology [ACCUMULATION]
-    if 'ACCUMULATION' in df.columns:
-        print(f"\t 'ACCUMULATION' - Accumulation Climatology [m a\u207b\xb9]   Min: {np.round(df['ACCUMULATION'].min(),2)} -- Max: {np.round(df['ACCUMULATION'].max(),2)}")
-        ACCUMULATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ACCUMULATION").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
-        add_variable_along_easting_northing(ds, ACCUMULATION, 'ACCUMULATION', 'm a\u207b\xb9', 'Accumulation Climatology')
-
-    # Sublimation Climatology [SUBLIMATION]
-    if 'SUBLIMATION' in df.columns:
-        print(f"\t 'SUBLIMATION' - Sublimation Climatology [m a\u207b\xb9]   Min: {np.round(df['SUBLIMATION'].min(),2)} -- Max: {np.round(df['SUBLIMATION'].max(),2)}")
-        SUBLIMATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "SUBLIMATION").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
-        add_variable_along_easting_northing(ds, SUBLIMATION, 'SUBLIMATION', 'm a\u207b\xb9', 'Sublimation Climatology')
+    # Precipitation Climatology [PRECIPITATION]
+    if 'PRECIPITATION_CLIMATOLOGY' in df.columns:
+        print(f"\t 'PRECIPITATION_CLIMATOLOGY' - Precipitation Climatology [m a\u207b\xb9]   Min: {np.round(df['PRECIPITATION_CLIMATOLOGY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_CLIMATOLOGY'].max(),2)}")
+        PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Precipitation Climatology')
 
     # Basal Heat Flux [BASAL]
     if 'BASAL' in df.columns:
