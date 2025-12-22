@@ -32,8 +32,7 @@ The model static input file contains topographic information that varies across 
 
     The following optional variables can also be used:
 
-    * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] 
-    *(enables a spatially-variable basal/geothermal heat flux)*
+    * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] <br> *(enables a spatially-variable basal/geothermal heat flux)*
 
 <br>
 The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
