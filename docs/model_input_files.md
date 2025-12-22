@@ -33,8 +33,8 @@ The model static input file contains topographic information that varies across 
     <br>
     The following optional variables can also be used:
 
-    * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] <br> *(enables a spatially-variable basal/geothermal heat flux)*
-    * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height)*
+    * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] <br> *(enables a spatially-variable basal/geothermal heat flux and overrides the 'basal heat flux' parameter)*
+    * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height and overrides the 'initial height' parameters)*
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
