@@ -38,7 +38,7 @@ The model static input file contains topographic information that varies across 
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
-The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of advanced static variables.
+The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
