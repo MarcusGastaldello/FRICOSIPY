@@ -2,9 +2,9 @@
 
 {# Override the specific metadata block to swap the favicon tag #}
 {% block site_meta %}
-    {{ super() }}
-    {# This replaces/adds the modern tag Google wants in 2025 #}
-    <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
+  {{ super() }}
+  {# This replaces/adds the modern tag Google wants in 2025 #}
+  <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
 {% endblock %}
 
 {% block extrahead %}
