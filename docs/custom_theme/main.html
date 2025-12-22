@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 {% block htmltitle %}
   <title>
     {%- if page and page.meta and page.meta.og_title -%}
@@ -9,27 +11,20 @@
 {% endblock %}
 
 {% block site_meta %}
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" 
-          content="{%- if page and page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- elif config.site_description -%}{{ config.site_description }}{%- endif -%}" />
-    {% if config.site_author %}<meta name="author" content="{{ config.site_author }}" />{% endif %}
-    {% if page and page.canonical_url %}<link rel="canonical" href="{{ page.canonical_url }}" />{% endif %}
-    <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
-{% endblock %}
+    {{ super() }}
+    <meta name="description" content="{%- if page and page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- elif config.site_description -%}{{ config.site_description }}{%- endif -%}" />
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
 
-{% block extrahead %}
-  {{ super() }}
-  <meta name="robots" content="index, follow">
-  <meta name="google-site-verification" content="TQi8dxx7V5lfUz7qLK1nOh24eN34zbWgt7oNAEepYr8" />
-  {%- if page -%}
+    {%- if page -%}
     <meta property="og:title" content="{%- if page.meta and page.meta.og_title -%}{{ page.meta.og_title | trim }}{%- else -%}{{ config.site_name }}{%- endif -%}">
     <meta property="og:description" content="{%- if page.meta and page.meta.og_description -%}{{ page.meta.og_description | trim }}{%- else -%}{{ config.site_description }}{%- endif -%}">
     <meta property="og:url" content="{{ page.canonical_url }}">
     <meta property="og:image" content="https://fricosipy.readthedocs.io/en/latest/images/FRICOSIPY-social.png">
     <meta property="og:image:width" content="3179">
-    <meta property="og:image:height" content="1671">    
+    <meta property="og:image:height" content="1671">
     <meta property="og:type" content="website">
-  {%- endif -%}
+    {%- endif -%}
+
+    <link rel="icon" href="{{ base_url }}/img/favicon.ico" type="image/x-icon">
 {% endblock %}
