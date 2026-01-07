@@ -30,6 +30,8 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
+  - pymdownx.highlight:
+      pygments_style: monokai
 
 nav:
   - Home: index.md
