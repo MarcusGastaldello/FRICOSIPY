@@ -65,20 +65,22 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 #### Subsurface Variables (12)
 
-* **DEPTH** - Layer depth [m]
-* **HEIGHT** - Layer height [m]
-* **DENSITY** - Layer density [kg m$^{-3}$ ]
-* **TEMPERATURE** - Layer temperature [$^\circ$C]
-* **WATER CONTENT** - Layer volumetric water content [–]
-* **COLD CONTENT** - Layer cold content [J m$^{-2}$ ]
-* **POROSITY** - Layer volumetric porosity [–]
-* **ICE FRACTION** - Layer volumetric ice fraction [–]
-* **IRREDUCIBLE WATER** - Layer irreducible water content [–]
-* **REFREEZE** - Layer refreeze [m w.e.]
-* **HYDRO YEAR** - Layer hydrological year [yyyy]
-* **GRAIN SIZE** - Layer grain size [mm]
+| Variable | Description | Unit |
+|:---|:---|:---:|
+| **DEPTH** | Layer depth | m |
+| **HEIGHT** | Layer height | m |
+| **DENSITY** | Layer density | kg m$^{-3}$ |
+| **TEMPERATURE** | Layer temperature | $^\circ$C |
+| **WATER CONTENT** | Layer volumetric water content | – |
+| **COLD CONTENT** | Layer cold content | J m$^{-2}$ |
+| **POROSITY** | Layer volumetric porosity | – |
+| **ICE FRACTION** | Layer volumetric ice fraction | – |
+| **IRREDUCIBLE WATER** | Layer irreducible water content | – |
+| **REFREEZE** | Layer refreeze | m w.e. |
+| **HYDRO YEAR** | Layer hydrological year | yyyy |
+| **GRAIN SIZE** | Layer grain size | mm |
 
-!!! attention
+!!! note
     Including the subsurface variables in the output dataset 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
