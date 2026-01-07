@@ -30,11 +30,11 @@ og_description: An explanation of how to setup the configuration file and run a 
     
 | Variable | Description | Unit |
 |:---|:---|:---:|
-| **AIR_TEMPERATURE** | Net shortwave radiation flux | °C |
-| **AIR_PRESSURE** | Net sensible radiation flux | hPa |
-| **RELATIVE_HUMIDITY** | Net latent radiation flux | % |
-| **WIND_SPEED** | Net longwave radiation flux | m s$^{-1}$ |
-| **FRACTIONAL_CLOUD_COVER** | Rain heat flux | - |
+| **AIR_TEMPERATURE** | Air temperature | °C |
+| **AIR_PRESSURE** | Barometric air pressure | hPa |
+| **RELATIVE_HUMIDITY** | Relative humidity | % |
+| **WIND_SPEED** | Wind speed | m s$^{-1}$ |
+| **FRACTIONAL_CLOUD_COVER** | Fractional cloud cover | - |
 
 ---
 
