@@ -62,36 +62,38 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ---
 
-#### Subsurface Mass Fluxes (4)
+??? "**Subsurface Mass Fluxes (4)**"
 
 
 ---
 
-#### Other (9)
+??? "**Other (9)**"
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-#### Subsurface Variables (12)
+??? "**Subsurface Variables (12)**"
 
-| Variable | Description | Unit |
-|:---|:---|:---:|
-| **DEPTH** | Layer depth | m |
-| **HEIGHT** | Layer height | m |
-| **DENSITY** | Layer density | kg m$^{-3}$ |
-| **TEMPERATURE** | Layer temperature | $^\circ$C |
-| **WATER CONTENT** | Layer volumetric water content | – |
-| **COLD CONTENT** | Layer cold content | J m$^{-2}$ |
-| **POROSITY** | Layer volumetric porosity | – |
-| **ICE FRACTION** | Layer volumetric ice fraction | – |
-| **IRREDUCIBLE WATER** | Layer irreducible water content | – |
-| **REFREEZE** | Layer refreeze | m w.e. |
-| **HYDRO YEAR** | Layer hydrological year | yyyy |
-| **GRAIN SIZE** | Layer grain size | mm |
-
-!!! note
-    Including the subsurface variables in the output dataset 
+    <div style="height: 0px;"></div>
+    
+    | Variable | Description | Unit |
+    |:---|:---|:---:|
+    | **DEPTH** | Layer depth | m |
+    | **HEIGHT** | Layer height | m |
+    | **DENSITY** | Layer density | kg m$^{-3}$ |
+    | **TEMPERATURE** | Layer temperature | $^\circ$C |
+    | **WATER CONTENT** | Layer volumetric water content | – |
+    | **COLD CONTENT** | Layer cold content | J m$^{-2}$ |
+    | **POROSITY** | Layer volumetric porosity | – |
+    | **ICE FRACTION** | Layer volumetric ice fraction | – |
+    | **IRREDUCIBLE WATER** | Layer irreducible water content | – |
+    | **REFREEZE** | Layer refreeze | m w.e. |
+    | **HYDRO YEAR** | Layer hydrological year | yyyy |
+    | **GRAIN SIZE** | Layer grain size | mm |
+    
+    !!! note
+        Including the subsurface variables in the output dataset 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
