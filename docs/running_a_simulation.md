@@ -34,9 +34,9 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 #### Surface Energy Fluxes (7)
 
-|A|A|
-|:---|:---|
-|A|A|
+|A|A|A|
+|:---|:---|:---|
+| **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
 
 * **SHORTWAVE** - Net shortwave radiation flux [W m$^{-2}$ ]
 * **SENSIBLE** - Net sensible radiation flux [W m$^{-2}$ ]
