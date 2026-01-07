@@ -32,17 +32,17 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ---
 
-#### Surface Energy Fluxes (7)
+??? "**Surface Energy Fluxes (7)**"
 
-| Variable | Description | Unit |
-|:---|:---|:---:|
-| **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
-| **SENSIBLE** | Net sensible radiation flux | W m$^{-2}$ |
-| **LATENT** | Net latent radiation flux | W m$^{-2}$ |
-| **LONGWAVE** | Net longwave radiation flux | W m$^{-2}$ |
-| **RAIN HEAT** | Rain heat flux | W m$^{-2}$ |
-| **SUBSURFACE** | Subsurface heat flux | W m$^{-2}$ |
-| **MELT ENERGY** | Melt energy flux | W m$^{-2}$ |
+    | Variable | Description | Unit |
+    |:---|:---|:---:|
+    | **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
+    | **SENSIBLE** | Net sensible radiation flux | W m$^{-2}$ |
+    | **LATENT** | Net latent radiation flux | W m$^{-2}$ |
+    | **LONGWAVE** | Net longwave radiation flux | W m$^{-2}$ |
+    | **RAIN HEAT** | Rain heat flux | W m$^{-2}$ |
+    | **SUBSURFACE** | Subsurface heat flux | W m$^{-2}$ |
+    | **MELT ENERGY** | Melt energy flux | W m$^{-2}$ |
 
 ---
 
