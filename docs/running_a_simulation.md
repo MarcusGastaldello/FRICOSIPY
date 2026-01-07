@@ -34,6 +34,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ??? "**Surface Energy Fluxes (7)**"
 
+    <br>
     | Variable | Description | Unit |
     |:---|:---|:---:|
     | **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
