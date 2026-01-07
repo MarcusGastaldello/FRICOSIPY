@@ -34,7 +34,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ??? "**Surface Energy Fluxes (7)**"
 
-    <div style="height: 5px;"></div>
+    <div style="height: 0px;"></div>
     
     | Variable | Description | Unit |
     |:---|:---|:---:|
