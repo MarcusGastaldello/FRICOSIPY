@@ -26,9 +26,17 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
-#### Meteorological Variables (5)
+??? "**Meteorological Variables (5)**"
 
-
+    <div style="height: 0px;"></div>
+    
+    | Variable | Description | Unit |
+    |:---|:---|:---:|
+    | **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
+    | **SENSIBLE** | Net sensible radiation flux | W m$^{-2}$ |
+    | **LATENT** | Net latent radiation flux | W m$^{-2}$ |
+    | **LONGWAVE** | Net longwave radiation flux | W m$^{-2}$ |
+    | **RAIN HEAT** | Rain heat flux | W m$^{-2}$ |
 
 ---
 
