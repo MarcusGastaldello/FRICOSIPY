@@ -30,11 +30,11 @@ og_description: An explanation of how to setup the configuration file and run a 
     
 | Variable | Description | Unit |
 |:---|:---|:---:|
-| **SHORTWAVE** | Net shortwave radiation flux | W m$^{-2}$ |
-| **SENSIBLE** | Net sensible radiation flux | W m$^{-2}$ |
-| **LATENT** | Net latent radiation flux | W m$^{-2}$ |
-| **LONGWAVE** | Net longwave radiation flux | W m$^{-2}$ |
-| **RAIN HEAT** | Rain heat flux | W m$^{-2}$ |
+| **AIR_TEMPERATURE** | Net shortwave radiation flux | °$^{C}$ |
+| **AIR_PRESSURE** | Net sensible radiation flux | W m$^{-2}$ |
+| **RELATIVE_HUMIDITY** | Net latent radiation flux | W m$^{-2}$ |
+| **WIND_SPEED** | Net longwave radiation flux | W m$^{-2}$ |
+| **FRACTIONAL_CLOUD_COVER** | Rain heat flux | W m$^{-2}$ |
 
 ---
 
