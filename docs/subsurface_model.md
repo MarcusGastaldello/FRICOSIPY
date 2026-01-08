@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | The Multi-layer Subsurface Model
 og_description: Explanation of the processes and parameterisations governing the evolution of subsurface variables
 ---
