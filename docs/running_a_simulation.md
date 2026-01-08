@@ -98,7 +98,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **FIRN_TEMPERATURE_CHANGE \*** | Firn temperature change | $^\circ$C $^{-1}$ |
 | **FIRN_FACIE \*** | Firn Facie (acc. [Shumskii, 1964](https://doi.org/10.1017/S0016756800050597)) <br> 0 : Recrystillisation (dry snow) <br> 1 : Recrystallisation-infiltration <br> 2 : Cold-infiltration <br> 3 : Warn-infiltration (temperate)| — |
 
-<small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
+<small> * \*Note: The. * </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
