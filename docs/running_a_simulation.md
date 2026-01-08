@@ -24,10 +24,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ## Output Variables
 
-The *FRICOSIPY* model reports a large selection of surface and subsurface variables into the output NetCDF dataset.
-
-
-
+The *FRICOSIPY* model reports a large selection of variables into the output NetCDF dataset. The user can (de)select any of these variables in the configuration file.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -97,13 +94,13 @@ The *FRICOSIPY* model reports a large selection of surface and subsurface variab
 | **N_LAYERS** | Number of layers | — |
 | **FIRN_TEMPERATURE** | Firn temperature | $^\circ$C |
 | **FIRN_TEMPERATURE_CHANGE** | Firn temperature change | $^\circ$C $^{-1}$ |
-| **FIRN_FACIE** | Firn Facie | — |
+| **FIRN_FACIE** | Firn Facie <br> 0: Recrystillisation | — |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following variables for every subsurface layer.
+If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following subsurface variables for every layer $(z)$.
 
 **Subsurface Variables $(12)$**
     
