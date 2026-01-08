@@ -1,6 +1,6 @@
 /* Only target inline code snippets */
 :not(pre) > code {
-    color: #333333 !important;    /* Your desired color */
+    color: #333333;    /* Your desired color */
     background-color: #f4f4f4;
     border: 1px solid #ddd;
     padding: 2px 4px;
