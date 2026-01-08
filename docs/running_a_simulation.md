@@ -30,6 +30,8 @@ The *FRICOSIPY* model reports a large selection of variables into the output Net
 
 ### 3-D Output Variables ( $𝑥$ , $𝑦$ , $t$ )
 
+The *FRICOSIPY* model will report the following variables for each spatial node $(x,y)$ for every simulation timestep $(t)$:
+
 **Meteorological Variables $(5)$**
     
 | Variable | Description | Unit |
@@ -100,7 +102,7 @@ The *FRICOSIPY* model reports a large selection of variables into the output Net
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following subsurface variables for every layer $(z)$.
+If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following subsurface variables for every layer $(z)$:
 
 **Subsurface Variables $(12)$**
     
