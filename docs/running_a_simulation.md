@@ -24,7 +24,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ## Output Variables
 
-The *FRICOSIPY* model reports a large selection of surface and subsurface variables into the output NetCDF.
+The *FRICOSIPY* model reports a large selection of surface and subsurface variables into the output NetCDF dataset.
 
 
 
@@ -103,9 +103,7 @@ The *FRICOSIPY* model reports a large selection of surface and subsurface variab
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-
-
-If `full_field = True`{style="color: #333333"} then 
+If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following variables for every subsurface layer.
 
 **Subsurface Variables $(12)$**
     
