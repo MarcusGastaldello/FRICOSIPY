@@ -34,7 +34,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 | **AIR_PRESSURE** | Barometric air pressure | hPa |
 | **RELATIVE_HUMIDITY** | Relative humidity | % |
 | **WIND_SPEED** | Wind speed | m s$^{-1}$ |
-| **FRACTIONAL_CLOUD_COVER** | Fractional cloud cover | - |
+| **FRACTIONAL_CLOUD_COVER** | Fractional cloud cover | — |
 
 ---
 
@@ -88,11 +88,11 @@ If `full_field = True`
 | **HEIGHT** | Layer height | m |
 | **DENSITY** | Layer density | kg m$^{-3}$ |
 | **TEMPERATURE** | Layer temperature | $^\circ$C |
-| **WATER CONTENT** | Layer volumetric water content | – |
+| **WATER CONTENT** | Layer volumetric water content | — |
 | **COLD CONTENT** | Layer cold content | J m$^{-2}$ |
-| **POROSITY** | Layer volumetric porosity | – |
-| **ICE FRACTION** | Layer volumetric ice fraction | – |
-| **IRREDUCIBLE WATER** | Layer irreducible water content | – |
+| **POROSITY** | Layer volumetric porosity | — |
+| **ICE FRACTION** | Layer volumetric ice fraction | — |
+| **IRREDUCIBLE WATER** | Layer irreducible water content | — |
 | **REFREEZE** | Layer refreeze | m w.e. |
 | **HYDRO YEAR** | Layer hydrological year | yyyy |
 | **GRAIN SIZE** | Layer grain size | mm |
