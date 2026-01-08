@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | Running a Simulation
 og_description: An explanation of how to setup the configuration file and run a simulation.
 ---
