@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | Result Viewer
 og_description: A brief overview of the plotting functions available on the Jupyter Notebook FRICOSIPY result viewer
 ---
