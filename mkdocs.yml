@@ -30,8 +30,6 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
   - attr_list
-  - pymdownx.highlight:
-      pygments_style: dark-plus
 
 nav:
   - Home: index.md
