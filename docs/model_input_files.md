@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | The Model Input Files
 og_description: Explanation of the three model model input files required to run a FRICOSIPY simulation
 ---
