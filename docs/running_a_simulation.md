@@ -94,7 +94,7 @@ The *FRICOSIPY* model reports a large selection of variables into the output Net
 | **N_LAYERS** | Number of layers | — |
 | **FIRN_TEMPERATURE** | Firn temperature | $^\circ$C |
 | **FIRN_TEMPERATURE_CHANGE** | Firn temperature change | $^\circ$C $^{-1}$ |
-| **FIRN_FACIE** | Firn Facie <br> 0: Recrystillisation | — |
+| **FIRN_FACIE** | Firn Facie <br> 0 : Recrystillisation (Dry snow) | — |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
