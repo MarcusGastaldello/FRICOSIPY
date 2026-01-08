@@ -118,7 +118,7 @@ If `full_field = True` then
 | **GRAIN SIZE** | Layer grain size | mm |
     
 !!! note
-    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required by the simulation. It is therefore reccomended that the user sets `full_field = false` (default), unless they specifically require the data.
+    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required by the simulation. It is therefore reccomended that the user sets `full_field = false` *(default)*, unless they specifically require the data.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
