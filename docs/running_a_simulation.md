@@ -6,6 +6,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 # Running a Simulation
 
 
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## File Selection
@@ -17,9 +18,16 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ## Spatial Extent / Subset
 
+
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Output Variables
+
+The *FRICOSIPY* model reports a large selection of surface and subsurface variables into the output NetCDF.
+
+
+
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -122,6 +130,21 @@ If `full_field = True`{style="color: #333333"} then
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Output Reporting Frequency
+
+By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. 
+
+An exemplar meteo CSV would therefore have the following format:
+
+| DATETIME          |
+|:---:|
+| 2024-01-00 13:00   |
+| 2024-01-00 14:00   |
+| ⋮ |
+| 2024-12-31 22:00   |
+| 2024-12-31 23:00   |
+
+Place the input CSV file in the *data/meteo/CSV/* directory 
+
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
