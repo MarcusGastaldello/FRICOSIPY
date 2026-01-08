@@ -46,15 +46,24 @@ og_description: An explanation of how to setup the configuration file and run a 
 | **SENSIBLE** | Net sensible radiation flux | W m$^{-2}$ |
 | **LATENT** | Net latent radiation flux | W m$^{-2}$ |
 | **LONGWAVE** | Net longwave radiation flux | W m$^{-2}$ |
-| **RAIN HEAT** | Rain heat flux | W m$^{-2}$ |
+| **RAIN_HEAT** | Rain heat flux | W m$^{-2}$ |
 | **SUBSURFACE** | Subsurface heat flux | W m$^{-2}$ |
-| **MELT ENERGY** | Melt energy flux | W m$^{-2}$ |
+| **MELT_ENERGY** | Melt energy flux | W m$^{-2}$ |
 
 ---
 
 **Surface Mass Fluxes $(8)$**
 
-
+| Variable | Description | Unit |
+|:---|:---|:---:|
+| **RAIN** | Rain | m w.e. |
+| **SNOWFALL** | Snowfall | m w.e. |
+| **EVAPORATION** | Evaporation | m w.e. |
+| **SUBLIMATION** | Sublimation | m w.e. |
+| **CONDENSATION** | Condensation | m w.e. |
+| **DEPOSITION** | Deposition | m w.e. |
+| **SURFACE_MELT** | Surface melt | m w.e. |
+| **SURFACE_MASS_BALANCE** | Surface mass balance | m w.e. |
 
 ---
 
@@ -89,7 +98,7 @@ If `full_field = True`
 | **GRAIN SIZE** | Layer grain size | mm |
     
 !!! note
-    Including the subsurface variables greatly increases the size of the output dataset 
+    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
