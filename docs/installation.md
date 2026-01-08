@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | Installation 
 og_description: Guidelines on how to install the FRICOSIPY model
 ---
