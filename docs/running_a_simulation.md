@@ -96,7 +96,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-If `full_field = True`
+If ```python `full_field = True` then 
 
 **Subsurface Variables $(12)$**
     
