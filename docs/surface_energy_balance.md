@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | The Surface Energy Balance
 og_description: Explanation of the processes and parameterisations used to resolve the Surface Energy Balance (SEB)
 ---
