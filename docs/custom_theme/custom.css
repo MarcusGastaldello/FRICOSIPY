@@ -1,0 +1,6 @@
+/* Change inline code color */
+code {
+    color: #333333;            /* Dark grey/black instead of red */
+    background-color: #f8f8f8; /* Light grey background */
+    border: 1px solid #e1e1e8; /* Subtle border */
+}
