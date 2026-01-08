@@ -116,7 +116,7 @@ If ```python `full_field = True` then
 | **GRAIN SIZE** | Layer grain size | mm |
     
 !!! note
-    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required by the simulation.
+    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required by the simulation. It is therefore reccomended that `full_field = false`, unless the user specifically requires this data.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
