@@ -98,7 +98,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 
 
-If `full_field = True` then 
+If `full_field = True`{style="color: #333333"} then 
 
 **Subsurface Variables $(12)$**
     
