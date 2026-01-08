@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | Parameters 
 og_description: A brief guide to optimum parameter selection for a FRICOSIPY simulation
 ---
