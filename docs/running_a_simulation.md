@@ -96,7 +96,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **N_LAYERS** | Number of layers | — |
 | **FIRN_TEMPERATURE** | Firn temperature | $^\circ$C |
 | **FIRN_TEMPERATURE_CHANGE** | Firn temperature change | $^\circ$C $^{-1}$ |
-| **FIRN_FACIE** | Firn Facie <br> 0 : Recrystillisation (dry snow) <br> 1 : Recrystallisation-infiltration <br> 2 : Cold-infiltration <br> 3 : Warn-infiltration (temperate)| — |
+| **FIRN_FACIE * ** | Firn Facie <br> 0 : Recrystillisation (dry snow) <br> 1 : Recrystallisation-infiltration <br> 2 : Cold-infiltration <br> 3 : Warn-infiltration (temperate)| — |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
