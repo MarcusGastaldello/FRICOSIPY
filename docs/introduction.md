@@ -1,5 +1,4 @@
 ---
-# Metadata
 og_title: FRICOSIPY | Introduction
 og_description: An Introduction to the FRICOSIPY Model
 ---
