@@ -69,10 +69,28 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 **Subsurface Mass Fluxes $(4)$**
 
+| Variable | Description | Unit |
+|:---|:---|:---:|
+| **REFREEZE** | Refreezing | m w.e. |
+| **SUBSURFACE_MELT** | Subsurface melt | m w.e. |
+| **RUNOFF** | Runoff | m w.e. |
+| **MASS_BALANCE** | Mass balance | m w.e. |
 
 ---
 
 **Other $(9)$**
+
+| Variable | Description | Unit |
+|:---|:---|:---:|
+| **SNOW_HEIGHT** | Snow height | m |
+| **SNOW_WATER_EQUIVALENT** | Snow water equivalent | m w.e. |
+| **TOTAL_HEIGHT** | Total height | m |
+| **SURFACE_TEMPERATURE** | Surface temperature | $^\circ$C |
+| **SURFACE_ALBEDO** | Surface albedo | — |
+| **N_LAYERS** | Number of layers | — |
+| **FIRN_TEMPERATURE** | Firn temperature | $^\circ$C |
+| **FIRN_TEMPERATURE_CHANGE** | Firn temperature change | $^\circ$C $^{-1}$ |
+| **FIRN_FACIE** | Firn Facie | — |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -98,7 +116,7 @@ If `full_field = True`
 | **GRAIN SIZE** | Layer grain size | mm |
     
 !!! note
-    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required.
+    Including the subsurface variables greatly increases the size of the output dataset and the amount of memory required by the simulation.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
