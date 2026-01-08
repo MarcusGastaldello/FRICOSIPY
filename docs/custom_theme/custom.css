@@ -1,6 +1,15 @@
-/* Change inline code color */
-code {
-    color: #333333;            /* Dark grey/black instead of red */
-    background-color: #f8f8f8; /* Light grey background */
-    border: 1px solid #e1e1e8; /* Subtle border */
+/* Only target inline code snippets */
+:not(pre) > code {
+    color: #333333 !important;    /* Your desired color */
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 2px 4px;
+}
+
+/* Ensure code blocks (inside <pre>) stay as they were */
+pre code {
+    color: inherit; 
+    background-color: transparent;
+    padding: 0;
+    border: none;
 }
