@@ -98,7 +98,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **FIRN_TEMPERATURE_CHANGE \*** | Firn temperature change | $^\circ$C $^{-1}$ |
 | **FIRN_FACIE \*** | Firn Facie (acc. [Shumskii, 1964](https://doi.org/10.1017/S0016756800050597)) <br> 0 : Recrystillisation (dry snow) <br> 1 : Recrystallisation-infiltration <br> 2 : Cold-infiltration <br> 3 : Warn-infiltration (temperate)| — |
 
-<small> *(\*Note: Firn temperatures and facies are evaluated at the depth prescribed by the `firn_temperature_depth` parameter.)* </small>
+<small> *( \*Note: Firn temperatures and facies are evaluated at the depth prescribed by the `firn_temperature_depth` parameter. )* </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
