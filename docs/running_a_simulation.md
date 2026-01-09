@@ -130,9 +130,7 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 ## Output Reporting Frequency
 
-By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this
-
-Therefore, the *FRICOSIPY* model offers a customisable reporting frequency for the output dataset. The user must simply set `reduced_output == True` and places a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a customisable reporting frequency for the output dataset. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
 *Example. Yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.*
 
