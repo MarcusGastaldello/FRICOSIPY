@@ -152,7 +152,6 @@ Place the input CSV file in the *data/meteo/CSV/* directory
 The *FRICOSIPY* model, supports multi-thread processing using the *Dask* parallel computing library. By modifying `workers = $n$`, the user specifies the number of spatial nodes that the simulation will concurrently simulate
 
 !!! warning
-    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your cluster / computer is divided between each worker. If insufficient memory is allocated to each thread / CPU, the simulation will crash.
-
+    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully consider whether they have sufficient memory available for their simulation; those with a high resolution spatio-temporal input and large output dataset will inherently require more memory. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
