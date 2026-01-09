@@ -104,7 +104,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 
 ### 4-D Output Variables ( $x$ , $𝑦$ , $z$ , $t$  )
 
-If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIPY* model will also report the following subsurface variables for every layer $(z)$:
+If the user sets `full_field == True`, then the *FRICOSIPY* model will also report the following subsurface variables for every layer $(z)$:
 
 **Subsurface Variables $(12)$**
     
@@ -130,9 +130,15 @@ If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIP
 
 ## Output Reporting Frequency
 
-By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. 
+By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this
 
 
+
+Therefore, the *FRICOSIPY* model offers a customisable reporting frequency for the output dataset. The user must simply set `reduced_output == True` and places a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory.
+
+
+
+*Ex. yearly timestamps for the time period 2000 – 2025 which would reduce the output dataset from 219150 hourly values to 25 aggregated annual values.
 
 |          |
 |:---:|
@@ -142,16 +148,13 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 | 2024-12-31 23:00   |
 | 2025-12-31 23:00   |
 
-Place the input CSV file in the *data/meteo/CSV/* directory 
-
-
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Dask Parallelisation
 
-The *FRICOSIPY* model, supports multi-thread processing using the *Dask* parallel computing library. By modifying `workers = $n$`, the user specifies the number of spatial nodes that the simulation will concurrently simulate
+The *FRICOSIPY* model, supports multi-thread processing using the *Dask* parallel computing library. By modifying `workers = 1`, the user specifies the number of spatial nodes that the simulation will concurrently simulate
 
 !!! warning
-    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully consider whether they have sufficient memory available for their simulation; those with a high resolution spatio-temporal input and large output dataset will inherently require more memory. 
+    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully examine whether they have sufficient memory available for their simulation; those with a large large output dataset will inherently require more memory. Consider reducing the output reporting frequency, using a smaller spatial subset or disabling the reporting of ubsurface variables. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
