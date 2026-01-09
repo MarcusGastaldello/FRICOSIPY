@@ -6,7 +6,7 @@
 
 /* 2. The Main Box Body */
 .admonition.warning {
-    background-color: #fef5f4 !important; /* Very pale red/pink background */
+    background-color: #fcdedb !important; /* Very pale red/pink background */
     border-color: #f29f97 !important;     /* Matches the header bar border */
 }
 
