@@ -1,16 +1,20 @@
-/* Admonition Colours */
-.admonition.note {
-    border-color: #2ecc71; /* Change the left border color */
+/* 1. The Header Bar (Warning) */
+.admonition.warning > .admonition-title {
+    background-color: #f29f97 !important; /* The salmon/coral header color */
+    color: white !important;               /* White text for 'Warning' */
 }
 
-.admonition.note > .admonition-title {
-    background-color: #2ecc71; /* Change the header background color */
-    color: white;             /* Text color for 'Note' */
+/* 2. The Main Box Body */
+.admonition.warning {
+    background-color: #fef5f4 !important; /* Very pale red/pink background */
+    border-color: #f29f97 !important;     /* Matches the header bar border */
 }
 
-/* Code Styling */
+/* 3. Global Code Styling (Greyish text as requested) */
 .rst-content code, 
-.rst-content tt {
-    color: #555555 !important; /* Force your grey */
-    background: #f4f4f4;       /* Optional: very light grey background */
+.rst-content tt,
+pre {
+    color: #555555 !important;           /* Dark grey text */
+    background-color: #f8f8f8 !important; /* Light neutral grey background */
+    border: 1px solid #e1e4e5 !important;
 }
