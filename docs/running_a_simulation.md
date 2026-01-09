@@ -164,3 +164,13 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 # Executing a Simulation
+
+```
+python FRICOSIPY.py
+```
+
+As it starts, detailed information about the simulation will be reported into the terminal. Thereafter, progress will be reported upon the completion of each spatial node until the simulation is complete. 
+
+!!! attention
+    Remember that 
+
