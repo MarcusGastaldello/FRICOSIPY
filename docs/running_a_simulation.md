@@ -14,7 +14,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 
 
-
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Spatial Extent / Subset
 
@@ -130,7 +130,17 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 ## Output Reporting Frequency
 
-By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a customisable reporting frequency for the output dataset. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a few methods to customise the reporting frequency for the output dataset. 
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### $(i)$ Model Initialisation / Spin-up
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### $(ii)$ 
+
+The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
 <small> *Ex. Yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
 
@@ -152,3 +162,5 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
     When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully examine whether they have sufficient memory available for their simulation; those with a large large output dataset will inherently require more memory. Consider reducing the output reporting frequency, using a smaller spatial subset or disabling the reporting of ubsurface variables. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+# Executing a Simulation
