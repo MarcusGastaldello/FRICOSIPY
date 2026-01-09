@@ -165,7 +165,7 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
 
 # Executing a Simulation
 
-Once the configuration file is set up, the *FRICOSIPY* model is executed with the following command:
+Once the configuration file is set up, the *FRICOSIPY* model is executed with the command:
 
 ```
 python FRICOSIPY.py
