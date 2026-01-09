@@ -132,15 +132,15 @@ If the user sets `full_field = True`{style="color: #333333"}, then the *FRICOSIP
 
 By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. 
 
-An exemplar meteo CSV would therefore have the following format:
 
-| DATETIME          |
+
+|          |
 |:---:|
-| 2024-01-00 13:00   |
-| 2024-01-00 14:00   |
+| 2000-12-31 23:00   |
+| 2001-12-31 23:00   |
 | ⋮ |
-| 2024-12-31 22:00   |
 | 2024-12-31 23:00   |
+| 2025-12-31 23:00   |
 
 Place the input CSV file in the *data/meteo/CSV/* directory 
 
