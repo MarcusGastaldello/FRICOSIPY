@@ -552,7 +552,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
             # Calculate initial firn temperature
             Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")   
-            Initial_Firn_Temperature = GRID.get_temperature()[Index_Depth] - 273.16
+            Initial_Firn_Temperature = GRID.get_temperature()[min(Index_Depth, GRID.get_number_layers() - 1)] - zero_temperature
 
         # ================ #
         # DATA AGGREGATION
@@ -647,11 +647,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
             # Calculate Firn temperatures:
             Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")
-            _FIRN_TEMPERATURE[idx_res] = GRID.get_temperature()[Index_Depth] - zero_temperature
+            _FIRN_TEMPERATURE[idx_res] = GRID.get_temperature()[min(Index_Depth, GRID.get_number_layers() - 1)] - zero_temperature
             _FIRN_TEMPERATURE_CHANGE[idx_res] = _FIRN_TEMPERATURE[idx_res] - Initial_Firn_Temperature
 
             # Determine Firn Facie:
-            if GRID.get_temperature()[Index_Depth] - zero_temperature > 0.1:
+            if GRID.get_temperature()[min(Index_Depth, GRID.get_number_layers() - 1)] - zero_temperature > 0.1:
                 _FIRN_FACIE[idx_res] = 4
             elif cumulative_melt == 0:
                 _FIRN_FACIE[idx_res] = 1
