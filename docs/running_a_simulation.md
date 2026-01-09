@@ -149,7 +149,7 @@ Place the input CSV file in the *data/meteo/CSV/* directory
 
 ## Dask Parallelisation
 
-!!! danger
+!!! warning
     Text
 
 
