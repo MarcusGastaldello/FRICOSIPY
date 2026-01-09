@@ -165,7 +165,7 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
 
 # Executing a Simulation
 
-Once the configuration file is set up, the *FRICOSIPY* model is executed with the following terminal command.
+Once the configuration file is set up, the *FRICOSIPY* model is executed with the following command:
 
 ```
 python FRICOSIPY.py
@@ -174,6 +174,6 @@ python FRICOSIPY.py
 As the simulation starts, detailed information will be reported into the terminal. Thereafter, progress will be indicated upon the completion of each spatial node until the simulation is complete. 
 
 !!! attention
-    Remember that your conda environment must be active (`conda activate <env>`) and you must be in the directory of the FRICOSIPY model.
+    Remember that your conda environment must be active `conda activate <env>` and you must be in the directory of the FRICOSIPY model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
