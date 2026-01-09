@@ -1,0 +1,16 @@
+/* Admonition Colours */
+.admonition.note {
+    border-color: #2ecc71; /* Change the left border color */
+}
+
+.admonition.note > .admonition-title {
+    background-color: #2ecc71; /* Change the header background color */
+    color: white;             /* Text color for 'Note' */
+}
+
+/* Code Styling */
+.rst-content code, 
+.rst-content tt {
+    color: #555555 !important; /* Force your grey */
+    background: #f4f4f4;       /* Optional: very light grey background */
+}
