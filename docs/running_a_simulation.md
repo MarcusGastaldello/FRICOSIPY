@@ -91,6 +91,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **SNOW_HEIGHT** | Snow height | m |
 | **SNOW_WATER_EQUIVALENT** | Snow water equivalent | m w.e. |
 | **TOTAL_HEIGHT** | Total height | m |
+| **SURFACE_ELEVATION** | Surface elevation | m a.s.l. |
 | **SURFACE_TEMPERATURE** | Surface temperature | $^\circ$C |
 | **SURFACE_ALBEDO** | Surface albedo | — |
 | **N_LAYERS** | Number of layers | — |
