@@ -5,7 +5,7 @@ og_description: Explanation of the three model model input files required to run
 
 # Model Input Files
 
-The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset ( 𝑥 , 𝑦 , 𝑡 ) of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution. In *FRICOSIPY*, the meteorological data is instead interpolated across the spatial grid according to topographic variation during the main simulation.
+The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF) files in order to run a simulation: *Static*, *Meteo* and *Illumination*. These replace the large 3-dimensional input dataset $(x,y,t)$ of the original *COSIPY* model in order to lessen the required computational resources and enable the execution of a simulation with a high spatio-temporal resolution. In *FRICOSIPY*, the meteorological data is instead interpolated across the spatial grid according to topographic variation during the main simulation.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -16,7 +16,7 @@ The *FRICOSIPY* model requires three input *Network Common Data Format* (NetCDF)
 <br style="clear: both;" />
 
 The model static input file contains topographic information that varies across the spatial domain  
-( 𝑥 , 𝑦 ) and requires the following variables:
+$(x,y)$ and requires the following variables:
 
 * **NORTHING** – Northing [m]
 * **EASTING** – Easting [m]
@@ -96,7 +96,7 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 
 <br style="clear: both;" />
 
-The model meteorological input file contains the meteorological data varying through time ( 𝑡 ) and requires the following variables:
+The model meteorological input file contains the meteorological data varying through time $(t)$ and requires the following variables:
 
 * **DATETIME** – Datetime [yyyy-mm-dd hh:mm]
 * **T2**   – Air temperature [K]
@@ -156,7 +156,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
 <br style="clear: both;" />
 
-The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
+The model illumination input file determines whether grid nodes across the spatial domain $(x,y)$ are illuminated by the sun for any given timestep in a standard calendar and leap year $(t)$ :
 
 The `create_illumination_netcdf.py` utility program can create this file from an existing static file.
 
