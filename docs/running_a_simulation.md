@@ -13,12 +13,13 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 For each simulation, the user must specify the [three model input files](https://fricosipy.readthedocs.io/en/latest/model_input_files/):
 
-* **STATIC** –  the input file with topographic data that varies across the spatial domain $(x,y)$
-* **METEO** – the input file with meteorological data that varies through time $(t)$
-* **ILLUMINATION** – the input file that determines whether spatial nodes are illuminated by the sun $(x,y,t)$
+* **STATIC** –  the input file with topographic data that varies across the spatial domain $(x,y)$.
+* **METEO** – the input file with meteorological data that varies through time $(t)$.
+* **ILLUMINATION** – the input file that determines whether grid nodes across the spatial domain $(x,y)$
+ are illuminated by the sun for any given timestep $(t)$.
 
 !!! note
-    It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the *data/* directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
+    It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the '*data/*' directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -152,7 +153,7 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 
 ### $(ii)$ Output Timestamps
 
-Alternatively, the user can directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+Alternatively, the user can directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
 <small> *Ex. An exemplar output timestamps file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
 
