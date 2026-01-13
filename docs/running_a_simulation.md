@@ -13,7 +13,7 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 For each simulation, the user must specify the [three model input files](https://fricosipy.readthedocs.io/en/latest/model_input_files/):
 
-* **STATIC** –  the input file with topographic data that varies across the spatial domain $(x,y)$.
+* [**STATIC**](https://fricosipy.readthedocs.io/en/latest/model_input_files/#1-static-file) –  the input file with topographic data that varies across the spatial domain $(x,y)$.
 * **METEO** – the input file with meteorological data that varies through time $(t)$.
 * **ILLUMINATION** – the input file that determines whether grid nodes across the spatial domain $(x,y)$
  are illuminated by the sun for any given timestep $(t)$.
