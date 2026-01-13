@@ -72,9 +72,9 @@ python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.
 
 ### $(ii)$ Conversion from GeoTIFF to NetCDF
 
-Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* directory and then the ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) utility program can then convert it into NetCDF format. A shapefile (.shp) is also required to deliniate the boundary of the glacier (the glacier mask) which should be placed in the *data/static/SHP/* directory.
+Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* directory and then the `create_static_netcdf_from_GeoTIFF.py` utility program can then convert it into NetCDF format. A shapefile (.shp) is also required to deliniate the boundary of the glacier (the glacier mask) which should be placed in the *data/static/SHP/* directory.
 
-The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program ['*create_static_netcdf_from_GeoTIFF.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_STATIC/create_static_netcdf_from_GeoTIFF.py) with the following arguments:
+The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program `create_static_netcdf_from_GeoTIFF.py` with the following arguments:
 
 * &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
@@ -131,9 +131,9 @@ An exemplar meteo CSV would therefore have the following format:
 | 2024-12-31 22:00   | 268.34 | 1.42 | 82.45 | 643.61 | 0.00 | 0.00 |
 | 2024-12-31 23:00   | 269.21 | 2.20 | 81.56 | 644.22 | 0.00 | 0.00 |
 
-Place the input CSV file in the *data/meteo/CSV/* directory and then the ['*create_meteo_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_METEO/create_meteo_netcdf.py) utility program can then convert it into NetCDF format.
+Place the input CSV file in the *data/meteo/CSV/* directory and then the `create_meteo_netcdf.py utility program can then convert it into NetCDF format.
 
-The program is launched, by navigating to the *utilities/create_METEO/* directory on the command line and executing the program ['*create_meteo_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_METEO/create_meteo_netcdf.py) with the following arguments:
+The program is launched, by navigating to the *utilities/create_METEO/* directory on the command line and executing the program `create_meteo_netcdf.py` with the following arguments:
 
 * &emsp; **-c** &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
 * &emsp; **-m** &emsp; *&lt;meteo_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output meteo NetCDF file name*
@@ -158,9 +158,9 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
 The model illumination input file determines whether grid nodes across the spatial domain ( 𝑥 , 𝑦 ) are illuminated by the sun for any given timestep in a standard calendar and leap year ( 𝑡 ) :
 
-The ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) utility program can create this file from an existing static file.
+The `create_illumination_netcdf.py` utility program can create this file from an existing static file.
 
-The program is launched, by navigating to the *utilities/create_ILLUMINATION/* directory on the command line and executing the program ['*create_illumination_netcdf.py*'](https://github.com/MarcusGastaldello/FRICOSIPY/tree/main/utilities/create_ILLUMINATION/create_illumination_netcdf.py) with the following arguments:
+The program is launched, by navigating to the *utilities/create_ILLUMINATION/* directory on the command line and executing the program `create_illumination_netcdf.py` with the following arguments:
 
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
