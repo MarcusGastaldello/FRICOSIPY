@@ -5,7 +5,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 # Running a Simulation
 
-
+In order to run the *FRICOSIPY* model, the user must first configure the simulation by editing the configuration file: *config.py*
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -20,11 +20,15 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 
 
+bounding box
+
+
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Output Variables
 
-The *FRICOSIPY* model reports a large selection of variables into the output NetCDF dataset. The user can (de)select any of these variables in the configuration file.
+The *FRICOSIPY* model reports a large selection of variables into the output NetCDF dataset. The user can (de)select any of these variables in the configuration file. 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
