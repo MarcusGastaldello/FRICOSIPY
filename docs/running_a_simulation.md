@@ -13,7 +13,7 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 
 !!! note
-    It is only necessary to specify the filename of the input static, meteo \& illumination files; 
+    It is only necessary to specify the filename of the input static, meteo /& illumination files; 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
