@@ -13,11 +13,12 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 For each simulation, the user must specify the [three model input files](https://fricosipy.readthedocs.io/en/latest/model_input_files/):
 
+* **STATIC** –  the input file with topographic data that varies across the spatial domain $(x,y)$
+* **METEO** – the input file with meteorological data that varies through time $(t)$
+* **ILLUMINATION** – 
 
 !!! note
-    It is only necessary to specify the filename of the input static, meteo & illumination files; 
-
-    to their respective folders in the *data/* directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
+    It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the *data/* directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
