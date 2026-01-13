@@ -5,7 +5,7 @@ og_description: An explanation of how to setup the configuration file and run a 
 
 # Running a Simulation
 
-In order to run the *FRICOSIPY* model, the user must first configure the simulation by editing the configuration file: *config.py*
+In order to run the *FRICOSIPY* model, the user must first configure the simulation by editing the configuration file: `config.py`
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
