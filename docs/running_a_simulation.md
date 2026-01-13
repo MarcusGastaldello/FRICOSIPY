@@ -11,7 +11,8 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 ## File Selection
 
-For each simulation, the user must specify the three model input files and the desired name of the output file.
+For each simulation, the user must specify the (three model input files)[https://fricosipy.readthedocs.io/en/latest/model_input_files/]:
+
 
 !!! note
     It is only necessary to specify the filename of the input static, meteo & illumination files; 
