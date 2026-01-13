@@ -147,7 +147,7 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 
 Alternatively, the user can directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the *data/output/output_timestamps/* directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
-<small> *Ex. Yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
+<small> *Ex. An exemplar output timestamps file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
 
 |          |
 |:---:|
