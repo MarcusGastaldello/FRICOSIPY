@@ -25,7 +25,7 @@ For each simulation, the user must specify the [three model input files](https:/
 
 ## Temporal Range & Spatial Extent
 
-The temporal range and spatial extent of the simulation must also be specified by the user. This is achieved by providing datetime values [yyyy-mm-dd hh:mm] indicating the starting and ending timestamp (which must be within the datetime range of the METEO file) and defining a bounding box of easting $(x)$ and northing $(y)$ values to demarcate the spatial extent. Regarding the latter, by default the user would set ´spatial_subset´= False´ and [x_min, x_max, y_min, y_max] = None´ to use the entirity of the spatial domain of the STATIC file. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same STATIC file and enables the clipping of surrounding terrain needed to accurately create the ILLUMINATION file.
+The temporal range and spatial extent of the simulation must also be specified by the user. This is achieved by providing datetime values [yyyy-mm-dd hh:mm] indicating the starting and ending timestamp (which must be within the datetime range of the METEO file) and defining a bounding box of easting $(x)$ and northing $(y)$ values to demarcate the spatial extent. Regarding the latter, by default the user would set `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` to use the entirity of the spatial domain of the STATIC file. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same STATIC file and enables the clipping of surrounding terrain needed to accurately create the ILLUMINATION file.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
