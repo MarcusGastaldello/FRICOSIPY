@@ -21,7 +21,7 @@ og_description: Explanation of the processes and parameterisations governing the
 
 ## Thermal Diffusion
 
-is governed by the *Fourier* heat equation:
+Thermal diffusion is governed by the *Fourier* heat equation:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -59,10 +59,10 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
+    k = 
     $$
     </div>
-    <small>where</small>
+    <small>where </small>
 
 ---
 
@@ -73,10 +73,10 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
+    k = 
     $$
     </div>
-    <small>where</small>
+    <small>where </small>
     
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
