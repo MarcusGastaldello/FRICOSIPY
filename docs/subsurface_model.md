@@ -48,7 +48,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
     $$
     </div>
-    <small>where $k_i$ = W m$^{-1}$ K$^{-1}$, are the reference thermal conductivities and $/phi_i$ are the volumetric fractions of ice, water and air respectively </small>
+    <small>where $k_i$ = W m$^{-1}$ K$^{-1}$, are the reference thermal conductivities and $\phi_{\:i}$,\phi_{\:w}$ & \phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
     
 ---
 
