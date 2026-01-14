@@ -51,7 +51,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
   SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
   $$
   </div>
-  <small>where
+  <small>where</small>
 
 ---
 
