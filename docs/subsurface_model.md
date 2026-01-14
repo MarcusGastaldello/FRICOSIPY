@@ -48,7 +48,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     k = \phi_{\:i} + \phi_{\:w} + \phi_{\:a}
     $$
     </div>
-    <small>where $k_i$ = W m$^{-1}$ K$^{-1}$, are the reference thermal conductivities and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
+    <small>where $k_i$ = 2.22, $k_w$ = 0.55 & $k_a$ = 0.024 W m$^{-1}$ are the reference thermal conductivities and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
     
 ---
 
