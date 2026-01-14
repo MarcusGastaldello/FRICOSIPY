@@ -40,6 +40,14 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ??? "**$(i)$ Bulk-volumetric**"
 
+    <br> 
+    The bulk-volumetric method is the default approach of the original *COSIPY* model. Thermal conductivity $(k)$ is calculated as a volumetrically-weighted sum of reference values for ice, water and air.
+    
+    <small>where $k_i$ = W m$^{-1}$ K$^{-1}$, are the reference thermal conductivities and are the of ice, water and air respectively </small>
+    
+    
+
+
 ---
 
 ??? "**$(ii)$ Sturm (1997)**"
