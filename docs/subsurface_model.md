@@ -45,7 +45,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 ??? "**$(ii)$ Sturm (1997)**"
 
     <br> 
-    Using the parameterisation of [Sturm (1997)](https://doi.org/10.3189/S0022143000002781), thermally conductivity $(k)$ is empirically-derived based on observational data.
+    Using the parameterisation of [Sturm (1997)](https://doi.org/10.3189/S0022143000002781), thermal conductivity $(k)$ is empirically-derived based on observational data.
     
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
@@ -56,8 +56,18 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ---
 
-??? "**$(iii)$ Calonne et al. (1997)**"
+??? "**$(iii)$ Calonne et al. (2019)**"
 
+    <br> 
+    Using the parameterisation of [Calonne et al. (2019)](https://doi.org/10.1029/2019GL085228), thermal conductivity $(k)$ is empirically-derived based on 3-dimensional image-based computations.
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
+    $$
+    </div>
+    <small>where</small>
+    
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Specific Heat Capacity Parameterisations
