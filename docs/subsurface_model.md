@@ -44,6 +44,15 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ??? "**$(ii)$ Sturm (1997)**"
 
+  <br> Using the parameterisation of [Sturm (1997)](https://doi.org/10.3189/S0022143000002781), thermally conductivity $(k)$ is modelled 
+  
+  <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+  $$
+  SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
+  $$
+  </div>
+  <small>where
+
 ---
 
 ??? "**$(iii)$ Calonne et al. (1997)**"
