@@ -144,7 +144,7 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 
 ### $(i)$ Model Initialisation / Spin-up
 
-In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting `model_spin_up == True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
+In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting <br> `model_spin_up == True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
