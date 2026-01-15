@@ -5,7 +5,7 @@ og_description: Guidelines on how to install the FRICOSIPY model
 
 # Installation
 
-The *FRICOSIPY* model can be installed by following the proceeding three steps:
+The *FRICOSIPY* model can be installed by following the proceeding three basic steps:
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
