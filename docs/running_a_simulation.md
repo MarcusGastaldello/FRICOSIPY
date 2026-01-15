@@ -144,11 +144,13 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 
 ### $(i)$ Model Initialisation / Spin-up
 
+In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting `model_spin_up == True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### $(ii)$ Output Timestamps
 
-Alternatively, the user can directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+The user can also directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
 <small> *Ex. An exemplar output timestamps CSV file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
 
@@ -182,6 +184,6 @@ python FRICOSIPY.py
 As the simulation starts, detailed information will be reported into the terminal. Thereafter, progress will be indicated upon the completion of each spatial node until the simulation is complete. 
 
 !!! attention
-    Remember that your conda environment must be active `conda activate <env>` and you must be in the directory of the FRICOSIPY model.
+    Remember that your conda environment must be active `conda activate <env>` and you must be in the root directory in order to launch the FRICOSIPY model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
