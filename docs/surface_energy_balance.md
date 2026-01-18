@@ -52,21 +52,21 @@ Shortwave radiation is the thermal radiation supplied directly from the Sun that
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">    
 $$
-I_{0} = I_{TOA} \: \Lambda ( x , y ) \: \tau_{rg} \: \tau_{w} \: \tau_{aerosols} \: \tau_{clouds} 
+I_{0} = I_{\text{TOA}} \: \Lambda ( x , y ) \: \tau_{\text{rg}} \: \tau_{\text{w}} \: \tau_{\text{aerosols}} \: \tau_{\text{clouds}} 
 $$
 </div>
-<small>where $I_{0}$ is the solar irradiance, $I_{TOA}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{rg}$, $\tau_{w}$, $\tau_{aerosols}$ & $\tau_{clouds}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
+<small>where $I_{0}$ is the solar irradiance, $I_{\text{TOA}}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{\text{rg}}$, $\tau_{\text{w}}$, $\tau_{\text{aerosols}}$ & $\tau_{\text{clouds}}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
 The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption $(\tau_{rg})$, water absorption $(\tau_{w})$ and the attenuation by aerosols $(\tau_{aerosols})$ are modelled after [Kondratyev (1969)](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald (1960)](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton (1954)](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover $(\tau_{clouds})$, is modelled after [Gruell et al. (1997)](https://doi.org/10.1029/97JD02083):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-\tau_{clouds} = 1 - a \: N - b \: N^2
+\tau_{\text{clouds}} = 1 - a \: N - b \: N^2
 $$
 </div>
 <small>where $a = 0.233$ and $b = 0.415$ are cloud transmissivity coefficients (default values) and $N$ is the fractional cloud cover. </small>
 
-The incoming shortwave radiation $(SW_{in})$ is computed as the sum of the direct and diffuse components of the solar irradiance, after [Oerlemans (1992)](https://doi.org/10.3189/S0022143000003634); spatial nodes shaded by surrounding topography only receive diffuse radiation.
+The incoming shortwave radiation $(SW_{\text{in}})$ is computed as the sum of the direct and diffuse components of the solar irradiance, after [Oerlemans (1992)](https://doi.org/10.3189/S0022143000003634); spatial nodes shaded by surrounding topography only receive diffuse radiation.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -85,10 +85,10 @@ The net shortwave radiation $(SW_{net})$ entering the energy balance is calculat
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-SW_{net} = SW_{in} \: (1 - \alpha) - SW_{pen}
+SW_{\text{net}} = SW_{\text{in}} \: (1 - \alpha) - SW_{\text{pen}}
 $$
 </div>
-<small>where $SW_{net}$ is the net shortwave radiation, $SW_{in}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{pen}$ is the optional penetrating shortwave radiation deduction.</small>
+<small>where $SW_{\text{net}}$ is the net shortwave radiation, $SW_{\text{in}}$ is the incoming shortwave radiation, $\alpha$ is the broadband albedo and $SW_{\text{pen}}$ is the optional penetrating shortwave radiation deduction.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -102,7 +102,7 @@ $$
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \alpha = \alpha_{firn} + \left[ (\alpha_{fresh\:snow} - \alpha_{firn}) \: e^{-\frac{t}{t*}} \right]
+    \alpha = \alpha_{\text{firn}} + \left[ (\alpha_{\text{fresh snow}} - \alpha_{\text{firn}}) \: e^{-\frac{t}{t*}} \right]
     $$
     </div>
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\alpha_{\text{fresh snow}} = 0.85$ and $\alpha_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic decay timescale parameter (days).</div>
@@ -117,12 +117,12 @@ $$
     $$
     t^* = 
     \begin{cases}
-    t^*_{wet}, & T_s = 0^\circ \text{C} \\
-    t^*_{dry} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C}
+    t^*_{\text{wet}}, & T_s = 0^\circ \text{C} \\
+    t^*_{\text{dry}} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C}
     \end{cases}
     $$
     
-    <small>where $t^∗_{\:wet}$ and $t^∗_{\:dry}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
+    <small>where $t^∗_{\:\text{wet}}$ and $t^∗_{\:\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -131,14 +131,14 @@ $$
 ??? "**$(i)$ Bintanja & van den Broeke (1995)**"
 
     <br>
-    If the user enables the penetrating radiation module, the absorbed radiation $(SW_{pen})$ at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
+    If the user enables the penetrating radiation module, the absorbed radiation $(SW_{\text{pen}})$ at depth $z$ is calculated using the parametersiation of [Bintanja and Van den Broeke (1995)](https://doi.org/10.1175/1520-0450(1995)034%3C0902:TSEBOA%3E2.0.CO;2):
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    SW_{pen} (z) = \lambda_{abs} \: SW_{in} \: (1 - \alpha) \: e^{-z \: \beta}
+    SW_{\text{pen}} (z) = \lambda_{\text{abs}} \: SW_{\text{in}} \: (1 - \alpha) \: e^{-z \: \beta}
     $$
     </div>
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\lambda_{abs}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\lambda_{\text{abs}}$ is the fraction of absorbed shortwave radiation ($0.8$ for ice, $0.9$ for snow) and $\beta$ is the extinction coefficient ($2.5$ m$^{-1}$ for ice, $17.1$ m$^{-1}$ for snow as the default values).</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -162,10 +162,10 @@ The sensible heat flux represents the transfer of heat energy and is driven by t
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{sensible} = \rho_{a} \: c_{p,a} \: C_{t} \: V \: (T_{a}-T_{s})
+Q_{\text{sensible}} = \rho_{a} \: c_{p,a} \: C_{t} \: V \: (T_{a}-T_{s})
 $$
 </div>
-<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $c_{\text{p,a}}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively. </small> 
+<small> where $\rho_a$ is the dry air density (kg m$^{-3}$), $c_{p,a}$ is the specific heat of dry air under constant pressure (J kg$^{-1}$ K$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $T$ is the air temperature (K) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively. </small> 
 
 *Eg. If the air temperature is warmer than the glacier, sensible / heat energy convects towards and warms the glacier surface.*
 
@@ -181,10 +181,10 @@ The latent heat flux represents the transfer of latent energy (associated with p
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{latent} = \rho_{a} \: L_{s,v} \: C_{t} \: V \:(q_{a}-q_{s})
+Q_{\text{latent}} = \rho_{a} \: L_{s,v} \: C_{t} \: V \:(q_{a}-q_{s})
 $$
 </div>
-<small> where $\rho_\text{a}$ is the dry air density (kg m$^{-3}$), $L_{\text{s,v}}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively.</small> 
+<small> where $\rho_a$ is the dry air density (kg m$^{-3}$), $L_{s,v}$ is the latent heat of sublimation or vaporisation (J kg$^{-1}$), $C_{t}$ is the bulk turbulent exchange coefficient, $V$ is the wind speed (m s$^{-1}$), $q$ is the specific humidity (kg kg$^{-1}$) and the $s$ and $a$ subscripts refer to the surface and the atmosphere at a reference measurement height respectively.</small> 
 
 !!! note
 
@@ -248,14 +248,14 @@ $$
 
 <br style="clear: both;" />
 
-Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation $(LW_{net})$ is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
+Longwave radiation (otherwise known as terrestrial radiation) is the thermal radiation emitted between the Earth's surface and atmosphere that is within the infrared classification (3 - 100 $\mu$m) of the electromagnetic spectrum. Net longwave radiation $(LW_{\text{net}})$ is calculated in accordance with the *Stefan*–*Boltzmann* law for grey body emission:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-LW_{net} = LW_{in} - \varepsilon_{s} \: \sigma \: T_{s}^{4}
+LW_{\text{net}} = LW_{\text{in}} - \varepsilon_{s} \: \sigma \: T_{s}^{4}
 $$
 </div>
-<small>where $LW_{net}$  is the net longwave radiation flux, $LW_{in}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature (K).</small>
+<small>where $LW_{\text{net}}$  is the net longwave radiation flux, $LW_{\text{in}}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature (K).</small>
 
 ---
 
@@ -264,20 +264,20 @@ $$
 ??? "**$(i)$ Konzelmann et al. (1994)**"
 
     <br>
-    If the user is unable to provide incoming longwave radiation $(LW_{in})$ in the input meterological data, it can instead by derived from the fractional cloud cover $(N)$ using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature $(T_a)$ and atmospheric emissivity <br> $(\varepsilon_{atm})$ into the *Stefan*-*Boltzmann* law:
+    If the user is unable to provide incoming longwave radiation $(LW_{\text{in}})$ in the input meterological data, it can instead by derived from the fractional cloud cover $(N)$ using the parametersiation of [Konzelmann et al. (1994)](https://doi.org/10.1016/0921-8181(94)90013-2). This substitutes the air temperature $(T_a)$ and atmospheric emissivity <br> $(\varepsilon_{atm})$ into the *Stefan*-*Boltzmann* law:
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    LW_{in} = \varepsilon_{atm} \: \sigma \: T_{a}^{4}
+    LW_{\text{in}} = \varepsilon_{\text{atm}} \: \sigma \: T_{a}^{4}
     $$
     $$    
-    \varepsilon_{atm} = \varepsilon_{cs} \: ( 1 - N^2) + \varepsilon_{clouds} \: N^2
+    \varepsilon_{atm} = \varepsilon_{\text{cs}} \: ( 1 - N^2) + \varepsilon_{\text{clouds}} \: N^2
     $$    
     $$
-    \varepsilon_{cs} = 0.23 + c_{emission} \left[ \frac{VP_{sat} \: RH}{T_a} \right]
+    \varepsilon_{cs} = 0.23 + c_{\text{emission}} \left[ \frac{VP_{\text{sat}} \: RH}{T_a} \right]
     $$
     </div>
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{atm}$, $\varepsilon_{cs}$ and $\varepsilon_{clouds} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{sat}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{emission} = 0.4$ is a calibration parameter. </div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $LW_{in}$ is the derived incoming longwave radiation, $\varepsilon_{\text{atm}}$, $\varepsilon_{\text{cs}}$ and $\varepsilon_{\text{clouds}} = 0.96$ are the atmospheric, clear-sky and cloud emissivities respectively, $N$ is the fractional cloud cover, $RH$ is the relative humidity (%), $VP_{\text{sat}}$ is the saturated vapour pressure (Pa), $T_a$ is the air temperature (K) and $c_{\text{emission}} = 0.4$ is a calibration parameter. </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -291,10 +291,10 @@ The rain heat flux represents the energy imparted to the surface from the enthal
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{rain} = \rho_{w} \: c_{\text{p,w}} \: dt \: (T_{a}-T_{s})
+Q_{\text{rain}} = \rho_{w} \: c_{p,w} \: dt \: (T_{a}-T_{s})
 $$
 </div>
-<small> where $\rho_{w}$ is the density of water (kg m$^{-3}$), $c_{\text{p,w}}$ is the specific heat of water under constant pressure (J kg$^{-1}$ K$^{-1}$), $dt$ is the model time step and the $T_{s}$ and $T_{a}$ are the surface and air (rain) temperature respectively.</small>
+<small> where $\rho_{w}$ is the density of water (kg m$^{-3}$), $c_{p,w}$ is the specific heat of water under constant pressure (J kg$^{-1}$ K$^{-1}$), $dt$ is the model time step and the $T_{s}$ and $T_{a}$ are the surface and air (rain) temperature respectively.</small>
 
 !!! note
 
@@ -309,7 +309,7 @@ The subsurface heat conduction flux (otherwise known as the ground heat flux) is
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-Q_{subsurface} = k_{s} \: \frac{\delta T}{\delta z} \approx  k_{s} \: \left[ \frac{T_{z\:\text{interp 2}} - T_{z\:\text{interp 1}}}{z_{\:\text{interp 2}} - z_{\:\text{interp 1}}} \right]
+Q_{\text{subsurface}} = k_{s} \: \frac{\delta T}{\delta z} \approx  k_{s} \: \left[ \frac{T_{z\:\text{interp 2}} - T_{z\:\text{interp 1}}}{z_{\:\text{interp 2}} - z_{\:\text{interp 1}}} \right]
 $$
 </div>
 <small> where $k_{s}$ is the surface thermal conductivity (W m$^{-1}$ K$^{-1}$) and $z_{\:\text{interp 1}} = 0.06$ m and $z_{\:\text{interp 2}} = 0.10$ m are the default prescribed depth values used to calculate subsurface temperatures via linear interpolation between subsurface layers.</small>
@@ -326,10 +326,10 @@ When the surface temperature $(T_s)$ is evaluated to 0 $^\circ$C, the residual e
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-\text{Surface melt} = \frac{Q_{melt} \:\: dt}{\rho_{w} \: L_{f}}
+\text{Surface melt} = \frac{Q_{\text{melt}} \:\: dt}{\rho_{w} \: L_{f}}
 $$
 </div>
-<small>where $Q_{melt}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{f} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
+<small>where $Q_{\text{melt}}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{f} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
 
 This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
 
