@@ -29,10 +29,6 @@ markdown_extensions:
       generic: true
   - pymdownx.details
   - pymdownx.superfences:
-      custom_fences:
-        - name: math
-          class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.fence_to_math  # Changed from fence_math
   - attr_list
   - md_in_html
 
