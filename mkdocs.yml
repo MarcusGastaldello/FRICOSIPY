@@ -32,7 +32,7 @@ markdown_extensions:
       custom_fences:
         - name: math
           class: arithmatex
-          format: !!python/name:pymdownx.arithmatex.fence_math
+          format: !!python/name:pymdownx.arithmatex.fence_to_math  # Changed from fence_math
   - attr_list
   - md_in_html
 
