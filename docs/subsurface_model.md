@@ -90,7 +90,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     $$
     
     </div>
-    <small>where $k_{i}(T)$ and $k_{a}(T)$ are the ice and air thermal conductivity at the temperature T, $k_{i}^{\text{ref}}$ = 2.107 W m$^{-1}$ K$^{-1}$ and $k_{a}^{\text{ref}}$ = 0.024 W m$^{-1}$ K$^{-1}$ are the ice and air thermal conductivities at the reference temperature of -3 $^\circ$C, $a$ = 0.02 m$^{3}$ kg$^{-1}$ and $\rho_{\:\text{transition}}$ = 450 kg m $^{-3}$. </small>
+    <small>where $k_{i}(T)$ and $k_{a}(T)$ are the ice and air thermal conductivity at the temperature T, $k_{i}^{\text{ref}}$ = 2.107 and $k_{a}^{\text{ref}}$ = 0.024 W m$^{-1}$ K$^{-1}$ are the ice and air thermal conductivities at the reference temperature of -3 $^\circ$C, $a$ = 0.02 m$^{3}$ kg$^{-1}$ and $\rho_{\:\text{transition}}$ = 450 kg m $^{-3}$. </small>
     
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
