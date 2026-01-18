@@ -74,7 +74,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    k(\rho,T) = (1-\vartheta) \frac{k_{i}(T) k_{a}(T)}{k_{i}^{\text{ ref}} k_{a}^{\text{ ref}}} k_{\text{ snow}}^{\text{ ref}}(\rho) + \vartheta \frac{k_{i}(T)}{k_{i}^{\text{ ref}}} k_{\text{ firn}}^{\text{ ref}}(\rho)
+    k(\rho,T) = (1-\vartheta) \frac{k_{i}(T) \: k_{a}(T)}{k_{i}^{\text{ ref}} k_{a}^{\text{ ref}}} k_{\text{ snow}}^{\text{ ref}}(\rho) + \vartheta \frac{k_{i}(T)}{k_{i}^{\text{ ref}}} k_{\text{ firn}}^{\text{ ref}}(\rho)
     $$
 
     $$
