@@ -113,6 +113,16 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ??? "**$(ii)$ Yen (1981)**"
 
+    <br> 
+    Using the parameterisation of [Yen (1981)](https://apps.dtic.mil/sti/citations/ADA103734),
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    c_p (T) = 152.2 + 7.122 \: T
+    $$
+    </div>
+    <small>where </small>
+    
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Dry Firn Densification
