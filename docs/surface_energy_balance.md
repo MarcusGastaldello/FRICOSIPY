@@ -9,10 +9,10 @@ Driven by the input meteorological data, the surface energy fluxes are evaluated
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net} + Q_{rain} \pm Q_{subsurface} = 0
+SW_{\text{net}} \pm Q_{\text{sensible}} \pm Q_{\text{latent}} \pm LW_{\text{net}} + Q_{\text{rain}} \pm Q_{\text{subsurface}} = 0
 $$
 </div>
-<small> where $SW_{net}$ is the net shortwave radiation flux, $Q_{sensible}$ and $Q_{latent}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{net}$ is the net longwave radiation flux, $Q_{rain}$ is the rain heat flux, and $Q_{subsurface}$ is the subsurface heat conduction flux. </small>
+<small> where $SW_{\text{net}}$ is the net shortwave radiation flux, $Q_{\text{sensible}}$ and $Q_{\text{latent}}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{\text{net}}$ is the net longwave radiation flux, $Q_{\text{rain}}$ is the rain heat flux, and $Q_{\text{subsurface}}$ is the subsurface heat conduction flux. </small>
 
 ![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-SEB.png)
 
@@ -30,8 +30,8 @@ However, since the surface temperature of a glacier is physically constrained to
   </div>
 
   $$
-  SW_{net} \pm Q_{sensible} \pm Q_{latent} \pm LW_{net}
-  + Q_{rain} \pm Q_{subsurface} = Q_{melt}
+  SW_{net} \pm Q_{\text{sensible}} \pm Q_{\text{latent}} \pm LW_{\text{net}}
+  + Q_{\text{rain}} \pm Q_{\text{subsurface}} = Q_{\text{melt}}
   $$
 </div>
 <div style="height: 20px;"></div>
