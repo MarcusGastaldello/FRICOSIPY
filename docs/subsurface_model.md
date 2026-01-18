@@ -34,8 +34,9 @@ In the *FRICOSIPY* model, the heat equation is numerically solved using an impli
 the derived surface temperature $(T_{s})$ from the resolution of the [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) (*Dirichlet*) and a basal / geomethermal heat flux (*Neumann*).
 
 <div markdown = 1 style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+
 $$
-T_i^{new} = T_i + \Delta t_{\text{step}} \left[ \frac{ \frac{\frac{1}{2}(K_{i+1} + K_i)(T_{i+1} - T_i)}{\frac{1}{2}(z_{i+1} + z_i)} - \frac{\frac{1}{2}(K_{i-1} + K_i)(T_i - T_{i-1})}{\frac{1}{2}(z_{i-1} + z_i)} }{ \frac{1}{4}z_{i-1} + \frac{1}{2}z_i + \frac{1}{4}z_{i+1} } \right]
+T_i^{new} = T_i + \Delta t \left[ \frac{ \frac{K_{i+1/2} (T_{i+1} - T_i)}{\Delta z_{i+1/2}} - \frac{K_{i-1/2} (T_i - T_{i-1})}{\Delta z_{i-1/2}} }{ \Delta z_i } \right]
 $$
 
 </div>
