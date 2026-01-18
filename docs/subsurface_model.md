@@ -52,7 +52,7 @@ The stable integration timestap ($\Delta$t) is determined according to the *Von 
 <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
   
 $$
-\Delta t_{\text{stable}} = 0.5 \cdot \min \left( \frac{\Delta z_{avg}^2}{K_{avg}} \right)
+\Delta t_{\text{stable}} \le \frac{1}{2} \min \left( \frac{\Delta z_{i+1/2}^2}{K_{i+1/2}} \right)
 $$
 
 </div>
