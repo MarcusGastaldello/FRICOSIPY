@@ -105,6 +105,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     $$
     c_p (\phi) = k_{c_{\:p,i} \: \phi_{\:i} + c_{\:p,w} \: \phi_{\:w} + c_{\:p,a} \: \phi_{\:a}
     $$
+    
     </div>
     <small>where $c_{\:p,i}$ = 2.22, $c_{\:p,w}$ = 0.55 & $c_{\:p,a}$ = 0.024 W m$^{-1}$ are the reference specific heat capacities (for constant pressure) and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
 
