@@ -22,7 +22,7 @@ $$
 
     By convention, positive values $(+)$ represent energy absorbed by the glacier surface; negative values $(-)$ depict energy emitted from the glacier surface.
 
-However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt $(Q_{melt})$ should the surface temperature reach 0 $^\circ$C:
+However, since the surface temperature of a glacier is physically constrained to its melting point, excess energy must be apportioned to melt $(Q_{\text{melt}})$ should the surface temperature reach 0 $^\circ$C:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; position:relative; max-width:100%; overflow-x:auto;">
   <div style="position:absolute; top:4px; left:10px; font-size:12px; color:#444;">
@@ -57,7 +57,7 @@ $$
 </div>
 <small>where $I_{0}$ is the solar irradiance, $I_{\text{TOA}}$ is the unattenuated Top-of-Atmosphere (TOA) solar irradiance on a surface normal to the incident radiation, $\Lambda$ is a correction factor for an inclined surface relative to the topography of a spatial node ( $x$ , $y$ ) and $\tau_{\text{rg}}$, $\tau_{\text{w}}$, $\tau_{\text{aerosols}}$ & $\tau_{\text{clouds}}$ are the coefficients of atmospheric transmissivity for *Rayleigh* scattering and gaseous absorption, water absorption, aerosols and cloud cover respectively .</small>
 
-The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption $(\tau_{rg})$, water absorption $(\tau_{w})$ and the attenuation by aerosols $(\tau_{aerosols})$ are modelled after [Kondratyev (1969)](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald (1960)](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton (1954)](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover $(\tau_{clouds})$, is modelled after [Gruell et al. (1997)](https://doi.org/10.1029/97JD02083):
+The coefficients of atmospheric transmissivity that  *Rayleigh* scattering and gaseous absorption $(\tau_{\text{rg}})$, water absorption $(\tau_{\text{w}})$ and the attenuation by aerosols $(\tau_{\text{aerosols}})$ are modelled after [Kondratyev (1969)](https://shop.elsevier.com/books/radiation-in-the-atmosphere/kondratyev/978-0-12-419050-4), [McDonald (1960)](https://doi.org/10.1175/1520-0469(1960)017%3C0319:DAOSRB%3E2.0.CO;2) and [Houghton (1954)](https://doi.org/10.1175/1520-0469(1954)011%3C0001:OTAHBO%3E2.0.CO;2) respectively. The final component, the attenuation by cloud cover $(\tau_{\text{clouds}})$, is modelled after [Gruell et al. (1997)](https://doi.org/10.1029/97JD02083):
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
@@ -70,7 +70,7 @@ The incoming shortwave radiation $(SW_{\text{in}})$ is computed as the sum of th
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-SW_{in}
+SW_{\text{in}}
 =
 I_{0}\Bigg[
 \underbrace{\,0.2 + 0.65(1 - N)\,}_{\text{direct radiation}}
@@ -81,7 +81,7 @@ $$
 </div>
 <small>where $SW_{in}$ is the incoming shortwave radiation, $I_{0}$ is the solar irradiance and $N$ is the fractional cloud cover.</small>
 
-The net shortwave radiation $(SW_{net})$ entering the energy balance is calculated using a broadband isotropic albedo $(\alpha)$, that determines the proportion of incoming radiation reflected off the surface. The user can also optionally apportion some of the input shortwave radiation to directly bypass the surface energy balance and directly warm the subsurface layers.
+The net shortwave radiation $(SW_{\text{net}})$ entering the energy balance is calculated using a broadband isotropic albedo $(\alpha)$, that determines the proportion of incoming radiation reflected off the surface. The user can also optionally apportion some of the input shortwave radiation to directly bypass the surface energy balance and directly warm the subsurface layers.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
