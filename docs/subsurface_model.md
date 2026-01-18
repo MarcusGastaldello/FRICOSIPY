@@ -74,13 +74,19 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    \begin{align}
-    & k(\rho,T) = (1-\vartheta) \frac{k_{i}(T) k_{a}(T)}{k_{i}^{\text{ref}} k_{a}^{\text{ref}}} k_{\text{snow}}^{\text{ref}}(\rho) + \vartheta \frac{k_{i}(T)}{k_{i}^{\text{ref}}} k_{\text{firn}}^{\text{ref}}(\rho) \\
-    & \vartheta = 1 / \left[ 1 + \text{exp}(-2a (\rho - \rho_{\:\text{transition}})) \right] \\
-    & k_{\text{firn}}^{\text{ref}} = 2.107 + 0.003618(\rho - \rho_{i}) \\
-    & k_{\text{snow}}^{\text{ref}} = 0.024 - 1.23\rho \times 10^{-4} + 2.5 \times 10^{-6}\rho^2
-    \label{eq:calonne}
-    \end{align}
+    k(\rho,T) = (1-\vartheta) \frac{k_{i}(T) k_{a}(T)}{k_{i}^{\text{ref}} k_{a}^{\text{ref}}} k_{\text{snow}}^{\text{ref}}(\rho) + \vartheta \frac{k_{i}(T)}{k_{i}^{\text{ref}}} k_{\text{firn}}^{\text{ref}}(\rho)
+    $$
+
+    $$
+    \vartheta = 1 / \left[ 1 + \text{exp}(-2a (\rho - \rho_{\:\text{transition}})) \right]
+    $$
+    
+    $$
+    k_{\text{firn}}^{\text{ref}} = 2.107 + 0.003618(\rho - \rho_{i})
+    $$
+    
+    $$
+    k_{\text{snow}}^{\text{ref}} = 0.024 - 1.23\rho \times 10^{-4} + 2.5 \times 10^{-6}\rho^2
     $$
     
     </div>
