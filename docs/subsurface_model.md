@@ -39,7 +39,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    T_i^{new} = T_i + \Delta t \left[ \frac{ \frac{K_{i+1/2} (T_{i+1} - T_i)}{\Delta z_{i+1/2}} - \frac{K_{i-1/2} (T_i - T_{i-1})}{\Delta z_{i-1/2}} }{ \Delta z_i } \right]
+    T_i^{new} = T_i + \Delta t \left[ \frac{ \frac{K_{i+1/2}\:(T_{i+1} - T_i)}{\Delta z_{i+1/2}} - \frac{K_{i-1/2}\:(T_i - T_{i-1})}{\Delta z_{i-1/2}} }{ \Delta z_i } \right]
     $$
 
     </div>
