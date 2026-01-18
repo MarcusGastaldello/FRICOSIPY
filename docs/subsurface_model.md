@@ -78,11 +78,11 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     $$
 
     $$
-    \vartheta = 1 / \left[ 1 + \text{exp}(-2a (\rho - \rho_{\:\text{transition}})) \right]
+    \vartheta = 1 / \left[ 1 + \text{exp}(-2a \: (\rho - \rho_{\:\text{transition}})) \right]
     $$
     
     $$
-    k_{\text{firn}}^{\text{ref}} = 2.107 + 0.003618(\rho - \rho_{i})
+    k_{\text{firn}}^{\text{ref}} = 2.107 + 0.003618 \: (\rho - \rho_{i})
     $$
     
     $$
