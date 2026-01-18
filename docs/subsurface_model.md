@@ -66,7 +66,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ---
 
-??? "**$(ii)$ Calonne et al. (2019)**"
+??? "**$(iii)$ Calonne et al. (2019)**"
 
     <br> 
     Using the parameterisation of [Calonne et al. (2019)](https://doi.org/10.1029/2019GL085228), thermal conductivity $(k)$ is empirically-derived based on 3-dimensional image-based computations.
