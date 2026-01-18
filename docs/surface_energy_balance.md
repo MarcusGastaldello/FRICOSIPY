@@ -124,19 +124,18 @@ $$
     
     <small>where $t^∗_{\:\text{wet}}$ and $t^∗_{\:\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}\:,\:t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
-??? "**$(iv)$ Bougamont et al. (2005)**"
+??? "**$(v)$ Bougamont et al. (2005)**"
 
     The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach. It introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
-
-    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
-    $$
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
+    
+    ```math
     t^* = 
     \begin{cases} 
     t^*_{\text{wet}}, & T_s = 0^\circ \text{C} \\ 
     t^*_{\text{dry}} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C} 
     \end{cases}
-    $$
-    </div>
 
     <small>where $t^∗_{\text{wet}}$ and $t^∗_{\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}, t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>
 
