@@ -107,7 +107,7 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
     $$
     
     </div>
-    <small>where $c_{\:p,i}$ = 2.22, $c_{\:p,w}$ = 0.55 & $c_{\:p,a}$ = 0.024 W m$^{-1}$ are the reference specific heat capacities (for constant pressure) and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
+    <small>where $c_{\:p,i}$ = 2050, $c_{\:p,w}$ = 4217 & $c_{\:p,a}$ = 1004.67 J kg$^{-1}$ K$^{-1}$ are the reference specific heat capacities (for constant pressure) and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
 
 ---
 
