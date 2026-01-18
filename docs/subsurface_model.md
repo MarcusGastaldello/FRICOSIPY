@@ -36,11 +36,11 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 
 $$
-T_i^{\text{ new}} = T_i + \Delta t \left[ \frac{ \frac{K_{i+1/2}\:(T_{i+1} - T_i)}{\Delta z_{i+1/2}} - \frac{K_{i-1/2}\:(T_i - T_{i-1})}{\Delta z_{i-1/2}} }{ \Delta z_i } \right] \qquad (\text{intermediary nodes})
+T_i^{\text{ new}} = T_i + \Delta t_{\text{stable}} \left[ \frac{ \frac{K_{i+1/2}\:(T_{i+1} - T_i)}{\Delta z_{i+1/2}} - \frac{K_{i-1/2}\:(T_i - T_{i-1})}{\Delta z_{i-1/2}} }{ \Delta z_i } \right] \qquad (\text{intermediary nodes})
 $$
 
 $$
-T_n^{\text{ new}} = T_n + \Delta t \left[ \frac{ \frac{Q_{\text{basal}} K_n}{k_n} - \frac{K_{n-1/2} (T_n - T_{n-1})}{\Delta z_{n-1/2}} }{ \frac{1}{4} z_{n-1} + \frac{3}{4} z_n } \right] \qquad (\text{basal node})
+T_n^{\text{ new}} = T_n + \Delta t_{\text{stable}} \left[ \frac{ \frac{Q_{\text{basal}} K_n}{k_n} - \frac{K_{n-1/2} (T_n - T_{n-1})}{\Delta z_{n-1/2}} }{ \frac{1}{4} z_{n-1} + \frac{3}{4} z_n } \right] \qquad (\text{basal node})
 $$
 
 </div>
