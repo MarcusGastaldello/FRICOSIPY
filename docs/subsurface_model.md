@@ -33,8 +33,9 @@ $$
 In the *FRICOSIPY* model, the heat equation is numerically solved using an implicit second-order central difference scheme, constrained between two boundary conditions; 
 the derived surface temperature $(T_{s})$ from the resolution of the [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) (*Dirichlet*) and a basal / geomethermal heat flux (*Neumann*).
 
-??? **Further Information**
+??? "**Further Information**"
 
+    <br>
     <div markdown = 1 style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
     $$
