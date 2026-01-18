@@ -98,6 +98,16 @@ the derived surface temperature $(T_{s})$ from the resolution of the [surface en
 
 ??? "**$(i)$ Bulk-volumetric**"
 
+    <br> 
+    The bulk-volumetric method is the default approach of the original *COSIPY* model. Specific heat capacity $(c_p)$ is calculated as a volumetrically-weighted sum of reference values for ice, water and air.
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    c_p (\phi) = k_{c_{\:p,i} \: \phi_{\:i} + c_{\:p,w} \: \phi_{\:w} + c_{\:p,a} \: \phi_{\:a}
+    $$
+    </div>
+    <small>where $c_{\:p,i}$ = 2.22, $c_{\:p,w}$ = 0.55 & $c_{\:p,a}$ = 0.024 <br> W m$^{-1}$ are the reference specific heat capacities (for constant pressure) and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
+
 ---
 
 ??? "**$(ii)$ Yen (1981)**"
