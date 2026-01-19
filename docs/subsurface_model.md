@@ -17,7 +17,7 @@ In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrang
 
 
 
-The *FRICOSIPY* model then uses a linear logistic transfer function based on air temperature to differentiate between solid and liquid precipitation. The proportion of snowfall scales between 100 % at 0 °C and 0 % at 2 °C [(Hantel et al., 2000)](https://doi.org/10.1002/(SICI)1097-0088(200005)20:6<615::AID-JOC489>3.0.CO;2-0)
+The *FRICOSIPY* model then uses a linear logistic transfer function based on air temperature to differentiate between solid and liquid precipitation. The proportion of snowfall scales between 100 % at 0 °C and 0 % at 2 °C [(Hantel et al., 2000)](https://doi.org/10.1002/(SICI)1097-0088(200005)20:6<615::AID-JOC489>3.0.CO;2-0). Snow is accumulated into the uppermost subsurface layer; rain is directly routed as liquid into the [percolation scheme](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing).
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
