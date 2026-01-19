@@ -47,7 +47,7 @@ $$
 
 <small>where ... and $\Delta$t is the stable integration timestep. </small>
 
-The stable integration timestap ($\Delta$t) is determined according to the *Von Neumann* stability condition:
+The stable integration timestap ($\Delta t_{\text{stable}}$) is determined according to the *Von Neumann* stability condition:
 
 <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
   
