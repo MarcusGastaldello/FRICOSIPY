@@ -81,7 +81,7 @@ $$
     k (\phi) = k_{\:i} \: \phi_{\:i} + k_{\:w} \: \phi_{\:w} + k_{\:a} \: \phi_{\:a}
     $$
     </div>
-    <small>where $k_{\:i}$ = 2.22, $k_{\:w}$ = 0.55 & $k_{\:a}$ = 0.024 W m$^{-1}$ are the reference thermal conductivities and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively </small>
+    <small>where $k_{\:i}$ = 2.22, $k_{\:w}$ = 0.55 & $k_{\:a}$ = 0.024 W m$^{-1}$ are the reference thermal conductivities and $\phi_{\:i}$,$\phi_{\:w}$ & $\phi_{\:a}$ are the volumetric fractions of ice, water and air respectively. </small>
     
 ---
 
@@ -93,15 +93,12 @@ $$
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
    
     $$
-    k = 
-    \begin{cases} 
-    0.023 + 0.234 \rho, & \rho < 156 \text{kg m}^{-3} \\ 
-    0.138 - 1.01 \rho + 3.233 \rho^2, & 156 \leq \rho \leq 600 \text{kg m}^{-3}
-    \end{cases}
+    k = 0.138 - 1.01 \rho + 3.233 \rho^2
     $$
 
     </div>
-
+    <small>where $\rho$ (kg m$^{-3}$) is the density of subsurface layers. </small>
+    
 ---
 
 ??? "**$(iii)$ Calonne et al. (2019)**"
