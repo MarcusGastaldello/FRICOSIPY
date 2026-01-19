@@ -21,7 +21,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on air
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### Advanced Preipitation Methods
+### Advanced Precipitation Methods
 
 ??? "**$(i)$ Three-Phase Anomaly**"
 
@@ -29,7 +29,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on air
 
 ### Fresh Snow Density Parameterisations
 
-By default, the density of fresh snow layers $(\rho_{\text{ snow}})$ is defined by the `fresh_snow_density` parameter. Otherwise, the user can select a more advanced paramterisation to determine a value based on the concurrent meteorological conditions:
+By default, the density of fresh snow layers $(\rho_{\text{ snow}})$ is defined by the `fresh_snow_density` parameter. However, the user can also select a more advanced parameterisation to determine a value based on the concurrent meteorological conditions:
 
 ??? "**$(i)$ Vionnet et al. (2012)**"
 
