@@ -45,7 +45,7 @@ $$
 
 </div>
 
-<small>where $i$ is a given subsurface layers, $i \pm 1/2$ represents the interface property between i and the adjacent subsurface layer, $n$ is the total number of subsurface layers, $Q_{\text{ basal}} is the basal / geothermal heat flux $(W m^{-2}$)$ and $\Delta$t is the stable integration timestep. </small>
+<small>where $i$ is a given subsurface layers, $i \pm 1/2$ represents the interface property between i and the adjacent subsurface layer, $n$ is the total number of subsurface layers, $Q_{\text{ basal}}$ is the basal / geothermal heat flux $(W m^{-2}$)$ and $(\Delta t_{\text{stable}})$ is the stable integration timestep. </small>
 
 The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Von Neumann* stability condition:
 
