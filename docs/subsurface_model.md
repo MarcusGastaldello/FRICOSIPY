@@ -184,9 +184,11 @@ $$
 
 ## Dry Firn Densification
 
+Firn densification $()$ is the process by which snow transforms over time into glacial ice due to overburden pressure and thermal metamorphosis. This excludes the effects of subsurface liquid refreezing, which is accounted for in the  
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### Dry Firn Densification Parameterisations
+### Firn Densification Parameterisations
 
 ??? "**$(i)$ Boone (2002)**"
 
