@@ -93,7 +93,7 @@ $$
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
    
     $$
-    k = 0.138 - 1.01 \rho + 3.233 \rho^2
+    k = 0.138 - 1.01 \: \rho + 3.233 \: \rho^2
     $$
 
     </div>
