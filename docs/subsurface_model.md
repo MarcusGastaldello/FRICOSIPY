@@ -19,7 +19,7 @@ In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrang
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-P (x,y) = P_{\text{ meteo}} \: \right[ 1 + (Z (x,y) - Z_{\text{ meteo}}) \: \Gamma \left] \:
+P (x,y) = P_{\text{ meteo}} \: \left[ 1 + (Z (x,y) - Z_{\text{ meteo}}) \: \Gamma \right] \: M
 $$
 </div>
 <small>where .  </small>
