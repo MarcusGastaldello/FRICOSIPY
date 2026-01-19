@@ -90,12 +90,17 @@ $$
     <br> 
     Using the parameterisation of [Sturm (1997)](https://doi.org/10.3189/S0022143000002781), thermal conductivity $(k)$ is empirically-derived based on observational data.
     
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
+   
     $$
     k = 
+    \begin{cases} 
+    , & \rho < 156 \text{kg m}^{-3} \\ 
+    , & \rho < 156 \text{kg m}^{-3}
+    \end{cases}
     $$
+
     </div>
-    <small>where </small>
 
 ---
 
