@@ -5,9 +5,15 @@ og_description: Explanation of the processes and parameterisations governing the
 
 # Multi-layer Subsurface Model
 
+In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrangian* re-meshing algorithm: layers can translate vertically along the depth axis $(z)$ following mass exchange at the surface. Subsurface layers are regulated by a user-defined, fixed height threshold $(h_{max})$, upon exceeding which a new surface layer is created for further accumulation and all existing layers are shifted downwards.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Precipitation
+
+
+
+ The model then uses a linear logistic transfer function based on air temperature to differentiate between solid and liquid precipitation. The proportion of snowfall scales between 100 % at 0 °C and 0 % at 2 °C (Hantel et al., 2000).
 
 ### Advanced Methods
 
