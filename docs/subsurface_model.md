@@ -15,7 +15,7 @@ In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrang
 
 ## Precipitation
 
-
+The input precipitation data $(P)$ from the meteorological input file is adjusted to each spatial node $(x,y)$ according to a linear, elevation-dependant precipitation lapse rate $(\Gamma)$ and a precipitation multiplier $(M)$.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
