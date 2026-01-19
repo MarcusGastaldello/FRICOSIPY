@@ -19,9 +19,19 @@ In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrang
 
 The *FRICOSIPY* model then uses a linear logistic transfer function based on air temperature to differentiate between solid and liquid precipitation. The proportion of snowfall scales between 100 % at 0 °C and 0 % at 2 °C [Hantel et al., 2000](https://doi.org/10.1002/(SICI)1097-0088(200005)20:6<615::AID-JOC489>3.0.CO;2-0)
 
-### Advanced Methods
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Advanced Preipitation Methods
 
 ??? "**$(i)$ Three-Phase Anomaly**"
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Fresh Snow Density Parameterisations
+
+By default, the density of fresh snow layers $(\rho_{\text{ snow}})$ is defined by the `fresh_snow_density` parameter. Otherwise, the user can select a more advanced paramterisation to determine a value based on the concurrent meteorological conditions:
+
+??? "**$(i)$ Vionnet et al. (2012)**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
