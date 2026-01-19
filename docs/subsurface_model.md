@@ -9,7 +9,7 @@ In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrang
 
 ![FRICOSIPY Multi-layer Subsurface Model](images/FRICOSIPY-subsurface-model.png)
 
-<small> **Figure 2**: FRICOSIPY Multi-layer Subsurface Model </small>
+<small> **Figure 6**: FRICOSIPY Multi-layer Subsurface Model </small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
