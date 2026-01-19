@@ -184,7 +184,7 @@ $$
 
 ## Dry Firn Densification
 
-Firn densification $()$ is the process by which snow transforms over time into glacial ice due to overburden pressure and thermal metamorphosis. This excludes the effects of subsurface liquid refreezing, which is accounted for in the  
+Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow transforms over time into glacial ice due to overburden pressure and thermal metamorphosis. This excludes the effects of subsurface liquid refreezing, which is already accounted for in the [refreezing module](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing).
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
