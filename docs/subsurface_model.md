@@ -45,7 +45,7 @@ $$
 
 </div>
 
-<small>where ... and $\Delta$t is the stable integration timestep. </small>
+<small>where $i$ is a given subsurface layers, $i \pm 1/2$ , $n$ is the total number of subsurface layers and $\Delta$t is the stable integration timestep. </small>
 
 The stable integration timestap ($\Delta t_{\text{stable}}$) is determined according to the *Von Neumann* stability condition:
 
