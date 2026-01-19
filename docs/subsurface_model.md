@@ -47,7 +47,7 @@ $$
 
 <small>where $i$ is a given subsurface layers, $i \pm 1/2$ represents the interface property between i and the adjacent subsurface layer, $n$ is the total number of subsurface layers and $\Delta$t is the stable integration timestep. </small>
 
-The stable integration timestap ($\Delta t_{\text{stable}}$) is determined according to the *Von Neumann* stability condition:
+The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Von Neumann* stability condition:
 
 <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
   
