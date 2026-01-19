@@ -21,10 +21,10 @@ The input precipitation data $(P)$ from the meteorological input file is adjuste
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-P (x,y) = P_{\text{ meteo}} \: \left[ 1 + (Z (x,y) - Z_{\text{ meteo}}) \: \Gamma \right] \: M
+P (x,y) = P_{\text{ ref}} \: \left[\: 1 + (Z (x,y) - Z_{\text{ ref}}) \: \Gamma_{\text{ lapse}} \: \right] \: M
 $$
 </div>
-<small>where .  </small>
+<small>where $P_{\text{ ref}}$ and $Z_{\text{ ref}}$ are the reference precipitation data and altitude of the input meteorological dataset, $Z (x,y)$ is the elevation of the spatial node, $\Gamma_{\text{ lapse}}$ is the linear precipitation lapse rate and $M$ is the precipitation multiplier. </small>
 
 The *FRICOSIPY* model then uses a linear logistic transfer function based on the nodal air temperature to differentiate between solid and liquid precipitation. The proportion of snowfall scales between 100 % at 0 °C and 0 % at 2 °C [(Hantel et al., 2000)](https://doi.org/10.1002/(SICI)1097-0088(200005)20:6<615::AID-JOC489>3.0.CO;2-0). Snow is accumulated into the uppermost subsurface layer; rain is directly routed as liquid into the [percolation scheme](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing).
 
