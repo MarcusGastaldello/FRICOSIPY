@@ -95,8 +95,8 @@ $$
     $$
     k = 
     \begin{cases} 
-    , & \rho < 156 \text{kg m}^{-3} \\ 
-    , & \rho < 156 \text{kg m}^{-3}
+    0.023 + 0.234 \rho, & \rho < 156 \text{kg m}^{-3} \\ 
+    0.138 - 1.01 \rho + 3.233 \rho^2, & 156 \leq \rho \leq 600 \text{kg m}^{-3}
     \end{cases}
     $$
 
