@@ -72,7 +72,7 @@ $$
 \frac{\delta T}{\delta t} = K \: \frac{\delta^{2} T}{\delta z^{2}} = \frac{k}{\rho \: c_p} \: \frac{\delta^{2} T}{\delta z^{2}}
 $$
 </div>
-<small>where $K$ is the thermal diffusivity (m$^2$ s$^{-1}$), $k$ is the thermal conductivity (W m$^{-1}$ K$^{-1}$), $\rho$ is the density (kg m$^{-3}) and $c_p$ is the specific heat capacity under constant pressure (J kg$^{-1}$ K$^{-1}$).  </small>
+<small>where $K$ is the thermal diffusivity (m$^2$ s$^{-1}$), $k$ is the thermal conductivity (W m$^{-1}$ K$^{-1}$), $\rho$ is the density (kg m$^{-3}$) and $c_p$ is the specific heat capacity under constant pressure (J kg$^{-1}$ K$^{-1}$).  </small>
   
 In the *FRICOSIPY* model, the heat equation is numerically solved using an explicit, second-order central difference scheme, constrained between two boundary conditions; 
 the derived surface temperature $(T_{s})$ from the resolution of the [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) (*Dirichlet*) and a basal / geomethermal heat flux (*Neumann*).
