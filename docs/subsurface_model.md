@@ -46,6 +46,17 @@ By default, the density of fresh snow layers $(\rho_{\text{ snow}})$ is defined 
 
 ??? "**$(i)$ Vionnet et al. (2012)**"
 
+    <br>
+    Using the parameterisation of [Vionnet et al (2012)](https://doi.org/10.5194/gmd-5-773-2012), the density of fresh snow $(\rho_{\text{ snow}})$ is emperically-derived based on air temperature $(T_a)$ and wind speed $(V)$:
+    
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    \rho_{\text{ snow}} = \text{min} \left[ \: 109.0 + 6.0 \: T_a + 26.0 \: V^2 , 50.0 \: \right]
+    $$
+    </div>
+
+
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Percolation & Refreezing
