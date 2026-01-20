@@ -51,10 +51,10 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
     
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \rho_{\text{ fresh snow}} = \text{max} \left[ \: 109.0 + 6.0 \: T_a + 26.0 \: V^2 , 50.0 \: \right]
+    \rho_{\text{ fresh snow}} = \text{max} \left[ \: 109.0 + 6.0 \: T_a + 26.0 \: V^2 , \rho_{\text{ min}} \: \right]
     $$
     </div>
-
+    <small>where $\rho_{\text{ min}} = 50$ kg m$^{-3}$ is the minimum fresh snow density. </small>
 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
