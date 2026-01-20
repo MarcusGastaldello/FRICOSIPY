@@ -5,7 +5,7 @@ og_description: Explanation of the processes and parameterisations governing the
 
 # Multi-layer Subsurface Model
 
-In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrangian* re-meshing algorithm: layers can translate vertically along the depth axis $(z)$ following mass exchange at the surface. Subsurface layers are regulated by a user-defined, fixed height threshold $(h_{max})$, upon exceeding which a new surface layer is created for further accumulation and all existing layers are shifted downwards.
+In the *FRICOSIPY* model, the subsurface is discretised according to an *Lagrangian* re-meshing algorithm: layers can translate vertically along the depth axis $(z)$ following mass exchange at the surface. Subsurface layers are regulated by a user-defined, fixed height threshold $(h_{\text{max}})$, upon exceeding which a new surface layer is created for further accumulation and all existing layers are shifted downwards.
 
 Subsurface layers are defined according to their volumetric fraction of ice $(\phi_{\text{ ice}})$, water $(\phi_{\text{ water}})$, and air  $(\phi_{\text{ air}})$, with most of their inherent physical properties being derived from this volumetric composition.
 
