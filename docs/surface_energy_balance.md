@@ -247,7 +247,18 @@ $$
 
 ### Surface Roughness Parameterisation
 
-??? "**$(i)$ Moelg et al. (2009)**"
+??? "**$(i)$ Moelg et al. (2012)**"
+
+    <br>
+    Using the parameterisation of [Moelg et al. (2012)](https://doi.org/10.5194/tc-6-1445-2012), the evolution of the surface roughness <br> 
+    $(\mu)$ is modelled as an linearly increasing function of time $t$ since the last significant snowfall event.
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    \alpha = \alpha_{\text{firn}} + \left[ (\alpha_{\text{fresh snow}} - \alpha_{\text{firn}}) \: e^{-\frac{t}{t*}} \right]
+    $$
+    </div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\alpha_{\text{fresh snow}} = 0.85$ and $\alpha_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic decay timescale parameter (days).</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
