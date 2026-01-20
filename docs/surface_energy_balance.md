@@ -30,7 +30,7 @@ However, since the surface temperature of a glacier is physically constrained to
   </div>
 
   $$
-  SW_{net} \pm Q_{\text{sensible}} \pm Q_{\text{latent}} \pm LW_{\text{net}}
+  SW_{\text{net}} \pm Q_{\text{sensible}} \pm Q_{\text{latent}} \pm LW_{\text{net}}
   + Q_{\text{rain}} \pm Q_{\text{subsurface}} = Q_{\text{melt}}
   $$
 </div>
