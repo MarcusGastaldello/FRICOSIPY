@@ -51,7 +51,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ snow}})$ is defined 
     
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \rho_{\text{ snow}} = \text{min} \left[ \: 109.0 + 6.0 \: T_a + 26.0 \: V^2 , 50.0 \: \right]
+    \rho_{\text{ snow}} = \text{max} \left[ \: 109.0 + 6.0 \: T_a + 26.0 \: V^2 , 50.0 \: \right]
     $$
     </div>
 
