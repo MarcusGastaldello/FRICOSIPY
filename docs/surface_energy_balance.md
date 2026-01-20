@@ -255,10 +255,11 @@ $$
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    min(surface_roughness_fresh_snow + surface_roughness_timescale * hours_since_snowfall, surface_roughness_firn)
+
+    \mu = \text{min} \left[ \: \mu_{\text{ fresh snow}} t \: t* , \mu_{\text{ firn}} \: \right]
     $$
     </div>
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\alpha_{\text{fresh snow}} = 0.85$ and $\alpha_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic surface roughness timescale parameter (mm h$^{-1$}).</div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\mu_{\text{fresh snow}} = 0.85$ and $\mu_{\text{firn}} = 0.52$ are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic surface roughness timescale parameter (mm h$^{-1$}).</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
