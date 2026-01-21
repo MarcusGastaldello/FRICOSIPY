@@ -84,6 +84,10 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
+!!! note
+
+    The parameterisations for hydraulic conductivity $(\Theta)$ are only applicable for users using the Darcy [(Hirashima et al., 2010)] percolation scheme.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Thermal Diffusion
