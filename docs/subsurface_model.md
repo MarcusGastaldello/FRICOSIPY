@@ -65,6 +65,15 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 
 
+
+
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Irreducible Water Content Parameterisations
+
+??? "**$(i)$ Coleou et al. (1998)**"
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Hydraulic Conductivitiy Parameterisations
