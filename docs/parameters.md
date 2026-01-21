@@ -14,10 +14,10 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 ### Surface Energy Balance
 
-| Parameterisation | Default | Alternatives |
+| Parameterisation | Default method | Alternatives methods |
 |---|---|---|
 | **Surface albedo** | [Oerlemans & Knapp (1998)](https://doi.org/10.3189/S0022143000002574) | [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) | 
-| **Penetrating radiation** | [Bintanja & van den Broeke (1998)](https://doi.org/10.1175/1520-0450(1995)034<0902:TSEBOA>2.0.CO;2), | (*disabled*) | 
+| **Penetrating radiation** | [Bintanja & van den Broeke (1998)](https://doi.org/10.1175/1520-0450(1995)034<0902:TSEBOA>2.0.CO;2) | *(disabled)* | 
 | **Surface roughness** |  |  | 
 | **Saturation vapour pressure** |  |  | 
 | **Surface temperature solver** |  |  | 
