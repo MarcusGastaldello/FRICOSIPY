@@ -18,9 +18,9 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 |---|---|---|
 | **Surface albedo** | [Oerlemans & Knapp (1998)](https://doi.org/10.3189/S0022143000002574) | [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) | 
 | **Penetrating radiation** | [Bintanja & van den Broeke (1998)](https://doi.org/10.1175/1520-0450(1995)034<0902:TSEBOA>2.0.CO;2) | *(disabled)* | 
-| **Surface roughness** |  |  | 
-| **Saturation vapour pressure** |  |  | 
-| **Surface temperature solver** |  |  | 
+| **Surface roughness** | [Moelg et al. (2012)](https://doi.org/10.5194/tc-6-1445-2012) | *(constant)* | 
+| **Saturation vapour pressure** | [Sonntag (1994)](https://doi.org/10.1127/metz/3/1994/51) |  | 
+| **Surface temperature solver** | *Newton* | *L-BFGS-B* / *SLSQP* | 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
