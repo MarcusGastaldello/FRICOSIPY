@@ -85,6 +85,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
 <br>
+
 ---
 
 !!! note
