@@ -7,6 +7,15 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 ## Model Parameterisations
 
+### Surface Energy Balance
+
+| Parameterisation | Default | Alternatives |
+|:---:|:---:|:---:|
+| 1086500 | 2633800 | 45.92925 | 
+| 1086500 | 2633850 | 45.93039 | 
+
+### Multi-layer Subsurface Model
+
 ## Model Parameters
 
 ### General Model Parameters
