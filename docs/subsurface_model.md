@@ -286,7 +286,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
     $$
-    
+    \frac{1}{\rho_s(z,t)} \frac{d\rho_s(z,t)}{dt} = \frac{M_s(z,t) g}{\eta(z,t)} + c_1 \exp \left[ -c_2(T_m - T_s) - c_3 \max(0, \rho_s(z,t) - \rho_0) \right]
     $$
 
     $$
