@@ -88,9 +88,8 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
-<br>
+    <br>
 
----
 
 !!! note
 
