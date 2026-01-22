@@ -41,6 +41,10 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
+!!! note
+
+    It is important to ensure that the `station_altitude` parameter is correctly set to the altitude of the weather station where the input meteorological data originates from. The meteorological data will be adjusted based on the difference between this altitude and the nodal elevation data in the input static file.
+
 ### Physical Processes Parameters
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
