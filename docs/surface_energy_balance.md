@@ -163,7 +163,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 <br style="clear: both;" />
 
-The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient $(\Delta T)$ between the atmosphere $(T_a)$ and the glacier surface $(T_a)$.
+The sensible heat flux represents the transfer of heat energy and is driven by the temperature gradient $(\Delta T)$ between the atmosphere $(T_a)$ and the glacier surface $(T_s)$.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
