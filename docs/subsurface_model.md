@@ -246,10 +246,10 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     \frac{d\rho}{dt} = C \: \: c_{\text{ lig}} \: g \:(\rho - \rho_{\text{ ice}}) \: \text{exp} \left( -\frac{E_{\text{c}}}{RT} + \frac{E_{\text{g}}}{R\overline{T}} \right)
     $$
     $$
-    c_{\text{ lig}} \: (C,\rho) =
-    \begin{cases}
-    0.0991 - 0.0103 \:\: \text{log}(C), & \rho \lt 550 \: \text{kg\:m}^{-3} \\
-    0.0701 - 0.0086 \:\: \text{log}(C), & \rho \geq 550 \: \text{kg\:m}^{-3}
+    c_{\text{lig}}(C, \rho) = 
+    \begin{cases} 
+    0.0991 - 0.0103 \ln(C), & \rho \lt 550 \text{ kg m}^{-3} \\
+    0.0701 - 0.0086 \ln(C), & \rho \geq 550 \text{ kg m}^{-3} 
     \end{cases}
     $$
     </div>
