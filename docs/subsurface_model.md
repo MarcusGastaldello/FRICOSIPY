@@ -68,13 +68,15 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 ### Preferential Percolation Parameterisations
 
+By default, whether using the bucket scheme or *Darcy*-governed flow, percolation in the *FRICOSIPY* model adheres to a simple, uniform / homogeneous wetting front. However, in reality, preferential flow can occur where water rapidly penetrates deep into the snowpack in localised columns. This has the potential to advect heat energy to great depths following the latent energy release of refreezing.
+
 ??? "**$(i)$ Marchenko et al. (2017)**"
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Irreducible Water Content Parameterisations
 
-??? "**$(i)$ Coleou et al. (1998)**"
+??? "**$(i)$ Coléou and Lesaffre (1998)**"
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
