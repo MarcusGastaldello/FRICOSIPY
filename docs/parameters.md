@@ -32,14 +32,14 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 |---|---|---|
 | [**Precipitation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#precipitation) | Standard | Three-phase anomaly|
 | [**Fresh snow density**]() | Constant | [Vionnet et al. (2012)](https://doi.org/10.5194/gmd-5-773-2012) |
-| [**Thermal conductivity**]() | Bulk-volumetric | [Sturm (1997)](https://doi.org/10.3189/S0022143000002781) or <br> [Calonne et al. (2019)](https://doi.org/10.1029/2019GL085228) |
-| [**Specific heat capacity**]() | Bulk-volumetric | [Yen (1981)](https://apps.dtic.mil/sti/citations/ADA103734) |
-| [**Standard percolation**]() | Bucket | [Darcy (Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) |
-| [**Preferential percolation**]() | Disabled | [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) |
-| [**Hydraulic conductivity**]() | [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012) | [Shimzu (1970)](https://hdl.handle.net/2115/20234) |
-| [**Irreducible water content**]() | [Coléou and Lesaffre (1998)](https://doi.org/10.3189/1998AoG26-1-64-68)| | Constant |
-| [**Dry densification**]() | [Anderson (1976)]() | [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) |
-| [**Snow metamorphism**]() | [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002) | *(None)* | 
+| [**Thermal conductivity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#thermal-conductivitiy-parameterisations) | Bulk-volumetric | [Sturm (1997)](https://doi.org/10.3189/S0022143000002781) or <br> [Calonne et al. (2019)](https://doi.org/10.1029/2019GL085228) |
+| [**Specific heat capacity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#specific-heat-capacity-parameterisations) | Bulk-volumetric | [Yen (1981)](https://apps.dtic.mil/sti/citations/ADA103734) |
+| [**Standard percolation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing) | Bucket | [Darcy (Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) |
+| [**Preferential percolation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#preferential-percolation-parameterisations) | Disabled | [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) |
+| [**Hydraulic conductivity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#hydraulic-conductivitiy-parameterisations) | [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012) | [Shimzu (1970)](https://hdl.handle.net/2115/20234) |
+| [**Irreducible water content**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#irreducible-water-content-parameterisations) | [Coléou and Lesaffre (1998)](https://doi.org/10.3189/1998AoG26-1-64-68)| | Constant |
+| [**Dry densification**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#firn-densification-parameterisations) | [Anderson (1976)]() | [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) |
+| [**Snow metamorphism**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#snow-metamorphism-parameterisations) | [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002) | *(None)* | 
 
 !!! note
     If you have any reccomendations for improved or alternative parameterisations, please contact the model developers. The modular design of *FRICOSIPY* means that it is relatively straightforward to add new parameterisations into the model for upcoming releases.
