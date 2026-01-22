@@ -96,6 +96,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     </div>
     <small>where .</small>
 
+<br>
 !!! note
 
     The parameterisations for hydraulic conductivity $(\Theta)$ are only applicable for users using the Darcy [(Hirashima et al., 2010)] percolation scheme.
