@@ -294,7 +294,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
     
     </div>
-    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$). </small>
+    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$), $T$ is the current layer temperature (K), $T_m = 273.16$ K is the melting point temperature,  . </small>
     
 ---
 
@@ -317,7 +317,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     \end{cases}
     $$
     </div>
-    <small> where $C$ is the accumulation rate (mm yr$^{-1}$), $\rho$ is the layer density (kg m$^{-3}$), $T$ is the current layer temperature ($^\circ$C), $\overline{T}$ is the average layer temperature of the preceding year ($^\circ$C), $R$ = 8.314 J      mol$^{-1}$ K$^{-1}$ is the universal gas constant and $E_{\text{c}}$ = 60 kJ mol$^{-1}$ and $E_{\text{g}}$ = 42.4 kJ mol$^{-1}$ are the activation energies associated with creep by lattice diffusion and grain growth respectively. </small>
+    <small> where $C$ is the accumulation rate (mm yr$^{-1}$), $\rho$ is the layer density (kg m$^{-3}$), $T$ is the current layer temperature (K), $\overline{T}$ is the average layer temperature of the preceding year (K), $R$ = 8.314 J      mol$^{-1}$ K$^{-1}$ is the universal gas constant and $E_{\text{c}}$ = 60 kJ mol$^{-1}$ and $E_{\text{g}}$ = 42.4 kJ mol$^{-1}$ are the activation energies associated with creep by lattice diffusion and grain growth respectively. </small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
