@@ -281,7 +281,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 ??? "**$(i)$ Anderson (1976)**"
 
     <br>
-    The parameterisation of [Anderson (1976)](https://doi.org/10.3189/1998AoG26-1-64-68) is a semi-empirical method that calculates the rate of densification based on the overburden pressure of the snowpack and thermal metamorphosis (snow settling):
+    The parameterisation of [Anderson (1976)](https://doi.org/10.3189/1998AoG26-1-64-68) is a semi-empirical method that calculates the rate of densification based on the overburden pressure of the snowpack and snow metamorphosis:
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
@@ -294,11 +294,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
     
     </div>
-    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$), $T$ is the current layer temperature (K), $T_m = 273.16$ K is the melting point temperature, \rho is the layer density (kg m$^{-3}$), $c_1 = 2.8 \times 10^{-6}$ s$^{-1}$, 
-    
-    
-    
-    . </small>
+    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$), $T$ is the current layer temperature (K), $T_m = 273.16$ K is the melting point temperature, $\rho$ is the layer density (kg m$^{-3}$), $c_1 = 2.8 \times 10^{-6}$ s$^{-1}$, $c_2 = 0.042$ K$^{-1}$,     $c_3 = .046$ m$^3$ kg$^{-1}$, $c_4 = 0.081$ K$^{-1}$, $c_5 = 0.018$ m$^3$ kg$^{-1}$ and $\eta_0 = 3.7 \times 10^7$kg m$^{-1}$ s$^{-1}$.</small>
     
 ---
 
