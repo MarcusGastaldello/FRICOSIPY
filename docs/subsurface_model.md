@@ -94,11 +94,12 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(i)$ Coléou and Lesaffre (1998)**"
 
     <br>
+    Using the parameterisation of [Coléou and Lesaffre (1998)](https://doi.org/10.3189/1998AoG26-1-64-68), the irreducible water content $(\theta_{\text{ irr}})$ is empirically-derived based on observational data.
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
     $$
-    \theta_{\text{irr}} = 
+    \theta_{\text{ irr}} = 
     \begin{cases}
     9.0264 + 0.0099 \: \frac{(1 \: - \: \phi_{\text{ ice}})}{\phi_{\text{ ice}}},& \phi_{\text{ ice}} \leq 0.23 \\
     0.08 - 0.1023 \: (\phi_{\text{ ice}}-0.03)                         ,& 0.23 > \phi_{\text{ ice}} \leq 0.812\\
