@@ -72,6 +72,20 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 ??? "**$(i)$ Marchenko et al. (2017)**"
 
+    <br>
+    The statistical preferential percolation scheme of [Vionnet et al (2012)](https://doi.org/10.3389/feart.2017.00016) instantly distributes all surface water in accordance with a normal Probability Density Function (PDF) up to a pre-defined characteristic preferential percolation depth ($z_{\text{lim}}$)
+  
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    \text{PDF}_{\text{normal}}(z,z_{\text{lim}}) = 2 \left[ \frac{\text{exp}\left( -\frac{z^2}{2 \sigma^2} \right)}{\sigma  \sqrt{2 \pi}} \right]
+    $$
+    
+    $$
+    \sigma = z_{\text{lim}}\: / \: 3
+    $$
+    </div>
+    <small>where $\rho_{\text{ min}} = 50$ kg m$^{-3}$ is the minimum fresh snow density. </small>
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Irreducible Water Content Parameterisations
