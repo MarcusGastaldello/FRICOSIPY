@@ -78,14 +78,14 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    \text{PDF}_{\text{normal}}(z,z_{\text{lim}}) = 2 \left[ \frac{\text{exp}\left( -\frac{z^2}{2 \sigma^2} \right)}{\sigma  \sqrt{2 \pi}} \right]
+    \text{PDF}_{\text{normal}}(z,z_{\text{ lim}}) = 2 \left[ \frac{\text{exp}\left( -\frac{z^2}{2 \sigma^2} \right)}{\sigma  \sqrt{2 \pi}} \right]
     $$
     
     $$
-    \sigma = z_{\text{lim}}\: / \: 3
+    \sigma = z_{\text{ lim}}\: / \: 3
     $$
     </div>
-    <small>where $\rho_{\text{ min}} = 50$ kg m$^{-3}$ is the minimum fresh snow density. </small>
+    <small>where $\sigma$ is the standard deviation of the probability density function and $z_{\text{ lim}}$ represents the pre-defined characteristic preferential percolation depth (m). </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
