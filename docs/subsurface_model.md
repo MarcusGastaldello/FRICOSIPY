@@ -255,7 +255,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
     
     $$
-    \frac{d\rho}{dt} = C \: \: c_{\text{ lig}} \: g \:(\rho - \rho_{\text{ ice}}) \: \text{exp} \left( \underbrace{-\frac{E_{\text{c}}}{RT}}_{\text{creep}} + \underbrace{\frac{E_{\text{g}}}{R\overline{T}}}_{\text{grain growth}} \right)
+    \frac{d\rho}{dt} = C \: \: c_{\text{ lig}} \: g \:(\rho - \rho_{\text{ ice}}) \: \text{exp} \left(-\frac{E_{\text{c}}}{RT} + \frac{E_{\text{g}}}{R\overline{T}} \right)
     $$
     
     $$
