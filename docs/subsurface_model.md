@@ -239,7 +239,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 ??? "**$(ii)$ Ligtenberg et al. (2011)**"
 
     <br>
-    The parameterisation of [Ligtenberg et al. (2011)]() is an enhancement of the semi-empirical method of [Arthern et al. (2010)](), based on the processes of sintering and lattice-diffusion creep of consolidated ice, that adds a dependence on the local accumulation rate $(C)$:
+    The parameterisation of [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) is an enhancement of the semi-empirical method of [Arthern et al. (2010)](https://doi.org/10.1029/2009JF001306), based on the processes of sintering and lattice-diffusion creep of consolidated ice, that adds a dependence on the local accumulation rate $(C)$:
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     $$
