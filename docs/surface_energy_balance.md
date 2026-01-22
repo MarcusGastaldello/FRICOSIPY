@@ -182,7 +182,7 @@ $$
 
 <br style="clear: both;" />
 
-The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient $(\Delta q)$ between the atmosphere and the glacier surface.
+The latent heat flux represents the transfer of latent energy (associated with phase changes) and is driven by the moisture gradient $(\Delta q)$ between the atmosphere $(q_a)$ and the glacier surface $(q_s)$.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
