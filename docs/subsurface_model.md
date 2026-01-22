@@ -89,7 +89,12 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
     <br>
-
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    \Theta = 
+    $$
+    </div>
+    <small>where .</small>
 
 !!! note
 
