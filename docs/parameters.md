@@ -41,8 +41,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | [**Dry densification**]() | [Anderson (1976)]() | [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) |
 | [**Snow metamorphism**]() | [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002) | *(None)* | 
 
-!!!
-    
+!!! note
     If you have any reccomendations for improved or alternative parameterisations, please contact the model developers. The modular design of *FRICOSIPY* means that it is relatively straightforward to add new parameterisations into the model for upcoming releases.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
