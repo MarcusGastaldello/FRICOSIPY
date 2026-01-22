@@ -280,8 +280,9 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 
 ??? "**$(i)$ Anderson (1976)**"
 
-    The parameterisation of [Anderson (1976)](https://doi.org/10.3189/1998AoG26-1-64-68) is a semi-empirical method that calculates the rate of densification based on the overburden pressure of the snowpack and thermal metamorphosis (snow settling):
     <br>
+    The parameterisation of [Anderson (1976)](https://doi.org/10.3189/1998AoG26-1-64-68) is a semi-empirical method that calculates the rate of densification based on the overburden pressure of the snowpack and thermal metamorphosis (snow settling):
+    
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
     $$
@@ -289,11 +290,11 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
 
     $$
-    \eta (z,t) = \eta_0 \: \text{exp} \left[ c_4 \: () + c_5 \: \rho \right]
+    \eta \: (z,t) = \eta_0 \:\: \text{exp} \left[ c_4 \: () + c_5 \: \rho \: \right]
     $$
     
     </div>
-    <small>where. </small>
+    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$). </small>
     
 ---
 
