@@ -36,7 +36,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | [**Specific heat capacity**]() | Bulk-volumetric | [Yen (1981)](https://apps.dtic.mil/sti/citations/ADA103734) |
 | [**Standard percolation**]() | Bucket | [Darcy (Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) |
 | [**Preferential percolation**]() | Disabled | [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) |
-| [**Hydraulic conductivity**]() | | |
+| [**Hydraulic conductivity**]() | [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012) | [Shimzu (1970)](https://hdl.handle.net/2115/20234) |
 | [**Irreducible water content**]() | | |
 | [**Dry densification**]() | [Anderson (1976)]() | [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) |
 | [**Snow metamorphism**]() | [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002) | *(None)* | 
