@@ -248,7 +248,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
     c_{\text{ lig}} \: (C,\rho) =
     \begin{cases}
-    0.0991 - 0.0103 \:\: \text{log}(C), & \rho    < 550 \: \text{kg\:m}^{-3} \\
+    0.0991 - 0.0103 \:\: \text{log}(C), & \rho \lt 550 \: \text{kg\:m}^{-3} \\
     0.0701 - 0.0086 \:\: \text{log}(C), & \rho \geq 550 \: \text{kg\:m}^{-3}
     \end{cases}
     $$
