@@ -37,7 +37,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | [**Standard percolation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing) | Bucket | [Darcy (Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) |
 | [**Preferential percolation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#preferential-percolation-parameterisations) | Disabled | [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) |
 | [**Hydraulic conductivity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#hydraulic-conductivitiy-parameterisations) | [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012) | [Shimzu (1970)](https://hdl.handle.net/2115/20234) |
-| [**Irreducible water content**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#irreducible-water-content-parameterisations) | [Coléou and Lesaffre (1998)](https://doi.org/10.3189/1998AoG26-1-64-68)| | Constant |
+| [**Irreducible water content**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#irreducible-water-content-parameterisations) | [Coléou and Lesaffre (1998)](https://doi.org/10.3189/1998AoG26-1-64-68)| Constant |
 | [**Dry densification**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#firn-densification-parameterisations) | [Anderson (1976)]() | [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011) |
 | [**Snow metamorphism**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#snow-metamorphism-parameterisations) | [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002) | *(None)* | 
 
