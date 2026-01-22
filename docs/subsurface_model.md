@@ -63,6 +63,11 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Advanced Percolation Methods
+
+??? "**$(i)$ Darcy (Hirashima et al., 2010)**"
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
