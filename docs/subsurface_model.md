@@ -286,7 +286,7 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
     $$
-    \frac{d\rho}{dt} = \left[ \frac{M_s g}{\eta} + c_1 \exp \left[ -c_2 \: (T_m - T_s) - c_3 \max \: (0, \rho - \rho_0 \:) \right] \right]
+    \frac{d\rho}{dt} = \left[ \frac{M_s g}{\eta} + c_1 \exp \left[ -c_2 \: (T_m - T_s) - c_3 \max \: (0, \rho - \rho_0 \:) \right] \right] \: \rho
     $$
 
     $$
@@ -294,7 +294,11 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
     $$
     
     </div>
-    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$), $T$ is the current layer temperature (K), $T_m = 273.16$ K is the melting point temperature,  . </small>
+    <small>where $M_s$ is the overlying snow mass, $\eta$ is the snow viscosity (kg m$^{-1}$ s$^{-1}$), $T$ is the current layer temperature (K), $T_m = 273.16$ K is the melting point temperature, \rho is the layer density (kg m$^{-3}$), $c_1 = 2.8 \times 10^{-6}$ s$^{-1}$, 
+    
+    
+    
+    . </small>
     
 ---
 
