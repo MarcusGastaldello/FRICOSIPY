@@ -76,6 +76,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     The statistical preferential percolation scheme of [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) instantly distributes all surface water in accordance with a normal Probability Density Function (PDF) up to a pre-defined characteristic preferential percolation depth ($z_{\text{lim}}$)
       
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    
     $$
     \text{PDF}_{\text{normal}}(z,z_{\text{lim}}) = 2 \left[ \frac{\text{exp}\left( -\frac{z^2}{2 \sigma^2} \right)}{\sigma  \sqrt{2 \pi}} \right]
     $$
