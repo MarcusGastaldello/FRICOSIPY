@@ -9,6 +9,7 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 ## Model Parameterisations
 
+The *FRICOSIPY* model enables the user to customise the parameterisations used to model key physical processes.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
