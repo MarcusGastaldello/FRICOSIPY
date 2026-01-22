@@ -240,6 +240,8 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 
     <br>
 
+    \frac{d\rho}{dt} = C \: c_{\text{lig}} \: g (\rho - \rho_{\text{ice}}) \: \text{exp} \left( -\frac{E_{\text{c}}}{RT} + \frac{E_{\text{g}}}{R\overline{T}} \right)
+
     <small> where $C$ is the accumulation rate (mm yr$^{-1}$), $\rho$ is the layer density (kg m$^{-3}$), $T$ is the current layer temperature ($^\circ$C), $\overline{T}$ is the average layer temperature of the preceding year ($^\circ$C), $R$ = 8.314 J      mol$^{-1}$ K$^{-1}$ is the universal gas constant and $E_{\text{c}}$ = 60 kJ mol$^{-1}$ and $E_{\text{g}}$ = 42.4 kJ mol$^{-1}$ are the activation energies associated with creep by lattice diffusion and grain growth respectively. </small>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
