@@ -93,6 +93,22 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 ??? "**$(i)$ Coléou and Lesaffre (1998)**"
 
+    <br>
+    
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
+    
+    $$
+    \theta_{\text{irr}} = 
+    \begin{cases}
+    9.0264 + 0.0099 \frac{(1-\phi_{\text{ice}})}{\phi_{\text{ice}}},& \phi_{\text{ice}} \leq 0.23 \\
+    0.08 - 0.1023 (\phi_{\text{ice}}-0.03)                         ,& 0.23 > \phi_{\text{ice}} \leq 0.812\\
+    0                                                              ,& \phi_{\text{ice}} > 0.812
+    \end{cases}
+    $$
+    
+    </div>
+    <small>where .</small>
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Hydraulic Conductivitiy Parameterisations
