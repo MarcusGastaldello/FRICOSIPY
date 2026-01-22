@@ -108,7 +108,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     $$
     
     </div>
-    <small>where .</small>
+    <small>where $(\theta_{\text{ ice}})$ is the volumetric ice fraction.</small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
