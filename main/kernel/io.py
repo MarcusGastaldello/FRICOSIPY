@@ -207,7 +207,7 @@ class IOClass:
         self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
         
         ## (Multi-layer Subsurface Model):
-        self.RESULT-attrs['Precipitation_method'] = precipitation_method
+        self.RESULT.attrs['Precipitation_method'] = precipitation_method
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
