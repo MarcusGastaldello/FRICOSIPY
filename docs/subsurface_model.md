@@ -138,12 +138,12 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(\Theta)$ is empirically-derived based on 3-dimensional image-based computations.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \Theta_{\text{ sat}} = 3.0 \: \left( \frac{d}{2} \right)^2 \: \exp (-0.0130 \rho)
+    \Theta_{\text{ sat}} = 3.0 \: \left( \frac{d}{2} \right)^2 \: \exp (-0.0130 \: \rho)
     $$
     </div>
     <small>where $d$ is the snow grain size (mm) and $\rho$ is the subsurface layer density (kg m$^{-3}$).</small>
 
-<br>
+---
 !!! note
 
     The parameterisations for hydraulic conductivity $(\Theta_{\text{ sat}})$ are only applicable for users using the Darcy [(Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) percolation scheme.
