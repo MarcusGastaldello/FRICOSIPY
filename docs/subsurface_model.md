@@ -361,6 +361,8 @@ Firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow
 
 ### Snow Metamorphism Parameterisations
 
+Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow crystals evolve over time, expressed in the *FRICOSIPY* model by the growth in snow grain size.
+
 ??? "**$(i)$ Katsushima et al. (2009)**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
