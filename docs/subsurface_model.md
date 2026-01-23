@@ -163,7 +163,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Thermal Diffusion
 
-![Alt text](icons/Template.png){width="125px" align=left}
+![Alt text](icons/Diffusion.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
