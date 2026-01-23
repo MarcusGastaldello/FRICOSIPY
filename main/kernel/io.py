@@ -255,15 +255,15 @@ class IOClass:
             self.RESULT.attrs['Albedo_decay_timescale_threshold'] = albedo_decay_timescale_threshold
         elif albedo_method == 'Oerlemans98':
             self.RESULT.attrs['Albedo_mod_snow_aging'] = albedo_decay_timescale
-        if penetrating_method == 'Bintanja95':
+        if penetrating_radiation_method == 'Bintanja95':
             self.RESULT.attrs['Extinction_coeff_snow'] = extinction_coeff_snow
             self.RESULT.attrs['Extinction_coeff_ice'] = extinction_coeff_ice
-        if roughness_method == 'Moelg12':
+        if surface_roughness_method == 'Moelg12':
             self.RESULT.attrs['Surface_roughness_fresh_snow'] = surface_roughness_fresh_snow
             self.RESULT.attrs['Surface_roughness_ice'] = surface_roughness_ice
             self.RESULT.attrs['Surface_roughness_firn'] = surface_roughness_firn
             self.RESULT.attrs['Surface_roughness_timescale'] = surface_roughness_timescale
-        elif roughness_method == 'constant':
+        elif surface_roughness_method == 'constant':
             self.RESULT.attrs['Constant_fresh_snow_density'] = constant_surface_roughness
         if preferential_percolation_method == 'Marchenko17':
             self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
