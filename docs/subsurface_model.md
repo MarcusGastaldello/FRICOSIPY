@@ -15,7 +15,9 @@ Subsurface layers are defined according to their volumetric fraction of ice $(\p
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Precipitation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
+
+![Alt text](icons/Precipitation.png){width="125px" align=left}
 
 The input precipitation data $(P_{\text{ ref}})$ from the meteorological input file is adjusted to each spatial node $(x,y)$ according to a linear, elevation-dependant precipitation lapse rate $(\Gamma_{\text{ lapse}})$ and a precipitation multiplier $(M)$.
 
