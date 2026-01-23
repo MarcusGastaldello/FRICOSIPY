@@ -15,7 +15,7 @@ Subsurface layers are defined according to their volumetric fraction of ice $(\p
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span>  Shortwave Radiation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #F2F2F2; border: 2px solid #404040; border-radius: 4px; "></span>  Precipitation
 
 ![Alt text](icons/Precipitation.png){width="125px" align=left}
 
