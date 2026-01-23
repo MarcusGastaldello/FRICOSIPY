@@ -277,6 +277,7 @@ $$
     c_p (T) = 152.2 + 7.122 \: T
     $$
     </div>
+    <small>where $T$ is the subsurface layer temperature (K). </small>
     
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
