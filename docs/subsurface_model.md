@@ -66,7 +66,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Percolation & Refreezing
 
-![Alt text](icons/Precipitation.png){width="125px" align=left}
+![Alt text](icons/Template.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -161,7 +161,11 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Thermal Diffusion
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Thermal Diffusion
+
+![Alt text](icons/Template.png){width="125px" align=left}
+
+<br style="clear: both;" />
 
 Thermal diffusion, the process by which heat energy moves through the subsurface, is governed by the *Fourier* heat equation:
 
@@ -292,9 +296,13 @@ $$
     
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Dry Firn Densification
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Firn Densification
 
-Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow transforms over time into glacial ice due to overburden pressure and thermal metamorphosis. This excludes the effects of subsurface liquid refreezing, which is already accounted for in the [refreezing module](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing).
+![Alt text](icons/Template.png){width="125px" align=left}
+
+<br style="clear: both;" />
+
+Firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow transforms over time into glacial ice due to overburden pressure and thermal metamorphosis. This excludes the effects of subsurface liquid refreezing, which is already accounted for in the [refreezing module](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#percolation-refreezing).
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -343,7 +351,11 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Snow Metamorphism
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Snow Metamorphism
+
+![Alt text](icons/Template.png){width="125px" align=left}
+
+<br style="clear: both;" />
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
