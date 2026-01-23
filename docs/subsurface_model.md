@@ -154,7 +154,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 
 ## Thermal Diffusion
 
-Thermal diffusion is governed by the *Fourier* heat equation:
+Thermal diffusion, the process by which heat energy moves through the subsurface, is governed by the *Fourier* heat equation:
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
