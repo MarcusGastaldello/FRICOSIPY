@@ -128,7 +128,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     \Theta = 7.7 \times 10^{-4} \: \frac{d^2 g}{\nu} \: \exp \: (-7.8 \times 10^{-3} \: \: \rho)
     $$
     </div>
-    <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
+    <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration, $\nu = 1.8 \times 10^{-6}$ m$^{-2}$ s^{-1} and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
 
 ---
 
