@@ -343,12 +343,3 @@ Dry firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which 
 ??? "**$(i)$ Katsushima et al. (2009)**"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-## Exemplar Temperature-Depth Profile
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-## Exemplar Density-Depth Profile
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
