@@ -63,7 +63,12 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Percolation & Refreezing
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Percolation & Refreezing
+
+![Alt text](icons/Precipitation.png){width="125px" align=left}
+
+<br style="clear: both;" />
 
 The *FRICOSIPY* model employs a standard *bucket approach* percolation scheme whereby liquid water filters down into subsequent layers upon exceeding the layer saturation capacity – their irreducible water content $(\phi_{\text{ irr}})$. <br>
 
