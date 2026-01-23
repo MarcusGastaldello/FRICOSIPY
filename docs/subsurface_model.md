@@ -353,7 +353,7 @@ Firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Snow Metamorphism
 
-![Alt text](icons/Template.png){width="125px" align=left}
+![Alt text](icons/Metamorphism.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
