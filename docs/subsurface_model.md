@@ -122,10 +122,10 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(i)$ Shimizu (1970)**"
 
     <br>
-    Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(\Theta)$ is empirically derived based on laboratory experiments.
+    Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(\Theta_{\text{ sat}})$ is empirically derived based on laboratory experiments.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \Theta = 7.7 \times 10^{-4} \: \frac{d^2 g}{\nu} \: \exp \: (-7.8 \times 10^{-3} \: \: \rho)
+    \Theta_{\text{ sat}} = 7.7 \times 10^{-4} \: \frac{d^2 g}{\nu} \: \exp \: (-7.8 \times 10^{-3} \: \: \rho)
     $$
     </div>
     <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration, $\nu = 1.8 \times 10^{-6}$ m$^{-2}$ s$^{-1}$ is the kinematic viscosity of water at 0$^{\circ}$C and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
@@ -138,15 +138,15 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(\Theta)$
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \Theta = 3.0 \: ( \frac{d}{2})^2 \: \exp
+    \Theta_{\text{ sat}} = 3.0 \: \left( \frac{d}{2} \right)^2 \: \exp (-0.0130 \rho)
     $$
     </div>
-    <small>where .</small>
+    <small>where $d$ is the snow grain size (mm) and $\rho$ is the subsurface layer density (kg m$^{-3}$).</small>
 
 <br>
 !!! note
 
-    The parameterisations for hydraulic conductivity $(\Theta)$ are only applicable for users using the Darcy [(Hirashima et al., 2010)] percolation scheme.
+    The parameterisations for hydraulic conductivity $(\Theta_{\text{ sat}})$ are only applicable for users using the Darcy [(Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) percolation scheme.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
