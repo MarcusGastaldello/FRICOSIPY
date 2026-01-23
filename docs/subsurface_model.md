@@ -125,7 +125,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
     Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(\Theta_{\text{ sat}})$ is empirically derived based on laboratory experiments.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \Theta_{\text{ sat}} = 7.7 \times 10^{-4} \: \right[ \: \frac{d^2 g}{\nu} \: \left] \exp \: (-7.8 \times 10^{-3} \: \: \rho)
+    \Theta_{\text{ sat}} = 7.7 \times 10^{-4} \: \left[ \: \frac{d^2 g}{\nu} \: \right] \exp \: (-7.8 \times 10^{-3} \: \: \rho)
     $$
     </div>
     <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration, $\nu = 1.8 \times 10^{-6}$ m$^{-2}$ s$^{-1}$ is the kinematic viscosity of water at 0$^{\circ}$C and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
