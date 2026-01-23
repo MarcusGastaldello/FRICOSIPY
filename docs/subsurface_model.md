@@ -66,7 +66,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Percolation & Refreezing
 
-![Alt text](icons/Template.png){width="125px" align=left}
+![Alt text](icons/Percolation.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -298,7 +298,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Firn Densification
 
-![Alt text](icons/Template.png){width="125px" align=left}
+![Alt text](icons/Densification.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
