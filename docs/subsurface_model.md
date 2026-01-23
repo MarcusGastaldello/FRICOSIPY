@@ -135,7 +135,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
     <br>
-    Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(\Theta)$
+    Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(\Theta)$ is empirically-derived based on 3-dimensional image-based computations.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     \Theta_{\text{ sat}} = 3.0 \: \left( \frac{d}{2} \right)^2 \: \exp (-0.0130 \rho)
