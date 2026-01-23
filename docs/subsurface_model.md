@@ -122,23 +122,23 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(i)$ Shimizu (1970)**"
 
     <br>
-    Using the parameterisation of [Shimizu, 1970](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(\Theta)$ is empirically derived based on laboratory experiments.
+    Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(\Theta)$ is empirically derived based on laboratory experiments.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     \Theta = 7.7 \times 10^{-4} \: \frac{d^2 g}{\nu} \: \exp \: (-7.8 \times 10^{-3} \: \: \rho)
     $$
     </div>
-    <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration, $\nu = 1.8 \times 10^{-6}$ m$^{-2}$ s^{-1} and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
+    <small>where $d$ is the snow grain size (mm), $g = 9.81$ m s$^{-2}$ is the gravitational acceleration, $\nu = 1.8 \times 10^{-6}$ m$^{-2}$ s$^{-1}$ is the kinematic viscosity of water at 0$^{\circ}$C and $\rho$ is the subsurface layer density (kg m$^{-3}$). </small>
 
 ---
 
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
     <br>
-    [Calonne et al., 2012](https://doi.org/10.5194/tc-6-939-2012)
+    Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(\Theta)$
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    \Theta = 3 * (self.get_layer_grain_size() / 2000) ** 2 * 9.82 / 1.79e-06 * np.exp(-0.013 * self.get_layer_density())
+    \Theta = 3.0 \: ( \frac{d}{2})^2 \: \exp
     $$
     </div>
     <small>where .</small>
