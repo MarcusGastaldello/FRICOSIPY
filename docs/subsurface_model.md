@@ -19,6 +19,8 @@ Subsurface layers are defined according to their volumetric fraction of ice $(\p
 
 ![Alt text](icons/Precipitation.png){width="125px" align=left}
 
+<br style="clear: both;" />
+
 The input precipitation data $(P_{\text{ ref}})$ from the meteorological input file is adjusted to each spatial node $(x,y)$ according to a linear, elevation-dependant precipitation lapse rate $(\Gamma_{\text{ lapse}})$ and a precipitation multiplier $(M)$.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
