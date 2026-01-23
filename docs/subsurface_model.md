@@ -61,7 +61,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 ## Percolation & Refreezing
 
-
+By default, the *FRICOSIPY* model employs a standard `bucket approach' percolation scheme whereby liquid water filters down into subsequent layers upon exceeding the layer saturation capacity – their irreducible water content $(\phi_{\text{ irr}})$. <br>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -78,7 +78,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(i)$ Marchenko et al. (2017)**"
 
     <br>
-    The statistical preferential percolation scheme of [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) instantly distributes all surface water in accordance with a normal Probability Density Function (PDF) up to a pre-defined characteristic preferential percolation depth ($z_{\text{lim}}$):
+    The statistical preferential percolation scheme of [Marchenko et al. (2017)](https://doi.org/10.3389/feart.2017.00016) initially distributes all surface water in accordance with a normal Probability Density Function (PDF) up to a pre-defined characteristic preferential percolation depth ($z_{\text{lim}}$):
       
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
