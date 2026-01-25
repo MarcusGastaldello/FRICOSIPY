@@ -10,12 +10,12 @@
 
 /* Customised Example admonitions */
 .admonition.example > .admonition-title {
-    background-color: #bfbfbf !important;  
+    background-color: #8b8b8b !important;  
     color: white !important;               
 }
 .admonition.example {
-    background-color: #f9f9f9 !important; 
-    border-color: #bfbfbf !important;     
+    background-color: #eeeeee !important; 
+    border-color: #8b8b8b !important;     
 }
 
 /* Global Code Styling (Greyish text) */
