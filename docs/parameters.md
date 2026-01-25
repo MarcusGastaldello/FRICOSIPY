@@ -123,6 +123,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ## Subsurface Remeshing Options
 
+The subsurface remeshing options allow the user to customise the resolution of the subsurface grid.
+
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
 | `minimum_snow_layer_height` | <small>0.0005</small>            | m | Minimum layer height |
@@ -133,6 +135,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Initial Conditions
+
+
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
@@ -146,5 +150,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `initial_lower_snowpack_density` | <small>275.0</small>       | kg m$^{-3}$  | Bottom density for initial snowpack |
 | `initial_upper_temperature` | <small>270.16</small>           | K | Upper boundary condition for initial temperature profile |
 | `initial_lower_temperature` | <small>273.16</small>           | K | Lower boundary condition for initial temperature profile |
+
+!!! note
+    For detailed subsurface investigations, it is strongly reccomended to precede the main simulation with a spin-up/initialisation phase; otherwise, the initial years of the simulation will be heavily influenced by these arbitrary initial conditions.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
