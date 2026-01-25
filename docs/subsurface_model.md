@@ -52,7 +52,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     </div>
     <small>where $P$ is the annual precipitation climatology (mm yr$^{-1}$) for a given spatial node $(x,y)$, $A$ is the annual anamoly for a given year $(i)$ and $D$ is the temporal downscaling coefficient for a given timestep (t).</small>
 
-    In order to use this method, these additional variables must be provided in the input static and meteorological files:
+    In order to use this method, the following variables must be provided in the input static and meteorological files:
 
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [mm yr$^{-1}$] *(input static file)*
     * **PRECIPITATION_ANOMALY** – Precipitation anomaly [-] *(input meteorologicial file)*
