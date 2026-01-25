@@ -114,10 +114,13 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `surface_roughness_timescale` | <small>0.0026</small>            | hours | *(Moelg et al., 2012)* Roughness length timescale |
 | `constant_fresh_snow_density` | <small>250.</small>              | kg m$^{-3}$ | *(Constant - snow_density_method)* Constant density of freshly fallen snow |
 | `constant_surface_roughness` | <small>0.001</small>              | m | *(Constant - surface_roughness_method)* Surface roughness constant |
-| `preferential_percolation_depth` | <small>3.0</small>            | m | *(Marchenko et al., 2017)* Charachteristic preferential percolation depth |
+| `preferential_percolation_depth` | <small>3.0</small>            | m | *(Marchenko et al., 2017)* Characteristic preferential percolation depth |
 | `constant_irreducible_water_content` | <small>0.02</small>       | - | *(Constant - irreducible_water_content_method)* Constant irreducible water content |
 | `temperature_interpolation_depth_1` | <small>10</small>          | m | *(Ligtenberg et al., 2011)* First depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 | `temperature_interpolation_depth_2` | <small>20</small>          | m | *(Ligtenberg et al., 2011)* Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
+
+!!! note
+    These parameters are only used by the simulation if their respective parameterisation is active.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -135,8 +138,6 @@ The subsurface remeshing options allow the user to customise the resolution of t
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Initial Conditions
-
-
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
