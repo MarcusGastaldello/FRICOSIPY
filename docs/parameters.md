@@ -61,6 +61,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### Physical Processes Parameters
 
+|A|A|
 |---|---|
 | `albedo_fresh_snow = 0.85`                        | Albedo of fresh snow [-] (default = 0.85) |
 | `albedo_firn = 0.52`                              | Albedo of firn [-] (default = 0.52) |
