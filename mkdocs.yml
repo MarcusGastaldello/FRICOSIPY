@@ -29,6 +29,9 @@ markdown_extensions:
       generic: true
   - pymdownx.details
   - pymdownx.superfences:
+  - pymdownx.highlight:
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
   - attr_list
   - md_in_html
 
