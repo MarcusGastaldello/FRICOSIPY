@@ -89,7 +89,7 @@ By default, the density of fresh snow layers $(\rho_{\text{ fresh snow}})$ is de
 
 The *FRICOSIPY* model employs a standard *bucket approach* percolation scheme whereby liquid water filters down into subsequent layers upon exceeding the layer saturation capacity – their irreducible water content $(\phi_{\text{ irr}})$. <br>
 
-Penetrating shortwave radiation can also directly melt the ice matrix of subsurface layers, if they are warmed to the melting temperature, supplementing their water content. Subsurface water can also refreeze if there is sufficient cold content and volumetric capacity in layers – the latter being limited by the pore closure density $(\rho_{\text{ pore closure}}$ at the transition from firn to glacial ice.
+Penetrating shortwave radiation can also directly melt the ice matrix of subsurface layers, if they are warmed to the melting temperature, supplementing their water content. Subsurface water can also refreeze if there is sufficient cold content and volumetric capacity in layers – the latter being limited by the pore closure density $(\rho_{\text{ pore closure}})$ at the transition from firn to glacial ice.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
