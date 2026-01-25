@@ -51,6 +51,9 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     </div>
     <small>where $P (x,y)$ is the annual precipitation climatology (mm yr$^{-1}$) </small>
 
+    !!! example
+        A
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Fresh Snow Density Parameterisations
