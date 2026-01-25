@@ -65,7 +65,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Units | Description |
 |-----|:---:|---|
-| `station_altitude=3000.0`            | m a.s.l. | Altitude of meteorological station |
+| <span style="white-space:nowrap">`station_altitude = 3000.0`</span>            | m a.s.l. | Altitude of meteorological station |
 | `z = 2.0`                              | m | Meteorological data measurement height |
 | `air_temperature_lapse_rate = -0.006`  | K m$^{-1}$ | Air temperature lapse rate |
 | `precipitation_lapse_rate = 0.0002`    | % m$^{-1}$ | Precipitation lapse rate |
