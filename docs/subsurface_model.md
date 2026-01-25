@@ -43,7 +43,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
 ??? "**$(i)$ Three-Phase Anomaly**"
 
     <br>
-    Alternatively, the user can employ the three-phase anomaly method in which the model temporally downscales a spatially variable annual precipitation climatology into an hourly precipitation time series with adjustments for annual variability.
+    Alternatively, the user can employ the *three-phase anomaly* method in which the model temporally downscales a spatially variable annual precipitation climatology into an hourly precipitation time series with adjustments for annual variability.
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
@@ -55,9 +55,11 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     In order to use this method, these additional variables must be provided in the input static and meteorological files:
 
     !!! example 
-        If a person intends to model the *Great Aletsch* glacier, all meteorological data is available from the *Jungfraujoch* station (*Meteo Swiss*), with the exception of precipitation. The user could therefore use the three-phase anomaly method with the following 
+        If a person intends to model the *Great Aletsch* glacier, all meteorological data is available from the *Jungfraujoch* station (*Meteo Swiss*), with the exception of precipitation. The user could therefore use the *three-phase anomaly* method with the following 
     
-        * **Precipitation climatology** $(C)$ $\rightarrow$ [Precipitation 1991-2020 climate normals](https://www.meteoswiss.admin.ch/climate/the-climate-of-switzerland/climate-normals.html)
+        * **Precipitation climatology** $(C)$ $\rightarrow$ [Precipitation 1991-2020 climate normals spatial map](https://www.meteoswiss.admin.ch/climate/the-climate-of-switzerland/climate-normals.html)
+        * **Annual anomaly** $(A)$ $\rightarrow$ [*Monchsgrat* annual precipitation measurements](https://www.meteosuisse.admin.ch/services-et-publications/applications/valeurs-mesurees-et-reseaux-de-mesure.html#param=messnetz-manuell&station=MGR&table=false)
+        * **Downscaling coefficient** $(D)$ $\rightarrow$ [*Grindelwald* hourly precipitation data](https://www.meteosuisse.admin.ch/services-et-publications/applications/valeurs-mesurees-et-reseaux-de-mesure.html#param=messnetz-manuell&station=GWA&table=false)
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
