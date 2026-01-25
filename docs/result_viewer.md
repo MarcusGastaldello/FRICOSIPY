@@ -71,7 +71,7 @@ ax.bar(months, RAIN_HEAT,         width = 0.8, color = Purples(0.50), alpha = 0.
 # Figure Legend:
 plt.legend(loc="center right", bbox_to_anchor=(1.4,0.5));
 ```
-<\div>
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
