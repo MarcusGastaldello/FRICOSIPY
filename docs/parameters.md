@@ -67,10 +67,6 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### Physical Processes Parameters
 
-A
-
-<div style="overflow-x: auto; white-space: nowrap;">
-
 | Parameter | Units | Description |
 |:--------------------------------------------------------------------------------------------------------------|:---:|---|
 | `albedo_fresh_snow = 0.85`                        | – | Albedo of fresh snow |
@@ -89,8 +85,6 @@ A
 | `surface_emission_coeff = 1.0`                    | – | Surface emission coefficient for snow/ice |
 | `firn_temperature_depth = 20.0`                   | m | Depth at which firn temperature is measured |
 | `grain_size_fresh_snow = 0.1`                     | mm | Grain size |
-
-</div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
