@@ -42,6 +42,15 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
 
 ??? "**$(i)$ Three-Phase Anomaly**"
 
+    <br>
+    Alternatively
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    P (x,y) = C (x,y) 
+    $$
+    </div>
+    <small>where  </small>
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Fresh Snow Density Parameterisations
