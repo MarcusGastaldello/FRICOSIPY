@@ -50,13 +50,16 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     P (x,y) = C (x,y) \: A(i) \: D (t)
     $$
     </div>
-    <small>where $P$ is the annual precipitation climatology (mm yr$^{-1}$) for a given spatial node $(x,y)$, $A$ is the annual anamoly for a given year $(i)$ and $D$ is the temporal downscaling coefficient for a given timestep (t).</small>
+    <small>where $P$ is the annual precipitation climatology (mm yr$^{-1}$) for a given spatial node $(x,y)$, $A$ is the normalised annual anamoly for a given year $(i)$ and $D$ is the temporal downscaling coefficient for a given timestep (t).</small>
 
     In order to use this method, the following variables must be provided in the input static and meteorological files:
 
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [mm yr$^{-1}$] *(input static file)*
     * **PRECIPITATION_ANOMALY** – Precipitation anomaly [-] *(input meteorologicial file)*
     * **D** – Precipitation downscaling coefficient [-] *(input meteorologicial file)*
+
+    !!! note
+    The precipitation anomaly $(A)$ should be expressed as a normalised scaling factor (mean = 1) and the hourly precipitation data should be divided by its annual sum (for each respective year) for the downscaling coefficient $(D)$.
 
     !!! example 
         If a person intends to model the *Great Aletsch* glacier, all meteorological data is available from the [*Jungfraujoch*](https://www.meteosuisse.admin.ch/services-et-publications/applications/valeurs-mesurees-et-reseaux-de-mesure.html#param=messnetz-automatisch&station=JUN&table=false) station (*Meteo Swiss*), with the exception of precipitation. The user could therefore use the *three-phase anomaly* method with the following 
