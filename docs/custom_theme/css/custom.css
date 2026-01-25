@@ -22,7 +22,7 @@
 .rst-content code, 
 .rst-content tt,
 pre {
-    color: #555555 !important;           
+    color: #555555;           
     background-color: #f8f8f8 !important; 
     border: 1px solid #e1e4e5 !important;
 }
