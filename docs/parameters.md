@@ -93,11 +93,31 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `snow_ice_threshold` | <small>900.0</small>                      | kg m$^{-3}$ | Snow-ice density threshold |
 | `surface_emission_coeff` | <small>1.0</small>                    | – | Surface emission coefficient for snow/ice |
 | `firn_temperature_depth` | <small>20.0</small>                   | m | Depth at which firn temperature is measured |
-| `grain_size_fresh_snow` | <small>0.1</small>                     | mm | Grain size |
+| `grain_size_fresh_snow` | <small>0.1</small>                     | mm | Grain size of fresh snow |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Parameterisation-choice specifc Parameters
+
+| Parameter | Value | Units | Description |
+|:---|:---:|:---:|---|
+| `extinction_coeff_snow` | 17.1                    | m$^{-1}$ | (Bintanja89) Extinction coefficient for snow |
+| `extinction_coeff_ice` | 2.5                      | m$^{-1}$ | (Bintanja89) Extinction coefficient for ice |
+| `albedo_decay_timescale` | 22                     | days | (Oerlemans98) Albedo decay timescale (constant) |
+| `albedo_decay_timescale_wet` | 10                 | days | (Bougamont05) Albedo decay timescale (melting surface) |
+| `albedo_decay_timescale_dry` | 30                 | days | (Bougamont05) Albedo decay timescale (dry snow surface) |
+| `albedo_decay_timescale_dry_adjustment` | 14      | day K$^{-1}$ | (Bougamont05) Albedo dry snow decay timescale increase at negative temperatures |
+| `albedo_decay_timescale_threshold` | 263.17       | K | (Bougamont05) Albedo temperature threshold for dry snow decay timescale increase |
+| `surface_roughness_fresh_snow` | 0.24             | mm | (Moelg12) Surface roughness length for fresh snow |
+| `surface_roughness_ice` | 1.7                     | mm | (Moelg12) Surface roughness length for ice |
+| `surface_roughness_firn` | 4.0                    | mm | (Moelg12) Surface roughness length for aged snow |
+| `surface_roughness_timescale` | 0.0026            | hours | (Moelg12) Roughness length timescale |
+| `constant_fresh_snow_density` | 250.              | kg m$^{-3}$ | (Constant - snow_density_method) Constant density of freshly fallen snow |
+| `constant_surface_roughness` | 0.001              | m | (Constant - surface_roughness_method) Surface roughness constant |
+| `preferential_percolation_depth` | 3.0            | m | (Marchenko17) Charachteristic preferential percolation depth |
+| `constant_irreducible_water_content` | 0.02       | - | (Constant - irreducible_water_content_method) |
+| `temperature_interpolation_depth_1` | 10          | m | (Ligtenberg11) First depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
+| `temperature_interpolation_depth_2` | 20          | m | (Ligtenberg11) Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
