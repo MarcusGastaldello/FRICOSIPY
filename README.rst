@@ -32,7 +32,7 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/en/latest/ <https://fric
 
 :Support / Contact:
     .. image:: https://img.shields.io/badge/Contact-Marcus%20Gastaldello-blue.svg
-        :target: https://www.unifr.ch/directory/en/people/329166/38c19
+        :target: https://fricosipy.readthedocs.io/en/latest/contact/
 
 
     .. image:: https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg
@@ -47,6 +47,7 @@ Citation
 Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
 
 ----
+
 
 
 
