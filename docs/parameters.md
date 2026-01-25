@@ -136,7 +136,7 @@ The subsurface remeshing options allow the user to modify the resolution of the 
 
 ## Initial Conditions
 
-These parameters control how the subsurface grid is initialised at the start of the simulation.
+The initial condition parameters control how the subsurface grid is initialised at the start of the simulation.
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
