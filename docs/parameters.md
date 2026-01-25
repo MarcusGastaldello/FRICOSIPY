@@ -101,21 +101,21 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `extinction_coeff_snow` | <small>17.1</small>                    | m$^{-1}$ | (Bintanja89) Extinction coefficient for snow |
-| `extinction_coeff_ice` | <small>2.5</small>                      | m$^{-1}$ | (Bintanja89) Extinction coefficient for ice |
-| `albedo_decay_timescale` | <small>22</small>                     | days | (Oerlemans98) Albedo decay timescale (constant) |
-| `albedo_decay_timescale_wet` | <small>10</small>                 | days | (Bougamont05) Albedo decay timescale (melting surface) |
-| `albedo_decay_timescale_dry` | <small>30</small>                 | days | (Bougamont05) Albedo decay timescale (dry snow surface) |
-| `albedo_decay_timescale_dry_adjustment` | <small>14</small>      | day K$^{-1}$ | (Bougamont05) Albedo dry snow decay timescale increase at negative temperatures |
-| `albedo_decay_timescale_threshold` | <small>263.17</small>       | K | (Bougamont05) Albedo temperature threshold for dry snow decay timescale increase |
-| `surface_roughness_fresh_snow` | <small>0.24</small>             | mm | (Moelg12) Surface roughness length for fresh snow |
-| `surface_roughness_ice` | <small>1.7</small>                     | mm | (Moelg12) Surface roughness length for ice |
-| `surface_roughness_firn` | <small>4.0</small>                    | mm | (Moelg12) Surface roughness length for aged snow |
-| `surface_roughness_timescale` | <small>0.0026</small>            | hours | (Moelg12) Roughness length timescale |
-| `constant_fresh_snow_density` | <small>250.</small>              | kg m$^{-3}$ | (Constant - snow_density_method) Constant density of freshly fallen snow |
-| `constant_surface_roughness` | <small>0.001</small>              | m | (Constant - surface_roughness_method) Surface roughness constant |
-| `preferential_percolation_depth` | <small>3.0</small>            | m | (Marchenko17) Charachteristic preferential percolation depth |
-| `constant_irreducible_water_content` | <small>0.02</small>       | - | (Constant - irreducible_water_content_method) |
+| `extinction_coeff_snow` | <small>17.1</small>                    | m$^{-1}$ | *(Bintanja & van den Broeke, 1998)* Extinction coefficient for snow |
+| `extinction_coeff_ice` | <small>2.5</small>                      | m$^{-1}$ | *(Bintanja & van den Broeke, 1998)* Extinction coefficient for ice |
+| `albedo_decay_timescale` | <small>22</small>                     | days | *(Oerlemans & Knap, 1998)* Albedo decay timescale (constant) |
+| `albedo_decay_timescale_wet` | <small>10</small>                 | days | *(Bougamont et al., 2005)* Albedo decay timescale (melting surface) |
+| `albedo_decay_timescale_dry` | <small>30</small>                 | days | *(Bougamont et al., 2005)* Albedo decay timescale (dry snow surface) |
+| `albedo_decay_timescale_dry_adjustment` | <small>14</small>      | day K$^{-1}$ | *(Bougamont et al., 2005)* Albedo dry snow decay timescale increase at negative temperatures |
+| `albedo_decay_timescale_threshold` | <small>263.17</small>       | K | *(Bougamont et al., 2005)* Albedo temperature threshold for dry snow decay timescale increase |
+| `surface_roughness_fresh_snow` | <small>0.24</small>             | mm | *(Moelg et al., 2012)* Surface roughness length for fresh snow |
+| `surface_roughness_ice` | <small>1.7</small>                     | mm | *(Moelg et al., 2012)* Surface roughness length for ice |
+| `surface_roughness_firn` | <small>4.0</small>                    | mm | *(Moelg et al., 2012)* Surface roughness length for aged snow |
+| `surface_roughness_timescale` | <small>0.0026</small>            | hours | *(Moelg et al., 2012)* Roughness length timescale |
+| `constant_fresh_snow_density` | <small>250.</small>              | kg m$^{-3}$ | *(Constant - snow_density_method)* Constant density of freshly fallen snow |
+| `constant_surface_roughness` | <small>0.001</small>              | m | *(Constant - surface_roughness_method)* Surface roughness constant |
+| `preferential_percolation_depth` | <small>3.0</small>            | m | *(Marchenko et al., 2017)* Charachteristic preferential percolation depth |
+| `constant_irreducible_water_content` | <small>0.02</small>       | - | *(Constant - irreducible_water_content_method)* Constant irreducible water content |
 | `temperature_interpolation_depth_1` | <small>10</small>          | m | *(Ligtenberg et al., 2011)* First depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 | `temperature_interpolation_depth_2` | <small>20</small>          | m | *(Ligtenberg et al., 2011)* Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 
@@ -128,7 +128,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `minimum_snow_layer_height` | <small>0.0005</small>            | m | Minimum layer height |
 | `maximum_simulation_layer_height` | <small>0.10</small>        | m | Maximum height of fine layers |
 | `maximum_coarse_layer_height` | <small>0.3</small>             | m | Maximum height of coarse layers |
-| `coarse_layer_threshold` | <small>21.</small>                  | m | Threshold depth at which fine near surface layers are merged into coarser deep layers |
+| `coarse_layer_threshold` | <small>21.</small>                  | m | Threshold depth at which fine near-surface layers are merged into coarser deep layers |
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -143,8 +143,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `initial_glacier_height` | <small>50.0</small>                | m | Initial glacier height (without snowlayers) |
 | `initial_glacier_layer_heights` | <small>1.0</small>          | m | Initial thickness of glacier ice layers |
 | `initial_upper_snowpack_density` | <small>250.0</small>       | kg m$^{-3}$  | Top density for initial snowpack |
-initial_lower_snowpack_density` | <small>275.0</small>          | kg m$^{-3}$  | Bottom density for initial snowpack |
-initial_upper_temperature` | <small>270.16</small>              | K | Upper boundary condition for initial temperature profile |
-initial_lower_temperature` | <small>273.16</small>              | K | Lower boundary condition for initial temperature profile |
+| `initial_lower_snowpack_density` | <small>275.0</small>       | kg m$^{-3}$  | Bottom density for initial snowpack |
+| `initial_upper_temperature` | <small>270.16</small>           | K | Upper boundary condition for initial temperature profile |
+| `initial_lower_temperature` | <small>273.16</small>           | K | Lower boundary condition for initial temperature profile |
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
