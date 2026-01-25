@@ -72,7 +72,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `cloud_emissivity = 0.96`                         | – | Emissivity of clouds |
 | `LW_emission_constant = 0.42`                     | – | Constant in the longwave emission formula |
 | `subsurface_interpolation_depth_1 = 0.06`         | m | First depth for temperature interpolation which is used for calculation of subsurface/ground heat flux |
-| <nobr> `subsurface_interpolation_depth_2 = 0.10` </nobr>         | m | Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux |
+| <nobr>`subsurface_interpolation_depth_2 = 0.10`</nobr>         | m | Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux |
 | `basal_heat_flux = 35`                            | mW m$^{-2}$ | Basal / Geothermal heat flux |
 | `pore_close_off_density = 830.0`                  | kg m$^{-3}$ | Pore close-off density |
 | `snow_ice_threshold = 900.0`                      | kg m$^{-3}$ | Snow-ice density threshold |
