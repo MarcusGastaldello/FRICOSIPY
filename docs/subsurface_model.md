@@ -51,8 +51,8 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     </div>
     <small>where $P (x,y)$ is the annual precipitation climatology (mm yr$^{-1}$) </small>
 
-    !!! example
-        A
+    !!! example "*Modelling the Great Aletsch Glacier*"
+        [A](https://www.meteoswiss.admin.ch/climate/the-climate-of-switzerland/climate-normals.html)
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
