@@ -34,7 +34,7 @@ $(x,y)$ and requires the following variables:
 
     * **BASAL** – Basal / geothermal heat flux [Wm$^{-2}$] <br> *(enables a spatially-variable basal/geothermal heat flux and overrides the 'basal_heat_flux' parameter)*
     * **THICKNESS** – Glacier thickness [m] <br> *(enables a spatially-variable initial glacier height and overrides the 'initial_height' parameters)*
-    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m w.e.] <br> *(annual precipitation climatology for the three-phase anomaly model)*
+    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [mm yr$^{-1}$] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
 The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables.
