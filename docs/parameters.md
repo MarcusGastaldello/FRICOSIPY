@@ -5,6 +5,8 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 # Parameters
 
+For any FRICOSIPY simulation, it is important to properly customise the model's parameters and parameterisations; in particular the general model and meteorological input parameters. If you unsure how to correctly calibrate the model, try initially running the simulation with the default parameter values.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Model Parameterisations
