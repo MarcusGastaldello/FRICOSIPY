@@ -9,10 +9,9 @@ og_description: Information on contacting the model developers
 
 The *FRICOSIPY* model is currently solely developed by myself, *Marcus Gastaldello*, a PhD student at the *University of Fribourg*, *Switzerland*. 
 
-Please report any erros or bugs found with the code directly to the issues page on *GitHub*, clearly indicating the code lines and the error message.
+Please report any bugs found with the code directly to the [issues page on *GitHub*](https://github.com/MarcusGastaldello/FRICOSIPY/issues), clearly indicating the code lines and the error message.
 
-If you interested in collaboration, have suggestions to improve the model 
-
+If you interested in collaboration, have suggestions to improve the model or our having difficulties understanding the documentation, please feel free to get in touch:
 
 [marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch)
 
