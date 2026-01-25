@@ -54,7 +54,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
 
     In order to use this method, the following variables must be provided in the input static and meteorological files:
 
-    * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [mm yr$^{-1}$] *(input static file)*
+    * **PRECIPITATION_CLIMATOLOGY** – Precipitation climatology [mm yr$^{-1}$] *(input static file)*
     * **PRECIPITATION_ANOMALY** – Precipitation anomaly [-] *(input meteorologicial file)*
     * **D** – Precipitation downscaling coefficient [-] *(input meteorologicial file)*
 
