@@ -16,6 +16,13 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 ## Point Surface Energy Balance
 
 ```
+# Load Python Modules
+import xarray as xr
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
 # Calculate the mean annual energy fluxes:
 SHORTWAVE = ds.SHORTWAVE.sel(x = x, y = y).groupby("time.month").mean("time")
 SENSIBLE = ds.SENSIBLE.sel(x = x, y = y).groupby("time.month").mean("time")
@@ -39,6 +46,7 @@ RdYlBu = mpl.colormaps['RdYlBu']
 Purples = mpl.colormaps['Purples']
 
 # Setup Figure & Axis:
+plt.rcParams["figure.figsize"] = (12, 6)
 plt.rcParams.update({'font.size': 9})
 fig, ax = plt.subplots(1,1,figsize=(5,5), dpi = 250)
 ax.set(ylabel = "Mean Monthly Energy Flux \n [W m$^{-2}$]", xlabel = "Month")
