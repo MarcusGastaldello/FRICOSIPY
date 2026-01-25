@@ -46,10 +46,10 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     Alternatively
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    P (x,y) = C (x,y) 
+    P (x,y) = C (x,y) D (t)
     $$
     </div>
-    <small>where  </small>
+    <small>where $P (x,y)$ is the annual precipitation climatology (mm yr$^{-1}$) </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
