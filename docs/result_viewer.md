@@ -15,7 +15,10 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 ## Point Surface Energy Balance
 
-```
+
+<div class="styledcode-box" markdown>
+    
+``` python
 # Load Python Modules
 import xarray as xr
 import pandas as pd
@@ -68,6 +71,7 @@ ax.bar(months, RAIN_HEAT,         width = 0.8, color = Purples(0.50), alpha = 0.
 # Figure Legend:
 plt.legend(loc="center right", bbox_to_anchor=(1.4,0.5));
 ```
+<\div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
