@@ -46,7 +46,7 @@ nav:
     - Result Viewer: result_viewer.md
   - "Advanced":
     - Model Architecture: model_architecture.md
-  - "Support"
+  - "Support":
     - Contact: contact.md
 
 extra_javascript:
