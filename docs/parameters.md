@@ -53,11 +53,11 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### General Model Parameters
 
-| Parameter | Units | Description |
-|:---|:---:|---|
-| `dt = 3600`         | s | Simulation time step |
-| `max_depth = 50`    | m | Maximum simulation depth |
-| `max_layers = 500`  | – | Maximum number of subsurface layers |
+| Parameter | Value | Units | Description |
+|:---|:---:|:---:|---|
+| `dt`          | 3600 | s | Simulation time step |
+| `max_depth`   | 50 | m | Maximum simulation depth |
+| `max_layers`  | 500 | – | Maximum number of subsurface layers |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
