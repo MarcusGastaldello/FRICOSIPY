@@ -13,7 +13,7 @@ Please report any bugs found with the code directly to the [issues page on *GitH
 
 If you interested in collaboration, have suggestions to improve the model or are having difficulties understanding the documentation, please feel free to get in touch:
 
-✉: [marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch) <br>
+✉ : [marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch) <br>
 <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" width="16" height="16" style="vertical-align: middle; margin-bottom: 3px;""> : [https://github.com/MarcusGastaldello](https://github.com/MarcusGastaldello) <br>
 <img src="https://img.icons8.com/color/48/linkedin.png" width="18" height="18" style="vertical-align: middle; margin-bottom: 3px;""> : [https://linkedin.com/in/marcus-gastaldello-8844b2130/](https://www.linkedin.com/in/marcus-gastaldello-8844b2130/)
 
