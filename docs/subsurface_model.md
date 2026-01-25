@@ -55,7 +55,7 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     In order to use this method, these additional variables must be provided in the input static and meteorological files:
 
     !!! example 
-        If a person intends to model the *Great Aletsch* glacier, all meteorological data is available from the *Jungfraujoch* station (*Meteo Swiss*), with the exception of precipitation. The user could therefore use the *three-phase anomaly* method with the following 
+        If a person intends to model the *Great Aletsch* glacier, all meteorological data is available from the [*Jungfraujoch*](https://www.meteosuisse.admin.ch/services-et-publications/applications/valeurs-mesurees-et-reseaux-de-mesure.html#param=messnetz-automatisch&station=JUN&table=false) station (*Meteo Swiss*), with the exception of precipitation. The user could therefore use the *three-phase anomaly* method with the following 
     
         * **Precipitation climatology** $(C)$ $\rightarrow$ [Precipitation 1991-2020 climate normals spatial map](https://www.meteoswiss.admin.ch/climate/the-climate-of-switzerland/climate-normals.html)
         * **Annual anomaly** $(A)$ $\rightarrow$ [*Monchsgrat* annual precipitation measurements](https://www.meteosuisse.admin.ch/services-et-publications/applications/valeurs-mesurees-et-reseaux-de-mesure.html#param=messnetz-manuell&station=MGR&table=false)
