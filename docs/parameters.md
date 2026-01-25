@@ -53,6 +53,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### General Model Parameters
 
+<small> General parameters that   </small>
+
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
 | `dt`          | <small>3600</small> | s | Simulation time step |
@@ -62,6 +64,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Meteorological Input Parameters
+
+<small> Parameters that modify the input meteorological data. </small>
 
 | Parameter | Value | Units | Description |
 |-----|:---:|:---:|---|
@@ -75,6 +79,8 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Physical Processes Parameters
+
+<small> Parameters associated with the physical processes in the models. </small>
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
