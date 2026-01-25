@@ -33,7 +33,7 @@ The temporal range of the simulation must be specified by providing datetime val
 
 ### Spatial Subset:
 
-The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same STATIC file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
+The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
