@@ -12,5 +12,3 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 ## Point Surface Energy Balance
 
 ## Point Surface Mass Balance
-
-## Glacier-wide Mass Balance
