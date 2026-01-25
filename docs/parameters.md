@@ -123,8 +123,28 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ## Subsurface Remeshing Options
 
+| Parameter | Value | Units | Description |
+|:---|:---:|:---:|---|
+| `minimum_snow_layer_height` | 0.0005            | m | Minimum layer height |
+| `maximum_simulation_layer_height` | 0.10        | m | Maximum height of fine layers |
+| `maximum_coarse_layer_height` | 0.3             | m | Maximum height of coarse layers |
+| `coarse_layer_threshold` | 21.                  | m | Threshold depth at which fine near surface layers are merged into coarser deep layers |
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Initial Conditions
+
+| Parameter | Value | Units | Description |
+|:---|:---:|:---:|---|
+| `initial_snowheight` | 2.00                    | m | Initial snowheight |
+| `initial_snow_layer_heights` | 0.10            | m | Initial thickness of snow layers |
+| `initial_snow_grain_size` | 0.10               | mm | Initial snow grain size |
+| `initial_ice_grain_size` | 5.0                 | mm | Initial ice grain size |
+| `initial_glacier_height` | 50.0                | m | Initial glacier height (without snowlayers) |
+| `initial_glacier_layer_heights` | 1.0          | m | Initial thickness of glacier ice layers |
+| `initial_upper_snowpack_density` | 250.0       | kg m$^{-3}$  | Top density for initial snowpack |
+initial_lower_snowpack_density` | 275.0          | kg m$^{-3}$  | Bottom density for initial snowpack |
+initial_upper_temperature` | 270.16              | K | Upper boundary condition for initial temperature profile |
+initial_lower_temperature` | 273.16              | K | Lower boundary condition for initial temperature profile |
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
