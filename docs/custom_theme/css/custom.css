@@ -35,9 +35,14 @@ pre {
 }
 
 /* Specific Syntax Highlighting Overrides for this box */
-.styledcode-box .k, .styledcode-box .kc { color: #569CD6 !important; }  /* Keywords (def, import) */
-.styledcode-box .nf { color: #DCDCAA !important; }                      /* Functions */
-.styledcode-box .s2, .styledcode-box .s1 { color: #CE9178 !important; } /* Strings */
-.styledcode-box .mi { color: #B5CEA8 !important; }                      /* Numbers */
-.styledcode-box .c1 { color: #6A9955 !important; font-style: italic; }  /* Comments */
-.styledcode-box .nb { color: #4EC9B0 !important; }                      /* Built-ins/Classes */
+.styledcode-box .k, 
+.styledcode-box .kn, 
+.styledcode-box .kc { color: #C586B0 !important; } /* Pink: import, from, def */
+.styledcode-box .nn { color: #4EC9B0 !important; } /* Teal: xarray, pandas, numpy */
+.styledcode-box .n  { color: #9CDCFE !important; } /* Light Blue: SHORTWAVE, ds, ax */
+.styledcode-box .nf { color: #DCDCAA !important; } /* Yellow: .sel(), .groupby(), .bar() */
+.styledcode-box .s2, 
+.styledcode-box .s1 { color: #CE9178 !important; } /* Orange/Brown: "time.month", "gray" */
+.styledcode-box .mi, 
+.styledcode-box .mf { color: #B5CEA8 !important; } /* Light Green: 0.8, 12, 6 */
+.styledcode-box .c1 { color: #6A9955 !important; font-style: italic !important; } /* Green: Comments */
