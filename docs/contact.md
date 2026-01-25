@@ -13,6 +13,6 @@ Please report any bugs found with the code directly to the [issues page on *GitH
 
 If you interested in collaboration, have suggestions to improve the model or our having difficulties understanding the documentation, please feel free to get in touch:
 
-[marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch)
+✉: [marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch)
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
