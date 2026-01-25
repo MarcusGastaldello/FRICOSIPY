@@ -139,6 +139,8 @@ The subsurface remeshing options allow the user to customise the resolution of t
 
 ## Initial Conditions
 
+These parameters control how the subsurface grid is initialised at the start of the simulation.
+
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
 | `initial_snowheight` | <small>2.00</small>                    | m | Initial snowheight |
