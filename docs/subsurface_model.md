@@ -46,10 +46,10 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
     Alternatively
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
-    P (x,y) = C (x,y) D (t)
+    P (x,y) = C (x,y) \: A(i) \: D (t)
     $$
     </div>
-    <small>where $P (x,y)$ is the annual precipitation climatology (mm yr$^{-1}$) </small>
+    <small>where $P$ is the annual precipitation climatology (mm yr$^{-1}$) for a given spatial node $(x,y)$, $A$ is the annual anamoly for a given year $(i)$ and $D$ is the temporal downscaling coefficient for a given timestep (t).</small>
 
     !!! example "*Modelling the Great Aletsch Glacier*"
         [A](https://www.meteoswiss.admin.ch/climate/the-climate-of-switzerland/climate-normals.html)
