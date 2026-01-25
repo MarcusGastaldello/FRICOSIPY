@@ -11,7 +11,7 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
 
 ## Downloading the *FRICOSIPY* Model
 
-**$(1)$**    Download the [latest version](https://github.com/MarcusGastaldello/FRICOSIPY/releases)) latest version of the *FRICOSIPY* model from *GitHub* and unpack its contents from the ZIP archive folder.
+**$(1)$**    Download the [latest version](https://github.com/MarcusGastaldello/FRICOSIPY/releases) latest version of the *FRICOSIPY* model from *GitHub* and unpack its contents from the ZIP archive folder.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
