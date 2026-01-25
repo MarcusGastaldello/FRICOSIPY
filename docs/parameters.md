@@ -5,13 +5,13 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 # Parameters
 
-For any *FRICOSIPY* simulation, it is important to properly customise the model's parameters and parameterisations by modifying the file: `parameters.py`. The following tables provide links to the original source literature of the paramterisation and the section of this documentation that explains its implementation.
+For any *FRICOSIPY* simulation, it is important to properly customise the model's parameters and parameterisations by modifying the file: `parameters.py`. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Model Parameterisations
 
-The *FRICOSIPY* model enables the user to customise the parameterisations used to model key physical processes.
+The *FRICOSIPY* model enables the user to customise the parameterisations used to model key physical processes.  The following tables provide links to the original source literature of the paramterisations and the section of this documentation that explains its implementation in the model.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -119,14 +119,11 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `temperature_interpolation_depth_1` | <small>10</small>          | m | *(Ligtenberg et al., 2011)* First depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 | `temperature_interpolation_depth_2` | <small>20</small>          | m | *(Ligtenberg et al., 2011)* Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 
-!!! note
-    These parameters are only used by the simulation if their respective parameterisation is active.
-
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Subsurface Remeshing Options
 
-The subsurface remeshing options allow the user to customise the resolution of the subsurface grid.
+The subsurface remeshing options allow the user to modify the resolution of the subsurface grid.
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
