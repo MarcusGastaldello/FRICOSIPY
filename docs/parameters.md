@@ -61,24 +61,24 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### Physical Processes Parameters
 
-| Parameter | Description |
-|-----|---|
-| `albedo_fresh_snow = 0.85`                        | Albedo of fresh snow [-] (default = 0.85) |
-| `albedo_firn = 0.52`                              | Albedo of firn [-] (default = 0.52) |
-| `albedo_ice = 0.30`                               | Albedo of ice [-] (default = 0.30) |
-| `albedo_characteristic_snow_depth = 3.0`          | Characteristic scale for snow depth [cm] |
-| `cloud_transmissivity_coeff_alpha = 0.233`        | Cloud transmissivity coefficient alpha [-] |
-| `cloud_transmissivity_coeff_beta = 0.415`         | Cloud transmissivity coefficient beta [-] |
-| `cloud_emissivity = 0.96`                         | Emissivity of clouds [-] (default = 0.96) |
-| `LW_emission_constant = 0.42`                     | Constant in the longwave emission formula [-] (default = 0.42) |
-| `subsurface_interpolation_depth_1 = 0.06`         | First depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m] (default = 0.06) |
-| `subsurface_interpolation_depth_2 = 0.10`         | Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m] (default = 0.10) |
-| `basal_heat_flux = 35`                            | Basal / Geothermal heat flux [mW m-2] (default = 35) |
-| `pore_close_off_density = 830.0`                  | Pore close-off density [kg m-3] (default = 830) |
-| `snow_ice_threshold = 900.0`                      | Snow-ice density threshold [kg m-3] (default = 900) |
-| `surface_emission_coeff = 1.0`                    | Surface emission coefficient for snow/ice [-] (default = 1.00) |
-| `firn_temperature_depth = 20.0`                   | Depth at which firn temperature is measured [m] |
-| `grain_size_fresh_snow = 0.1`                     | Grain size [mm] (default = 0.1) |
+| Parameter | Units | Description |
+|-----|---|---|
+| `albedo_fresh_snow = 0.85`                        | – | Albedo of fresh snow |
+| `albedo_firn = 0.52`                              | – | Albedo of firn |
+| `albedo_ice = 0.30`                               | – | Albedo of ice |
+| `albedo_characteristic_snow_depth = 3.0`          | cm | Characteristic scale for snow depth 
+| `cloud_transmissivity_coeff_alpha = 0.233`        | – | Cloud transmissivity coefficient alpha |
+| `cloud_transmissivity_coeff_beta = 0.415`         | – | Cloud transmissivity coefficient beta |
+| `cloud_emissivity = 0.96`                         | – | Emissivity of clouds |
+| `LW_emission_constant = 0.42`                     | – | Constant in the longwave emission formula |
+| `subsurface_interpolation_depth_1 = 0.06`         | m | First depth for temperature interpolation which is used for calculation of subsurface/ground heat flux |
+| `subsurface_interpolation_depth_2 = 0.10`         | m | Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux |
+| `basal_heat_flux = 35`                            | mW m$^{2}$ | Basal / Geothermal heat flux |
+| `pore_close_off_density = 830.0`                  | kg m$^{-3}$ | Pore close-off density |
+| `snow_ice_threshold = 900.0`                      | kg m$^{-3}$ | Snow-ice density threshold |
+| `surface_emission_coeff = 1.0`                    | – | Surface emission coefficient for snow/ice |
+| `firn_temperature_depth = 20.0`                   | m | Depth at which firn temperature is measured |
+| `grain_size_fresh_snow = 0.1`                     | mm | Grain size |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
