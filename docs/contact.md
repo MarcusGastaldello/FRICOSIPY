@@ -11,7 +11,7 @@ The *FRICOSIPY* model is currently solely developed by myself, *Marcus Gastaldel
 
 Please report any bugs found with the code directly to the [issues page on *GitHub*](https://github.com/MarcusGastaldello/FRICOSIPY/issues), clearly indicating the code lines and the error message.
 
-If you interested in collaboration, have suggestions to improve the model or our having difficulties understanding the documentation, please feel free to get in touch:
+If you interested in collaboration, have suggestions to improve the model or are having difficulties understanding the documentation, please feel free to get in touch:
 
 ✉: [marcus.gastaldello@unifr.ch](mailto:marcus.gastaldello@unifr.ch)
 
