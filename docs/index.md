@@ -28,10 +28,4 @@ The latest version of *FRICOSIPY* is available at: [https://github.com/MarcusGas
 | **License**                 | [![License](https://img.shields.io/badge/License-GPLv3-red.svg)](http://www.gnu.org/licenses/gpl-3.0.en.html) |
 | **Support / Contact**       | [![Contact](https://img.shields.io/badge/Contact-Marcus%20Gastaldello-blue.svg)](https://github.com/MarcusGastaldello/FRICOSIPY/blob/main/docs/contact.md) [![ORCID](https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg)](https://orcid.org/0009-0003-2384-3617) |
 
----
-
-!!! note
-
-    This user guide is currently under development for the new v1.3 release of *FRICOSIPY*. Completetion is scheduled for February 2026.
-
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
