@@ -5,7 +5,7 @@ og_description: A brief guide to optimum parameter selection for a FRICOSIPY sim
 
 # Parameters
 
-For any *FRICOSIPY* simulation, it is important to properly customise the model's parameters and parameterisations by modifying the file: `parameters.py`. 
+For any *FRICOSIPY* simulation, it is important to properly customise the model's parameters and parameterisations by modifying the file: `parameters.py`. The following tables provide links to the original source literature of the paramterisation and the section of this documentation that explains its implementation.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
