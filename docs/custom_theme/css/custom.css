@@ -1,16 +1,24 @@
-/* 1. The Header Bar (Warning) */
+/* Customised Warning admonitions */
 .admonition.warning > .admonition-title {
-    background-color: #f29f97 !important; /* The salmon/coral header color */
-    color: white !important;               /* White text for 'Warning' */
+    background-color: #f29f97 !important;  
+    color: white !important;               
 }
-
-/* 2. The Main Box Body */
 .admonition.warning {
-    background-color: #fcdedb !important; /* Very pale red/pink background */
-    border-color: #f29f97 !important;     /* Matches the header bar border */
+    background-color: #fcdedb !important; 
+    border-color: #f29f97 !important;     
 }
 
-/* 3. Global Code Styling (Greyish text as requested) */
+/* Customised Example admonitions */
+.admonition.example > .admonition-title {
+    background-color: #bfbfbf !important;  
+    color: white !important;               
+}
+.admonition.example {
+    background-color: #f9f9f9 !important; 
+    border-color: #bfbfbf !important;     
+}
+
+/* Global Code Styling (Greyish text) */
 .rst-content code, 
 .rst-content tt,
 pre {
