@@ -55,7 +55,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `dt`          | 3600 | s | Simulation time step |
+| `dt`          | <small>3600</small> | s | Simulation time step |
 | `max_depth`   | 50 | m | Maximum simulation depth |
 | `max_layers`  | 500 | – | Maximum number of subsurface layers |
 
