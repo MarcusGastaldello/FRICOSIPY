@@ -54,7 +54,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 ### General Model Parameters
 
 | Parameter | Units | Description |
-|-----|:---:|---|
+|:---|:---:|---|
 | `dt = 3600`         | s | Simulation time step |
 | `max_depth = 50`    | m | Maximum simulation depth |
 | `max_layers = 500`  | – | Maximum number of subsurface layers |
@@ -77,7 +77,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 ### Physical Processes Parameters
 
 | Parameter | Units | Description |
-|:--------------------------------------------------------------------------------------------------------------|:---:|---|
+|:---|:---:|---|
 | `albedo_fresh_snow = 0.85`                        | – | Albedo of fresh snow |
 | `albedo_firn = 0.52`                              | – | Albedo of firn |
 | `albedo_ice= 0.30`                               | – | Albedo of ice |
