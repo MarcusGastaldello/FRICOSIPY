@@ -72,7 +72,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | `albedo_fresh_snow = 0.85`                        | – | Albedo of fresh snow |
 | `albedo_firn = 0.52`                              | – | Albedo of firn |
 | `albedo_ice = 0.30`                               | – | Albedo of ice |
-| `albedo_characteristic_snow_depth = 3.0`          | cm | Characteristic scale for snow depth |
+| `albedo_characteristic_snow_depth&ensp;=&ensp;3.0`          | cm | Characteristic scale for snow depth |
 | `cloud_transmissivity_coeff_alpha = 0.233`        | – | Cloud transmissivity coefficient alpha |
 | `cloud_transmissivity_coeff_beta = 0.415`         | – | Cloud transmissivity coefficient beta |
 | `cloud_emissivity = 0.96`                         | – | Emissivity of clouds |
