@@ -53,7 +53,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### General Model Parameters
 
-| Parameter | Value | Units | Description |
+| <small>Parameter | <small>Value | <small>Units | <small>Description |
 |:---|:---:|:---:|---|
 | `dt`          | <small>3600</small> | <small>s | <small>Simulation time step |
 | `max_depth`   | <small>50</small>   | <small>m | <small>Maximum simulation depth |
@@ -65,12 +65,12 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |-----|:---:|:---:|---|
-| `station_altitude` | <small>3000.0</small>            | m a.s.l. | Altitude of meteorological station |
-| `z` | <small>2.0</small>                              | m | Meteorological data measurement height |
-| `air_temperature_lapse_rate` | <small>-0.006</small>  | K m$^{-1}$ | Air temperature lapse rate |
-| `precipitation_lapse_rate` | <small>0.0002</small>    | % m$^{-1}$ | Precipitation lapse rate |
-| `precipitation_multiplier` | <small>1.0</small>       | – | Multiplicative scaling factor for precipitation data |
-| `minimum_snowfall` | <small>0.00001</small>           | m | Minimum snowfall per simulation timestep |
+| `station_altitude` | <small>3000.0</small>            | <small>m a.s.l. | <small>Altitude of meteorological station |
+| `z` | <small>2.0</small>                              | <small>m | <small>Meteorological data measurement height |
+| `air_temperature_lapse_rate` | <small>-0.006</small>  | <small>K m$^{-1}$ | <small>Air temperature lapse rate |
+| `precipitation_lapse_rate` | <small>0.0002</small>    | <small>% m$^{-1}$ | <small>Precipitation lapse rate |
+| `precipitation_multiplier` | <small>1.0</small>       | <small>– | <small>Multiplicative scaling factor for precipitation data |
+| `minimum_snowfall` | <small>0.00001</small>           | <small>m | <small>Minimum snowfall per simulation timestep |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
