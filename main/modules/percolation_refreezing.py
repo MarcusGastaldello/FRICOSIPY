@@ -38,20 +38,17 @@ def percolation_refreezing(GRID, hydro_year, surface_water, dt):
     # Only run percolation and refreezing modules if water present:
     if (np.any(GRID.get_liquid_water_content()) != 0):
 
-        # Sub-surface Refreezing:
-        water_refrozen = refreezing(GRID, hydro_year)
-
         # Water Percolation, Storage & Run-off:
-        heterogeneous_percolation_allowed = ['bucket','Darcy']
-        if heterogeneous_percolation_method == 'bucket':
+        standard_percolation_allowed = ['bucket','Darcy']
+        if standard_percolation_method == 'bucket':
             Q = method_bucket_scheme(GRID)
-        elif heterogeneous_percolation_method == 'Darcy':
+        elif standard_percolation_method == 'Darcy':
             Q = method_Darcy(GRID, dt)
         else:
-            raise ValueError("Heterogeneous percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(heterogeneous_percolation_method, ", ".join(heterogeneous_percolation_allowed)))
+            raise ValueError("Standard percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(standard_percolation_method, ", ".join(standard_percolation_allowed)))
 
         # Sub-surface Refreezing:
-        #water_refrozen = refreezing(GRID, hydro_year)
+        water_refrozen = refreezing(GRID, hydro_year)
 
     else:
         Q , water_refrozen = 0, 0
@@ -162,7 +159,6 @@ def method_Darcy(GRID, dt):
     dt_cumulative = 0.0
 
     while dt_cumulative < dt:
-
 
         # Integration timestep:
         dt_step = np.minimum(dt_stable, dt - dt_cumulative)
