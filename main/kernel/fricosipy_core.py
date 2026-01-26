@@ -91,6 +91,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 SNOW_HEIGHT (t)                 ::    Snow height [m]
                 SNOW_WATER_EQUIVALENT (t)       ::    Snow water equivalent [m w.e.]
                 TOTAL_HEIGHT (t)                ::    Total height [m]
+                SURFACE_ELEVATION (t)           ::    Surface elevation [m a.s.l.]
                 SURFACE_TEMPERATURE (t)         ::    Surface temperature [°C]
                 SURFACE_ALBEDO (t)              ::    Surface albedo [-]
                 N_LAYERS (t)                    ::    Number of layers [-]
@@ -279,10 +280,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     _RUNOFF = np.full(nt,np.nan, dtype=precision)
     _MASS_BALANCE = np.full(nt,np.nan, dtype=precision)
 
-    # Other Information (9):
+    # Other Information (10):
     _SNOW_HEIGHT = np.full(nt,np.nan, dtype=precision)
     _SNOW_WATER_EQUIVALENT = np.full(nt,np.nan, dtype=precision)
     _TOTAL_HEIGHT = np.full(nt,np.nan, dtype=precision)
+    _SURFACE_ELEVATION = np.full(nt,np.nan, dtype=precision)
     _SURFACE_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
     _SURFACE_ALBEDO = np.full(nt,np.nan, dtype=precision)
     _N_LAYERS = np.full(nt,np.nan, dtype=precision)     
@@ -477,7 +479,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
-            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
 
@@ -659,10 +661,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _RUNOFF[idx_res] = RUNOFF_AGG.sum()
             _MASS_BALANCE[idx_res] = MASS_BALANCE_AGG.sum()
 
-            # Other Information (Instantaneous) (9):
+            # Other Information (Instantaneous) (10):
             _SNOW_HEIGHT[idx_res] = GRID.get_total_snowheight()
             _SNOW_WATER_EQUIVALENT[idx_res] = np.sum(np.asarray(GRID.get_snow_heights()) * (np.asarray(GRID.get_snow_densities()) / water_density))
             _TOTAL_HEIGHT[idx_res] = GRID.get_total_height()
+            _SURFACE_ELEVATION[idx_res] = np.nan
             _SURFACE_TEMPERATURE[idx_res] = surface_temperature - zero_temperature
             _SURFACE_ALBEDO[idx_res] = albedo
             _N_LAYERS[idx_res] = GRID.get_number_layers()
@@ -771,7 +774,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
-            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
 
