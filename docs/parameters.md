@@ -76,8 +76,6 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### Physical Processes Parameters
 
-A
-
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
 | `albedo_fresh_snow` | <small>0.85                       | – | <small>Albedo of fresh snow</small> |
