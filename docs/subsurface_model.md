@@ -40,10 +40,10 @@ The *FRICOSIPY* model then uses a linear logistic transfer function based on the
 
 ### Advanced Precipitation Methods
 
-??? "**$(i)$ Three-Phase Anomaly**"
+??? "**$(i)$ Mattea et al. (2021)**"
 
     <br>
-    Alternatively, the user can employ the *three-phase anomaly* method in which the model temporally downscales a spatially variable annual precipitation climatology into an hourly precipitation time series with adjustments for annual variability.
+    Alternatively, the user can employ the *three-phase anomaly* method of [Mattea et al. (2021)](https://doi.org/10.5194/tc-15-3181-2021) in which the model temporally downscales a spatially variable annual precipitation climatology into an hourly precipitation time series with adjustments for annual variability.
 
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
