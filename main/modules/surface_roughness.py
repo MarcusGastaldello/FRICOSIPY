@@ -19,13 +19,13 @@ from parameters import *
 def update_roughness(GRID):
     """ This module calculates the temporal change of the surface roughess """
     
-    surface_roughness_allowed = ['Moelg12','constant']
-    if surface_roughness_method == 'Moelg12':
+    roughness_allowed = ['Moelg12','constant']
+    if roughness_method == 'Moelg12':
         surface_roughness = method_Moelg(GRID)
-    elif surface_roughness_method == 'constant':
+    elif roughness_method == 'constant':
         surface_roughness = constant_surface_roughness
     else:
-        raise ValueError("Surface roughness method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_roughness_method,", ".join(surface_roughness_allowed)))
+        raise ValueError("Roughness method = \"{:s}\" is not allowed, must be one of {:s}".format(roughness_method,", ".join(roughness_allowed)))
     return surface_roughness
 
 # ====================================================================================================================

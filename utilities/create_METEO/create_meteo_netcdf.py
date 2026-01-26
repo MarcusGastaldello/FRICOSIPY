@@ -1,7 +1,7 @@
 """
     ==================================================================
 
-              CREATE METEOROLOGICAL (METEO) INPUT FILE PROGRAM
+              CREATE METEOROLOGICAL (METEO) INPUTFILE PROGRAM
 
         This file creates the model input meteo file that contains 
         contains the meteorological data varying through time (t)
@@ -23,10 +23,7 @@
 
         Optional Variables:
 
-        T2_LAPSE (t)                 ::    Air Temperature Lapse Rate [K m-1]
-        D (t)                        ::    Precipitation Downscaling Coefficient [-]
-        PRECIPITATION_ANOMALY (t)    ::    Annual Precipitation Anomaly [-]
-        
+        T2_LAPSE (t)   ::    Air Temperature Lapse Rate [K m-1]
 
     ==================================================================
 """
@@ -175,11 +172,17 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         D = np.asarray(df['D'].apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_time(ds, D, 'D', '-', 'Precipitation Downscaling Coefficient')
 
-    # Annual Precipitation Anomaly [-]
-    if 'PRECIPITATION_ANOMALY' in df.columns:
-        print(f"\t 'PRECIPITATION_ANOMALY' - Annual Precipitation Anomaly [-]     Min: {np.round(df['PRECIPITATION_ANOMALY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_ANOMALY'].max(),2)}")
-        PRECIPITATION_ANOMALY = np.asarray(df['PRECIPITATION_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
-        add_variable_along_time(ds, PRECIPITATION_ANOMALY, 'PRECIPITATION_ANOMALY', '-', 'Annual Precipitation Anomaly')
+    # Annual Accumulation Anomaly [-]
+    if 'ACC_ANOMALY' in df.columns:
+        print(f"\t 'ACC_ANOMALY' - Annual Accumulation Anomaly [-]     Min: {np.round(df['ACC_ANOMALY'].min(),2)} -- Max: {np.round(df['ACC_ANOMALY'].max(),2)}")
+        ACC_ANOMALY = np.asarray(df['ACC_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
+        add_variable_along_time(ds, ACC_ANOMALY, 'ACC_ANOMALY', '-', 'Annual Accumulation Anomaly')
+    
+    # Annual Sublimation Anomaly [-]
+    if 'SUB_ANOMALY' in df.columns:
+        print(f"\t 'SUB_ANOMALY' - Annual Sublimation Anomaly [-]      Min: {np.round(df['SUB_ANOMALY'].min(),2)} -- Max: {np.round(df['SUB_ANOMALY'].max(),2)}")
+        SUB_ANOMALY = np.asarray(df['SUB_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
+        add_variable_along_time(ds, SUB_ANOMALY, 'SUB_ANOMALY', '-', 'Annual Sublimation Anomaly')
 
     # ============================== #
     # Write Input Meteo File to Disc 
@@ -207,8 +210,8 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Create meteo input file from csv file.')
     parser.add_argument('-c', '-csv_file', dest='csv_file', help='Csv file(see readme for file convention)')
-    parser.add_argument('-m', '-meteo_file', dest='meteo_file', help='Meteo file')
-    parser.add_argument('-s', '-start_date', dest='start_date', help='Start date')
+    parser.add_argument('-o', '-meteo_file', dest='meteo_file', help='Meteo file')
+    parser.add_argument('-b', '-start_date', dest='start_date', help='Start date')
     parser.add_argument('-e', '-end_date', dest='end_date', help='End date')
 
     args = parser.parse_args()

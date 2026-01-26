@@ -5,8 +5,8 @@ site_description: "The University of Fribourg Variant of the Coupled Snow & Ice 
 
 theme:
   name: readthedocs
-  highlightjs: false
-  logo: images/FRICOSIPY-logo-blue.png
+  highlightjs: true
+  logo: images/FRICOSIPY-logo-transparent.png
   custom_dir: docs/custom_theme
 
 extra:
@@ -28,12 +28,8 @@ markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
   - pymdownx.details
-  - pymdownx.superfences:
-  - pymdownx.highlight:
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
+  - pymdownx.superfences
   - attr_list
-  - md_in_html
 
 nav:
   - Home: index.md
@@ -49,11 +45,6 @@ nav:
     - Result Viewer: result_viewer.md
   - "Advanced":
     - Model Architecture: model_architecture.md
-  - "Support":
-    - Contact: contact.md
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
-
-extra_css:
-  - css/custom.css

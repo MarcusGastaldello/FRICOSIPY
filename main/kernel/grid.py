@@ -253,16 +253,22 @@ class Grid:
         computational efficiency.
         """
 
+        # Remove layers if they get too small
+        idx = self.get_number_layers() - 1
+        if self.get_node_height(idx) < minimum_snow_layer_height:
+            self.remove_node([idx])
+
         # Merge uppermost layer with the second layer unless it exceeds the maximum layer height or they are from different hydrological years
         if (self.get_number_layers() >= 2):  
             if ((self.get_node_height(0) + self.get_node_height(1) <= maximum_simulation_layer_height) and (self.get_node_hydro_year(0) == self.get_node_hydro_year(1))):
                 self.merge_nodes(0)
         
         # Merge into coarser layers if a layer goes beyond the region of interest:
-        idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
-        if (idx + 1 <= (self.get_number_layers() - 1)): 
-            if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
-                self.merge_nodes(idx)
+        if self.get_depth()[-1] > coarse_layer_threshold:
+            idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
+            if (idx + 1 <= (self.get_number_layers() - 1)): 
+                if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
+                    self.merge_nodes(idx)
 
         # If last layer depth exceeds the desired subsurface measurement depth, remove it
         idx = self.get_number_layers() - 1

@@ -15,35 +15,35 @@
 # =================== #
 
 # Filepaths:
-data_path = './data/'            # ('./data' current directory | '../data' parent directory)
+data_path = '../data/'            # ('./data' current directory | '../data' parent directory)
 
 # Input Files:
-static_netcdf = '<static_file>.nc'
-meteo_netcdf = '<meteo_file>.nc'
-illumination_netcdf = '<illumination_file>.nc'
+static_netcdf = 'Static_Colle_Gnifetti_20m.nc'
+meteo_netcdf = 'Meteo_Colle_Gnifetti_1H_1939-2025.nc'
+illumination_netcdf = 'Illumination_Colle_Gnifetti_20m.nc'
 
 # Output File:
-output_netcdf = '<output_file>.nc'
+output_netcdf = 'Output_Colle_Gnifetti_1999-2025_Melting Test.nc'
 
 # ================= #
 # SIMULATION PERIOD 
 # ================= #
 
 # Date Range:
-time_start   = '2000-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
-time_end     = '2024-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
+time_start   = '1999-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
+time_end     = '2025-09-30T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
 # ========================== #
 # OUTPUT REPORTING FREQUENCY 
 # ========================== #
 
 # Model Spin-up
-model_spin_up = False              # Output variables are not aggregated during an initialisation / spin-up phase.
-initial_timestamp  = None          # (Datetime (yyyy-mm-ddThh:mm) , if unused - 'None')
+model_spin_up = False                     # Output variables are not aggregated during an initialisation / spin-up phase.
+initial_timestamp  = None  # (Datetime (yyyy-mm-ddThh:mm) , if unused - 'None')
 
 # Output Timestamps:
-reduced_output = False             # Only report output variables on user-defined output timestamps.
-output_timestamps = None           # CSV file with desired output timestamps (if unused - 'None').
+reduced_output = True                                       # Only report output variables on user-defined output timestamps.
+output_timestamps = 'Output_Timestamps_3H_1999-2025.csv'    # CSV file with desired output timestamps (if unused - 'None').
 
 # ======================= #
 # SPATIAL EXTENT / SUBSET 
@@ -53,8 +53,8 @@ output_timestamps = None           # CSV file with desired output timestamps (if
 grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 - Metric Swiss CH1903+/LV95)
 
 # Reduce Spatial Extent
-spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
-[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] # (if unused - 'None')
+spatial_subset = True            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
+[x_min, x_max, y_min, y_max] = [2633790, 2633850, 1086560, 1086620] # (if unused - 'None')
 
 # ================= #
 # OUTPUT VARIABLES:
@@ -75,7 +75,7 @@ subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONT
 # SIMULATION PARALLELIZATION 
 # ========================== #
 
-workers = 1                       # Number of processers/workers to simulatenously simulate grid nodes (Note: RAM/memory is shared by the number of processors selected)
+workers = 5                       # Number of processers/workers to simulatenously simulate grid nodes (Note: RAM/memory is shared by the number of processors selected)
 local_port = 8786                 # port for local cluster
 
 # ======================== #

@@ -21,11 +21,14 @@ from numba import njit
 def densification(GRID,ACCUMULATION,dt):
     """ This module calculates the dry densification of the snowpack """
 
-    densification_allowed = ['Anderson76', 'Ligtenberg11', 'disabled']
-    if dry_densification_method == 'Anderson76':
+    densification_allowed = ['Boone02', 'Ligtenberg11', 'disabled']
+    if dry_densification_method == 'Boone02':
         method_Boone(GRID,dt)
     elif dry_densification_method == 'Ligtenberg11':
-        method_Ligtenberg(GRID,ACCUMULATION,dt)
+        if ACCUMULATION is None:
+            raise ValueError("Error: Annual accumulation ('ACCUMULATION') [m w.e.] must be supplied in the input STATIC file in order to use the Ligtenberg et al. 2011 densification method!")
+        else:
+            method_Ligtenberg(GRID,ACCUMULATION,dt)
     elif densification_method == 'disabled':
         pass
     else:
@@ -33,14 +36,14 @@ def densification(GRID,ACCUMULATION,dt):
 
 # ====================================================================================================================
 
-# ==================== #
-# Anderson 1976 Method
-# ==================== #
+# ================= #
+# Boone 2002 Method
+# ================= #
 
 @njit
 def method_Boone(GRID,dt):
     """ Densification based on overburden pressure and snow thermal metamorphosis
-        after Anderson (1976)
+        after Boone (2002)
 
         Parameters:
                     dt               ::    Integration time in a model time-step [s]

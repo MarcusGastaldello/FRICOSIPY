@@ -1,4 +1,4 @@
-.. image:: https://github.com/MarcusGastaldello/FRICOSIPY/blob/main/docs/images/FRICOSIPY-figure-logo.png
+.. image:: https://github.com/MarcusGastaldello/FRICOSIPY/blob/5187afe8a43662a2afdf812cceba2aef4d079f21/docs/images/FRICOSIPY-figure-logo.png
 
 The University of Fribourg variant of the Coupled Snow & Ice Model in Python (FRICOSIPY) is a 1-dimensonal, coupled surface energy balance and
 multi-layer subsurface firn model that evaluates the mass balance of a glacier.
@@ -23,7 +23,7 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/en/latest/ <https://fric
         :target: https://doi.org/10.5281/zenodo.2579668
 
 :Documentation:
-    .. image:: https://img.shields.io/badge/Docs-FRICOSIPY%20User%20Guide%20v1.3-red.svg
+    .. image:: https://img.shields.io/badge/Docs-FRICOSIPY%20User%20Guide-red.svg
         :target: https://fricosipy.readthedocs.io/en/latest/ 
 
 :License:
@@ -32,7 +32,7 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/en/latest/ <https://fric
 
 :Support / Contact:
     .. image:: https://img.shields.io/badge/Contact-Marcus%20Gastaldello-blue.svg
-        :target: https://fricosipy.readthedocs.io/en/latest/contact/
+        :target: https://www.unifr.ch/directory/en/people/329166/38c19
 
 
     .. image:: https://img.shields.io/badge/ORCID-0009%200003%202384%203617-brightgreen.svg
@@ -44,16 +44,9 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/en/latest/ <https://fric
 Citation
 =======
 
-Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.0.) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
+Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
 
 ----
-
-
-
-
-
-
-
 
 
 
