@@ -171,10 +171,10 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         else:
             raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
 
-    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
+    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [mm w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
     elif precipitation_method == 'Mattea21':
         if ('PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys())) and ('PRECIPITATION_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
-            RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+            RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * precipitation_multiplier
         else:
             raise ValueError("Error: All three variables of the three phase precipitation model ('PRECIPITATION_CLIMATOLOGY', 'PRECIPITATION_ANOMALY','D') must be supplied in the input STATIC & METEO files")
 
