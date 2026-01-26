@@ -32,7 +32,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameterisation | Default method | Alternative methods |
 |---|---|---|
-| [**Precipitation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#precipitation) | Standard | Three-phase anomaly|
+| [**Precipitation**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#precipitation) | Standard | [Mattea et al. (2021)](https://doi.org/10.5194/tc-15-3181-2021) |
 | [**Fresh snow density**]() | Constant | [Vionnet et al. (2012)](https://doi.org/10.5194/gmd-5-773-2012) |
 | [**Thermal conductivity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#thermal-conductivitiy-parameterisations) | Bulk-volumetric | [Sturm (1997)](https://doi.org/10.3189/S0022143000002781) or <br> [Calonne et al. (2019)](https://doi.org/10.1029/2019GL085228) |
 | [**Specific heat capacity**](https://fricosipy.readthedocs.io/en/latest/subsurface_model/#specific-heat-capacity-parameterisations) | Bulk-volumetric | [Yen (1981)](https://apps.dtic.mil/sti/citations/ADA103734) |
