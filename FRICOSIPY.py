@@ -3,7 +3,7 @@
 """
     ======================================================================================================================================================
 
-                                                                    FRICOSIPY VERSION 1.2
+                                                                    FRICOSIPY VERSION 1.3.0
 
     This is the main executable file of the 'FRIbourg COupled Snowpack and Ice surface energy and mass balance glacier model in PYthon' (FRICOSIPY). 
     The original COSIPY model was initially written by Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
@@ -11,7 +11,7 @@
 
     The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
 
-    Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. 
+    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.0) [Computer software]. 
     https://github.com/MarcusGastaldello/FRICOSIPY
 
     ======================================================================================================================================================
