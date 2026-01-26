@@ -18,7 +18,7 @@
 
         Optional Variables:
 
-        PRECIPITATION_CLIMATOLOGY (x,y)   ::    Annual accumulation climatology [m w.e. a-1]
+        PRECIPITATION_CLIMATOLOGY (x,y)   ::    Annual accumulation climatology [mm w.e. a-1]
         BASAL (x,y)                       ::    Basal heat flux [mW m-2]
         THICKNESS (x,y)                   ::    Glacier depth / thickness [m]
 
@@ -154,7 +154,7 @@ def create_static_input(csv_file, static_file):
     if 'PRECIPITATION_CLIMATOLOGY' in df.columns:
         print(f"\t 'PRECIPITATION_CLIMATOLOGY' - Precipitation Climatology [m a\u207b\xb9]   Min: {np.round(df['PRECIPITATION_CLIMATOLOGY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_CLIMATOLOGY'].max(),2)}")
         PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
-        add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Precipitation Climatology')
+        add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'mm a\u207b\xb9', 'Precipitation Climatology')
 
     # Basal Heat Flux [BASAL]
     if 'BASAL' in df.columns:
@@ -204,4 +204,5 @@ if __name__ == "__main__":
 
 
 # ============================================================================================= #
+
 
