@@ -25,10 +25,7 @@ def densification(GRID,ACCUMULATION,dt):
     if dry_densification_method == 'Anderson76':
         method_Boone(GRID,dt)
     elif dry_densification_method == 'Ligtenberg11':
-        if ACCUMULATION is None:
-            raise ValueError("Error: Annual accumulation ('ACCUMULATION') [m w.e.] must be supplied in the input STATIC file in order to use the Ligtenberg et al. 2011 densification method!")
-        else:
-            method_Ligtenberg(GRID,ACCUMULATION,dt)
+        method_Ligtenberg(GRID,ACCUMULATION,dt)
     elif densification_method == 'disabled':
         pass
     else:
