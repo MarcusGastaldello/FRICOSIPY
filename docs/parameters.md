@@ -80,10 +80,10 @@ A
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `albedo_fresh_snow` | <small>0.85                       | – | Albedo of fresh snow </small> |
+| `albedo_fresh_snow` | <small>0.85                       | – | <small>Albedo of fresh snow</small> |
 | `albedo_firn` | <small>0.52</small>                              | – | Albedo of firn |
 | `albedo_ice` | <small>0.30</small>                               | – | Albedo of ice |
-| `albedo_characteristic_snow_depth` | <small>3.0</small>          | cm | Characteristic scale for snow depth |
+| `albedo_characteristic_snow_depth` | <small>3.0</small>          | <small>cm | Characteristic scale for snow depth |
 | `cloud_transmissivity_coeff_alpha` | <small>0.233</small>        | – | Cloud transmissivity coefficient alpha |
 | `cloud_transmissivity_coeff_beta` | <small>0.415</small>         | – | Cloud transmissivity coefficient beta |
 | `cloud_emissivity` | <small>0.96</small>                         | – | Emissivity of clouds |
