@@ -133,7 +133,7 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     z   = np.asarray(GRID.get_depth())
 
     # Convert units:
-    b = ACCUMULATION * 1000 # accumulation [mm a-1]
+    b = max(ACCUMULATION * 1000, 1) # accumulation [mm a-1]
     dt = dt / 31536000 # timestep as a fraction of a calendar year
 
     # Binary mask for snow/ice determination:
