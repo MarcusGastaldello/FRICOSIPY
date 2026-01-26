@@ -162,7 +162,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         PRES = METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * -0.006)))
     
     # Precipitation:
-    precipitation_allowed = ['standard','three-phase anomaly']
+    precipitation_allowed = ['standard','Mattea21']
 
     # Standard precipiation data [mm] (Van Pelt et al., 2019)
     if precipitation_method == 'standard':
@@ -171,8 +171,8 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         else:
             raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
 
-    # Three-phase precipitation model (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
-    elif precipitation_method == 'three-phase anomaly':
+    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
+    elif precipitation_method == 'Mattea21':
         if ('PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys())) and ('PRECIPITATION_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
             RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
         else:
