@@ -23,7 +23,10 @@
 
         Optional Variables:
 
-        T2_LAPSE (t)   ::    Air Temperature Lapse Rate [K m-1]
+        T2_LAPSE (t)                 ::    Air Temperature Lapse Rate [K m-1]
+        D (t)                        ::    Precipitation Downscaling Coefficient [-]
+        PRECIPITATION_ANOMALY (t)    ::    Annual Precipitation Anomaly [-]
+        
 
     ==================================================================
 """
