@@ -86,7 +86,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 RUNOFF (t)                      ::    Surface Runoff [m w.e.]
                 MASS_BALANCE (t)                ::    Mass balance [m w.e.]
 
-            # Other Information (9):
+            # Other Information (10):
 
                 SNOW_HEIGHT (t)                 ::    Snow height [m]
                 SNOW_WATER_EQUIVALENT (t)       ::    Snow water equivalent [m w.e.]
