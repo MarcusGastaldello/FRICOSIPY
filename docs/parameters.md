@@ -78,7 +78,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `albedo_fresh_snow` | <small>0.85</small>                        | – | Albedo of fresh snow |
+| `albedo_fresh_snow` | <small>0.85                       | – | Albedo of fresh snow </small> |
 | `albedo_firn` | <small>0.52</small>                              | – | Albedo of firn |
 | `albedo_ice` | <small>0.30</small>                               | – | Albedo of ice |
 | `albedo_characteristic_snow_depth` | <small>3.0</small>          | cm | Characteristic scale for snow depth |
