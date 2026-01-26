@@ -282,12 +282,15 @@ def interpolate_Tz(GRID):
     n = GRID.get_number_layers()
 
     def interpolate(target_z):
-    
+
+		# Skip the first node if the fresh snow layer is too thin (< 2cm)
+        start_idx = 1 if z[0] < 0.02 else 0
+		
         # Determine the closest subsurface node index:
-        idx_1 = np.abs(z - target_z).argmin()
+        idx_1 = np.abs(z[start_idx:] - target_z).argmin() + start_idx
 
         # Determine the adjacent subsurface node index that bounds the target depth: 
-        idx_2 = max(0, idx_1 - 1) if z[idx_1] > target_z else min(n - 1, idx_1 + 1)
+        idx_2 = max(start_idx, idx_1 - 1) if z[idx_1] > target_z else min(n - 1, idx_1 + 1)
 
         # Linearly interpolate the target subsurface temperature (ensuring no division by zero error):
         dz = z[idx_1] - z[idx_2]
@@ -325,5 +328,6 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
+
 
 
