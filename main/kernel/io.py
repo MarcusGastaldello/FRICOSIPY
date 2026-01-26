@@ -211,7 +211,7 @@ class IOClass:
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
-        self.RESULT.attrs['Heterogeneous_percolation_method'] = heterogeneous_percolation_method
+        self.RESULT.attrs['Standard_percolation_method'] = standard_percolation_method
         self.RESULT.attrs['Preferential_percolation_method'] = preferential_percolation_method
         self.RESULT.attrs['Hydraulic_conductivity_method'] = hydraulic_conductivity_method
         self.RESULT.attrs['Irreducible_water_content_method'] = irreducible_water_content_method 
