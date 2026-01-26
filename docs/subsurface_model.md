@@ -375,6 +375,9 @@ Firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow
     </div>
     <small> where $C$ is the accumulation rate (mm yr$^{-1}$), $\rho$ is the layer density (kg m$^{-3}$), $T$ is the current layer temperature (K), $\overline{T}$ is the average layer temperature of the preceding year (K), $R$ = 8.314 J      mol$^{-1}$ K$^{-1}$ is the universal gas constant and $E_{\text{c}}$ = 60 kJ mol$^{-1}$ and $E_{\text{g}}$ = 42.4 kJ mol$^{-1}$ are the activation energies associated with creep by lattice diffusion and grain growth respectively. </small>
 
+    !!! note
+        The [Ligtenberg et al. (2011)](https://doi.org/10.5194/tc-5-809-2011)
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #BFBFBF; border: 2px solid #404040; border-radius: 4px; "></span>  Snow Metamorphism
