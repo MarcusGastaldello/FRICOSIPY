@@ -18,14 +18,14 @@ from numba import njit
 # Dry Densification
 # ================= #
 
-def densification(GRID,ACCUMULATION,dt):
+def densification(GRID,dt,ACCUMULATION):
     """ This module calculates the dry densification of the snowpack """
 
     densification_allowed = ['Anderson76', 'Ligtenberg11', 'disabled']
     if dry_densification_method == 'Anderson76':
         method_Boone(GRID,dt)
     elif dry_densification_method == 'Ligtenberg11':
-        method_Ligtenberg(GRID,ACCUMULATION,dt)
+        method_Ligtenberg(GRID,dt,ACCUMULATION)
     elif densification_method == 'disabled':
         pass
     else:
@@ -101,7 +101,7 @@ def method_Boone(GRID,dt):
 # ================================================================= #
 
 @njit
-def method_Ligtenberg(GRID,ACCUMULATION,dt):
+def method_Ligtenberg(GRID,dt,ACCUMULATION):
     """ Densification based on in situ measurements of Antarctic snow compaction (used in the EBFM)
         after Arthern et al. 2010 (modified by Ligtenberg et al. 2011)
 
@@ -133,7 +133,7 @@ def method_Ligtenberg(GRID,ACCUMULATION,dt):
     z   = np.asarray(GRID.get_depth())
 
     # Convert units:
-    b = max(ACCUMULATION * 1000, 1) # accumulation [mm a-1]
+    b = max(ACCUMULATION * 1000, 1) # accumulation [mm w.e. a-1]
     dt = dt / 31536000 # timestep as a fraction of a calendar year
 
     # Binary mask for snow/ice determination:
