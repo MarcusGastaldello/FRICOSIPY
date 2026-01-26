@@ -341,10 +341,10 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     # ========= #
 
     # Initial Variables:
+    cumulative_mass_balance = 0
+    annual_mass_balances = np.empty(0)
     cumulative_melt = 0.0
-    surface_temperature = 270
     Initial_Firn_Temperature = np.nan
-    albedo_snow = albedo_fresh_snow
 
     # Indexes:
     idx_agg = 0 # Aggregation index (index of the variable aggregation arrays)
@@ -393,7 +393,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # ======================================= #       
 
         # Update Albedo
-        albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
+        albedo, albedo_snow = update_albedo(GRID, albedo_snow = albedo_fresh_snow, surface_temperature = 270)
 
         # Calculate net shortwave radiation
         SW_net = SWin[t] * (1 - albedo)
@@ -507,7 +507,19 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # DRY DENSIFICATION
         # ================= #
 
-        densification(GRID, ACCUMULATION, dt)
+        # Auxillary function for calculating accumulation for Ligtenberg et al. (2011) firn densification scheme:
+
+        # Calculate annual accumulation when it is a new hydrological year (not the first year in case it is incomplete)
+        if (HYDRO_YEAR[t] != HYDRO_YEAR[max(t-1, 0)]) and (HYDRO_YEAR[t] != (HYDRO_YEAR[0] + 1)):
+
+            # Append annual mass balance and calculate accumulation (negative if ablation):
+            annual_mass_balances = np.append(annual_mass_balances, cumulative_mass_balance)
+            ACCUMULATION = np.mean(annual_mass_balances)
+
+            # Reset the annual mass balance for the next hydrological year:
+            cumulative_mass_balance = 0
+
+        densification(GRID, dt, ACCUMULATION = np.nan)
 
         # ============ #
         # MASS BALANCE
@@ -516,6 +528,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         surface_mass_balance = SNOWFALL * (density_fresh_snow / water_density) - surface_melt + sublimation + deposition + evaporation
         internal_mass_balance = water_refrozen - subsurface_melt
         mass_balance = surface_mass_balance + internal_mass_balance
+        cumulative_mass_balance =+  mass_balance
 
         # ================== #
         # INITIAL CONDITIONS
