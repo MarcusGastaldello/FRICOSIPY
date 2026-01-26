@@ -49,6 +49,9 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Model Parameters
+
+The following tables list all the parameters in the *FRICOSIPY* model alongside their default values.
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### General Model Parameters
