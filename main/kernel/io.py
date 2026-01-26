@@ -408,13 +408,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.SNOW_WATER_EQUIVALENT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_ELEVATION' in self.other):
+            self.SURFACE_ELEVATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_ALBEDO' in self.other):
@@ -467,7 +469,7 @@ class IOClass:
         local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_GROUND,local_RAIN_FLUX,local_MELT_ENERGY, \
         local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SURFACE_MASS_BALANCE, \
         local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MASS_BALANCE, \
-        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
+        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_ELEVATION,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
         local_LAYER_DEPTH,local_LAYER_HEIGHT,local_LAYER_DENSITY,local_LAYER_TEMPERATURE,local_LAYER_WATER_CONTENT,local_LAYER_COLD_CONTENT,local_LAYER_POROSITY,local_LAYER_ICE_FRACTION, \
         local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_HYDRO_YEAR,local_LAYER_GRAIN_SIZE):
         """ Fills the global result arrays with local variables from each node """
@@ -528,13 +530,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE[:,y,x] = local_MASS_BALANCE         
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT[:,y,x] = local_SNOW_HEIGHT
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.SNOW_WATER_EQUIVALENT[:,y,x] = local_SNOW_WATER_EQUIVALENT
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT[:,y,x] = local_TOTAL_HEIGHT
+        if ('SURFACE_ELEVATION' in self.other):
+            self.SURFACE_ELEVATION[:,y,x] = local_SURFACE_ELEVATION     
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE[:,y,x] = local_SURFACE_TEMPERATURE
         if ('SURFACE_ALBEDO' in self.other):
@@ -640,13 +644,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.MASS_BALANCE, 'MASS_BALANCE', 'm w.e.', 'Mass Balance')       
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_HEIGHT, 'SNOW_HEIGHT', 'm', 'Snow Height')
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_WATER_EQUIVALENT, 'SNOW_WATER_EQUIVALENT', 'm w.e.', 'Snow Water Equivalent')
         if ('TOTAL_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.TOTAL_HEIGHT, 'TOTAL_HEIGHT', 'm', 'Total Height')
+        if ('SURFACE_ELEVATION' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_ELEVATION, 'SURFACE_ELEVATION', 'm a.s.l.', 'Surface Elevation')
         if ('SURFACE_TEMPERATURE' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_TEMPERATURE, 'SURFACE_TEMPERATURE', '°C', 'Surface Temperature')
         if ('SURFACE_ALBEDO' in self.other):
