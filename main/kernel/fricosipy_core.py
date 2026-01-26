@@ -470,7 +470,16 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
         # Exit node simulation if all snow/glacier layers are removed
         if GRID.get_number_layers() == 0:
-            break
+            
+            # Prematurely terminate node simulation and return output variables:    
+            return (indY,indX, \
+            _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
+            _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
+            _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
+            _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
+            _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
 
         # ======================== #
         # PERCOLATION & REFREEZING
