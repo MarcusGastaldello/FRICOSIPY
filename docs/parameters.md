@@ -53,11 +53,11 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 ### General Model Parameters
 
-| <small>Parameter | <small>Value | <small>Units | <small>Description |
+| <small>Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `dt`          | <small>3600</small> | <small>s | <small>Simulation time step |
-| `max_depth`   | <small>50</small>   | <small>m | <small>Maximum simulation depth |
-| `max_layers`  | <small>500</small>  | <small>– | <small>Maximum number of subsurface layers |
+| `dt`          | <small>3600</small> | s | Simulation time step |
+| `max_depth`   | <small>50</small>   | m | Maximum simulation depth |
+| `max_layers`  | <small>500</small>  | – | Maximum number of subsurface layers |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -65,12 +65,12 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |-----|:---:|:---:|---|
-| `station_altitude` | <small>3000.0</small>            | <small>m a.s.l. | <small>Altitude of meteorological station |
-| `z` | <small>2.0</small>                              | <small>m | <small>Meteorological data measurement height |
-| `air_temperature_lapse_rate` | <small>-0.006</small>  | <small>K m$^{-1}$ | <small>Air temperature lapse rate |
-| `precipitation_lapse_rate` | <small>0.0002</small>    | <small>% m$^{-1}$ | <small>Precipitation lapse rate |
-| `precipitation_multiplier` | <small>1.0</small>       | <small>– | <small>Multiplicative scaling factor for precipitation data |
-| `minimum_snowfall` | <small>0.00001</small>           | <small>m | <small>Minimum snowfall per simulation timestep |
+| `station_altitude` | <small>3000.0</small>            | m a.s.l. | Altitude of meteorological station |
+| `z` | <small>2.0</small>                              | m | Meteorological data measurement height |
+| `air_temperature_lapse_rate` | <small>-0.006</small>  | K m$^{-1}$ | Air temperature lapse rate |
+| `precipitation_lapse_rate` | <small>0.0002</small>    | % m$^{-1}$ | Precipitation lapse rate |
+| `precipitation_multiplier` | <small>1.0</small>       | – | Multiplicative scaling factor for precipitation data |
+| `minimum_snowfall` | <small>0.00001</small>           | m | Minimum snowfall per simulation timestep |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -78,10 +78,10 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 
 | Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `albedo_fresh_snow` | <small>0.85                       | – | <small>Albedo of fresh snow</small> |
+| `albedo_fresh_snow` | <small>0.85</small>                        | – | Albedo of fresh snow |
 | `albedo_firn` | <small>0.52</small>                              | – | Albedo of firn |
 | `albedo_ice` | <small>0.30</small>                               | – | Albedo of ice |
-| `albedo_characteristic_snow_depth` | <small>3.0</small>          | <small>cm | Characteristic scale for snow depth |
+| `albedo_characteristic_snow_depth` | <small>3.0</small>          | cm | Characteristic scale for snow depth |
 | `cloud_transmissivity_coeff_alpha` | <small>0.233</small>        | – | Cloud transmissivity coefficient alpha |
 | `cloud_transmissivity_coeff_beta` | <small>0.415</small>         | – | Cloud transmissivity coefficient beta |
 | `cloud_emissivity` | <small>0.96</small>                         | – | Emissivity of clouds |
