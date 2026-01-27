@@ -20,7 +20,6 @@ from numba import njit
 # Penetrating Radiation
 # ===================== #
 
-@njit
 def penetrating_radiation(GRID, SW_net, dt):
     """ This module calculates the amount of subsurface melt from penetrating shortwave radiation """
     penetrating_radiation_allowed = ['Bintanja95','disabled']
