@@ -14,7 +14,6 @@ from constants import *
 from parameters import *
 from numba import njit
 
-@njit
 def update_albedo(GRID,albedo_snow,surface_temperature):
     """ This function calculates the temporal change of the surface albedo """
 
