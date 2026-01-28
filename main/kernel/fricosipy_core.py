@@ -138,11 +138,6 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     else:
         BASAL = basal_heat_flux
 
-    if 'PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys()):
-        PRECIPITATION_CLIMATOLOGY = STATIC.PRECIPITATION_CLIMATOLOGY.values
-    else:
-        PRECIPITATION_CLIMATOLOGY = None
-
     # ================================= #
     # GET METEOROLOGICAL DATA FROM FILE
     # ================================= #
@@ -342,9 +337,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     # TIME LOOP
     # ========= #
 
-    # Initial Variables:
-    cumulative_mass_balance = 0
+    # Initial Values:
+    accumulation = 1
+    albedo_snow = albedo_fresh_snow
+    surface_temperature = 270
     annual_mass_balances = np.empty(0)
+    cumulative_mass_balance = 0
     cumulative_melt = 0.0
     Initial_Firn_Temperature = np.nan
 
@@ -395,7 +393,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # ======================================= #       
 
         # Update Albedo
-        albedo, albedo_snow = update_albedo(GRID, albedo_snow = albedo_fresh_snow, surface_temperature = 270)
+        albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
 
         # Calculate net shortwave radiation
         SW_net = SWin[t] * (1 - albedo)
@@ -466,13 +464,16 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             pass
             #GRID.add_mass(net_mass_change) 
 
-        # Remove mass [m w.e.]
-        if net_mass_change < 0:
-            GRID.remove_mass(-net_mass_change)
+        # ============ # 
+        # GLACIER MELT 
+        # ============ # 
 
         # Exit node simulation if all snow/glacier layers are removed
         if GRID.get_number_layers() == 0:
-            
+
+            # Report that the node has melted to the terminal
+            print(f"\tNode [X: {indX}, Y: {indY}] has melted!")
+
             # Prematurely terminate node simulation and return output variables:    
             return (indY,indX, \
             _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
@@ -516,12 +517,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
             # Append annual mass balance and calculate accumulation (negative if ablation):
             annual_mass_balances = np.append(annual_mass_balances, cumulative_mass_balance)
-            ACCUMULATION = np.mean(annual_mass_balances)
+            accumulation = np.mean(annual_mass_balances)
 
             # Reset the annual mass balance for the next hydrological year:
             cumulative_mass_balance = 0
 
-        densification(GRID, dt, ACCUMULATION = np.nan)
+        densification(GRID, dt, accumulation)
 
         # ============ #
         # MASS BALANCE
