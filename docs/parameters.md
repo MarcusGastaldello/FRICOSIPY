@@ -119,8 +119,6 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 | `constant_surface_roughness` | <small>0.001</small>              | m | *(Constant - surface_roughness_method)* Surface roughness constant |
 | `preferential_percolation_depth` | <small>3.0</small>            | m | *(Marchenko et al., 2017)* Characteristic preferential percolation depth |
 | `constant_irreducible_water_content` | <small>0.02</small>       | - | *(Constant - irreducible_water_content_method)* Constant irreducible water content |
-| `temperature_interpolation_depth_1` | <small>10</small>          | m | *(Ligtenberg et al., 2011)* First depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
-| `temperature_interpolation_depth_2` | <small>20</small>          | m | *(Ligtenberg et al., 2011)* Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature |
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
