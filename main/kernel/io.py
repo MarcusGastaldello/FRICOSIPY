@@ -199,18 +199,19 @@ class IOClass:
 
         # Model Parameterisations:
         ## (Surface Energy Balance):
-        self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Albedo_method'] = albedo_method
-        self.RESULT.attrs['Dry_Densification_method'] = dry_densification_method
-        self.RESULT.attrs['Penetrating_method'] = penetrating_method
-        self.RESULT.attrs['Roughness_method'] = roughness_method
+        self.RESULT.attrs['Dry_densification_method'] = dry_densification_method
+        self.RESULT.attrs['Penetrating_radiation_method'] = penetrating_radiation_method
+        self.RESULT.attrs['Roughness_method'] = surface_roughness_method
         self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
         self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
         
-        ## (Surface Energy Balance):
+        ## (Multi-layer Subsurface Model):
+        self.RESULT.attrs['Precipitation_method'] = precipitation_method
+        self.RESULT.attrs['Snow_density_method'] = snow_density_method
         self.RESULT.attrs['Thermal_conductivity_method'] = thermal_conductivity_method
         self.RESULT.attrs['Specific_heat_method'] = specific_heat_method
-        self.RESULT.attrs['Heterogeneous_percolation_method'] = heterogeneous_percolation_method
+        self.RESULT.attrs['Standard_percolation_method'] = standard_percolation_method
         self.RESULT.attrs['Preferential_percolation_method'] = preferential_percolation_method
         self.RESULT.attrs['Hydraulic_conductivity_method'] = hydraulic_conductivity_method
         self.RESULT.attrs['Irreducible_water_content_method'] = irreducible_water_content_method 
@@ -254,24 +255,20 @@ class IOClass:
             self.RESULT.attrs['Albedo_decay_timescale_threshold'] = albedo_decay_timescale_threshold
         elif albedo_method == 'Oerlemans98':
             self.RESULT.attrs['Albedo_mod_snow_aging'] = albedo_decay_timescale
-        if penetrating_method == 'Bintanja95':
+        if penetrating_radiation_method == 'Bintanja95':
             self.RESULT.attrs['Extinction_coeff_snow'] = extinction_coeff_snow
             self.RESULT.attrs['Extinction_coeff_ice'] = extinction_coeff_ice
-        if roughness_method == 'Moelg12':
+        if surface_roughness_method == 'Moelg12':
             self.RESULT.attrs['Surface_roughness_fresh_snow'] = surface_roughness_fresh_snow
             self.RESULT.attrs['Surface_roughness_ice'] = surface_roughness_ice
             self.RESULT.attrs['Surface_roughness_firn'] = surface_roughness_firn
             self.RESULT.attrs['Surface_roughness_timescale'] = surface_roughness_timescale
-        elif roughness_method == 'constant':
+        elif surface_roughness_method == 'constant':
             self.RESULT.attrs['Constant_fresh_snow_density'] = constant_surface_roughness
-
         if preferential_percolation_method == 'Marchenko17':
             self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
         if irreducible_water_content_method == 'constant':
             self.RESULT.attrs['constant_irreducible_water_content'] = constant_irreducible_water_content
-        if dry_densification_method == 'Ligtenberg11':
-            self.RESULT.attrs['Temperature_interpolation_depth_1'] = temperature_interpolation_depth_1
-            self.RESULT.attrs['Temperature_interpolation_depth_2'] = temperature_interpolation_depth_2
 
         # Initial Conditions:
         self.RESULT.attrs['Initial_snowheight'] = initial_snowheight
@@ -326,10 +323,8 @@ class IOClass:
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.LATITUDE, 'LATITUDE', 'm', 'degrees')
         if 'BASAL' in list(self.STATIC.keys()):
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.BASAL, 'BASAL', 'mW m\u207b\xb2', 'Basal Heat Flux')
-        if 'ACCUMULATION' in list(self.STATIC.keys()):
-            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ACCUMULATION, 'ACCUMULATION', 'm a\u207b\xb9', 'Annual Accumulation Climatology')
-        if 'SUBLIMATION' in list(self.STATIC.keys()):
-            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.SUBLIMATION, 'SUBLIMATION', 'm a\u207b\xb9', 'Annual Sublimation Climatology')
+        if 'PRECIPITATION_CLIMATOLOGY' in list(self.STATIC.keys()):
+            self.add_variable_along_northingeasting(self.RESULT, self.STATIC.PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Annual Precipitation Climatology')
         if 'THICKNESS' in list(self.STATIC.keys()):    
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
 
@@ -410,13 +405,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.SNOW_WATER_EQUIVALENT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_ELEVATION' in self.other):
+            self.SURFACE_ELEVATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_ALBEDO' in self.other):
@@ -469,7 +466,7 @@ class IOClass:
         local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_GROUND,local_RAIN_FLUX,local_MELT_ENERGY, \
         local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SURFACE_MASS_BALANCE, \
         local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MASS_BALANCE, \
-        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
+        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_ELEVATION,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
         local_LAYER_DEPTH,local_LAYER_HEIGHT,local_LAYER_DENSITY,local_LAYER_TEMPERATURE,local_LAYER_WATER_CONTENT,local_LAYER_COLD_CONTENT,local_LAYER_POROSITY,local_LAYER_ICE_FRACTION, \
         local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_HYDRO_YEAR,local_LAYER_GRAIN_SIZE):
         """ Fills the global result arrays with local variables from each node """
@@ -530,13 +527,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE[:,y,x] = local_MASS_BALANCE         
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT[:,y,x] = local_SNOW_HEIGHT
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.SNOW_WATER_EQUIVALENT[:,y,x] = local_SNOW_WATER_EQUIVALENT
         if ('TOTAL_HEIGHT' in self.other):
             self.TOTAL_HEIGHT[:,y,x] = local_TOTAL_HEIGHT
+        if ('SURFACE_ELEVATION' in self.other):
+            self.SURFACE_ELEVATION[:,y,x] = local_SURFACE_ELEVATION     
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE[:,y,x] = local_SURFACE_TEMPERATURE
         if ('SURFACE_ALBEDO' in self.other):
@@ -642,13 +641,15 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.MASS_BALANCE, 'MASS_BALANCE', 'm w.e.', 'Mass Balance')       
 
-        # Other Information (9):
+        # Other Information (10):
         if ('SNOW_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_HEIGHT, 'SNOW_HEIGHT', 'm', 'Snow Height')
         if ('SNOW_WATER_EQUIVALENT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_WATER_EQUIVALENT, 'SNOW_WATER_EQUIVALENT', 'm w.e.', 'Snow Water Equivalent')
         if ('TOTAL_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.TOTAL_HEIGHT, 'TOTAL_HEIGHT', 'm', 'Total Height')
+        if ('SURFACE_ELEVATION' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_ELEVATION, 'SURFACE_ELEVATION', 'm a.s.l.', 'Surface Elevation')
         if ('SURFACE_TEMPERATURE' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_TEMPERATURE, 'SURFACE_TEMPERATURE', '°C', 'Surface Temperature')
         if ('SURFACE_ALBEDO' in self.other):

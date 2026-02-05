@@ -91,6 +91,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 SNOW_HEIGHT (t)                 ::    Snow height [m]
                 SNOW_WATER_EQUIVALENT (t)       ::    Snow water equivalent [m w.e.]
                 TOTAL_HEIGHT (t)                ::    Total height [m]
+                SURFACE_ELEVATION (t)           ::    Surface elevation [m a.s.l.]
                 SURFACE_TEMPERATURE (t)         ::    Surface temperature [°C]
                 SURFACE_ALBEDO (t)              ::    Surface albedo [-]
                 N_LAYERS (t)                    ::    Number of layers [-]
@@ -115,30 +116,30 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
   
     """
 
-    # =================== #
-    # INITIALISE SNOWPACK
-    # =================== #
-    GRID = init_snowpack()
-
     # ========================= #
     # GET STATIC DATA FROM FILE
     # ========================= #
 
+    # Required Variables:
     ELEVATION = STATIC.ELEVATION.values
     SLOPE = STATIC.SLOPE.values
     ASPECT = STATIC.ASPECT.values
     LATITUDE = STATIC.LATITUDE.values
     LONGITUDE = STATIC.LONGITUDE.values
+    EASTING = STATIC.EASTING.values
+    NORTHING = STATIC.NORTHING.values
 
+    # Optional Variables:
     if 'BASAL' in list(STATIC.keys()):
         BASAL = STATIC.BASAL.values
     else:
         BASAL = basal_heat_flux
 
-    if 'ACCUMULATION' in list(STATIC.keys()):
-        ACCUMULATION = STATIC.ACCUMULATION.values
-    else:
-        ACCUMULATION = None
+    # =================== #
+    # INITIALISE SNOWPACK
+    # =================== #
+
+    GRID = init_snowpack(STATIC)
 
     # ================================= #
     # GET METEOROLOGICAL DATA FROM FILE
@@ -159,21 +160,30 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     else:
         PRES = METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * -0.006)))
     
-    # Standard precipiation data [mm] (Van Pelt et al., 2019) 
-    if 'RRR' in list(METEO.keys()):
-        RRR = METEO.RRR.values * (1 + (ELEVATION - station_altitude) * precipitation_lapse_rate) * precipitation_multiplier
+    # Precipitation:
+    precipitation_allowed = ['standard','Mattea21']
 
-    # Three phase accumulation model (Accumulation climatology [m] * Annual anomaly [-] * Downscaling coefficient) [mm]
-    elif ('ACCUMULATION' in list(STATIC.keys())) and ('ACC_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
-
-        # Correction for sublimation losses (if known):
-        if ('SUBLIMATION' in list(STATIC.keys())) and ('SUB_ANOMALY' in list(METEO.keys())):
-            RRR = ((STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000 * precipitation_multiplier
+    # Standard precipiation data [mm] (Van Pelt et al., 2019)
+    if precipitation_method == 'standard':
+        if 'RRR' in list(METEO.keys()):
+            RRR = METEO.RRR.values * (1 + (ELEVATION - station_altitude) * precipitation_lapse_rate) * precipitation_multiplier
         else:
-            RRR = STATIC.ACCUMULATION.values * METEO.ACC_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+            raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
+
+    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
+    elif precipitation_method == 'Mattea21':
+        if ('PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys())) and ('PRECIPITATION_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
+            #RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+
+            # Correction for sublimation losses (if known):
+            if ('SUBLIMATION' in list(STATIC.keys())) and ('SUB_ANOMALY' in list(METEO.keys())):
+                RRR = ((STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000 * precipitation_multiplier
+
+        else:
+            raise ValueError("Error: All three variables of the three phase precipitation model ('PRECIPITATION_CLIMATOLOGY', 'PRECIPITATION_ANOMALY','D') must be supplied in the input STATIC & METEO files")
 
     else:
-        raise ValueError("Error: Either Precipitation ('RRR') or the variables of the three phase accumulation model ('ACC_ANOMALY','D','ACCUMULATION') must be supplied in the input METEO & STATIC files")
+        raise ValueError("Precipitation method = \"{:s}\" is not allowed, must be one of {:s}".format(precipitation_method, ", ".join(precipitation_allowed)))
 
     # Remaining variables remain constant across the spatial grid
     RH2 = METEO.RH2.values
@@ -273,10 +283,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     _RUNOFF = np.full(nt,np.nan, dtype=precision)
     _MASS_BALANCE = np.full(nt,np.nan, dtype=precision)
 
-    # Other Information (9):
+    # Other Information (10):
     _SNOW_HEIGHT = np.full(nt,np.nan, dtype=precision)
     _SNOW_WATER_EQUIVALENT = np.full(nt,np.nan, dtype=precision)
     _TOTAL_HEIGHT = np.full(nt,np.nan, dtype=precision)
+    _SURFACE_ELEVATION = np.full(nt,np.nan, dtype=precision)
     _SURFACE_TEMPERATURE = np.full(nt,np.nan, dtype=precision)
     _SURFACE_ALBEDO = np.full(nt,np.nan, dtype=precision)
     _N_LAYERS = np.full(nt,np.nan, dtype=precision)     
@@ -334,11 +345,14 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     # TIME LOOP
     # ========= #
 
-    # Initial Variables:
-    cumulative_melt = 0.0
-    surface_temperature = 270
-    Initial_Firn_Temperature = np.nan
+    # Initial Values:
+    accumulation = 1
     albedo_snow = albedo_fresh_snow
+    surface_temperature = 270
+    annual_mass_balances = np.empty(0)
+    cumulative_mass_balance = 0
+    cumulative_melt = 0.0
+    Initial_Firn_Temperature = np.nan
 
     # Indexes:
     idx_agg = 0 # Aggregation index (index of the variable aggregation arrays)
@@ -462,21 +476,26 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if net_mass_change < 0:
             GRID.remove_mass(-net_mass_change)
 
-        print(GRID.get_number_layers())
+        # ============ # 
+        # GLACIER MELT 
+        # ============ # 
 
         # Exit node simulation if all snow/glacier layers are removed
         if GRID.get_number_layers() == 0:
-            print(f"Stopping: All layers melted at timestep {t}.")
 
+            # Report that the node has melted to the terminal
+            print(f"\t Node [X: {EASTING} , Y: {NORTHING} ] has melted!", flush=True)
+
+            # Prematurely terminate node simulation and return output variables:    
             return (indY,indX, \
             _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
-            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
-
+        
         # ======================== #
         # PERCOLATION & REFREEZING
         # ======================== #
@@ -503,7 +522,19 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # DRY DENSIFICATION
         # ================= #
 
-        densification(GRID, ACCUMULATION, dt)
+        # Auxillary function for calculating accumulation for Ligtenberg et al. (2011) firn densification scheme:
+
+        # Calculate annual accumulation when it is a new hydrological year (not the first year in case it is incomplete)
+        if (HYDRO_YEAR[t] != HYDRO_YEAR[max(t-1, 0)]) and (HYDRO_YEAR[t] != (HYDRO_YEAR[0] + 1)):
+
+            # Append annual mass balance and calculate accumulation (negative if ablation):
+            annual_mass_balances = np.append(annual_mass_balances, cumulative_mass_balance)
+            accumulation = np.mean(annual_mass_balances)
+
+            # Reset the annual mass balance for the next hydrological year:
+            cumulative_mass_balance = 0
+
+        densification(GRID, dt, accumulation)
 
         # ============ #
         # MASS BALANCE
@@ -512,6 +543,13 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         surface_mass_balance = SNOWFALL * (density_fresh_snow / water_density) - surface_melt + sublimation + deposition + evaporation
         internal_mass_balance = water_refrozen - subsurface_melt
         mass_balance = surface_mass_balance + internal_mass_balance
+        cumulative_mass_balance +=  mass_balance
+
+        """
+        tsfile = open("Troubleshooting.csv","a", encoding ="utf 8")
+        tsfile.write(f"{t},{GRID.get_number_layers()}\n")
+        tsfile.close()
+        """
 
         # ================== #
         # INITIAL CONDITIONS
@@ -556,7 +594,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             idx_agg = 0
 
             # Calculate initial firn temperature
-            Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")
+            Index_Depth = np.searchsorted(GRID.get_depth(), firn_temperature_depth, side="left")   
             Initial_Firn_Temperature = GRID.get_temperature()[min(Index_Depth, GRID.get_number_layers() - 1)] - zero_temperature
 
         # ================ #
@@ -642,10 +680,11 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _RUNOFF[idx_res] = RUNOFF_AGG.sum()
             _MASS_BALANCE[idx_res] = MASS_BALANCE_AGG.sum()
 
-            # Other Information (Instantaneous) (9):
+            # Other Information (Instantaneous) (10):
             _SNOW_HEIGHT[idx_res] = GRID.get_total_snowheight()
             _SNOW_WATER_EQUIVALENT[idx_res] = np.sum(np.asarray(GRID.get_snow_heights()) * (np.asarray(GRID.get_snow_densities()) / water_density))
             _TOTAL_HEIGHT[idx_res] = GRID.get_total_height()
+            _SURFACE_ELEVATION[idx_res] = GRID.get_base_elevation() + GRID.get_total_height()
             _SURFACE_TEMPERATURE[idx_res] = surface_temperature - zero_temperature
             _SURFACE_ALBEDO[idx_res] = albedo
             _N_LAYERS[idx_res] = GRID.get_number_layers()
@@ -754,7 +793,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
-            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
+            _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
 

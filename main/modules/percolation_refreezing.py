@@ -38,20 +38,17 @@ def percolation_refreezing(GRID, hydro_year, surface_water, dt):
     # Only run percolation and refreezing modules if water present:
     if (np.any(GRID.get_liquid_water_content()) != 0):
 
-        # Sub-surface Refreezing:
-        water_refrozen = refreezing(GRID, hydro_year)
-
         # Water Percolation, Storage & Run-off:
-        heterogeneous_percolation_allowed = ['bucket','Darcy']
-        if heterogeneous_percolation_method == 'bucket':
+        standard_percolation_allowed = ['bucket','Darcy']
+        if standard_percolation_method == 'bucket':
             Q = method_bucket_scheme(GRID)
-        elif heterogeneous_percolation_method == 'Darcy':
+        elif standard_percolation_method == 'Darcy':
             Q = method_Darcy(GRID, dt)
         else:
-            raise ValueError("Heterogeneous percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(heterogeneous_percolation_method, ", ".join(heterogeneous_percolation_allowed)))
+            raise ValueError("Standard percolation method = \"{:s}\" is not allowed, must be one of {:s}".format(standard_percolation_method, ", ".join(standard_percolation_allowed)))
 
         # Sub-surface Refreezing:
-        #water_refrozen = refreezing(GRID, hydro_year)
+        water_refrozen = refreezing(GRID, hydro_year)
 
     else:
         Q , water_refrozen = 0, 0
@@ -123,24 +120,30 @@ def method_bucket_scheme(GRID):
     # Reset output values:
     Q = 0
 
-    # Loop over all internal sub-surface grid nodes: (Currently exploring faster vectorisation options)
-    for Idx in range(0, GRID.number_nodes - 1): 
+    if (np.array(GRID.get_height()) == 0).any():
+        print("Zero height layer!")
 
-        # Irreducible water content:
-        irr = GRID.get_node_irreducible_water_content(Idx)
-        # Liquid water content:
-        lwc = GRID.get_node_liquid_water_content(Idx)   
-        # Residual volumetric fraction of water:
-        residual = np.maximum((lwc - irr), 0.0)
+    # Skip percolation if there is only one subsurface layer:
+    if GRID.get_number_layers() > 1:
 
-        if residual > 0:
-            # Set current layer as saturated (at irreducible water content):
-            GRID.set_node_liquid_water_content(Idx, irr)
-            residual = residual * GRID.get_node_height(Idx)
-            GRID.set_node_liquid_water_content(Idx + 1, GRID.get_node_liquid_water_content(Idx + 1) + residual / GRID.get_node_height(Idx + 1))
-        else:
-            # Set current layer with unsaturated water content:
-            GRID.set_node_liquid_water_content(Idx, lwc)
+        # Loop over all internal sub-surface grid nodes: (Currently exploring faster vectorisation options)
+        for Idx in range(0, GRID.number_nodes - 1): 
+
+            # Irreducible water content:
+            irr = GRID.get_node_irreducible_water_content(Idx)
+            # Liquid water content:
+            lwc = GRID.get_node_liquid_water_content(Idx)   
+            # Residual volumetric fraction of water:
+            residual = np.maximum((lwc - irr), 0.0)
+
+            if residual > 0:
+                # Set current layer as saturated (at irreducible water content):
+                GRID.set_node_liquid_water_content(Idx, irr)
+                residual = residual * GRID.get_node_height(Idx)
+                GRID.set_node_liquid_water_content(Idx + 1, GRID.get_node_liquid_water_content(Idx + 1) + residual / GRID.get_node_height(Idx + 1))
+            else:
+                # Set current layer with unsaturated water content:
+                GRID.set_node_liquid_water_content(Idx, lwc)
 
     # Water in the last sub-surface node is allocated to run-off:
     Q = GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1)
@@ -162,7 +165,6 @@ def method_Darcy(GRID, dt):
     dt_cumulative = 0.0
 
     while dt_cumulative < dt:
-
 
         # Integration timestep:
         dt_step = np.minimum(dt_stable, dt - dt_cumulative)

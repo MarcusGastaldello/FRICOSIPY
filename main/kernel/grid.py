@@ -28,6 +28,7 @@ spec = OrderedDict()
 spec['layer_heights'] = float64[:]
 spec['layer_densities'] = float64[:]
 spec['layer_temperatures'] = float64[:]
+spec['average_layer_temperatures'] = float64[:]
 spec['layer_liquid_water_content'] = float64[:]
 spec['layer_refreezes'] = float64[:]
 spec['layer_firn_refreezes'] = float64[:]
@@ -39,6 +40,7 @@ spec['new_snow_height'] = float64
 spec['new_snow_timestamp'] = float64
 spec['old_snow_timestamp'] = float64
 spec['fresh_snow_timestamp'] = float64
+spec['base_elevation'] = float64
 spec['grid'] = types.ListType(node_type)
 
 # ================================================================================================== #
@@ -53,8 +55,11 @@ class Grid:
         store the information of individual layers. The class provides various setter/getter functions
         to read or overwrite the state of individual layers. 
 
+        Variables:
+
                 Layer heights (z)                 ::    Height of the layers [m]
                 Layer temperatures (z)            ::    Temperature of the layers [K]
+                Average layer temperatures (z)    ::    Average temperature of the layers [K]
                 Layer liquid water contents (z)   ::    Volumetric liquid water content of the layers [-]
                 Layer refreezes (z)               ::    Refrozen water within the layers [m w.e.]
                 Firn layer refreezes (z)          ::    Refrozen water within the layers (whilst firn) [m w.e.]
@@ -62,7 +67,17 @@ class Grid:
                 Layer grain sizes (z)             ::    Grain size of the layers [mm]
                 Layer ice fractions (z)           ::    Volumetric ice fraction of the layers [-]
 
-        Note: Firn here is defined as layers that have a hydrological layer at least one year older that the
+        Properties:
+
+                New snow height         ::    Height of new snow [m] (for Oerlemans & Knap, 1998 albedo)
+                New snow timestamp      ::    Age of newest snow [s] (for Oerlemans & Knap, 1998 albedo)
+                Old snow timestamp      ::    Age of underlying snow [s] (for Oerlemans & Knap, 1998 albedo)
+                Fresh snow timestamp    ::    Time since last snowfall [s] (not overriden if all the newest snow melts) (for Bougamont et al., 2005 albedo)
+                Base elevation          ::    Elevation of the bottom of the simulation [m a.s.l.] (used to track the absolute height of the glacier)
+
+        Note 1: The new and old snow properties here are independant from the subsurface layers; they track the time since specific snowfall events.   
+
+        Note 2: Firn here is defined as layers that have a hydrological layer at least one year older that the
         current simulation year. The firn layer refreezing variable is used to determine the firn facie.
 
         """
@@ -71,8 +86,8 @@ class Grid:
     # Initialisation:
     # =============== #
 
-    def __init__(self, layer_heights, layer_densities, layer_temperatures, layer_liquid_water_content, 
-                 layer_refreezes, layer_firn_refreezes, layer_hydro_years, layer_grain_sizes, layer_ice_fraction = None,
+    def __init__(self, layer_heights, layer_densities, layer_temperatures, average_layer_temperatures, layer_liquid_water_content, 
+                 layer_refreezes, layer_firn_refreezes, layer_hydro_years, layer_grain_sizes, base_elevation, layer_ice_fraction = None,
                  new_snow_height = None, new_snow_timestamp = None, old_snow_timestamp = None, fresh_snow_timestamp = None):
         """ Initialises the Grid Python class """
 
@@ -80,29 +95,29 @@ class Grid:
         self.layer_heights = layer_heights
         self.layer_densities = layer_densities
         self.layer_temperatures = layer_temperatures
+        self.average_layer_temperatures = average_layer_temperatures
         self.layer_liquid_water_content = layer_liquid_water_content
         self.layer_refreezes = layer_refreezes
         self.layer_firn_refreezes = layer_firn_refreezes 
         self.layer_hydro_years = layer_hydro_years
         self.layer_grain_sizes = layer_grain_sizes
-        self.layer_ice_fraction = layer_ice_fraction
+        self.layer_ice_fraction = layer_ice_fraction 
 
         # Number of total nodes
         self.number_nodes = len(layer_heights)
 
-        # Track the fresh snow layer (new_snow_height, new_snow_timestamp) as well as the old
-        # snow layer age (old_snow_timestamp)
-        if (new_snow_height is not None) and (new_snow_timestamp is not None) and \
-           (old_snow_timestamp is not None):
-            self.new_snow_height = new_snow_height           # meter snow accumulation
-            self.new_snow_timestamp = new_snow_timestamp     # seconds since snowfall
-            self.old_snow_timestamp = old_snow_timestamp     # snow age below fresh snow layer
-            self.fresh_snow_timestamp = fresh_snow_timestamp # seconds since snowfall (not overidden in case of uppermost layer melt)
+        # Initialise the subsurface grid properties:
+        if (new_snow_height is not None) and (new_snow_timestamp is not None) and (old_snow_timestamp is not None):
+            self.new_snow_height = new_snow_height           
+            self.new_snow_timestamp = new_snow_timestamp     
+            self.old_snow_timestamp = old_snow_timestamp     
+            self.fresh_snow_timestamp = fresh_snow_timestamp 
         else:
-            self.new_snow_height = 0.0      
-            self.new_snow_timestamp = 0.0   
+            self.new_snow_height = 0.0         
+            self.new_snow_timestamp = 0.0      
             self.old_snow_timestamp = 0.0
             self.fresh_snow_timestamp = 0.0
+        self.base_elevation = base_elevation
 
         # Do the grid initialization
         self.grid = typed.List.empty_list(node_type)
@@ -117,19 +132,20 @@ class Grid:
 
     def init_grid(self):
         """ Initialises the subsurface grid according to the initial conditions """
-        for idxNode in range(self.number_nodes):
-            layer_IF = None
+        for idx in range(self.number_nodes):
+            layer_ice_fraction = None
             if self.layer_ice_fraction is not None:
-                layer_IF = self.layer_ice_fraction[idxNode]
-            self.grid.append(Node(self.layer_heights[idxNode], 
-                                  self.layer_densities[idxNode],
-                                  self.layer_temperatures[idxNode], 
-                                  self.layer_liquid_water_content[idxNode], 
-                                  self.layer_refreezes[idxNode],
-                                  self.layer_firn_refreezes[idxNode],
-                                  self.layer_hydro_years[idxNode],
-                                  self.layer_grain_sizes[idxNode],
-                                  layer_IF))
+                layer_ice_fraction = self.layer_ice_fraction[idx]
+            self.grid.append(Node(self.layer_heights[idx], 
+                                  self.layer_densities[idx],
+                                  self.layer_temperatures[idx],
+                                  self.average_layer_temperatures[idx],
+                                  self.layer_liquid_water_content[idx], 
+                                  self.layer_refreezes[idx],
+                                  self.layer_firn_refreezes[idx],
+                                  self.layer_hydro_years[idx],
+                                  self.layer_grain_sizes[idx],
+                                  layer_ice_fraction))
 
     # ================================================================================================= #
 
@@ -151,14 +167,13 @@ class Grid:
         Note: The layer ice fraction is determined when the Node class for the new layer is initialised.
         
         """
-	
         # Initialise remaining layer variables as zero
         liquid_water_content = 0.0
         refreeze = 0.0
         firn_refreeze = 0.0
 
         # Insert new node to the numerical mesh / grid
-        self.grid.insert(0, Node(height, density, temperature, liquid_water_content, refreeze, firn_refreeze, hydro_year, grain_size, None))
+        self.grid.insert(0, Node(height, density, temperature, temperature, liquid_water_content, refreeze, firn_refreeze, hydro_year, grain_size, None))
 
         # Increase node counter
         self.number_nodes += 1
@@ -208,15 +223,13 @@ class Grid:
         new_ice_fraction = ((self.get_node_ice_fraction(idx) * self.get_node_height(idx) + \
                             self.get_node_ice_fraction(idx+1) * self.get_node_height(idx + 1)) / new_height)
 
-        # Updated air porosity
-        new_air_porosity = 1 - new_liquid_water_content - new_ice_fraction
-
-        if abs(1 - new_ice_fraction - new_air_porosity - new_liquid_water_content) > 1e-8:
-            print('Merging is not mass consistent',(new_ice_fraction + new_air_porosity + new_liquid_water_content))
-
         # Updated temperature
         new_temperature = (self.get_node_height(idx)/new_height) * self.get_node_temperature(idx) + \
                             (self.get_node_height(idx+1)/new_height) * self.get_node_temperature(idx + 1)
+        
+        # Updated average temperature
+        new_average_temperature = (self.get_node_height(idx)/new_height) * self.get_average_node_temperature(idx) + \
+                            (self.get_node_height(idx+1)/new_height) * self.get_average_node_temperature(idx + 1)
         
         # Updated refreezing
         new_refreeze = self.get_node_refreeze(idx) + self.get_node_refreeze(idx + 1)
@@ -227,7 +240,7 @@ class Grid:
                             (self.get_node_height(idx+1)/new_height) * self.get_node_grain_size(idx + 1)
         
         # Update the node properties
-        self.update_node(idx, new_height, new_temperature, new_ice_fraction, new_liquid_water_content, new_refreeze, new_firn_refreeze, new_grain_size)
+        self.update_node(idx, new_height, new_temperature, new_average_temperature, new_ice_fraction, new_liquid_water_content, new_refreeze, new_firn_refreeze, new_grain_size)
         
         # Remove the second layer
         self.remove_node([idx+1])
@@ -253,10 +266,12 @@ class Grid:
         computational efficiency.
         """
 
-        # Remove layers if they get too small
-        idx = self.get_number_layers() - 1
-        if self.get_node_height(idx) < minimum_snow_layer_height:
-            self.remove_node([idx])
+        # Remove layers if they subseed the minimum snow layer height       
+        idx = 1
+        while ((idx < self.get_number_snow_layers()- 1)):
+            if ((self.get_node_height(idx) <= minimum_snow_layer_height)):
+                self.remove_node([idx])
+            idx += 1
 
         # Merge uppermost layer with the second layer unless it exceeds the maximum layer height or they are from different hydrological years
         if (self.get_number_layers() >= 2):  
@@ -264,30 +279,35 @@ class Grid:
                 self.merge_nodes(0)
         
         # Merge into coarser layers if a layer goes beyond the region of interest:
-        if self.get_depth()[-1] > coarse_layer_threshold:
-            idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
-            if (idx + 1 <= (self.get_number_layers() - 1)): 
-                if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
-                    self.merge_nodes(idx)
+        idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
+        if (idx + 1 <= (self.get_number_layers() - 1)): 
+            if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
+                self.merge_nodes(idx)
 
-        # If last layer depth exceeds the desired subsurface measurement depth, remove it
+        # If last layer depth exceeds the desired subsurface measurement depth, remove it:
         idx = self.get_number_layers() - 1
         if (self.get_depth()[idx] > max_depth):
+
+            # Update base elevation of computational grid now that the las subsurface layer is to be removed:
+            self.set_base_elevation(self.get_base_elevation() + self.get_node_height(-1))
+
+            # Remove the last layer:
             self.remove_node([idx])
         
     # =================================================================================================
 
-    # ====================== #
-    # Update Node Properties
-    # ====================== #
+    # ===================== #
+    # Update Node Variables
+    # ===================== #
 
-    def update_node(self, idx, height, temperature, ice_fraction, liquid_water_content, refreeze, firn_refreeze, grain_size):
+    def update_node(self, idx, height, temperature, average_temperature, ice_fraction, liquid_water_content, refreeze, firn_refreeze, grain_size):
         """ Updates the properties of a specific layer at node idx 
 
         Variables:
 
                 Layer height                  ::    Updated height of the layer [m]
                 Layer temperature             ::    Updated temperature of the layer [K]
+                Layer average temperature     ::    Updated average temperature of the layer [K]
                 Layer ice fraction            ::    Updated volumetric ice fraction of the layer [-]
                 Layer liquid water content    ::    Updated volumetric liquid water content of the layer [-]
                 Layer refreeze                ::    Updated refrozen water within the layer [m w.e.]
@@ -298,6 +318,7 @@ class Grid:
 
         self.set_node_height(idx,height)
         self.set_node_temperature(idx,temperature)
+        self.set_node_average_temperature(idx,average_temperature)
         self.set_node_ice_fraction(idx,ice_fraction)
         self.set_node_liquid_water_content(idx,liquid_water_content)
         self.set_node_refreeze(idx,refreeze)
@@ -357,7 +378,7 @@ class Grid:
     # ================================================================================================== #
 
     #======================== #
-    # Snow Property Functions
+    # GRID Property Functions
     #======================== #
 
     """ The albedo module retains information about the age of the fresh snow and underlying layers in order
@@ -387,6 +408,16 @@ class Grid:
     def get_fresh_snow_props(self):
         """ Returns the properties of the fresh snow layer """
         return self.new_snow_height, self.new_snow_timestamp, self.old_snow_timestamp
+    
+    # ---------------------------------------------- #
+    
+    def set_base_elevation(self, base_elevation):
+        """ Sets the base elevation of the computational domain [m a.s.l.]"""
+        self.base_elevation = base_elevation
+
+    def get_base_elevation(self):
+        """ Gets the base elevation of the computational domain [m a.s.l.]"""
+        return self.base_elevation
 
     # ================================================================================================== #
 
@@ -403,7 +434,16 @@ class Grid:
         for idx in range(self.number_nodes):
             self.grid[idx].set_layer_temperature(temperature[idx])
 
-        # ---------------------------------------------- #
+    def set_node_average_temperature(self, idx, average_temperature):
+        """ Sets the average layer temperature at node idx [K] """
+        self.grid[idx].set_average_layer_temperature(average_temperature)
+
+    def set_average_temperature(self, average_temperature):
+        """ Sets the average layer temperature profile [K] (z) """
+        for idx in range(self.number_nodes):
+            self.grid[idx].set_average_layer_temperature(average_temperature[idx])
+
+    # ---------------------------------------------- #
 
     def set_node_height(self, idx, height):
         """ Sets the layer height of node idx [m] """
@@ -491,6 +531,14 @@ class Grid:
     def get_temperature(self):
         """ Returns the layer temperature profile [K] (z) """
         return [self.grid[idx].get_layer_temperature() for idx in range(self.number_nodes)]
+    
+    def get_average_node_temperature(self, idx):
+        """ Returns the average layer temperature of node idx [K] """
+        return self.grid[idx].get_average_layer_temperature()
+    
+    def get_average_temperature(self):
+        """ Returns the average_layer temperature profile [K] (z) """
+        return [self.grid[idx].get_average_layer_temperature() for idx in range(self.number_nodes)]
 
     # ---------------------------------------------- #
 

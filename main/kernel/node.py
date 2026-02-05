@@ -24,8 +24,9 @@ from numba.experimental import jitclass
 
 spec = OrderedDict()
 spec['height'] = float64
-spec['density'] = float64            
-spec['temperature'] = float64     
+spec['density'] = float64          
+spec['temperature'] = float64
+spec['average_temperature'] = float64 
 spec['liquid_water_content'] = float64    
 spec['refreeze'] = float64
 spec['firn_refreeze'] = float64
@@ -49,6 +50,7 @@ class Node:
 
                 Layer height                  ::    Height of the layer [m]
                 Layer temperature             ::    Temperature of the layer [K]
+                Layer average temperature     ::    Average temperature of the layer [K]
                 Layer liquid water content    ::    Volumetric liquid water content of the layer [-]
                 Layer refreeze                ::    Refrozen water within the layer [m w.e.]
                 Firn layer refreeze           ::    Refrozen water within the layer (whilst firn) [m w.e.]
@@ -67,22 +69,21 @@ class Node:
     # Initialisation:
     # =============== #
 
-    def __init__(self, height, snow_density, temperature, liquid_water_content, refreeze, 
+    def __init__(self, height, snow_density, temperature, average_temperature, liquid_water_content, refreeze, 
                  firn_refreeze, hydro_year, grain_size, ice_fraction = None):
         """ Initialises the Node Python class """
 
         # Initialise state layer variables 
         self.height = height
         self.temperature = temperature
+        self.average_temperature = average_temperature
         self.liquid_water_content = liquid_water_content
         self.refreeze = refreeze
         self.firn_refreeze = firn_refreeze
         self.hydro_year = hydro_year
         self.grain_size = grain_size
-
         if ice_fraction is None:
-            a = snow_density - (1 - (snow_density / ice_density)) * air_density
-            self.ice_fraction = a / ice_density
+            self.ice_fraction = (snow_density - (1 - (snow_density / ice_density)) * air_density) / ice_density
         else:
             self.ice_fraction = ice_fraction
 
@@ -101,6 +102,12 @@ class Node:
     def get_layer_temperature(self):
         """ Returns the layer temperature [K] """
         return self.temperature
+    
+    # -----------------------------------------------
+
+    def get_average_layer_temperature(self):
+        """ Returns the average layer temperature [K] """
+        return self.average_temperature
     
     # -----------------------------------------------
     
@@ -277,15 +284,21 @@ class Node:
 
     # -----------------------------------------------
 
-    def set_layer_temperature(self, T):
+    def set_layer_temperature(self, temperature):
         """ Sets the layer temperature [K] """
-        self.temperature = T
+        self.temperature = temperature
+
+    # -----------------------------------------------
+
+    def set_average_layer_temperature(self, average_temperature):
+        """ Sets the average layer temperature [K] """
+        self.average_temperature = average_temperature
 
     # -----------------------------------------------
     
-    def set_layer_ice_fraction(self, ifr):
+    def set_layer_ice_fraction(self, ice_fraction):
         """ Sets the layer volumetric ice fraction [-] """
-        self.ice_fraction = ifr
+        self.ice_fraction = ice_fraction
 
     # -----------------------------------------------
     
@@ -301,9 +314,9 @@ class Node:
 
     # -----------------------------------------------
 
-    def set_layer_liquid_water_content(self, lwc):
+    def set_layer_liquid_water_content(self, liquid_water_content):
         """ Sets the layer volumetric liquid water content [-] """
-        self.liquid_water_content = lwc
+        self.liquid_water_content = liquid_water_content
 
     # -----------------------------------------------
 

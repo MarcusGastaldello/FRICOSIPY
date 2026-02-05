@@ -282,10 +282,10 @@ def interpolate_Tz(GRID):
     n = GRID.get_number_layers()
 
     def interpolate(target_z):
-
-        # Skip the first node if the fresh snow layer is too thin (< 2cm)
-        start_idx = 1 if z[0] < 0.02 else 0
     
+		# Skip the first node if the fresh snow layer is too thin (< 2cm)
+        start_idx = 1 if z[0] < 0.02 else 0
+		
         # Determine the closest subsurface node index:
         idx_1 = np.abs(z[start_idx:] - target_z).argmin() + start_idx
 

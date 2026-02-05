@@ -3,7 +3,7 @@
 """
     ======================================================================================================================================================
 
-                                                                    FRICOSIPY VERSION 1.2
+                                                                    FRICOSIPY VERSION 1.3.0
 
     This is the main executable file of the 'FRIbourg COupled Snowpack and Ice surface energy and mass balance glacier model in PYthon' (FRICOSIPY). 
     The original COSIPY model was initially written by Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
@@ -11,7 +11,7 @@
 
     The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
 
-    Gastaldello, M. (2025). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.2.1) [Computer software]. 
+    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.0) [Computer software]. 
     https://github.com/MarcusGastaldello/FRICOSIPY
 
     ======================================================================================================================================================
@@ -173,7 +173,7 @@ def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_tim
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
                 RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SURFACE_MASS_BALANCE, \
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
-                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
+                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_ELEVATION,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
                 LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR,LAYER_GRAIN_SIZE = future.result()
                                 
@@ -182,7 +182,7 @@ def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_tim
                 SHORTWAVE,LONGWAVE,SENSIBLE,LATENT,GROUND,RAIN_FLUX,MELT_ENERGY, \
                 RAIN,SNOWFALL,EVAPORATION,SUBLIMATION,CONDENSATION,DEPOSITION,SURFACE_MELT,SURFACE_MASS_BALANCE, \
                 REFREEZE,SUBSURFACE_MELT,RUNOFF,MASS_BALANCE, \
-                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
+                SNOW_HEIGHT,SNOW_WATER_EQUIVALENT,TOTAL_HEIGHT,SURFACE_ELEVATION,SURFACE_TEMPERATURE,SURFACE_ALBEDO,N_LAYERS,FIRN_TEMPERATURE,FIRN_TEMPERATURE_CHANGE,FIRN_FACIE, \
                 LAYER_DEPTH,LAYER_HEIGHT,LAYER_DENSITY,LAYER_TEMPERATURE,LAYER_WATER_CONTENT,LAYER_COLD_CONTENT,LAYER_POROSITY,LAYER_ICE_FRACTION, \
                 LAYER_IRREDUCIBLE_WATER,LAYER_REFREEZE,LAYER_HYDRO_YEAR,LAYER_GRAIN_SIZE)
 
