@@ -106,12 +106,13 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
 
 ??? "**$(i)$ Darcy (Hirashima et al., 2010)**"
 
-    The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Von Neumann* stability condition:
+    <br>
+    The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
     $$
-    \Delta t_{\text{stable}} \le \frac{1}{2} \min \left( \frac{\Delta z_{i+1/2}^2}{K_{i+1/2}} \right)
+    \Delta t_{\text{stable}} \le \frac{(\Delta z)^2}{2 \cdot (K \cdot \frac{dh}{d\theta})}
     $$
     
     </div>
