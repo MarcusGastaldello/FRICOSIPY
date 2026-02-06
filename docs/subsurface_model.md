@@ -112,7 +112,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
     $$
-    \Delta t_{\text{stable}} \le \frac{1}{2} \text{min} \left( \frac{\Delta z^2}{K \: \frac{dh}{d\theta}} \right)
+    \Delta t_{\text{stable}} \le \frac{1}{2} \text{min} \left( \frac{\Delta z^2}{\Theta \: \frac{dh}{d\theta}} \right)
     $$
     
     </div>
