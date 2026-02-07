@@ -6,7 +6,6 @@ og_description: Information on contacting the model developers
 # Contact
 
 ![Main FRICOSIPY developer](images/FRICOSIPY-model-developer.jpg){style="float: right; width: 350px; margin-left: 20px;"}
-<br>
 
 The *FRICOSIPY* model is currently solely developed by myself, *Marcus Gastaldello*, a PhD student at the *Department of Geosciences*, *University of Fribourg*, *Switzerland*. 
 
