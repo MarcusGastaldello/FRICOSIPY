@@ -71,6 +71,7 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 | `station_altitude` | <small>3000.0</small>            | m a.s.l. | Altitude of meteorological station |
 | `z` | <small>2.0</small>                              | m | Meteorological data measurement height |
 | `air_temperature_lapse_rate` | <small>-0.006</small>  | K m$^{-1}$ | Air temperature lapse rate |
+| `air_temperature_offset`   | <small>0.0</small>       | °C | Air temperature offset |
 | `precipitation_lapse_rate` | <small>0.0002</small>    | % m$^{-1}$ | Precipitation lapse rate |
 | `precipitation_multiplier` | <small>1.0</small>       | – | Multiplicative scaling factor for precipitation data |
 | `minimum_snowfall` | <small>0.00001</small>           | m | Minimum snowfall per simulation timestep |
