@@ -16,7 +16,7 @@ The latest version of *FRICOSIPY* is available at: [https://github.com/MarcusGas
 
 ![Main FRICOSIPY model diagram and logo](images/FRICOSIPY-figure-logo.png)
 
-<small> **Main Figure**: The FRICOSIPY Model & Logo </small>
+<center><small> **Main Figure**: The FRICOSIPY Model & Logo </small></center>
 
 **Citation:** *Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3) [Computer software]. [https://github.com/MarcusGastaldello/FRICOSIPY](https://github.com/MarcusGastaldello/FRICOSIPY).*
 
