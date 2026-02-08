@@ -11,7 +11,7 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 ## Visualising an Xarray Dataset
 
-
+<img src="images/FRICOSIPY-NetCDF-file.png" alt="FRICOSIPY Output" width="600" style="image-rendering: -webkit-optimize-contrast;">
 
 ![FRICOSIPY Output NetCDF File](images/FRICOSIPY-NetCDF-file.png)
 
