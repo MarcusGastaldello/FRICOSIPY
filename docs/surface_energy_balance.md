@@ -16,7 +16,7 @@ $$
 
 ![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-SEB.png)
 
-<small> **Figure 2**: FRICOSIPY Surface Energy Balance</small>
+<center><small> **Figure 2**: FRICOSIPY Surface Energy Balance</small></center>
 
 !!! note
 
@@ -362,7 +362,7 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 ![Exemplar FRICOSIPY SEB (Surface Energy Balance) Colle Gnifetti](images/Exemplar-SEB.png)
 
-<small> **Figure 3**: Exemplar point Surface Energy Balance (SEB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small>
+<center><small> **Figure 3**: Exemplar point Surface Energy Balance (SEB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -372,7 +372,7 @@ The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the sur
 
 ![Exemplar FRICOSIPY SMB (Surface Mass Balance) Colle Gnifetti](images/Exemplar-SMB.png)
 
-<small> **Figure 4**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small>
+<center><small> **Figure 4**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
 
 !!! note
 
