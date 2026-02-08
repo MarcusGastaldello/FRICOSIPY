@@ -58,9 +58,9 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 
 | <small>Parameter | Value | Units | Description |
 |:---|:---:|:---:|---|
-| `dt`          | <small>3600</small> | s | Simulation time step |
-| `max_depth`   | <small>50</small>   | m | Maximum simulation depth |
-| `max_layers`  | <small>500</small>  | – | Maximum number of subsurface layers |
+| `dt`          | 3600 | s | Simulation time step |
+| `max_depth`   | 50   | m | Maximum simulation depth |
+| `max_layers`  | 500 | – | Maximum number of subsurface layers |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -68,13 +68,13 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 
 | Parameter | Value | Units | Description |
 |-----|:---:|:---:|---|
-| `station_altitude` | <small>3000.0</small>            | m a.s.l. | Altitude of meteorological station |
-| `z` | <small>2.0</small>                              | m | Meteorological data measurement height |
-| `air_temperature_lapse_rate` | <small>-0.006</small>  | K m$^{-1}$ | Air temperature lapse rate |
-| `air_temperature_offset`   | <small>0.0</small>       | °C | Air temperature offset |
-| `precipitation_lapse_rate` | <small>0.0002</small>    | % m$^{-1}$ | Precipitation lapse rate |
-| `precipitation_multiplier` | <small>1.0</small>       | – | Multiplicative scaling factor for precipitation data |
-| `minimum_snowfall` | <small>0.00001</small>           | m | Minimum snowfall per simulation timestep |
+| `station_altitude` | 3000.0            | m a.s.l. | Altitude of meteorological station |
+| `z` | 2.0                              | m | Meteorological data measurement height |
+| `air_temperature_lapse_rate` | -0.006  | K m$^{-1}$ | Air temperature lapse rate |
+| `air_temperature_offset`   | 0.0       | °C | Air temperature offset |
+| `precipitation_lapse_rate` | 0.0002    | % m$^{-1}$ | Precipitation lapse rate |
+| `precipitation_multiplier` | 1.0       | – | Multiplicative scaling factor for precipitation data |
+| `minimum_snowfall` | 0.00001           | m | Minimum snowfall per simulation timestep |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
