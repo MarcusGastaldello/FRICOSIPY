@@ -25,6 +25,8 @@ og_description: Explanation of the differences between FRICOSIPY and the origina
 
 The *FRICOSIPY* model introduces a range of new paramaterisations in order to enhance the model's versatility. As of the latest 1.3 release, these are as follows:
 
+* [Oerlemans and Klok, 2002](https://doi.org/10.3189/172756502781831133) *(solar radiation)*
+* [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) *(surface albedo)*
 * [Essery and Etchevers, 2004](https://doi.org/10.1029/2004JD005036) *(turbulent fluxes)*
 * [Mattea et al. (2021)](https://doi.org/10.5194/tc-15-3181-2021) *(three-phase precipitation model)*
 * [Hirashima et al., 2010](https://doi.org/10.1016/j.coldregions.2010.09.003) *(Darcy's law percolation)*
