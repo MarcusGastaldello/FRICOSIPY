@@ -13,7 +13,7 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 ![FRICOSIPY Output NetCDF File](images/FRICOSIPY-NetCDF-file.png)
 
-<center><small> **Figure 7**: FRICOSIPY Output NetCDF Dataset</small></center>
+<center><small> **Figure 6**: FRICOSIPY Output NetCDF Dataset</small></center>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
