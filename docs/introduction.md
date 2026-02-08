@@ -13,6 +13,6 @@ The model is 1-dimensional in space; each grid cell (or spatial node) is simulat
 
 ![Main FRICOSIPY model diagram](images/FRICOSIPY-figure.png)
 
-<small> **Figure 1**: The FRICOSIPY Model </small>
+<center><small> **Figure 1**: The FRICOSIPY Model </small></center>
 
 The following sections explain how the model functions in detail, outlining the parameterisations and key physical processes simulated in the model.
