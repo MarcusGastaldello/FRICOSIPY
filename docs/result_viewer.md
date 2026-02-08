@@ -13,6 +13,8 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 ![FRICOSIPY Output NetCDF File](images/FRICOSIPY-NetCDF-file.png)
 
+<small> **Figure 7**: FRICOSIPY Output NetCDF Dataset</small>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Point Surface Energy Balance
