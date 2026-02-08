@@ -15,7 +15,7 @@ og_description: Explanation of the differences between FRICOSIPY and the origina
 
 ## $(1)$ Model Structure
 
-
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## $(2)$ Model Improvements
 
