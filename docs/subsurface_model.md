@@ -11,7 +11,7 @@ Subsurface layers are defined according to their volumetric fraction of ice $(\p
 
 ![FRICOSIPY Multi-layer Subsurface Model](images/FRICOSIPY-subsurface-model.png)
 
-<small> **Figure 6**: FRICOSIPY Multi-layer Subsurface Model </small>
+<center><small> **Figure 5**: FRICOSIPY Multi-layer Subsurface Model </small></center>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
