@@ -32,6 +32,7 @@
 """
 
 import sys
+import os
 import xarray as xr
 import pandas as pd
 import numpy as np
@@ -65,7 +66,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     # ============================ #
 
     # Load meteorological data:
-    df = pd.read_csv(csv_file, delimiter = ',')
+    df = pd.read_csv(os.path.join('../../data/meteo/CSV/',csv_file), delimiter = ',')
 
     # Check input data:
     required_variables = {'DATETIME','T2', 'PRES', 'U2', 'RH2'}
@@ -90,7 +91,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         raise ValueError('Error: NaN Values are in the Dataset!')
     
     # Re-load meteorological data with dates parsing:
-    df = pd.read_csv(csv_file, delimiter = ',', index_col = ['DATETIME'], parse_dates = ['DATETIME'])
+    df = pd.read_csv(os.path.join('../../data/meteo/CSV/',csv_file), delimiter = ',', index_col = ['DATETIME'], parse_dates = ['DATETIME'])
 
     # ===================== #
     # Select Temporal Range
@@ -104,6 +105,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     print('\t Temporal range from %s until %s. Time steps: %s ' % (df.index[0],df.index[-1],len(df)))
     print('\t Input Meteorological Data CSV: ',csv_file)
     print('\t Output Meteorological Dataset: ',meteo_file,'\n')
+    print('\t ==============================================================')
 
     # ======================= #
     # Create Xarray Dataframe 
@@ -181,11 +183,13 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         PRECIPITATION_ANOMALY = np.asarray(df['PRECIPITATION_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
         add_variable_along_time(ds, PRECIPITATION_ANOMALY, 'PRECIPITATION_ANOMALY', '-', 'Annual Precipitation Anomaly')
 
+    print('\t ==============================================================')
+
     # ============================== #
     # Write Input Meteo File to Disc 
     # ============================== #
 
-    ds.to_netcdf(meteo_file)
+    ds.to_netcdf(os.path.join('../../data/meteo/',meteo_file))
 
     print('\n\t =================================')
     print('\t INPUT METEOROLOGICAL FILE CREATED')
