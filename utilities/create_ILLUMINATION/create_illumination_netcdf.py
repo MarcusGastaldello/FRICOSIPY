@@ -12,6 +12,7 @@
 """
 
 import sys
+import os
 import xarray as xr
 import pandas as pd
 import numpy as np
@@ -43,7 +44,7 @@ def create_illumindation_file(static_file, illumination_file):
     # Load static data
     # ================ #
 
-    ds = xr.open_dataset(static_file)   
+    ds = xr.open_dataset(os.path.join('../../data/static/',static_file))   
 
     print('\t INFORMATION:')
     print('\t ==============================================================')
@@ -113,7 +114,7 @@ def create_illumindation_file(static_file, illumination_file):
     Illumination_Leap = Illumination[8760:,:,:]
 
     # Save the Calculated Illumination Matrix:
-    f = nc.Dataset(illumination_file, 'w')
+    f = nc.Dataset(os.path.join('../../data/illumination/',illumination_file), 'w')
     f.createDimension('HOY', 8784)
     f.createDimension('y', len(ds.y))
     f.createDimension('x', len(ds.x))
