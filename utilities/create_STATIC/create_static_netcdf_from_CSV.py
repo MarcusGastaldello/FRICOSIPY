@@ -18,7 +18,7 @@
 
         Optional Variables:
 
-        PRECIPITATION_CLIMATOLOGY (x,y)   ::    Annual accumulation climatology [mm w.e. a-1]
+        PRECIPITATION_CLIMATOLOGY (x,y)   ::    Annual accumulation climatology [m w.e. a-1]
         BASAL (x,y)                       ::    Basal heat flux [mW m-2]
         THICKNESS (x,y)                   ::    Glacier depth / thickness [m]
 
@@ -55,7 +55,8 @@ def create_static_input(csv_file, static_file):
     # ==================== #
 
     # Check for NaNs:
-    df = pd.read_csv(csv_file)
+    df = pd.read_csv(os.path.join('../../data/static/CSV/',csv_file))
+
     if df.isnull().values.any() == True:
         raise ValueError('Error: NaN Values are in the Dataset!')
     
@@ -83,18 +84,19 @@ def create_static_input(csv_file, static_file):
     print('\t Maximum Easting:  ',np.max(df["EASTING"]))
     print('\t Minimum Northing: ',np.min(df["NORTHING"]))
     print('\t Maximum Northing: ',np.max(df["NORTHING"]))
+    print('\t --------------------------------------------------------------')
 
     # ================== #
     # Spatial Resoultion
     # ================== #
 
     # Calculate grid spatial resolution:
-    if (np.unique(np.diff(np.unique(df["EASTING"]))) == np.unique(np.diff(np.unique(df["NORTHING"])))) and \
-    (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
+    if (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
         print('\t Grid Spatial Resolution: ',resolution,' m \n')
+        print('\t ==============================================================')
     else:
-        raise ValueError('Error: Non-square grid detected!')
+        raise ValueError('Error: Non-rectilinear grid detected!')
 
     # ======================= #
     # Create Xarray Dataframe 
@@ -154,7 +156,7 @@ def create_static_input(csv_file, static_file):
     if 'PRECIPITATION_CLIMATOLOGY' in df.columns:
         print(f"\t 'PRECIPITATION_CLIMATOLOGY' - Precipitation Climatology [m a\u207b\xb9]   Min: {np.round(df['PRECIPITATION_CLIMATOLOGY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_CLIMATOLOGY'].max(),2)}")
         PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
-        add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'mm a\u207b\xb9', 'Precipitation Climatology')
+        add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Precipitation Climatology')
 
     # Basal Heat Flux [BASAL]
     if 'BASAL' in df.columns:
@@ -167,13 +169,14 @@ def create_static_input(csv_file, static_file):
         print(f"\t 'THICKNESS' - Glacier Thickness [m]                         Min: {np.round(df['THICKNESS'].min(),2)} -- Max: {np.round(df['THICKNESS'].max(),2)}")
         THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
+    print('\t ==============================================================')
 
     # =============================== #
     # Write Input Static File to Disc 
     # =============================== #
 
     #ds.rio.write_crs("epsg:2056", inplace=True) # Incompatible with current Python 3.6
-    ds.to_netcdf(static_file)
+    ds.to_netcdf(os.path.join('../../data/static/',static_file))
 
     print('\n\t =========================')
     print('\t INPUT STATIC FILE CREATED')
@@ -204,5 +207,4 @@ if __name__ == "__main__":
 
 
 # ============================================================================================= #
-
 
