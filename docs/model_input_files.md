@@ -99,7 +99,7 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 The model meteorological input file contains the meteorological data varying through time $(t)$ and requires the following variables:
 
 * **DATETIME** – Datetime [yyyy-mm-dd hh:mm]
-* **T2**   – Air temperature [K]
+* **T2**   – Air temperature [°C]
 * **U2**   – Wind speed [m s$^{-1}$]
 * **RH2**  – Relative humidity [%]
 * **PRES** – Atmospheric pressure [hPa]
@@ -116,7 +116,7 @@ Alternatively, instead of using fractional cloud cover ( N ), the user can speci
     <br>
     The following optional variables can also be used:
 
-    * **T2_LAPSE** – Air temperature lapse rate [K m$^{-1}$] <br> *(enables a temporally-variable lapse rate and overrides the 'air_temperature_lapse_rate' parameter)*
+    * **T2_LAPSE** – Air temperature lapse rate [°C m$^{-1}$] <br> *(enables a temporally-variable lapse rate and overrides the 'air_temperature_lapse_rate' parameter)*
     * **D** – Precipitation downscaling coefficient [-] <br> *(hourly precipitation downscaling coefficient for the three-phase anomaly model)*
     * **PRECIPITATION_ANOMALY** – Precipitation anomaly [-] <br> *(annual precipitation variance / anomaly for the three-phase anomaly model)*
 
