@@ -70,7 +70,7 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 |-----|:---:|:---:|---|
 | `station_altitude` | 3000.0            | m a.s.l. | Altitude of meteorological station |
 | `z` | 2.0                              | m | Meteorological data measurement height |
-| `air_temperature_lapse_rate` | -0.006  | K m$^{-1}$ | Air temperature lapse rate |
+| `air_temperature_lapse_rate` | -0.006  | °C m$^{-1}$ | Air temperature lapse rate |
 | `air_temperature_offset`   | 0.0       | °C | Air temperature offset |
 | `precipitation_lapse_rate` | 0.0002    | % m$^{-1}$ | Precipitation lapse rate |
 | `precipitation_multiplier` | 1.0       | – | Multiplicative scaling factor for precipitation data |
@@ -111,7 +111,7 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 | `albedo_decay_timescale_wet` | 10                 | days | *(Bougamont et al., 2005)* Albedo decay timescale (melting surface) |
 | `albedo_decay_timescale_dry` | 30                 | days | *(Bougamont et al., 2005)* Albedo decay timescale (dry snow surface) |
 | `albedo_decay_timescale_dry_adjustment` | 14      | day K$^{-1}$ | *(Bougamont et al., 2005)* Albedo dry snow decay timescale increase at negative temperatures |
-| `albedo_decay_timescale_threshold` | 263.17       | K | *(Bougamont et al., 2005)* Albedo temperature threshold for dry snow decay timescale increase |
+| `albedo_decay_timescale_threshold` | -10.0        | °C | *(Bougamont et al., 2005)* Albedo temperature threshold for dry snow decay timescale increase |
 | `surface_roughness_fresh_snow` | 0.24             | mm | *(Moelg et al., 2012)* Surface roughness length for fresh snow |
 | `surface_roughness_ice` | 1.7                     | mm | *(Moelg et al., 2012)* Surface roughness length for ice |
 | `surface_roughness_firn` | 4.0                    | mm | *(Moelg et al., 2012)* Surface roughness length for aged snow |
@@ -150,8 +150,8 @@ The initial condition parameters control how the subsurface grid is initialised 
 | `initial_glacier_layer_heights` | 1.0          | m | Initial thickness of glacier ice layers |
 | `initial_upper_snowpack_density` | 250.0       | kg m$^{-3}$  | Top density for initial snowpack |
 | `initial_lower_snowpack_density` | 275.0       | kg m$^{-3}$  | Bottom density for initial snowpack |
-| `initial_upper_temperature` | 270.16           | K | Upper boundary condition for initial temperature profile |
-| `initial_lower_temperature` | 273.16           | K | Lower boundary condition for initial temperature profile |
+| `initial_upper_temperature` | -3.0             | °C | Upper boundary condition for initial temperature profile |
+| `initial_lower_temperature` | 0.0              | °C | Lower boundary condition for initial temperature profile |
 
 !!! note
     For detailed subsurface investigations, it is strongly reccomended to precede the main simulation with a spin-up/initialisation phase; otherwise, the initial years of the simulation will be heavily influenced by these arbitrary initial conditions.
