@@ -84,9 +84,12 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
         try:
             res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-2, maxiter = 50,
                         args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
+            residual = energy_balance_optimisation(min(zero_temperature,float(res)), GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N)
             if res < lower_bound:
-                raise ValueError("Error: Surface temperature is out of physical bounds.")
-            res = SimpleNamespace(**{'x':min(np.array([zero_temperature]),res),'fun':None})
+                raise ValueError("Error: Surface temperature is out of physical bounds.")        
+            if (res < zero_temperature) and (abs(residual) > 1e-2):
+                raise ValueError("Error: Large residual in Newton-Raphson surface temperature calculation - switching to SLSQP method")
+            res = SimpleNamespace(**{'x':min(np.array([zero_temperature]),res),'fun': residual})
 	    
         except (RuntimeError,ValueError):
              # Workaround for non-convergence and unboundedness (revert to SLSQP)
@@ -328,6 +331,7 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
+
 
 
 
