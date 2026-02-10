@@ -8,7 +8,7 @@
         from an CSV file with the following variables:
 
         DATETIME (t)   ::    Datetime [yyyy-mm-dd hh:mm]
-        T2 (t)         ::    Air temperature [K]
+        T2 (t)         ::    Air temperature [°C]
         U2 (t)         ::    Wind speed [m s-1]
         RH2 (t)        ::    Relative humidity [%]
         PRES (t)       ::    Atmospheric pressure [hPa]
@@ -23,7 +23,7 @@
 
         Optional Variables:
 
-        T2_LAPSE (t)                 ::    Air Temperature Lapse Rate [K m-1]
+        T2_LAPSE (t)                 ::    Air Temperature Lapse Rate [°C m-1]
         D (t)                        ::    Precipitation Downscaling Coefficient [-]
         PRECIPITATION_ANOMALY (t)    ::    Annual Precipitation Anomaly [-]
         
@@ -75,7 +75,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
        ({'RRR'}.issubset(df.columns) or {'D', 'ACC_ANOMALY'}.issubset(df.columns))):    
         print('\t Missing variables. The meteo dataset must have the following variables:\n\n', \
               '\t DATETIME - Datetime [yyyy-mm-dd hh:mm]\n', \
-              '\t T2       - Air temperature [K]\n',  \
+              '\t T2       - Air temperature [°C]\n',  \
               '\t U2       - Wind speed [m s\u207b\xb9]\n', \
               '\t RH2      - Relative humidity [%]\n', \
               '\t PRES     - Atmospheric pressure [hPa]\n', \
@@ -122,15 +122,15 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     print('\t ==============================================================')
     
     # Air Temperature [T2]
-    print(f"\t 'T2' - Air Temperature at 2 m [K]                   Min: {np.round(df['T2'].min(),2)} -- Max: {np.round(df['T2'].max(),2)}")
+    print(f"\t 'T2' - Air Temperature at 2 m [°C]                   Min: {np.round(df['T2'].min(),2)} -- Max: {np.round(df['T2'].max(),2)}")
     T2 = np.asarray(df['T2'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
-    add_variable_along_time(ds, T2, 'T2', 'K', 'Air Temperature at 2 m')
+    add_variable_along_time(ds, T2, 'T2', '°C', 'Air Temperature at 2 m')
 
     # Air Temperature Lapse Rate [T2]
     if 'T2_LAPSE' in df.columns:
-        print(f"\t 'T2_LAPSE' - Air Temperature Lapse Rate [K m\u207b\xb9]     Min: {np.round(df['T2_LAPSE'].min(),2)} -- Max: {np.round(df['T2_LAPSE'].max(),2)}")
+        print(f"\t 'T2_LAPSE' - Air Temperature Lapse Rate [°C m\u207b\xb9]     Min: {np.round(df['T2_LAPSE'].min(),2)} -- Max: {np.round(df['T2_LAPSE'].max(),2)}")
         T2_LAPSE = np.asarray(df['T2_LAPSE'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
-        add_variable_along_time(ds, T2_LAPSE, 'T2_LAPSE', 'K m\u207b\xb9', 'Air Temperature Lapse Rate')
+        add_variable_along_time(ds, T2_LAPSE, 'T2_LAPSE', '°C m\u207b\xb9', 'Air Temperature Lapse Rate')
 
     # Atmospheric Pressure [PRES]
     print(f"\t 'PRES' - Atmospheric Pressure at 2 m [hPa]          Min: {np.round(df['PRES'].min(),2)} -- Max: {np.round(df['PRES'].max(),2)}")
