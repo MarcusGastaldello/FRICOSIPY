@@ -106,7 +106,7 @@ def method_Bougamont(GRID,albedo_snow,surface_temperature):
                     albedo_decay_timescale_dry               ::    Decay timescale (dry snow surface at 0 °C) [days]
                     albedo_decay_timescale_wet               ::    Decay timescale (melting surface) [days]
                     albedo_decay_timescale_dry_adjustment    ::    Increase in decay timescale at negative temperatures [day K-1]
-                    albedo_decay_timescale_threshold         ::    Temperature threshold for decay timescale increase [K]
+                    albedo_decay_timescale_threshold         ::    Temperature threshold for decay timescale increase [°C]
                     albedo_characteristic_snow_depth         ::    Albedo snow depth adjustment parameter [cm]
         Input: 
                     GRID                                     ::    Subsurface GRID variables
@@ -139,8 +139,8 @@ def method_Bougamont(GRID,albedo_snow,surface_temperature):
         if surface_temperature >= zero_temperature:
             albedo_decay_timescale_bougamont = albedo_decay_timescale_wet
         else:
-            if surface_temperature < albedo_decay_timescale_threshold:
-                albedo_decay_timescale_bougamont = albedo_decay_timescale_dry + (zero_temperature - albedo_decay_timescale_threshold) * albedo_decay_timescale_dry_adjustment
+            if surface_temperature < (albedo_decay_timescale_threshold + zero_temperature):
+                albedo_decay_timescale_bougamont = albedo_decay_timescale_dry + albedo_decay_timescale_threshold * albedo_decay_timescale_dry_adjustment
             else:
                 albedo_decay_timescale_bougamont = albedo_decay_timescale_dry + (zero_temperature - surface_temperature) * albedo_decay_timescale_dry_adjustment
 
