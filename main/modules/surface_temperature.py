@@ -252,7 +252,7 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
 
 	# Otherwise, if there is only a single subsurface layer:
     else:
-        GROUND = k * GRID.get_node_temperature(0) / (0.5 *  GRID.get_node_height(0))
+        GROUND = k * (GRID.get_node_temperature(0) - T0) / (0.5 *  GRID.get_node_height(0))
 
     # -------------------------------------------------------------------------------------------------------------------- #
 
@@ -328,6 +328,7 @@ def method_Sonntag(T):
 
 
 # ==================================================================================================================== #
+
 
 
 
