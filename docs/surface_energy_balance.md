@@ -36,7 +36,7 @@ However, since the surface temperature of a glacier is physically constrained to
 </div>
 <div style="height: 20px;"></div>
 
-The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Limited-memory *Broyden*–*Fletcher*–*Goldfarb*–*Shanno* algorithm (L-BFGS) algorithm, the Sequential Least SQuares Programming (SLSQP) approach or the *Newton*-*Raphson* method.
+The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Sequential Least SQuares Programming (SLSQP) algorithm or the *Newton*-*Raphson* method.
 
 The following section explains each of these energy fluxes in greater detail and how they are parameterised in the *FRICOSIPY* model.
 
