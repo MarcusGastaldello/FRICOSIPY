@@ -13,10 +13,10 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 *FRICOSIPY* output files are visualised using the standard *Xarray* dataset. The dataset is structured in 4 dimensions with the following co-ordinates:
 
-- **y** - $y$ co-ordinate of spatial node (northing) [m]
-- **x** - $x$ co-ordinate of spatial node (easting) [m]
-- **time** - datetime value [yyyy-mm-dd hh:mm]
-- **layer** - *subsurface layer [n]
+* **y** – $y$ co-ordinate of spatial node (northing) [m]
+* **x** – $x$ co-ordinate of spatial node (easting) [m]
+* **time** – datetime value [yyyy-mm-dd hh:mm]
+* **layer** – subsurface layer [n]
 
 Selecting the *data variables* tab will reveal the names and details of all output variables. Each can be selected by typing the dataset name ( `ds` ) followed by a period ( `.` ) and the exact name of the desired output variable ( *eg.* `ds.SHORTWAVE` will access the net shortwave radiation data ).
 
