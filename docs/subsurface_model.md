@@ -413,8 +413,8 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
     $$
     t^* = 
     \begin{cases} 
-    t^*_{\text{wet}}, & \left[ \frac{\phi \: \rho}{\rho} \right] <= 10 \% \\ 
-    t^*_{\text{dry}} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C} 
+    t^*_{\text{wet}}, & \left[ \frac{\phi_{\:w} \: \rho_{\:w}}{\rho} \right] \leq 10 \: \% \\ 
+    t^*_{\text{dry}}, & \left[ \frac{\phi_{\:w} \: \rho_{\:w}}{\rho} \right] > 10 \: \% 
     \end{cases}
     $$
 
