@@ -27,7 +27,7 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | [**Surface temperature solver**](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/#) | *Newton* *(faster)* | *SLSQP* *(slower)* | 
 
 !!! note
-    Should the *Newton-Raphson* approach fail to accurately converge on the correct surface temperature and produce a large energy residual, the simulation will automatically revert to using the Sequential Least SQuares Programming (SLSQP) algorithm. Therefore, typically the faster *Netwon-Raphson* approach is sufficient for most simulations.
+    Should the *Newton-Raphson* approach fail to accurately converge on the correct surface temperature and produce a large energy residual, the simulation will automatically revert to using the backup Sequential Least SQuares Programming (SLSQP) algorithm. Therefore, typically the faster *Newton-Raphson* approach is sufficient for most simulations.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
