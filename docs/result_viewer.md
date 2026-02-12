@@ -18,7 +18,7 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 - **time** -
 - **layer** - 
 
-Selecting the *data variables* tab will reveal the names and details of all output variables. Each can be selected by typing the dataset name (`ds`) followed by a period (`.`) and the exact name of the desired output variable.
+Selecting the *data variables* tab will reveal the names and details of all output variables. Each can be selected by typing the dataset name ( `ds` ) followed by a period ( `.` ) and the exact name of the desired output variable.
 
 ![FRICOSIPY Output NetCDF File](images/FRICOSIPY-NetCDF-file.png)
 
