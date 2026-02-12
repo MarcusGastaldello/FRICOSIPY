@@ -11,9 +11,21 @@ The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that 
 
 ## Visualising an Xarray Dataset
 
+*FRICOSIPY* output files are visualised using the standard *Xarray* dataset. The dataset is structured in 4 dimensions with the following co-ordinates:
+
+- **y** - 
+- **x**
+- **time**
+- **layer**
+
+Selecting the *Data variables* tab will reveal the names and details of all output variables. Each can be selected by typing the dataset name (*ds*) followed by a period (.) and the exact name of the desired output variable.
+
 ![FRICOSIPY Output NetCDF File](images/FRICOSIPY-NetCDF-file.png)
 
 <center><small> **Figure 6**: FRICOSIPY Output NetCDF Dataset</small></center>
+
+!!! note
+    If the user disabes the subsurface variables (), 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
