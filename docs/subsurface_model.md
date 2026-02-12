@@ -406,7 +406,7 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
 ??? "**$(i)$ Katsushima et al. (2009)**"
 
     <br> 
-    Using the parameterisation of [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002), snow grain size growth $(d)$ is determined using the emperical formulations of either [Brun (1989)](https://doi.org/10.3189/S0260305500007576) or [Tusima (1978)](https://doi.org/10.5331/seppyo.40.155); the latter being used when the gravimetric water content is above 10%.
+    Using the parameterisation of [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002), snow grain size $(d)$ growth is determined using the emperical formulations of either [Brun (1989)](https://doi.org/10.3189/S0260305500007576) or [Tusima (1978)](https://doi.org/10.5331/seppyo.40.155); the latter being used when the gravimetric water content is above 10%.
         
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
 
@@ -424,6 +424,6 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
 
     </div>
 
-    <small>where $t^∗_{\text{wet}}$ and $t^∗_{\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}, t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>    
+    <small>where $d$ is the snow grain size (mm), $\phi_{\:w}$ is the volumetric liquid water content, $w$ is the gravimetric water content and $\rho_{\:w} = 1000$ kg m$^{-3}$ is the density of water.</small>    
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
