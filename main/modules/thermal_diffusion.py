@@ -41,7 +41,7 @@ def thermal_diffusion(GRID, BASAL, dt):
     if GRID.get_number_layers() > 1:
 
         # Retrieve subsurface layer properties:
-        basal_heat_flux = BASAL* (45 / 35) / 1000
+        basal_heat_flux = BASAL / 1000
         z = np.asarray(GRID.get_height())
         K = np.asarray(GRID.get_thermal_diffusivity())
         T = np.asarray(GRID.get_temperature())
