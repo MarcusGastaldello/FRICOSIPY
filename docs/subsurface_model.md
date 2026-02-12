@@ -406,7 +406,7 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
 ??? "**$(i)$ Katsushima et al. (2009)**"
 
     <br> 
-    Using the parameterisation of [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002), snow grain size growth $(d)$ is determined using the emperical formulations of either [Brun, 1989](https://doi.org/10.3189/S0260305500007576) or [Tusima, 1978](https://doi.org/10.5331/seppyo.40.155); the latter being used when the gravimetric water content is above 10%.
+    Using the parameterisation of [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002), snow grain size growth $(d)$ is determined using the emperical formulations of either [Brun (1989)](https://doi.org/10.3189/S0260305500007576) or [Tusima (1978)](https://doi.org/10.5331/seppyo.40.155); the latter being used when the gravimetric water content is above 10%.
         
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
 
