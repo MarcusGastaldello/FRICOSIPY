@@ -27,7 +27,7 @@ Selecting the *attributes* tab will reveal a list of all the parameterisation ch
 <center><small> **Figure 6**: FRICOSIPY Output NetCDF Dataset</small></center>
 
 !!! note
-    If the user disabes the subsurface variables ( `full_field = False` in `config.py` ), the dataset will be reduced to 3 dimensions excluding the layer co-ordinate. 
+    If the user disabes the reporting of the subsurface variables ( `full_field = False` in `config.py` ), the dataset will be reduced to 3 dimensions excluding the layer co-ordinate. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
