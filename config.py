@@ -54,7 +54,7 @@ grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 - Metric Swiss CH19
 
 # Reduce Spatial Extent
 spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
-[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] # (if unused - 'None')
+[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] 
 
 # ================= #
 # OUTPUT VARIABLES:
@@ -62,7 +62,7 @@ spatial_subset = False            # Reduce the spatial extent of the static and 
 
 # 3-D Output Variables:
 meteorological_variables = ['AIR_TEMPERATURE','AIR_PRESSURE','RELATIVE_HUMIDITY','WIND_SPEED','FRACTIONAL_CLOUD_COVER']
-surface_energy_fluxes  =   ['SHORTWAVE','LONGWAVE','SENSIBLE','LATENT','GROUND','RAIN_FLUX','MELT_ENERGY']
+surface_energy_fluxes  =   ['SHORTWAVE','LONGWAVE','SENSIBLE','LATENT','SUBSURFACE','RAIN_HEAT_FLUX','MELT_ENERGY']
 surface_mass_fluxes =      ['RAIN','SNOWFALL','EVAPORATION','SUBLIMATION','CONDENSATION','DEPOSITION','SURFACE_MELT','SURFACE_MASS_BALANCE']
 subsurface_mass_fluxes =   ['REFREEZE','SUBSURFACE_MELT','RUNOFF','MASS_BALANCE']
 other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT','SURFACE_ELEVATION','SURFACE_TEMPERATURE','SURFACE_ALBEDO','N_LAYERS','FIRN_TEMPERATURE','FIRN_TEMPERATURE_CHANGE','FIRN_FACIE']
