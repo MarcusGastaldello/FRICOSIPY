@@ -120,24 +120,27 @@ def method_bucket_scheme(GRID):
     # Reset output values:
     Q = 0
 
-    # Loop over all internal sub-surface grid nodes: (Currently exploring faster vectorisation options)
-    for Idx in range(0, GRID.number_nodes - 1): 
+    # Skip percolation if there is only one subsurface layer:
+    if GRID.get_number_layers() > 1:
 
-        # Irreducible water content:
-        irr = GRID.get_node_irreducible_water_content(Idx)
-        # Liquid water content:
-        lwc = GRID.get_node_liquid_water_content(Idx)   
-        # Residual volumetric fraction of water:
-        residual = np.maximum((lwc - irr), 0.0)
+        # Loop over all internal sub-surface grid nodes: (Currently exploring faster vectorisation options)
+        for Idx in range(0, GRID.number_nodes - 1): 
 
-        if residual > 0:
-            # Set current layer as saturated (at irreducible water content):
-            GRID.set_node_liquid_water_content(Idx, irr)
-            residual = residual * GRID.get_node_height(Idx)
-            GRID.set_node_liquid_water_content(Idx + 1, GRID.get_node_liquid_water_content(Idx + 1) + residual / GRID.get_node_height(Idx + 1))
-        else:
-            # Set current layer with unsaturated water content:
-            GRID.set_node_liquid_water_content(Idx, lwc)
+            # Irreducible water content:
+            irr = GRID.get_node_irreducible_water_content(Idx)
+            # Liquid water content:
+            lwc = GRID.get_node_liquid_water_content(Idx)   
+            # Residual volumetric fraction of water:
+            residual = np.maximum((lwc - irr), 0.0)
+
+            if residual > 0:
+                # Set current layer as saturated (at irreducible water content):
+                GRID.set_node_liquid_water_content(Idx, irr)
+                residual = residual * GRID.get_node_height(Idx)
+                GRID.set_node_liquid_water_content(Idx + 1, GRID.get_node_liquid_water_content(Idx + 1) + residual / GRID.get_node_height(Idx + 1))
+            else:
+                # Set current layer with unsaturated water content:
+                GRID.set_node_liquid_water_content(Idx, lwc)
 
     # Water in the last sub-surface node is allocated to run-off:
     Q = GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1)
@@ -153,12 +156,39 @@ def method_bucket_scheme(GRID):
 
 @njit  
 def method_Darcy(GRID, dt):
+    """ Percolation of water according to a 'Darcy's law' based approach 
+        according to Hirashima et al., (2010) (https://doi.org/10.1016/j.coldregions.2010.09.003)
+    
+        Input:
+                    GRID       ::    Subsurface GRID variables -->
+                    K (z)      ::    Layer hydraulic conductivity [m s-1]
+                    d (z)      ::    Layer grain size [mm]
+                    h (z)      ::    Layer height [m]
+                    lwc (z)    ::    Layer liquid water content [-] 
+                    irr (z)    ::    Layer irreducible water content [-]
+                    theta (z)  ::    Layer unsaturated hydrualic conductivity [m s-1]
+        Output:
+                    lwc (z)    ::    Layer liquid water content (updated) [-]
+                    Q          ::    Runoff [m w.e.]
+    
+    """
 
-    # Determine integration steps required in the solver to ensure numerical stability:
-    dt_stable =  60        # Test Value (60 seconds?)
     dt_cumulative = 0.0
 
     while dt_cumulative < dt:
+
+        # Import Sub-surface Grid Information:
+        h = np.asarray(GRID.get_height())
+        d = np.asarray(GRID.get_grain_size())
+        theta = np.minimum(np.maximum(np.asarray(GRID.get_hydraulic_conductivity()),1e-10), 0.999)
+
+        # Inverse moisture gradient (C)
+        n = 15.68 * np.exp(-0.46 * d) + 1
+        m = 1 - 1 / n
+        inv_C = (1 / (7.3 * np.exp(1.9) * n * m)) * (theta **(-1 / m - 1)) * ((theta **(-1 / m) - 1)**(1 / n - 1))
+
+        # Determine integration steps required in the solver to ensure numerical stability:
+        dt_stable = max(np.min((0.5 * h**2) / (2 * (theta * inv_C) + 1e-12)), 1) # Courant-Friedrichs-Lewy (CFL) stability criterion     
 
         # Integration timestep:
         dt_step = np.minimum(dt_stable, dt - dt_cumulative)
@@ -167,19 +197,23 @@ def method_Darcy(GRID, dt):
         # Calculate water fluxes according to Darcy's law:
         D = darcy_fluxes(GRID, dt_step)
 
-        for Idx in range(0, GRID.number_nodes - 1):
+        # Surface node:
+        GRID.set_node_liquid_water_content(0, (GRID.get_node_liquid_water_content(0) * GRID.get_node_height(0) + - D[0]) / GRID.get_node_height(0))
 
-            # Subtract Darcy-derived water flux from (current) upper layer:
-            GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) - D[Idx]) / GRID.get_node_height(Idx))
+        # Intermediate nodes:
+        for Idx in range(1, GRID.number_nodes - 1):
+            GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) + (D[Idx - 1] - D[Idx])) / GRID.get_node_height(Idx))
 
-            # Add Darcy-derived water flux to (proceeding / next) lower layer:
-            GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx + 1) * GRID.get_node_height(Idx + 1) + D[Idx]) / GRID.get_node_height(Idx + 1))
+        # Base node:
+        Idx = GRID.number_nodes - 1
+        GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) + D[Idx - 1]) / GRID.get_node_height(Idx))
     
     # Water in the last sub-surface node is allocated to run-off:
     Q = GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1)
     GRID.set_node_liquid_water_content(GRID.number_nodes - 1, 0.0)
 
     return Q
+            
 
 # ====================================================================================================================
 

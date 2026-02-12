@@ -60,12 +60,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
             # Surface Energy Fluxes (7):
             
-                SWnet (t)                       ::    Shortwave radiation flux [W m-2]
-                LWnet (t)                       ::    Longwave radiation flux [W m-2]
-                SENSIBLEnet (t)                 ::    Sensible heat flux [W m-2]
-                LATENTnet (t)                   ::    Latent heat flux [W m-2]
-                GROUNDnet (t)                   ::    Ground heat flux [W m-2] 
-                RAIN_FLUX (t)                   ::    Rain heat flux [W m-2]
+                SHORTWAVE (t)                   ::    Shortwave radiation flux [W m-2]
+                LONGWAVE (t)                    ::    Longwave radiation flux [W m-2]
+                SENSIBLE (t)                    ::    Sensible heat flux [W m-2]
+                LATENT (t)                      ::    Latent heat flux [W m-2]
+                SUBSURFACE (t)                  ::    Subsurface heat flux [W m-2] 
+                RAIN_HEAT_FLUX (t)              ::    Rain heat flux [W m-2]
                 MELT_ENERGY (t)                 ::    Melt energy flux [W m-2]
 
             # Surface Mass Fluxes (8):
@@ -86,7 +86,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 RUNOFF (t)                      ::    Surface Runoff [m w.e.]
                 MASS_BALANCE (t)                ::    Mass balance [m w.e.]
 
-            # Other Information (10):
+            # Other Information (9):
 
                 SNOW_HEIGHT (t)                 ::    Snow height [m]
                 SNOW_WATER_EQUIVALENT (t)       ::    Snow water equivalent [m w.e.]
@@ -116,11 +116,6 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
   
     """
 
-    # =================== #
-    # INITIALISE SNOWPACK
-    # =================== #
-    GRID = init_snowpack()
-
     # ========================= #
     # GET STATIC DATA FROM FILE
     # ========================= #
@@ -131,6 +126,8 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     ASPECT = STATIC.ASPECT.values
     LATITUDE = STATIC.LATITUDE.values
     LONGITUDE = STATIC.LONGITUDE.values
+    EASTING = STATIC.EASTING.values
+    NORTHING = STATIC.NORTHING.values
 
     # Optional Variables:
     if 'BASAL' in list(STATIC.keys()):
@@ -138,24 +135,30 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     else:
         BASAL = basal_heat_flux
 
+    # =================== #
+    # INITIALISE SNOWPACK
+    # =================== #
+
+    GRID = init_snowpack(STATIC)
+
     # ================================= #
     # GET METEOROLOGICAL DATA FROM FILE
     # ================================= #
 
     # Interpolate temperature using an air temperature lapse rate
     if 'T2_LAPSE' in list(METEO.keys()):
-        T2 = METEO.T2.values + (ELEVATION - station_altitude) * METEO.T2_LAPSE.values
+        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - station_altitude) * METEO.T2_LAPSE.values) + air_temperature_offset
     else:
-        T2 = METEO.T2.values + (ELEVATION - station_altitude) * air_temperature_lapse_rate
+        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - station_altitude) * air_temperature_lapse_rate) + air_temperature_offset
 
     # Interpolate atmospheric pressure using the barometric equation
     np.seterr(divide = 'ignore') 
     if 'T2_LAPSE' in list(METEO.keys()):
         PRES = np.where(METEO.T2_LAPSE.values == 0,  
-                        METEO.PRES.values * np.exp(((-g * M) * (ELEVATION - station_altitude))/(R * METEO.T2.values)),
-                        METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * METEO.T2_LAPSE.values))))
+                        METEO.PRES.values * np.exp(((-g * M) * (ELEVATION - station_altitude))/(R * ((METEO.T2.values + zero_temperature) + air_temperature_offset))),
+                        METEO.PRES.values * np.power((T2 / ((METEO.T2.values + zero_temperature) + air_temperature_offset)),((-g * M) / (R * METEO.T2_LAPSE.values))))
     else:
-        PRES = METEO.PRES.values * np.power((T2/METEO.T2.values),((-g * M) / (R * -0.006)))
+        PRES = METEO.PRES.values * np.power((T2 / ((METEO.T2.values + zero_temperature) + air_temperature_offset)),((-g * M) / (R * air_temperature_lapse_rate)))
     
     # Precipitation:
     precipitation_allowed = ['standard','Mattea21']
@@ -167,10 +170,15 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         else:
             raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
 
-    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [mm w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
+    # Three-phase precipitation model (Mattea et al., 2021) (Precipitation climatology [m w.e.] * Annual anomaly [-] * Downscaling coefficient) [-]) 
     elif precipitation_method == 'Mattea21':
         if ('PRECIPITATION_CLIMATOLOGY' in list(STATIC.keys())) and ('PRECIPITATION_ANOMALY' in list(METEO.keys())) and ('D' in list(METEO.keys())):
-            RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * precipitation_multiplier
+            #RRR = STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values * METEO.D.values * 1000 * precipitation_multiplier
+
+            # Correction for sublimation losses (if known):
+            if ('SUBLIMATION' in list(STATIC.keys())) and ('SUB_ANOMALY' in list(METEO.keys())):
+                RRR = ((STATIC.PRECIPITATION_CLIMATOLOGY.values * METEO.PRECIPITATION_ANOMALY.values) + (STATIC.SUBLIMATION.values * METEO.SUB_ANOMALY.values)) * METEO.D.values * 1000 * precipitation_multiplier
+
         else:
             raise ValueError("Error: All three variables of the three phase precipitation model ('PRECIPITATION_CLIMATOLOGY', 'PRECIPITATION_ANOMALY','D') must be supplied in the input STATIC & METEO files")
 
@@ -251,12 +259,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     _FRACTIONAL_CLOUD_COVER = np.full(nt,np.nan, dtype=precision)
 
     # Surface Energy Fluxes (7):
-    _SWnet = np.full(nt,np.nan, dtype=precision)
-    _LWnet = np.full(nt,np.nan, dtype=precision)
-    _SENSIBLEnet = np.full(nt,np.nan, dtype=precision)
-    _LATENTnet = np.full(nt,np.nan, dtype=precision)
-    _GROUNDnet = np.full(nt,np.nan, dtype=precision)
-    _RAIN_FLUX = np.full(nt,np.nan, dtype=precision)
+    _SHORTWAVE = np.full(nt,np.nan, dtype=precision)
+    _LONGWAVE = np.full(nt,np.nan, dtype=precision)
+    _SENSIBLE = np.full(nt,np.nan, dtype=precision)
+    _LATENT = np.full(nt,np.nan, dtype=precision)
+    _SUBSURFACE = np.full(nt,np.nan, dtype=precision)
+    _RAIN_HEAT_FLUX = np.full(nt,np.nan, dtype=precision)
     _MELT_ENERGY = np.full(nt,np.nan, dtype=precision)
 
     # Surface Mass Fluxes (8):
@@ -339,7 +347,6 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
     # Initial Values:
     accumulation = 1
-    albedo_snow = albedo_fresh_snow
     surface_temperature = 270
     annual_mass_balances = np.empty(0)
     cumulative_mass_balance = 0
@@ -393,7 +400,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         # ======================================= #       
 
         # Update Albedo
-        albedo, albedo_snow = update_albedo(GRID, albedo_snow, surface_temperature)
+        albedo = update_albedo(GRID, surface_temperature)
 
         # Calculate net shortwave radiation
         SW_net = SWin[t] * (1 - albedo)
@@ -421,12 +428,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if LWin is not None:
             # Find new surface temperature (LW is directly supplied from meteorological data)
             fun, surface_temperature, lw_radiation_in, lw_radiation_out, sensible_heat_flux, latent_heat_flux, \
-            ground_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, LWinput = LWin[t])
+            subsurface_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, LWinput = LWin[t])
 
         else:
             # Find new surface temperature (LW is parametrised using fractional cloud cover)
             fun, surface_temperature, lw_radiation_in, lw_radiation_out, sensible_heat_flux, latent_heat_flux, \
-            ground_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, N = N[t])
+            subsurface_heat_flux, rain_heat_flux = update_surface_temperature(GRID, z0, T2[t], RH2[t], PRES[t], sw_radiation_net, U2[t], RAIN, SLOPE, N = N[t])
 
         # ============================ #
         # SURFACE MASS FLUXES [m w.e.]
@@ -447,7 +454,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if surface_temperature ==  zero_temperature:
 
             # Melt energy in [W m^-2]
-            melt_energy = max(0, sw_radiation_net + lw_radiation_in + lw_radiation_out + ground_heat_flux + rain_heat_flux +
+            melt_energy = max(0, sw_radiation_net + lw_radiation_in + lw_radiation_out + subsurface_heat_flux + rain_heat_flux +
                           sensible_heat_flux + latent_heat_flux)
         else:
             melt_energy = 0.0
@@ -464,6 +471,10 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             pass
             #GRID.add_mass(net_mass_change) 
 
+        # Remove mass [m w.e.]
+        if net_mass_change < 0:
+            GRID.remove_mass(-net_mass_change)
+
         # ============ # 
         # GLACIER MELT 
         # ============ # 
@@ -472,18 +483,18 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         if GRID.get_number_layers() == 0:
 
             # Report that the node has melted to the terminal
-            print(f"\tNode [X: {indX}, Y: {indY}] has melted!")
+            print(f"\t Node [X: {EASTING} , Y: {NORTHING} ] has melted!", flush=True)
 
             # Prematurely terminate node simulation and return output variables:    
             return (indY,indX, \
             _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
-            _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
+            _SHORTWAVE,_LONGWAVE,_SENSIBLE,_LATENT,_SUBSURFACE,_RAIN_HEAT_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
             _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \
             _LAYER_DEPTH,_LAYER_HEIGHT,_LAYER_DENSITY,_LAYER_TEMPERATURE,_LAYER_WATER_CONTENT,_LAYER_COLD_CONTENT,_LAYER_POROSITY,_LAYER_ICE_FRACTION, \
             _LAYER_IRREDUCIBLE_WATER,_LAYER_REFREEZE,_LAYER_HYDRO_YEAR,_LAYER_GRAIN_SIZE)
-
+        
         # ======================== #
         # PERCOLATION & REFREEZING
         # ======================== #
@@ -531,7 +542,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
         surface_mass_balance = SNOWFALL * (density_fresh_snow / water_density) - surface_melt + sublimation + deposition + evaporation
         internal_mass_balance = water_refrozen - subsurface_melt
         mass_balance = surface_mass_balance + internal_mass_balance
-        cumulative_mass_balance =+  mass_balance
+        cumulative_mass_balance +=  mass_balance
 
         # ================== #
         # INITIAL CONDITIONS
@@ -552,7 +563,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             LONGWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
             SENSIBLE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
             LATENT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
-            GROUND_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+            SUBSURFACE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
             RAIN_FLUX_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
             MELT_ENERGY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
@@ -599,7 +610,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             LONGWAVE_AGG[idx_agg] = lw_radiation_in + lw_radiation_out
             SENSIBLE_AGG[idx_agg] = sensible_heat_flux
             LATENT_AGG[idx_agg] = latent_heat_flux
-            GROUND_AGG[idx_agg] = ground_heat_flux
+            SUBSURFACE_AGG[idx_agg] = subsurface_heat_flux
             RAIN_FLUX_AGG[idx_agg] = rain_heat_flux
             MELT_ENERGY_AGG[idx_agg] = melt_energy
 
@@ -638,12 +649,12 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _FRACTIONAL_CLOUD_COVER[idx_res] = FRACTIONAL_CLOUD_COVER_AGG.mean()
 
             # Surface Energy Fluxes (Average Aggregated) (7):
-            _SWnet[idx_res] = SHORTWAVE_AGG.mean()
-            _LWnet[idx_res] = LONGWAVE_AGG.mean()
-            _SENSIBLEnet[idx_res] = SENSIBLE_AGG.mean()
-            _LATENTnet[idx_res] = LATENT_AGG.mean()
-            _GROUNDnet[idx_res] = GROUND_AGG.mean()
-            _RAIN_FLUX[idx_res] = RAIN_FLUX_AGG.mean()
+            _SHORTWAVE[idx_res] = SHORTWAVE_AGG.mean()
+            _LONGWAVE[idx_res] = LONGWAVE_AGG.mean()
+            _SENSIBLE[idx_res] = SENSIBLE_AGG.mean()
+            _LATENT[idx_res] = LATENT_AGG.mean()
+            _SUBSURFACE[idx_res] = SUBSURFACE_AGG.mean()
+            _RAIN_HEAT_FLUX[idx_res] = RAIN_FLUX_AGG.mean()
             _MELT_ENERGY[idx_res] = MELT_ENERGY_AGG.mean()
 
             # Surface Mass Fluxes (Cumulative Aggregated) (8):
@@ -666,7 +677,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
             _SNOW_HEIGHT[idx_res] = GRID.get_total_snowheight()
             _SNOW_WATER_EQUIVALENT[idx_res] = np.sum(np.asarray(GRID.get_snow_heights()) * (np.asarray(GRID.get_snow_densities()) / water_density))
             _TOTAL_HEIGHT[idx_res] = GRID.get_total_height()
-            _SURFACE_ELEVATION[idx_res] = np.nan
+            _SURFACE_ELEVATION[idx_res] = GRID.get_base_elevation() + GRID.get_total_height()
             _SURFACE_TEMPERATURE[idx_res] = surface_temperature - zero_temperature
             _SURFACE_ALBEDO[idx_res] = albedo
             _N_LAYERS[idx_res] = GRID.get_number_layers()
@@ -745,7 +756,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
                 LONGWAVE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
                 SENSIBLE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
                 LATENT_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
-                GROUND_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
+                SUBSURFACE_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
                 RAIN_FLUX_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
                 MELT_ENERGY_AGG = np.full(aggregation_timesteps[idx_res], np.nan, dtype=precision)
 
@@ -772,7 +783,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
     return (indY,indX, \
             _AIR_TEMPERATURE,_AIR_PRESSURE,_RELATIVE_HUMIDITY,_WIND_SPEED,_FRACTIONAL_CLOUD_COVER, \
-            _SWnet,_LWnet,_SENSIBLEnet,_LATENTnet,_GROUNDnet,_RAIN_FLUX,_MELT_ENERGY, \
+            _SHORTWAVE,_LONGWAVE,_SENSIBLE,_LATENT,_SUBSURFACE,_RAIN_HEAT_FLUX,_MELT_ENERGY, \
             _RAIN,_SNOWFALL,_EVAPORATION,_SUBLIMATION,_CONDENSATION,_DEPOSITION,_SURFACE_MELT,_SURFACE_MASS_BALANCE, \
             _REFREEZE,_SUBSURFACE_MELT,_RUNOFF,_MASS_BALANCE, \
             _SNOW_HEIGHT,_SNOW_WATER_EQUIVALENT,_TOTAL_HEIGHT,_SURFACE_ELEVATION,_SURFACE_TEMPERATURE,_SURFACE_ALBEDO,_N_LAYERS,_FIRN_TEMPERATURE,_FIRN_TEMPERATURE_CHANGE,_FIRN_FACIE, \

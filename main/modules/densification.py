@@ -112,9 +112,9 @@ def method_Ligtenberg(GRID,dt,accumulation):
                     rho (z)          ::    Layer density [kg m-3]
                     h (z)            ::    Layer height [m]
                     T (z)            ::    Layer temperature [K]
+                    T avg (z)        ::    Average layer temperature (EMA) [K]
                     icf (z)          ::    Layer ice fraction [-]
-                    z (z)            ::    Layer depth [m]
-                    ACCUMULATION     ::    Grid annual accumulation [m a-1]
+                    accumulation     ::    Grid annual accumulation [m a-1]
         Output:
                     rho (z)          ::    Layer density (updated) [kg m-3]
     """
@@ -129,12 +129,12 @@ def method_Ligtenberg(GRID,dt,accumulation):
     rho = np.asarray(GRID.get_density())
     h   = np.asarray(GRID.get_height())
     T   = np.asarray(GRID.get_temperature())
+    T_avg = np.asarray(GRID.get_average_temperature())
     icf = np.asarray(GRID.get_ice_fraction())
-    z   = np.asarray(GRID.get_depth())
 
     # Convert units:
     b = max(accumulation * 1000, 1) # accumulation [mm w.e. a-1]
-    dt = dt / 31536000 # timestep as a fraction of a calendar year
+    dt_frac = dt / (365 * 24 * 3600) # timestep as a fraction of a calendar year [s]
 
     # Binary mask for snow/ice determination:
     mask = np.where(rho < snow_ice_threshold,1,0)
@@ -144,19 +144,13 @@ def method_Ligtenberg(GRID,dt,accumulation):
     C_firn = 0.03 * np.maximum(2.366 - 0.293 * np.log(b) , 0.25)
     C = np.where(rho < 550, C_snow , C_firn)
 
-    # Obtain approximate temperatures from interpolation depths z1 & z2
-    Tz1 = T[np.searchsorted(z, temperature_interpolation_depth_1, side="left")]
-    Tz2 = T[np.searchsorted(z, temperature_interpolation_depth_2, side="left")]
-    
-    # Calculate linear temperature profile model constants
-    m = (Tz2 - Tz1) / (temperature_interpolation_depth_2 - temperature_interpolation_depth_1)
-    q = Tz1 - (m * temperature_interpolation_depth_1)
-    
-    # Calculate approximate annual average temperature from linear gradient interpolation
-    T_AVG = z * m + q
-    
+    # Estimate average temperature using an Exponential Moving Average (EMA):  
+    alpha = (2 * dt_frac) / (5 + dt_frac) # smoothing factor (five-yearly average)
+    T_avg = (T * alpha) + (T_avg * (1 - alpha))
+    GRID.set_average_temperature(T_avg)
+
     # Layer density change:
-    drho = mask * dt * C * b * g * (ice_density - rho) * np.exp((-Ec / (R * T)) + (Eg / (R * T_AVG)))
+    drho = mask * dt_frac * C * b * g * (ice_density - rho) * np.exp((-Ec / (R * T)) + (Eg / (R * T_avg)))
 
     # Calculate change in volumetric ice fraction:
     dicf = drho / ice_density
