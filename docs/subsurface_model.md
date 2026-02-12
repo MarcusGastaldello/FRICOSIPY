@@ -413,7 +413,7 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
     $$
     \frac{\delta d}{\delta t} = 
     \begin{cases} 
-    \frac{2}{\pi \: d^2} \: \left[ 1.28e-8 + 4.22 \times 10^{-10} \: w^{3} \right], & w \leq 10 \: \% \\ 
+    \frac{2}{\pi \: d^2} \: \left[ 1.28 \times 10^{-8} + \left( 4.22 \times 10^{-10} \: w^{3} \right) \right], & w \leq 10 \: \% \\ 
     \frac{2.5 \times 10^{-4}}{d^2} \: \frac{1}{3600}, & w > 10 \: \% 
     \end{cases}
     $$
