@@ -167,10 +167,12 @@ def init_snowpack(STATIC):
                 layer_grain_size.astype(np.float64),
                 float(base_elevation),
                 None,   # layer_ice_fraction
-                None,   # new_snow_height
-                None,   # new_snow_timestamp
-                None,   # old_snow_timestamp
-                None)   # fresh_snow_timestamp
+                None,   # old_snow_age
+                None,   # old_snow_albedo
+                None,   # old_snow_SWE
+                None,   # fresh_snow_age
+                None,   # fresh_snow_albedo
+                None,)  # fresh_snow_SWE
     
     return GRID
 

@@ -184,6 +184,10 @@ class IOClass:
                 # Output variables are reported on all simulation timestamps
                 self.RESULT.coords['time'] = self.METEO.coords['time'] 
 
+        # Subsurface layer coordinate
+        if full_field == True:
+            self.RESULT.coords['layer'] = np.arange(max_layers)
+
         # Output File Temporal Dimension
         self.nt = self.RESULT.sizes['time']
 
@@ -268,10 +272,7 @@ class IOClass:
         if preferential_percolation_method == 'Marchenko17':
             self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
         if irreducible_water_content_method == 'constant':
-            self.RESULT.attrs['constant_irreducible_water_content'] = constant_irreducible_water_content
-        if dry_densification_method == 'Ligtenberg11':
-            self.RESULT.attrs['Temperature_interpolation_depth_1'] = temperature_interpolation_depth_1
-            self.RESULT.attrs['Temperature_interpolation_depth_2'] = temperature_interpolation_depth_2
+            self.RESULT.attrs['Constant_irreducible_water_content'] = constant_irreducible_water_content
 
         # Initial Conditions:
         self.RESULT.attrs['Initial_snowheight'] = initial_snowheight
@@ -373,10 +374,10 @@ class IOClass:
             self.SENSIBLE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('LATENT' in self.surface_energy_fluxes):
             self.LATENT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
-        if ('GROUND' in self.surface_energy_fluxes):
-            self.GROUND = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
-        if ('RAIN_FLUX' in self.surface_energy_fluxes):
-            self.RAIN_FLUX = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SUBSURFACE' in self.surface_energy_fluxes):
+            self.SUBSURFACE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('RAIN_HEAT_FLUX' in self.surface_energy_fluxes):
+            self.RAIN_HEAT_FLUX = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('MELT_ENERGY' in self.surface_energy_fluxes):
             self.MELT_ENERGY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
@@ -466,7 +467,7 @@ class IOClass:
     
     def copy_local_to_global(self,y,x,
         local_AIR_TEMPERATURE,local_AIR_PRESSURE,local_RELATIVE_HUMIDITY,local_WIND_SPEED,local_FRACTIONAL_CLOUD_COVER, \
-        local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_GROUND,local_RAIN_FLUX,local_MELT_ENERGY, \
+        local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_SUBSURFACE,local_RAIN_HEAT_FLUX,local_MELT_ENERGY, \
         local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SURFACE_MASS_BALANCE, \
         local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MASS_BALANCE, \
         local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_ELEVATION,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
@@ -495,10 +496,10 @@ class IOClass:
             self.SENSIBLE[:,y,x] = local_SENSIBLE
         if ('LATENT' in self.surface_energy_fluxes):
             self.LATENT[:,y,x] = local_LATENT 
-        if ('GROUND' in self.surface_energy_fluxes):
-            self.GROUND[:,y,x] = local_GROUND 
-        if ('RAIN_FLUX' in self.surface_energy_fluxes):
-            self.RAIN_FLUX[:,y,x] = local_RAIN_FLUX 
+        if ('SUBSURFACE' in self.surface_energy_fluxes):
+            self.SUBSURFACE[:,y,x] = local_SUBSURFACE 
+        if ('RAIN_HEAT_FLUX' in self.surface_energy_fluxes):
+            self.RAIN_HEAT_FLUX[:,y,x] = local_RAIN_HEAT_FLUX 
         if ('MELT_ENERGY' in self.surface_energy_fluxes):
             self.MELT_ENERGY[:,y,x] = local_MELT_ENERGY
 
@@ -606,13 +607,13 @@ class IOClass:
         if ('LONGWAVE' in self.surface_energy_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.LONGWAVE, 'LONGWAVE', 'W m\u207b\xb2', 'Net Longwave Flux')
         if ('SENSIBLE' in self.surface_energy_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.SENSIBLE, 'SENSIBLE', 'W m\u207b\xb2', 'Net Sensible Flux')
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SENSIBLE, 'SENSIBLE', 'W m\u207b\xb2', 'Net Sensible Heat Flux')
         if ('LATENT' in self.surface_energy_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.LATENT, 'LATENT', 'W m\u207b\xb2', 'Net Latent Flux')
-        if ('GROUND' in self.surface_energy_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.GROUND, 'GROUND', 'W m\u207b\xb2', 'Net Ground Flux')
-        if ('RAIN_FLUX' in self.surface_energy_fluxes):
-            self.add_variable_along_northingeastingtime(self.RESULT, self.RAIN_FLUX, 'RAIN_FLUX', 'W m\u207b\xb2', 'Rain Heat Flux')
+            self.add_variable_along_northingeastingtime(self.RESULT, self.LATENT, 'LATENT', 'W m\u207b\xb2', 'Net Latent Heat Flux')
+        if ('SUBSURFACE' in self.surface_energy_fluxes):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SUBSURFACE, 'SUBSURFACE', 'W m\u207b\xb2', 'Net Subsurface / Ground Heat Flux')
+        if ('RAIN_HEAT_FLUX' in self.surface_energy_fluxes):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.RAIN_HEAT_FLUX, 'RAIN_HEAT_FLUX', 'W m\u207b\xb2', 'Rain Heat Flux')
         if ('MELT_ENERGY' in self.surface_energy_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.MELT_ENERGY, 'MELT_ENERGY', 'W m\u207b\xb2', 'Melt Flux')
 

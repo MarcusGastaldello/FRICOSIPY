@@ -19,10 +19,10 @@ albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bou
 penetrating_radiation_method = 'Bintanja95'       # Options: ['Bintanja95','disabled']
 surface_roughness_method = 'Moelg12'              # Options: ['Moelg12','constant']
 saturation_vapour_pressure_method = 'Sonntag90'   # Options: ['Sonntag90']
-surface_temperature_solver = 'Newton'             # Options: ['L-BFGS-B','SLSQP','Newton'] [slowest <--> fastest]
+surface_temperature_solver = 'Newton'             # Options: ['SLSQP','Newton'] [slowest <--> fastest]
 
 # Multi-layer Subsurface Model
-precipitation_method = 'standard'                 # Options: ['standard','three-phase anomaly']
+precipitation_method = 'standard'                 # Options: ['standard','Mattea21']
 snow_density_method = 'constant'                  # Options: ['Vionnet12','constant']
 thermal_conductivity_method = 'Calonne19'         # Options: ['bulk','Sturm97','Calonne19']
 specific_heat_method = 'Yen81'                    # Options: ['bulk','Yen81']
@@ -40,12 +40,13 @@ snow_metamorphism_method = 'Katsushima09'         # Options: ['Katsushima09','di
 # General Model Parameters:
 dt = 3600                                       # Simulation time step [s] (minimum: 3600 s / hour)
 max_depth = 50                                  # Maximum simulation depth [m]
-max_layers = 500                                # Maximum number of subsurface layers               
+max_layers = 200                                # Maximum number of subsurface layers               
 
 # Meteorological Input Parameters:
 station_altitude = 3000.0                       # Altitude of meteorological station [m a.s.l.]
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
-air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [K m-1] (default = -0.006)
+air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [°C m-1] (default = -0.006)
+air_temperature_offset = 0.0                    # Air temperature offset for adjusting data in meteorlogical forcing [°C] (default = 0.0 - no modification)
 precipitation_lapse_rate = 0.0002               # Precipitation lapse rate [% m-1] (default = 0.0002)
 precipitation_multiplier = 1.0                  # Scaling factor for adjusting precipitation data in meteorlogical forcing [-]
 minimum_snowfall = 0.00001                      # Minimum snowfall per time step in m which is added as new snow [m]
@@ -73,8 +74,8 @@ extinction_coeff_snow = 17.1                    # (Bintanja89) Extinction coeffi
 extinction_coeff_ice = 2.5                      # (Bintanja89) Extinction coefficient for ice [m-1]
 albedo_decay_timescale_wet = 10                 # (Bougamont05) Albedo decay timescale (melting surface) [days]
 albedo_decay_timescale_dry = 30                 # (Bougamont05) Albedo decay timescale (dry snow surface) [days]
-albedo_decay_timescale_dry_adjustment = 14      # (Bougamont05) Albedo dry snow decay timescale increase at negative temperatures [day K-1]
-albedo_decay_timescale_threshold = 263.17       # (Bougamont05) Albedo temperature threshold for dry snow decay timescale increase [K]
+albedo_decay_timescale_dry_adjustment = 14      # (Bougamont05) Albedo dry snow decay timescale increase at negative temperatures [day °C-1]
+albedo_decay_timescale_threshold = -10.0        # (Bougamont05) Albedo temperature threshold for dry snow decay timescale increase [°C]
 albedo_decay_timescale = 22                     # (Oerlemans98) Albedo decay timescale (constant) [days]
 surface_roughness_fresh_snow = 0.24             # (Moelg12) Surface roughness length for fresh snow [mm]
 surface_roughness_ice = 1.7                     # (Moelg12) Surface roughness length for ice [mm]
@@ -108,5 +109,5 @@ initial_glacier_height = 50.0                   # Initial glacier height (withou
 initial_glacier_layer_heights = 1.0             # Initial thickness of glacier ice layers [m]
 initial_upper_snowpack_density = 250.0          # Top density for initial snowpack [kg m-3]
 initial_lower_snowpack_density = 275.0          # Bottom density for initial snowpack [kg m-3]
-initial_upper_temperature = 270.16              # Upper boundary condition for initial temperature profile [K]
-initial_lower_temperature = 273.16              # Lower boundary condition for initial temperature profile [K] 
+initial_upper_temperature = -3.0                # Upper boundary condition for initial temperature profile [°C]
+initial_lower_temperature = -1.0                # Lower boundary condition for initial temperature profile [°C] 

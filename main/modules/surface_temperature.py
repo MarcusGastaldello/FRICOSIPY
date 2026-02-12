@@ -13,7 +13,7 @@
 import numpy as np
 from constants import *
 from parameters import *
-from scipy.optimize import minimize, newton
+from scipy.optimize import minimize, newton, brentq
 from numba import njit
 from types import SimpleNamespace
 
@@ -49,7 +49,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
                 LWout        ::    Outgoing longwave radiation [W m-2]
                 SENSIBLE     ::    Sensible heat flux [W m-2]
                 LATENT       ::    Latent heat flux [W m-2]
-                GROUND       ::    Ground heat flux [W m-2]
+                SUBSURFACE   ::    Subsurface heat flux [W m-2]
                 RAIN_HEAT    ::    Rain heat flux [W m-2]
         
     """
@@ -63,17 +63,21 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     initial_guess = float(min(GRID.get_node_temperature(0), 270))
 
     # Determine surface temperature by equalising the energy balance (SWnet + LWnet + LATENT + SENSIBLE + GROUND + RAIN_HEAT = 0)
-    surface_temperature_methods_allowed = ['L-BFGS-B','SLSQP','Newton']
+    surface_temperature_methods_allowed = ['SLSQP','Newton']
 
-    # ========================================================================================================== #
-    # Limited Broyden-Fletcher-Goldfarb-Shanno (L-BFGS-B) / Sequential Least Squares Programming (SLSQP) methods
-    # ========================================================================================================== #
+    # =================================================== #
+    # Sequential Least Squares Programming (SLSQP) method
+    # =================================================== #
 
-    if surface_temperature_solver == 'L-BFGS-B' or surface_temperature_solver == 'SLSQP':
-        res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_solver,
-                       bounds = ((lower_bound, upper_bound),), tol = 1e-2,
-                       args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
+    if surface_temperature_solver == 'SLSQP':
 
+            res = minimize(energy_balance_optimisation, initial_guess, method = surface_temperature_solver,
+                           bounds = ((lower_bound, upper_bound),), tol = 1e-4,
+                           args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'absolute', LWinput, N))
+            if (float(res.x) > zero_temperature):
+                residual = energy_balance_optimisation(zero_temperature, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
+                res = SimpleNamespace(**{'x': np.array([zero_temperature]),'fun': residual})
+        
     # -------------------------------------------------------------------------------------------------------------------- #
 
     # ===================== #
@@ -81,21 +85,26 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     # ===================== #
 
     elif surface_temperature_solver == 'Newton':
+
         try:
-            res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-2, maxiter = 50,
-                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
-            residual = energy_balance_optimisation(min(zero_temperature,float(res)), GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N)
-            if res < lower_bound:
+            res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-4, maxiter = 50,
+                        args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N))
+            residual = energy_balance_optimisation(min(zero_temperature,float(res)), GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
+            if float(res) < lower_bound:
                 raise ValueError("Error: Surface temperature is out of physical bounds.")        
-            if (res < zero_temperature) and (abs(residual) > 1e-2):
+            if (float(res) < zero_temperature) and (abs(residual) > 1e-4):
                 raise ValueError("Error: Large residual in Newton-Raphson surface temperature calculation - switching to SLSQP method")
-            res = SimpleNamespace(**{'x':min(np.array([zero_temperature]),res),'fun': residual})
+            res = SimpleNamespace(**{'x': np.array([np.minimum(zero_temperature, float(res))]), 'fun': residual})
 	    
         except (RuntimeError,ValueError):
-             # Workaround for non-convergence and unboundedness (revert to SLSQP)
-             res = minimize(energy_balance_optimisation, initial_guess, method='SLSQP',
-                       bounds=((lower_bound, upper_bound),),tol=1e-2,
-                       args=(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput, N))
+
+            res = minimize(energy_balance_optimisation, initial_guess, method = 'SLSQP',
+                           bounds = ((lower_bound, upper_bound),), tol = 1e-4,
+                           args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'absolute', LWinput, N))
+            if (float(res.x) > zero_temperature):
+                residual = energy_balance_optimisation(zero_temperature, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
+                res = SimpleNamespace(**{'x': np.array([zero_temperature]),'fun': residual})
+
     else:
         raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_solver, ", ".join(surface_temperature_methods_allowed)))
     
@@ -106,29 +115,29 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     GRID.set_node_temperature(0, T0)
  
     # Determine the surface energy fluxes:
-    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N,)
+    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N,)
      
     # Consistency check:
     if (T0 > zero_temperature) or (T0 < lower_bound):
         raise ValueError("Error: Surface temperature is out of physical bounds.")
 
     # Return surface energy fluxes:
-    return res.fun, T0, LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT
+    return res.fun, T0, LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT
 
 # ====================================================================================================================
 
 @njit
-def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, LWinput = None, N = None):
+def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, residual_setting, LWinput = None, N = None):
     """ Optimisation function to resolve the surface temperature (T0) """
 
     # Determine the surface energy fluxes for a given surface temperature (T0):
-    (LWin, LWout, SENSIBLE, LATENT, GROUND, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N)
+    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N)
 
-    # Return the minimised residual:
-    if surface_temperature_solver == 'Newton':
-        return (SWnet + LWin + LWout + SENSIBLE + LATENT + GROUND + RAIN_HEAT)
-    else:
-        return np.abs(SWnet + LWin + LWout + SENSIBLE + LATENT + GROUND + RAIN_HEAT)
+    # Return the residual:
+    if residual_setting == 'signed':
+        return (SWnet + LWin + LWout + SENSIBLE + LATENT + SUBSURFACE + RAIN_HEAT) # Signed value for Newton-Raphson & BrentQ
+    elif residual_setting == 'absolute':
+        return np.abs(SWnet + LWin + LWout + SENSIBLE + LATENT + SUBSURFACE + RAIN_HEAT) # Absolute value for SLSQP & L-BFGS-B
     
 # ====================================================================================================================
 
@@ -158,7 +167,7 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
                 LWout        ::    Outgoing longwave radiation [W m-2]
                 SENSIBLE     ::    Sensible heat flux [W m-2]
                 LATENT       ::    Latent heat flux [W m-2]
-                GROUND       ::    Ground heat flux [W m-2]
+                SUBSURFACE   ::    Subsurface heat flux [W m-2]
                 RAIN_HEAT    ::    Rain heat flux [W m-2]
     
     """
@@ -251,11 +260,11 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
         x1 = subsurface_interpolation_depth_1
         x2 = subsurface_interpolation_depth_2 - subsurface_interpolation_depth_1
         Tz1, Tz2 = Tz
-        GROUND = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
+        SUBSURFACE = k * ((x1 / (x2 + x1)) * ((Tz2 - Tz1) / x2) + (x2 / (x2 + x1)) * ((Tz1 - T0) / x1))
 
 	# Otherwise, if there is only a single subsurface layer:
     else:
-        GROUND = k * (GRID.get_node_temperature(0) - T0) / (0.5 *  GRID.get_node_height(0))
+        SUBSURFACE = k * (GRID.get_node_temperature(0) - T0) / (0.5 *  GRID.get_node_height(0))
 
     # -------------------------------------------------------------------------------------------------------------------- #
 
@@ -267,7 +276,7 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
 
     # -------------------------------------------------------------------------------------------------------------------- #
 
-    return (LWin.item(), LWout.item(), SENSIBLE.item(), LATENT.item(), GROUND.item(), RAIN_HEAT.item())
+    return (LWin.item(), LWout.item(), SENSIBLE.item(), LATENT.item(), SUBSURFACE.item(), RAIN_HEAT.item())
 
 # ==================================================================================================================== # 
 
@@ -285,7 +294,7 @@ def interpolate_Tz(GRID):
     n = GRID.get_number_layers()
 
     def interpolate(target_z):
-
+    
 		# Skip the first node if the fresh snow layer is too thin (< 2cm)
         start_idx = 1 if z[0] < 0.02 else 0
 		
@@ -323,16 +332,13 @@ def method_Sonntag(T):
                 VPsat    ::    Saturated vapour pressure [hPa]
     """
 
-    if T >= 273.16:
-        VPsat = 6.112 * np.exp((17.67 * (T - 273.16)) / ((T - 29.66))) # VPsat over water
+    if T >= zero_temperature:
+        VPsat = 6.112 * np.exp((17.67 * (T - zero_temperature)) / ((T - 29.66))) # VPsat over water
     else:
-        VPsat = 6.112 * np.exp((22.46 * (T - 273.16)) / ((T - 0.55)))  # VPsat over ice
+        VPsat = 6.112 * np.exp((22.46 * (T - zero_temperature)) / ((T - 0.55)))  # VPsat over ice
     return VPsat
 
 
 # ==================================================================================================================== #
-
-
-
 
 
