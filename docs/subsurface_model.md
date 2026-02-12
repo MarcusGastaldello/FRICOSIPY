@@ -407,12 +407,19 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
 
     <br> 
     Using the parameterisation of [Katsushima et al. (2009)](https://doi.org/10.1016/j.coldregions.2009.09.002), snow grain size growth $(d)$ is determined using the emperical formulations of either [Brun, 1989](https://doi.org/10.3189/S0260305500007576) or [Tusima, 1978](https://doi.org/10.5331/seppyo.40.155); the latter being used when the gravimetric water content is above 10%.
-    
-    
-    
-    
-    the choice of which being based on whether the gravimetric water 
+        
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
 
-    
+    $$
+    t^* = 
+    \begin{cases} 
+    t^*_{\text{wet}}, & T_s = 0^\circ \text{C} \\ 
+    t^*_{\text{dry}} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C} 
+    \end{cases}
+    $$
+
+    </div>
+
+    <small>where $t^∗_{\text{wet}}$ and $t^∗_{\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}, t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>    
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
