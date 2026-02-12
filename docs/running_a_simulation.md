@@ -152,13 +152,13 @@ By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output
 
 ### $(i)$ Model Initialisation / Spin-up
 
-In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting <br> `model_spin_up == True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
+In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting <br> `model_spin_up = True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### $(ii)$ Output Timestamps
 
-The user can also directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output == True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+The user can also directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output = True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
 
 <small> *Ex. An exemplar output timestamps CSV file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
 
