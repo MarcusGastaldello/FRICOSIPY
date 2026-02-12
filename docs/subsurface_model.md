@@ -418,6 +418,10 @@ Snow metamorphosis $(\frac{\delta d}{\delta t})$ is the process by which snow cr
     \end{cases}
     $$
 
+    $$
+    w = \left[ \frac{\phi_{\:w} \: \rho_{\:w}}{\rho} \right]
+    $$
+
     </div>
 
     <small>where $t^∗_{\text{wet}}$ and $t^∗_{\text{dry}}$ are the decay timescales (days) for a melting and dry surface respectively, $K$ is a calibration parameter (day $^\circ$C$^{−1}$) and $T_{\text{max}, t^∗}$ is a temperature threshold ($^\circ$C) for the decay timescale adjustment.</small>    
