@@ -125,6 +125,22 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     K = K_\text{ sat} \: \Theta^{\frac{1}{2}} \left[ 1 - \left( 1 - \Theta \right)^m \right]^2
     $$
+
+    $$
+    h = 
+    $$
+
+    $$
+    m = 1 - 1/n
+    $$
+
+    $$
+    n =
+    $$
+
+    $$
+    \alpha
+    $$
       
     $$
     \Theta = \frac{\theta_{\:w} - \theta_{\:\text{ irr}}}{\theta_{\:ws} - \theta_{\:\text{ irr}}}
@@ -146,7 +162,6 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     However, this explicit scheme quickly becomes numerically unstable for large integration timesteps $(\Delta t)$. Therefore, the water transport model of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68)
     
     </div>
-    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ & $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
