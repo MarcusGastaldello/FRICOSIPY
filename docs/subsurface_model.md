@@ -154,11 +154,11 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    \int_0^{\Delta t} \: q = K \left( \frac{dh}{dz} + 1 \right)
+    \int_0^{\Delta t} \: q \: dt = K \left( \frac{dh}{dz} + 1 \right) \Delta t
     $$
     
     </div>
-    
+    <br>
     However, this explicit scheme quickly becomes numerically unstable for large integration timesteps $(\Delta t)$. Therefore, the water transport model of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) instead uses a simplified scheme enabling larger timesteps and greater computational efficieny.
 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
@@ -168,6 +168,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>
+    <small>where  </small>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
