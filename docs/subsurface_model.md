@@ -123,7 +123,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    K = K_\text{ sat} \: \Theta^{\frac{1}{2}} \left[ 1 - \left( 1 - \Theta \right)^m \right]^2
+    K = K_\text{ sat} \: \Theta^{\frac{1}{2}} \: \left[\: 1 - \left( 1 - \Theta \right)^m \: \right]^2
     $$
 
     $$
@@ -135,7 +135,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
 
     $$
-    n = 15.68 e^{(-0.46 \: d)} + 1
+    n = 15.68 \: e^{(-0.46 \: d)} + 1
     $$
 
     $$
