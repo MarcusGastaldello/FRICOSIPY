@@ -154,7 +154,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    q = K \left( \frac{dh}{dz} + 1 \right)
+    \int_0^{\Delta t} \: q = K \left( \frac{dh}{dz} + 1 \right)
     $$
     
     </div>
