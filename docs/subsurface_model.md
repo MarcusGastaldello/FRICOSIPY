@@ -165,11 +165,11 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     
     $$
-    \int_0^{\Delta t} \: q \: dt = q_{\text{ lim}} \left[ \: 1 - \text{exp} \left( - \frac{q}{q} \: \Delta T \: \right) \right]
+    \int_0^{\Delta t} \: q \: dt = q_{\text{ lim}} \left[ \: 1 - \text{exp} \left( - \frac{q_0}{q_\text{ lim}} \: t_{\text{stable}} \: \right) \right]
     $$
     
     </div>
-    <small>where  </small>
+    <small>where $q_0$ </small>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
