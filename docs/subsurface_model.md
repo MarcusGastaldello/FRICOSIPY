@@ -135,11 +135,11 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
 
     $$
-    n =
+    n = 15.68 e^{(-0.46 \: d)} + 1
     $$
 
     $$
-    \alpha
+    \alpha = 7.3 \: d + 1.9
     $$
       
     $$
