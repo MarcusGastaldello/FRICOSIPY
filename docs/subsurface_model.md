@@ -107,7 +107,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
 ??? "**$(i)$ Darcy (Hirashima et al., 2010)**"
 
     <br>
-    The parameterisation of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) simulates the percolation of water through the snowpack according to the *Darcy* law for fluid flow through a porous medium:
+    The parameterisation of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) simulates the percolation of water through the snowpack according to the *Buckingham-Darcy* law for fluid flow through an unsaturated porous medium:
 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
