@@ -115,7 +115,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>    
-    
+    <small>where $q$ is the water flux (m s$^{-1}$), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{dz}$ is the hydraulic suction gradient. </small>
     
     <br>
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
