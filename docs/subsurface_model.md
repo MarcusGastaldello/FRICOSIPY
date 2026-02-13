@@ -107,7 +107,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
 ??? "**$(i)$ *Darcy* (Hirashima et al., 2010)**"
 
     <br>
-    The parameterisation of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) simulates the percolation of water through the snowpack according to the *Buckingham-Darcy* law for fluid flow through an unsaturated porous medium:
+    The parameterisation of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) simulates the percolation of water through the snowpack based on the *Buckingham-Darcy* law for fluid flow through an unsaturated porous medium:
 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
@@ -119,16 +119,31 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <small>where $q$ is the water flux (m s$^{-1}$), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{dz}$ is the hydraulic suction gradient. </small>
     
     The [van Genuchten (1980)](https://doi.org/10.2136/sssaj1980.03615995004400050002x) model is used to estimate the unsaturated hydraulic conductivity ($K$) and hydraulic suction head ($h$) based on a water retention curve for snow:
-
+    
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-
+    
     $$
-    K = K_\text{ sat} \: \Theta^{\frac{1}{2}} \right[ 1 - \left( 1 - \Theta \right)^m \left]^2
+    K = K_\text{ sat} \: \Theta^{\frac{1}{2}} \left[ 1 - \left( 1 - \Theta \right)^m \right]^2
     $$
       
     $$
     \Theta = \frac{\theta_{\:w} - \theta_{\:\text{ irr}}}{\theta_{\:ws} - \theta_{\:\text{ irr}}}
     $$
+    
+    </div>
+    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ & $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
+        
+    Typically, the water flux between subsurface layers is then determined by explicitly solving the  *Darcy-BuckinghamDarcy* equation:
+    
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    
+    $$
+    q = K \left( \frac{dh}{dz} + 1 \right)
+    $$
+
+    </div>
+
+    However, this explicit scheme quickly becomes numerically unstable for large integration timesteps ($\delta t$). Therefore, the water transport model of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68)
     
     </div>
     <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ & $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
