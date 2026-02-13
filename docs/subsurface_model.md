@@ -104,7 +104,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
 
 ### Advanced Percolation Methods
 
-??? "**$(i)$ Darcy (Hirashima et al., 2010)**"
+??? "**$(i)$ *Darcy* (Hirashima et al., 2010)**"
 
     <br>
     The parameterisation of [Hirashima et al. (2010)](https://doi.org/10.3189/1998AoG26-1-64-68) simulates the percolation of water through the snowpack according to the *Buckingham-Darcy* law for fluid flow through an unsaturated porous medium:
@@ -118,7 +118,8 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     </div>    
     <small>where $q$ is the water flux (m s$^{-1}$), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{dz}$ is the hydraulic suction gradient. </small>
     
-    <br>
+    The *van Genuchten* model is used to estimate the unsaturated hydraulic conductivity ($K$) based on a water retention curve for snow:
+    
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
