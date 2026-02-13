@@ -123,11 +123,11 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
       
     $$
-    \Theta = \frac{\theta_{\:w} \: \theta_{\:\text{ irr}}}{\theta_{\:ws} \: \theta_{\:\text{ irr}}}
+    \Theta = \frac{\theta_{\:w} - \theta_{\:\text{ irr}}}{\theta_{\:ws} - \theta_{\:\text{ irr}}}
     $$
     
     </div>
-    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ \ampersand $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws} is the saturated volumetric water content and $\theta_{\text{ irr}} is the irreducible water content. </small>
+    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ $\ampersand$ $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
