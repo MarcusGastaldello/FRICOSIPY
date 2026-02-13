@@ -118,7 +118,15 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     </div>    
     <small>where $q$ is the water flux (m s$^{-1}$), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{dz}$ is the hydraulic suction gradient. </small>
     
-    The *van Genuchten* model is used to estimate the unsaturated hydraulic conductivity ($K$) based on a water retention curve for snow:
+    The [van Genuchten (1980)](https://doi.org/10.2136/sssaj1980.03615995004400050002x) model is used to estimate the unsaturated hydraulic conductivity ($K$) based on a water retention curve for snow:
+
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+      
+    $$
+    \Theta = \frac{\theta_{\:w} \: \theta_{\:\text{irr}}}{\theta_{\:w} \: \theta_{\:\text{irr}}}
+    $$
+    
+    </div>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
