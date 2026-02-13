@@ -181,7 +181,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(i)$ Shimizu (1970)**"
 
     <br>
-    Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(K)$ is empirically derived based on laboratory experiments.
+    Using the parameterisation of [Shimizu (1970)](http://hdl.handle.net/2115/20234), the saturated hydraulic conductivity $(K_{\text{ sat}})$ is empirically derived based on laboratory experiments.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     K_{\text{ sat}} = 7.7 \times 10^{-4} \: \left[ \: \frac{d^2 g}{\nu} \: \right] \exp \: (-7.8 \times 10^{-3} \: \: \rho)
@@ -194,7 +194,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ??? "**$(ii)$ Calonne et al. (2012)**"
 
     <br>
-    Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(K)$ is empirically-derived based on 3-dimensional image-based computations.
+    Using the parameterisation of  [Calonne et al. (2012)](https://doi.org/10.5194/tc-6-939-2012), the saturated hydraulic conductivity $(K_{\text{ sat}})$ is empirically-derived based on 3-dimensional image-based computations.
     <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
     $$
     K_{\text{ sat}} = 3.0 \: \left[ \frac{d}{2} \right]^2 \: \exp \: (-0.0130 \: \rho)
@@ -205,7 +205,7 @@ By default, whether using the bucket scheme or *Darcy*-governed flow, percolatio
 ---
 !!! note
 
-    The parameterisations for hydraulic conductivity $(\Theta_{\text{ sat}})$ are only applicable for users using the Darcy [(Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) percolation scheme.
+    The parameterisations for hydraulic conductivity $(K_{\text{ sat}})$ are only applicable for users using the Darcy [(Hirashima et al., 2010)](https://doi.org/10.1016/j.coldregions.2010.09.003) percolation scheme.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
