@@ -278,10 +278,6 @@ $$
 </div>
 <small>where $LW_{\text{net}}$  is the net longwave radiation flux, $LW_{\text{in}}$ is the incoming longwave radiation, $\varepsilon_{s} \approx 0.99$ is the surface emissivity, $\sigma = 5.67 \times 10^{-11}$ W m$^{-2}$ K$^{-4}$ is the *Stefan*-*Boltzmann* constant and $T_s$ is the surface temperature (K).</small>
 
-![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-longwave-radiation.png)
-
-<center><small> **Figure 2**: FRICOSIPY Surface Energy Balance</small></center>
-
 ---
 
 ### Longwave Radiation Parameterisation 
