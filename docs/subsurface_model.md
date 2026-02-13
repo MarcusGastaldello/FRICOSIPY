@@ -147,7 +147,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>
-    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ & $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
+    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $d$ is the snow grain size (mm), $\alpha$ & $n$ are the moisture curve characteristic parameters, $\theta_{\:w}$ is the actual volumetric liquid water content, $\theta_{ws}$ is the saturated volumetric water content and $\theta_{\text{ irr}}$ is the irreducible water content. </small>
         
     Typically, the water flux between subsurface layers is then determined by explicitly solving the *Darcy-Buckingham* equation:
     
