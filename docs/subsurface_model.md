@@ -127,7 +127,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
 
     $$
-    h = 
+    h = \frac{1}{\alpha} \: \left( \theta_{\:w}^{-\frac{1}{m}} - 1 \right)^{\frac{1}{n}}
     $$
 
     $$
