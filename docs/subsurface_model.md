@@ -127,6 +127,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>
+    <small>where $K_\text{ sat}$ is the saturated hydraulic conductivity (m s$^{-1}$), $\Theta$ is the effective water saturation, $\alpha$ \& $n$ are the moisture curve characteristic parameters and . </small>
     
     The stable integration timestap $(\Delta t_{\text{stable}})$ is determined according to the *Courant-Friedrichs-Lewy* (CFL) stability condition:
     
