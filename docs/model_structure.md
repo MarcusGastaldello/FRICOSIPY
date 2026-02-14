@@ -9,12 +9,12 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>This is the main model directory containing all project configuration and source files.</small></div>"
+??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>This is the main model directory containing all ...</small></div>"
 
     <div style="margin-left: 40px;">
     <hr style="height:0.5px; background-color:#8b8b8b; border:none;" />
     
-    ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>kernel</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>This is the root directory containing all project configuration and source files.</small></div>"
+    ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>kernel</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>(description)</small></div>"
 
         <div style="margin-left: 40px;">
         <hr style="height:0.5px; background-color:#8b8b8b; border:none;" />
@@ -34,6 +34,22 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
                 </span>
             </div>
         </div>
+    </div>
+</div>
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>data</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>This is the main data directory containing all ...</small></div>"
+
+    <div style="margin-left: 40px;">
+    <hr style="height:0.5px; background-color:#8b8b8b; border:none;" />
+    
+    ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>static</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>(description)</small></div>"
+
+        <div style="margin-left: 40px;">
+        <hr style="height:0.5px; background-color:#8b8b8b; border:none;" />
+        
+       </div> 
     </div>
 </div>
 
@@ -69,7 +85,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
         <h2 style="margin: 0; padding: 0;">config.py</h2>
         <div style="margin-top: 8px;">
             <span style="color: gray; font-size: 0.95em;">
-                This is the main executable file of the <i>FRICOSIPY</i> model.
+                (description)
             </span>
         </div>
     </div>
@@ -88,7 +104,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
         <h2 style="margin: 0; padding: 0;">parameters.py</h2>
         <div style="margin-top: 8px;">
             <span style="color: gray; font-size: 0.95em;">
-                This is the main executable file of the <i>FRICOSIPY</i> model.
+                (description)
             </span>
         </div>
     </div>
@@ -107,7 +123,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
         <h2 style="margin: 0; padding: 0;">constants.py</h2>
         <div style="margin-top: 8px;">
             <span style="color: gray; font-size: 0.95em;">
-                This is the main executable file of the <i>FRICOSIPY</i> model.
+                (description)
             </span>
         </div>
     </div>
