@@ -23,7 +23,9 @@ The following interactive diagram shows the structure of the *FRICOSIPY*, allowi
         
         <div style="margin-left: 40px;"><hr style="height:0.5px; background-color:#8b8b8b; border:none;" /><div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">node.py</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">(description)</span></div></div></div></div>    
 
-        <div style="margin-left: 40px;"><hr style="height:0.5px; background-color:#8b8b8b; border:none;" /><div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">init.py</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">(description)</span></div></div></div></div>    
+        <div style="margin-left: 40px;"><hr style="height:0.5px; background-color:#8b8b8b; border:none;" /><div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">init.py</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">(description)</span></div></div></div></div> 
+
+        
      
     </div>
 
@@ -67,31 +69,17 @@ The following interactive diagram shows the structure of the *FRICOSIPY*, allowi
     
     </div>
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">docs</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The documentation directory containing the scripts for this <i>Read the Docs</i> website. </span></div></div></div>
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">FRICOSIPY.py</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The main executable file of the <i>FRICOSIPY</i> model.</span></div></div></div>
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">config.py</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The configuration file that allows the user to configure the setup for the current <i>FRICOSIPY simulation</i>. </span></div></div></div>
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">parameters.py</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;"> The parameters file that allows the user to specify the parameterisations and set the parameter values used in the simulation. </span></div></div></div>
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">constants.py</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The constants file that contains fixed physical constants used in the model calculations that should not be modified.</span></div></div></div>
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Jupyter.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">result_viewer.ipynb</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The <i>Jupyter Notebook</i> containing various plotting functions to help visualise the results.</span></div></div></div>
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Text.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">requirements.txt</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The requirements file containing a list of packages required in the model <i>Conda</i> environment.</span></div></div></div>
 
