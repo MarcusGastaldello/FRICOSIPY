@@ -41,8 +41,8 @@ nav:
     - Introduction: introduction.md
     - Surface Energy Balance: surface_energy_balance.md
     - Multi-layer Subsurface Model: subsurface_model.md
-    - Model Structure: model_structure.md
     - Differences to the COSIPY Model: differences.md
+    - Model Structure: model_structure.md
   - "Walkthrough":
     - Installation: installation.md
     - Model Input Files: model_input_files.md
