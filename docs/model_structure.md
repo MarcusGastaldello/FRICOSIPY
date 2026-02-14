@@ -24,7 +24,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
                 <img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" 
                      width="100" 
                      style="display: block;">
-        </div>
+            </div>
 
         <div style="display: table-cell; vertical-align: middle; padding-left: 5px;">
             <h4 style="margin: 0; padding: 0; font-size: 18px">fricosipy_core.py</h4>
