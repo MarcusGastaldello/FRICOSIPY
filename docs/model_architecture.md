@@ -28,7 +28,7 @@ Introduction
         </div>
     </div>
 
-    <hr style="height:1px; background-color:#8b8b8b; border:none;" />
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
             
         
