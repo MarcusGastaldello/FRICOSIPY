@@ -1,9 +1,9 @@
 ---
-og_title: FRICOSIPY | Model Architecture
-og_description: A schematic diagram showing the model architecture of FRICOSIPY
+og_title: FRICOSIPY | Model Structure
+og_description: A schematic diagram showing the model structure of FRICOSIPY
 ---
 
-# Model Architecture
+# Model Structure
 
 (Introduction text)
 
