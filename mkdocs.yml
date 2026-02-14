@@ -49,7 +49,7 @@ nav:
     - Running a Simulation: running_a_simulation.md
     - Result Viewer: result_viewer.md
   - "Advanced":
-    - Model Architecture: model_architecture.md
+    - Model Structure: model_structure.md
   - "Support":
     - Contact: contact.md
 
