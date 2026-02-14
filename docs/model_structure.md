@@ -27,7 +27,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
         </div>
 
         <div style="display: table-cell; vertical-align: middle; padding-left: 5px;">
-            <h2 style="margin: 0; padding: 0;">FRICOSIPY.py</h4>
+            <h2 style="margin: 0; padding: 0;">fricosipy_core.py</h4>
             <div style="margin-top: 8px;">
                 <span style="color: gray; font-size: 0.95em;">
                 This is the main executable file of the <i>FRICOSIPY</i> model.
