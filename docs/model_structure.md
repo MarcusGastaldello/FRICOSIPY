@@ -62,10 +62,10 @@ The following interactive diagram shows the structure of the *FRICOSIPY*, allowi
     ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>static</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>(description)</small></div>"
 
         <div style="margin-left: 40px;"><hr style="height:0.5px; background-color:#8b8b8b; border:none;" /><div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/NetCDF.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">static.nc</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">An exemplar input static NetCDF file that contains topographic information that varies across the spatial domain $(x,y)$.</span></div></div></div></div>
-    
-    </div>
 
     ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>meteo</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>(description)</small></div>"
+    
+    </div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
