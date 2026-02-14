@@ -4,3 +4,10 @@ og_description: A schematic diagram showing the model architecture of FRICOSIPY
 ---
 
 # Model Architecture
+
+??? "**Upper**"
+    
+    ??? "**Upper**"
+
+        ??? "**Upper**"
+        
