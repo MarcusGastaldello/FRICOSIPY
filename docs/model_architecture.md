@@ -9,7 +9,7 @@ og_description: A schematic diagram showing the model architecture of FRICOSIPY
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='40' style='vertical-align: middle; margin-right: 10px;'> <h2 style='display: inline;'>main</h2>"
+??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='120' style='vertical-align: middle; margin-right: 10px;'> <h2 style='display: inline;'>main</h2>"
 
     <br>
     <div style="margin-left: 20px;">
