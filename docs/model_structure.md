@@ -31,7 +31,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-"<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px;'>This is the root directory containing all project configuration and source files.</small></div>"
+"<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>FRICOSIPY</h2><small style='display: block; color: gray; margin-top: 8px;'>This is the main executable file of the *FRICOSIPY* model.</small></div>"
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
