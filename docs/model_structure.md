@@ -31,12 +31,20 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-<img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" align="left" style="margin-right: 20px;">
+<div style="display: table; width: 100%; margin-bottom: 25px;">
+    <div style="display: table-cell; vertical-align: middle; width: 115px;">
+        <img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" 
+             width="100" 
+             style="display: block;">
+    </div>
 
-## FRICOSIPY.py
-<small style="color: gray;">This is the main executable file of the *FRICOSIPY* model.</small>
-
-<br clear="left">
+    <div style="display: table-cell; vertical-align: middle; padding-left: 15px;">
+        <h2 style="margin: 0; padding: 0;">FRICOSIPY.py</h2>
+        <div style="height: 10px;"></div> <small style="display: block; color: gray; font-size: 0.95em;">
+            This is the main executable file of the <i>FRICOSIPY</i> model.
+        </small>
+    </div>
+</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
