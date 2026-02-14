@@ -48,8 +48,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
         <div style="margin-left: 40px;">
         <hr style="height:0.5px; background-color:#8b8b8b; border:none;" />
-        
-       </div> 
+         
     </div>
 </div>
 
