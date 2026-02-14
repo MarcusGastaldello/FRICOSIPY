@@ -5,7 +5,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 # Model Structure
 
-The following interactive diagram shows the structure of the *FRICOSIPY* model, allowing new users to familiarise themselves 
+The following interactive diagram shows the structure of the *FRICOSIPY*, allowing new users to familiarise themselves with the model. Unless the user intents to adapt the model, it is only necessary to interact with the main *Python* scipts in the root directory to run a *FRICOSIPY* simulation.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -92,6 +92,8 @@ The following interactive diagram shows the structure of the *FRICOSIPY* model, 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Text.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">requirements.txt</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The requirements file containing a list of packages required in the model <i>Conda</i> environment.</span></div></div></div>
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 !!! note
     
