@@ -7,7 +7,7 @@ og_description: A schematic diagram showing the model architecture of FRICOSIPY
 
 Introduction
 
-
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ??? "**Upper**"
 
@@ -27,6 +27,8 @@ Introduction
             </div>
         </div>
     </div>
+
+    <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
             
         
