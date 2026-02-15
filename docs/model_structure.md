@@ -7,7 +7,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 The following interactive diagram shows the structure of the *FRICOSIPY*, allowing new users to familiarise themselves with the model. Unless the user intents to adapt the model, it is only necessary to interact with the main *Python* scipts in the root directory to run a *FRICOSIPY* simulation.
 
-??? "<div style='display: flex; align-items: center;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='flex-grow: 1;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 4px; font-size: 0.9em;'>The main model directory containing all ...</small></div></div>"
+??? "<div style='display: flex; align-items: center; margin-left: -20px;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='flex-grow: 1;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 4px; font-size: 0.9em;'>The main model directory containing all ...</small></div></div>"
 
     <div style="margin-left: 40px;">
     ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h3 style='margin: 0;'>kernel</h3><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>(description)</small></div>"
