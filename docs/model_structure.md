@@ -72,6 +72,7 @@ The following interactive diagram shows the structure of the *FRICOSIPY*, allowi
             <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/CSV.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">meteo_data.csv</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">An exemplar CSV data file containing meteorological information to create an input meteo NetCDF file.</span></div></div></div>
             <hr style="height:1px; background-color:#8b8b8b; border:none;" /> 
             </div>
+        </div>
 
         <div style="margin-left: 40px;">
         <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/NetCDF.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">meteo.nc</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">An exemplar input meteo NetCDF file that contains meteorological data varying through time $(t)$.</span></div></div></div>
