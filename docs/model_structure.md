@@ -5,7 +5,7 @@ og_description: A schematic diagram showing the model structure of FRICOSIPY
 
 # TEST AREA
 
-??? "<div style='display: flex; align-items: center;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='min-width: 0;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em; line-height: 1.4;'>The main model directory containing all the scripts and important stuff in the model.</small></div></div>"
+??? "<div style='display: inline-flex; align-items: center; vertical-align: middle;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='min-width: 0;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em; line-height: 1.4;'>The main model directory containing all core computational scripts.</small></div></div>"
 
 # Model Structure
 
