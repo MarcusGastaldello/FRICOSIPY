@@ -3,11 +3,13 @@ og_title: FRICOSIPY | Model Structure
 og_description: A schematic diagram showing the model structure of FRICOSIPY
 ---
 
-??? "<div style='display: inline-block; vertical-align: middle; height: 20px; margin-top: -40px; margin-bottom: 40px;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'><div style='display: inline-block; vertical-align: middle; line-height: 1.2;'><h2 style='margin: 0;'>main</h2><small style='color: gray;'>The main model directory containing all core computational scripts lots more text blah blah blah.</small></div></div>"
-
 # Model Structure
 
 The following interactive diagram shows the structure of the *FRICOSIPY*, allowing new users to familiarise themselves with the model. Unless the user intents to adapt the model, it is only necessary to interact with the main *Python* scipts in the root directory to run a *FRICOSIPY* simulation.
+
+
+??? "<div style='display: inline-block; vertical-align: middle; height: 20px; margin-top: -30px; margin-bottom: 40px;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'><div style='display: inline-block; vertical-align: middle; line-height: 1.2;'><h2 style='margin: 0;'>main</h2><small style='color: gray;'>The main model directory containing all core computational scripts lots more text blah blah blah.</small></div></div>"
+
 
 ??? "<img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='vertical-align: middle; margin-right: 15px;'> <div style='display: inline-block; vertical-align: middle;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em;'>The main model directory containing the .</small></div>"
 
