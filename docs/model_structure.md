@@ -79,6 +79,25 @@ The following interactive diagram shows the structure of the *FRICOSIPY*, allowi
         <hr style="height:1px; background-color:#8b8b8b; border:none;" />
         </div>
 
+    <div style="margin-left: 40px;">
+    ??? "<div style='display: inline-flex; align-items: center; vertical-align: middle;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='min-width: 0;'><h3 style='margin: 0;'>create_METEO</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em; line-height: 1.4;'>(description)</small></div></div>"
+
+        <div style="margin-left: 40px;">
+        <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">create_meteo_netcdf.py</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">(description)</span></div></div></div>
+        <hr style="height:1px; background-color:#8b8b8b; border:none;" />
+        </div>
+
+    <div style="margin-left: 40px;">
+    ??? "<div style='display: inline-flex; align-items: center; vertical-align: middle;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='min-width: 0;'><h3 style='margin: 0;'>create_ILLUMINATION</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em; line-height: 1.4;'>(description)</small></div></div>"
+
+        <div style="margin-left: 40px;">
+        <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h4 style="margin: 0; padding: 0; font-size: 18px">create_illumination_netcdf.py</h4><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">(description)</span></div></div></div>
+        <hr style="height:1px; background-color:#8b8b8b; border:none;" />
+        </div>
+    <hr style="height:1px; background-color:#8b8b8b; border:none;" />
+    </div>
+
+
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">docs</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The documentation directory containing the scripts for this <i>Read the Docs</i> website. </span></div></div></div>
 
 <div style="display: table; width: 100%; margin-bottom: 25px; padding-left: 15px;"><div style="display: table-cell; vertical-align: middle; width: 115px;"><img src="https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Python.png" width="100" style="display: block;"></div><div style="display: table-cell; vertical-align: middle; padding-left: 5px;"><h2 style="margin: 0; padding: 0;">FRICOSIPY.py</h2><div style="margin-top: 8px;"><span style="color: gray; font-size: 0.95em;">The main executable file of the <i>FRICOSIPY</i> model.</span></div></div></div>
