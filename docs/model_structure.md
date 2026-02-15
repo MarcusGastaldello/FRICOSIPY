@@ -3,10 +3,6 @@ og_title: FRICOSIPY | Model Structure
 og_description: A schematic diagram showing the model structure of FRICOSIPY
 ---
 
-# TEST AREA
-
-??? "<div style='display: inline-flex; align-items: center; vertical-align: middle;'><img src='https://github.com/MarcusGastaldello/FRICOSIPY/raw/main/docs/icons/Folder.png' width='100' style='margin-right: 15px; flex-shrink: 0;'><div style='min-width: 0;'><h2 style='margin: 0;'>main</h2><small style='display: block; color: gray; margin-top: 8px; font-size: 0.95em; line-height: 1.4;'>The main model directory containing all core computational scripts.</small></div></div>"
-
 # Model Structure
 
 The following interactive diagram shows the structure of the *FRICOSIPY*, allowing new users to familiarise themselves with the model. Unless the user intents to adapt the model, it is only necessary to interact with the main *Python* scipts in the root directory to run a *FRICOSIPY* simulation.
