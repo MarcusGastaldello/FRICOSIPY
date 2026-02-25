@@ -14,11 +14,9 @@ The *FRICOSIPY* model has been developed as an adapation of the original [COSIPY
 
 ## $(1)$ Model Structure
 
+The principal difference between the *COSIPY* and *FRICOSIPY* models lies in the redesigned model structure. The original *COSIPY* model uses a single 3-dimensional dataset $(x,y,t)$; FRICOSIPY instead decouples this large dataset into 3 seperate static $(x,y)$, meteorological $(t)$ and illumination $(x,y,t)$ input files.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-
-The original *COSIPY* model uses a single 3-dimensional $(x,y,t)$ dataset
-
 
 ## $(2)$ Model Improvements
 
