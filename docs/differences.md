@@ -16,6 +16,10 @@ The *FRICOSIPY* model has been developed as an adapation of the original [COSIPY
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
+
+The original *COSIPY* model uses a single 3-dimensional $(x,y,t)$ dataset
+
+
 ## $(2)$ Model Improvements
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
