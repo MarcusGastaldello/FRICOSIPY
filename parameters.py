@@ -85,8 +85,6 @@ constant_fresh_snow_density = 250.              # (Constant - snow_density_metho
 constant_surface_roughness = 0.001              # (Constant - surface_roughness_method) Surface roughness constant [m]
 preferential_percolation_depth = 3.0            # (Marchenko17) Charachteristic preferential percolation depth [m]
 constant_irreducible_water_content = 0.02       # (Constant - irreducible_water_content_method) [-]
-temperature_interpolation_depth_1 = 10          # (Ligtenberg11) First depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
-temperature_interpolation_depth_2 = 20          # (Ligtenberg11) Second depth for temperature interpolation which is used for calculation of average subsurface layer temperature [m]
 
 # ============================ #
 # SUBSURFACE REMESHING OPTIONS 
