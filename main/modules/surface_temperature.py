@@ -87,23 +87,26 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     elif surface_temperature_solver == 'Newton':
 
         try:
-            res = newton(energy_balance_optimisation, np.array([GRID.get_node_temperature(0)]), tol = 1e-4, maxiter = 50,
+            res = newton(energy_balance_optimisation, float(np.atleast_1d(GRID.get_node_temperature(0))[0]), tol = 1e-4, maxiter = 50,
                         args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N))
-            residual = energy_balance_optimisation(min(zero_temperature,float(res)), GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
-            if float(res) < lower_bound:
+            res = float(np.atleast_1d(res)[0])
+            residual = energy_balance_optimisation(min(zero_temperature,res), GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
+            if res < lower_bound:
                 raise ValueError("Error: Surface temperature is out of physical bounds.")        
-            if (float(res) < zero_temperature) and (abs(residual) > 1e-4):
+            if (res < zero_temperature) and (abs(residual) > 1e-4):
                 raise ValueError("Error: Large residual in Newton-Raphson surface temperature calculation - switching to SLSQP method")
-            res = SimpleNamespace(**{'x': np.array([np.minimum(zero_temperature, float(res))]), 'fun': residual})
+            res = SimpleNamespace(**{'x': np.array([np.minimum(zero_temperature, res)]), 'fun': residual})
 	    
         except (RuntimeError,ValueError):
 
             res = minimize(energy_balance_optimisation, initial_guess, method = 'SLSQP',
                            bounds = ((lower_bound, upper_bound),), tol = 1e-4,
                            args = (GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'absolute', LWinput, N))
-            if (float(res.x) > zero_temperature):
+            if (float(np.atleast_1d(res.x)[0]) > zero_temperature):
                 residual = energy_balance_optimisation(zero_temperature, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, Tz, 'signed', LWinput, N)
                 res = SimpleNamespace(**{'x': np.array([zero_temperature]),'fun': residual})
+            else:
+                res.x = np.atleast_1d(res.x)
 
     else:
         raise ValueError("Surface temperature method = \"{:s}\" is not allowed, must be one of {:s}".format(surface_temperature_solver, ", ".join(surface_temperature_methods_allowed)))
@@ -111,7 +114,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     # -------------------------------------------------------------------------------------------------------------------- #
 
     # Set surface temperature (T0):
-    T0 = min(zero_temperature,float(res.x))
+    T0 = min(zero_temperature, float(np.atleast_1d(res.x)[0]))
     GRID.set_node_temperature(0, T0)
  
     # Determine the surface energy fluxes:
