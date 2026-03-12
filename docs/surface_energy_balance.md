@@ -261,6 +261,38 @@ $$
     </div>
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where $\mu_{\text{ fresh snow}} = 0.024$ mm and $\mu_{\text{ firn}} = 4.0$ mm are the albedo of fresh snow and firn, respectively (default values),<br> and $t^*$ is the characteristic surface roughness timescale parameter (mm h$^{-1}$).</div>
 
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Saturate Vapour Pressure Parameterisations
+
+??? "**$(i)$ Sonntag (1994)**"
+
+    <br>
+    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure...
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    VPsat = 
+    $$
+    
+    </div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+??? "**$(i)$ Murray (1967) (Magnus-Tetens)**"
+
+    <br>
+    Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure...
+
+    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    $$
+    VPsat = 
+    $$
+    
+    </div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
