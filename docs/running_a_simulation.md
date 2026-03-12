@@ -47,13 +47,14 @@ The *FRICOSIPY* model reports a large selection of variables into the output Net
 
 The *FRICOSIPY* model will report the following variables for each spatial node $(x,y)$ for every simulation timestep $(t)$:
 
-**Meteorological Variables $(5)$**
+**Meteorological Variables $(6)$**
     
 | Variable | Description | Unit |
 |:---|:---|:---:|
 | **AIR_TEMPERATURE** | Air temperature | °C |
 | **AIR_PRESSURE** | Barometric air pressure | hPa |
 | **RELATIVE_HUMIDITY** | Relative humidity | % |
+| **ABSOLUTE_HUMIDITY** | Relative humidity | g kg$^{-1}$ |
 | **WIND_SPEED** | Wind speed | m s$^{-1}$ |
 | **FRACTIONAL_CLOUD_COVER** | Fractional cloud cover | — |
 
@@ -99,7 +100,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 
 ---
 
-**Other $(9)$**
+**Other $(11)$**
 
 | Variable | Description | Unit |
 |:---|:---|:---:|
@@ -108,6 +109,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **TOTAL_HEIGHT** | Total height | m |
 | **SURFACE_ELEVATION** | Surface elevation | m a.s.l. |
 | **SURFACE_TEMPERATURE** | Surface temperature | $^\circ$C |
+| **SURFACE_HUMIDITY** | Surface humidity | g kg$^{-1}$ |
 | **SURFACE_ALBEDO** | Surface albedo | — |
 | **N_LAYERS** | Number of layers | — |
 | **FIRN_TEMPERATURE \*** | Firn temperature | $^\circ$C |
