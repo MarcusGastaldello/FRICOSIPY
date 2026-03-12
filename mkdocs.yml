@@ -11,6 +11,7 @@ theme:
 
 extra:
   favicon: img/favicon.ico
+  versions: true
   
 plugins:
   - search
