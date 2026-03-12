@@ -263,7 +263,7 @@ $$
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### Saturate Vapour Pressure Parameterisations
+### Saturated Vapour Pressure Parameterisations
 
 ??? "**$(i)$ Sonntag (1994)**"
 
@@ -278,9 +278,9 @@ $$
     </div>
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+---
 
-??? "**$(i)$ Murray (1967) (Magnus-Tetens)**"
+??? "**$(ii)$ Murray (1967) (Magnus-Tetens)**"
 
     <br>
     Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure...
