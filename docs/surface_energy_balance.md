@@ -268,14 +268,20 @@ $$
 ??? "**$(i)$ Sonntag (1994)**"
 
     <br>
-    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure...
+    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure $(VP_{\text{sat})$ is empirically-derived based on observational data.
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
+
     $$
-    VPsat = 
+    VP_{\text{sat} = 
+    \begin{cases} 
+    a, & T < 0^\circ \text{C} \\ 
+    a, & T > 0^\circ \text{C} 
+    \end{cases}
     $$
-    
+
     </div>
+
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
 
 ---
@@ -283,14 +289,20 @@ $$
 ??? "**$(ii)$ Murray (1967) (Magnus-Tetens)**"
 
     <br>
-    Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure...
+    Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure $(VP_{\text{sat})$ is empirically-derived based on observational data.
 
-    <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
+
     $$
-    VPsat = 
+    VP_{\text{sat} = 
+    \begin{cases} 
+    a, & T < 0^\circ \text{C} \\ 
+    a, & T > 0^\circ \text{C} 
+    \end{cases}
     $$
-    
+
     </div>
+
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
