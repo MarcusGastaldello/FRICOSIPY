@@ -180,6 +180,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>
+    <small>where $\delta z$ is the layer height (m), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{d\theta}$ is the inverse moisture gradient (m). </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
