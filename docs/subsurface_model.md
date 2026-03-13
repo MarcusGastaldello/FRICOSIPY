@@ -127,7 +127,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
 
     $$
-    h = \frac{1}{\alpha} \: \left( \theta_{\:w}^{-\frac{1}{m}} - 1 \right)^{\frac{1}{n}}
+    h = \frac{1}{\alpha} \: \left( \Theta^{-\frac{1}{m}} - 1 \right)^{\frac{1}{n}}
     $$
 
     $$
@@ -139,7 +139,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
 
     $$
-    \alpha = 7.3 \: d + 1.9
+    \alpha = 7.3 \: d + e^{1.9}
     $$
       
     $$
@@ -180,7 +180,7 @@ Penetrating shortwave radiation can also directly melt the ice matrix of subsurf
     $$
     
     </div>
-    <small>where $\delta z$ is the layer height (m), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{d\theta}$ is the inverse moisture gradient (m). </small>
+    <small>where $\Delta z$ is the layer height (m), $K$ is the hydraulic conductivity (m s$^{-1}$) and $\frac{dh}{d\theta}$ is the inverse moisture gradient (m). </small>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
