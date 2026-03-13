@@ -296,8 +296,8 @@ $$
     $$
     VP_{\text{sat}} = 
     \begin{cases} 
-    6.112 \: \text{exp} \left[ \frac{17.67 \: (T - 273.16)}{T - 29.66} \right] , & T > 0^\circ \text{C} \\ 
-    6.112 \: \text{exp} \left[ \frac{22.46 \: (T - 273.16)}{T - 0.55}  \right] , & T < 0^\circ \text{C} 
+    6.112 \: \text{exp} \left[ \frac{17.67 \: (T - 273.16)}{T - 29.66} \right] , & T > 0^\circ \text{C} \quad \text{(over water)} \\ 
+    6.112 \: \text{exp} \left[ \frac{22.46 \: (T - 273.16)}{T - 0.55}  \right] , & T < 0^\circ \text{C} \quad \text{(over ice)}
     \end{cases}
     $$
 
