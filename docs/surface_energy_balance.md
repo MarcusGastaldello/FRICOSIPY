@@ -268,7 +268,7 @@ $$
 ??? "**$(i)$ Sonntag (1994)**"
 
     <br>
-    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure $(VP_{\text{sat})$ is empirically-derived based on observational data.
+    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure $(VP_{\text{sat}})$ is empirically-derived based on observational data.
 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
 
@@ -289,7 +289,7 @@ $$
 ??? "**$(ii)$ Murray (1967) (Magnus-Tetens)**"
 
     <br>
-    Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure $(VP_{\text{sat})$ is empirically-derived based on observational data.
+    Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure $(VP_{\text{sat}})$ is empirically-derived based on observational data.
     
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
     
