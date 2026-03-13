@@ -54,7 +54,7 @@ The *FRICOSIPY* model will report the following variables for each spatial node 
 | **AIR_TEMPERATURE** | Air temperature | °C |
 | **AIR_PRESSURE** | Barometric air pressure | hPa |
 | **RELATIVE_HUMIDITY** | Relative humidity | % |
-| **ABSOLUTE_HUMIDITY** | Relative humidity | g kg$^{-1}$ |
+| **SPECIFIC_HUMIDITY** | Specific humidity | g kg$^{-1}$ |
 | **WIND_SPEED** | Wind speed | m s$^{-1}$ |
 | **FRACTIONAL_CLOUD_COVER** | Fractional cloud cover | — |
 
