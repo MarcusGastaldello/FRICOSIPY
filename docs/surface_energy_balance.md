@@ -300,6 +300,7 @@ $$
     6.112 \: \text{exp} \left[ \frac{22.46 \: (T - 273.16)}{T - 0.55}  \right] , & T < 0^\circ \text{C} \quad \text{(over ice)}
     \end{cases}
     $$
+    
     </div>
     
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where T is the air of surface temperature ($^\circ \text{C}$).</div>
