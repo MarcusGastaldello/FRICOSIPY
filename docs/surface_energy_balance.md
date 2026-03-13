@@ -268,15 +268,15 @@ $$
 ??? "**$(i)$ Sonntag (1994)**"
 
     <br>
-    Using the parameterisation of [Sonntag (2012)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure $(VP_{\text{sat}})$ is empirically-derived based on observational data.
+    Using the parameterisation of [Sonntag (1994)](https://doi.org/10.1127/metz/3/1994/51), the saturated vapour pressure $(VP_{\text{sat}})$ is empirically-derived based on observational data.
 
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
 
     $$
     VP_{\text{sat} = 
     \begin{cases} 
-    a, & T < 0^\circ \text{C} \\ 
-    a, & T > 0^\circ \text{C} 
+    a, & T < 0^\circ \text{C} \quad \text{(over water)} \\ 
+    a, & T > 0^\circ \text{C} \quad \text{(over ice)}
     \end{cases}
     $$
 
@@ -303,7 +303,7 @@ $$
 
     </div>
     
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where T is the air of surface temperature ($^\circ \text{C}$).</div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
