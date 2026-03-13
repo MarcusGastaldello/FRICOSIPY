@@ -296,14 +296,14 @@ $$
     $$
     VP_{\text{sat}} = 
     \begin{cases} 
-    a, & T < 0^\circ \text{C} \\ 
-    a, & T > 0^\circ \text{C} 
+    6.112 exp \left[ \frac{17.67 * (T - 273.16)}{T - 29.66} \right] , & T > 0^\circ \text{C} \\ 
+    6.112 exp \left[ \frac{22.46 * (T - 273.16)}{T - 0.55}  \right] , & T < 0^\circ \text{C} 
     \end{cases}
     $$
+
+    </div>
     
     <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
-    
-    </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
