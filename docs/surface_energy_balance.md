@@ -290,34 +290,19 @@ $$
 
     <br>
     Using the parameterisation of [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006%3C0203:OTCOSV%3E2.0.CO;2), the saturated vapour pressure $(VP_{\text{sat})$ is empirically-derived based on observational data.
-
+    
     <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
-
+    
     $$
-    VP_{\text{sat} = 
+    VP_{\text{sat}} = 
     \begin{cases} 
     a, & T < 0^\circ \text{C} \\ 
     a, & T > 0^\circ \text{C} 
     \end{cases}
     $$
-
-    </div>
-
-    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
-
-        <br>
-    The parameterisation of [Bougamont et al. (2005)](https://doi.org/10.1029/2005JF000348) is an enhancement of the [Oerlemans and Knap (1998)](https://doi.org/10.1017/S0022143000002574) approach. It introduces a surface temperature-dependent albedo decay timescale that enables both a faster decay on a melting surface and slower metamorphism in cold conditions.
     
-    <div markdown="1" style="border:1px solid #ccc; padding:10px; background:#f9f9f9; overflow-x:auto;">
-
-    $$
-    t^* = 
-    \begin{cases} 
-    t^*_{\text{wet}}, & T_s = 0^\circ \text{C} \\ 
-    t^*_{\text{dry}} + K \left[ \max(T_s, T_{\text{max}, t^*}) \right], & T_s < 0^\circ \text{C} 
-    \end{cases}
-    $$
-
+    <div style="font-size: small; margin-top: 2px; line-height: 1.75;"> where.</div>
+    
     </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
