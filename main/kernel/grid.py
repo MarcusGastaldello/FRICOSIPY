@@ -275,10 +275,16 @@ class Grid:
         computational efficiency.
         """
         
-        # Merge uppermost layer with the second layer unless it exceeds the maximum layer height or they are from different hydrological years
-        if (self.get_number_snow_layers() >= 2):  
-            if ((self.get_node_height(0) + self.get_node_height(1) <= maximum_simulation_layer_height) and (self.get_node_hydro_year(0) == self.get_node_hydro_year(1))):
+        # Merge uppermost snow layer with the second snow layer unless it exceeds the maximum snow layer height or they are from different hydrological years
+        if self.get_number_snow_layers() >= 2:  
+            if ((self.get_node_height(0) + self.get_node_height(1) <= maximum_snow_layer_height) and (self.get_node_hydro_year(0) == self.get_node_hydro_year(1))):
                 self.merge_nodes(0)
+        
+        # Merge uppermost glacier layer with the second glacier layer unless it exceeds the maximum glacier layer height or they are from different hydrological years
+        if self.get_number_glacier_layers() >= 2:
+            idx = self.get_number_snow_layers() # the index of the first glacier layer
+            if ((self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_glacier_layer_height) and (self.get_node_hydro_year(idx) == self.get_node_hydro_year(idx + 1))):
+                self.merge_nodes(idx)            
 
         # Merge snow layers if they subseed the minimum snow layer height and become too small  
         indices = np.where(np.asarray(self.get_snow_heights()) < minimum_snow_layer_height)[0]
