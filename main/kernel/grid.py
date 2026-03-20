@@ -274,29 +274,29 @@ class Grid:
         Beyond the user-defined region of interest, layers are merged into a coarser mesh to improve 
         computational efficiency.
         """
-        
+            
         # Merge uppermost layer with the second layer unless it exceeds the maximum layer height or they are from different hydrological years
-        if (self.get_number_layers() >= 2):  
+        if (self.get_number_snow_layers() >= 2):  
             if ((self.get_node_height(0) + self.get_node_height(1) <= maximum_simulation_layer_height) and (self.get_node_hydro_year(0) == self.get_node_hydro_year(1))):
                 self.merge_nodes(0)
-
-        # Merge layers if they subseed the minimum snow layer height and become too small  
-        indices = np.where(np.asarray(self.get_height()) < minimum_snow_layer_height)[0]
-        for i in range(len(indices) - 1, -1, -1): # backwards loop to avoid 
+    
+        # Merge snow layers if they subseed the minimum snow layer height and become too small  
+        indices = np.where(np.asarray(self.get_snow_heights()) < minimum_snow_layer_height)[0]
+        for i in range(len(indices) - 1, -1, -1): # backwards loop to avoid index misalignment
             idx = indices[i]
-            if idx < self.get_number_layers() - 1:
+            if idx < self.get_number_snow_layers() - 1:
                 self.merge_nodes(idx)
-        
+            
         # Merge into coarser layers if a layer goes beyond the region of interest:
         idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
-        if (idx + 1 <= (self.get_number_layers() - 1)): 
+        if (idx + 1 <= (self.get_number_snow_layers() - 1)): 
             if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
                 self.merge_nodes(idx)
-
+    
         # If last layer depth exceeds the desired subsurface measurement depth, remove it:
         idx = self.get_number_layers() - 1
         if (self.get_depth()[idx] > max_depth):
-
+    
             # Update base elevation of computational grid now that the las subsurface layer is to be removed:
             self.set_base_elevation(self.get_base_elevation() + self.get_node_height(-1))
 
