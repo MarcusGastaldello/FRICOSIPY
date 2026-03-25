@@ -12,7 +12,7 @@ $$
 SW_{\text{net}} \pm Q_{\text{sensible}} \pm Q_{\text{latent}} \pm LW_{\text{net}} + Q_{\text{rain}} \pm Q_{\text{subsurface}} = 0
 $$
 </div>
-<small> where $SW_{\text{net}}$ is the net shortwave radiation flux, $Q_{\text{sensible}}$ and $Q_{\text{latent}}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{\text{net}}$ is the net longwave radiation flux, $Q_{\text{rain}}$ is the rain heat flux, and $Q_{\text{subsurface}}$ is the subsurface heat conduction flux. </small>
+<small> where $SW_{\text{net}}$ is the net shortwave radiation flux, $Q_{\text{sensible}}$ and $Q_{\text{latent}}$ are the turbulent fluxes for sensible and latent exchange respectively, $LW_{\text{net}}$ is the net longwave radiation flux, $Q_{\text{rain}}$ is the rain heat flux, and $Q_{\text{subsurface}}$ is the subsurface heat conduction flux (all units W m$^{-2}$). </small>
 
 ![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-SEB.png)
 
