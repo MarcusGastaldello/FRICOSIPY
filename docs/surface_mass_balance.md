@@ -14,7 +14,7 @@ $$
 </div>
 <small> where $\dot{m}_{\text{ precipitation}}$ is the precipitation (snowfall or rain) mass flux, $\dot{m}_{\text{ deposition}}$ , $\dot{m}_{\text{ condensation}}$ , $\dot{m}_{\text{ evaporation}}$ & $\dot{m}_{\text{ sublimation}}$ are the turbulent mass fluxes associated with latent heat exchange and $\dot{m}_{\text{ melt}}$ is the surface melt mass flux (all units m w.e.). </small>
 
-![FRICOSIPY SMB (Surface Mass Balance)](images/FRICOSIPY-SMG.png)
+![FRICOSIPY SMB (Surface Mass Balance)](images/FRICOSIPY-SMB.png)
 
 <center><small> **Figure 4**: FRICOSIPY Surface Mass Balance</small></center>
 
@@ -22,7 +22,8 @@ $$
 
     By convention, positive values $(+)$ represent mass accumulated on the glacier surface; negative values $(-)$ depict mass ablated from the glacier surface.
 
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />    
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Exemplar Surface Mass Balance
 
