@@ -408,6 +408,10 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 
 <center><small> **Figure 3**: Exemplar point Surface Energy Balance (SEB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
 
+!!! note
+
+    The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface energy balance graph (akin to the figure above) for any output dataset.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 <script type="text/javascript">
