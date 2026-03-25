@@ -88,6 +88,9 @@ python3 create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netc
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
+!!! note
+    The `create_static_netcdf_from_GeoTIFF.py` utility program is currently not available but will be released soon in an upcoming release of FRICOSIPY.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## $(2)$ Meteorological File
