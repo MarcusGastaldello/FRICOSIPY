@@ -28,7 +28,7 @@ The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the sur
 
 !!! note
 
-    The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce both a surface energy balance and surface mass balance graph (akin to the figures above) for any output dataset.
+    The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface mass balance graph (akin to the figure above) for any output dataset.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
