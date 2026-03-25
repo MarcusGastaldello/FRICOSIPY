@@ -12,7 +12,7 @@ $$
 \text{SMB} = \dot{m}_{\text{ precipitation}} + \dot{m}_{\text{ deposition}} + \dot{m}_{\text{ condensation}} - \dot{m}_{\text{ evaporation}} - \dot{m}_{\text{ sublimation}} - \dot{m}_{\text{ melt}}
 $$
 </div>
-<small> where . </small>
+<small> where \dot{m}_{\text{ precipitation}} is the precipitation (snowfall or rain) mass flux, \dot{m}_{\text{ deposition}} , \dot{m}_{\text{ condensation}} , \dot{m}_{\text{ evaporation}} & \dot{m}_{\text{ sublimation}} are the turbulent mass fluxes associated with latent heat exchange and \dot{m}_{\text{ melt}} is the surface melt mass flux (all units m w.e.). </small>
 
 !!! note
 
