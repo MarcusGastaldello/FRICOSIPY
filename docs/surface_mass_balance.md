@@ -14,6 +14,9 @@ $$
 </div>
 <small> where . </small>
 
+!!! note
+
+    By convention, positive values $(+)$ represent mass accumulated on the glacier surface; negative values $(-)$ depict mass ablated from the glacier surface.
 
 ## Exemplar Surface Mass Balance
 
