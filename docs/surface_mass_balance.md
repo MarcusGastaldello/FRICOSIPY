@@ -31,7 +31,7 @@ The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the sur
 
 ![Exemplar FRICOSIPY SMB (Surface Mass Balance) Colle Gnifetti](images/Exemplar-SMB.png)
 
-<center><small> **Figure 4**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
+<center><small> **Figure 5**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
 
 !!! note
 
