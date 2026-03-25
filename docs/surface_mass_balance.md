@@ -9,7 +9,7 @@ og_description: Explanation of the processes and parameterisations used to resol
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 $$
-\text{SMB} = \dot{m}_{\text{ precipitation}} + \dot{m}_{\text{ deposition}} + \dot{m}_{\text{ condensation}} - \dot{m}_{\text{ evaporation}} - \dot{m}_{\text{ sublimation}} - \dot{m}_{\text{ surface melt}}
+\text{SMB} = \dot{m}_{\text{ s}} + \dot{m}_{\text{ deposition}} + \dot{m}_{\text{ condensation}} - \dot{m}_{\text{ evaporation}} - \dot{m}_{\text{ sublimation}} - \dot{m}_{\text{ surface melt}}
 $$
 </div>
 <small> where . </small>
