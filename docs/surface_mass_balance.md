@@ -33,6 +33,24 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #E86853; border-radius: 4px; "></span>  Surface Melt
+
+![Alt text](icons/Shortwave.png){width="125px" align=left}
+
+<br style="clear: both;" />
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+$$
+\text{Surface melt} = \frac{Q_{\text{melt}} \:\: dt}{\rho_{w} \: L_{f}}
+$$
+</div>
+<small>where $Q_{\text{melt}}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{f} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
 ## Exemplar Surface Mass Balance
 
 The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the surface – either accumulation $(+)$ or ablation $(-)$. In contrast to the energy balance, the monthly mass fluxes do not need to be balanced. **Figure 4** shows an exemplar point surface mass balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being situated in a high-altitude accumulation area, the net mass exchange is positive.
