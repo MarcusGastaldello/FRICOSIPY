@@ -36,7 +36,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #E86853; border-radius: 4px; "></span>  Surface Melt
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #595959; border-radius: 4px; "></span>  Surface Melt
 
 ![Alt text](icons/Shortwave.png){width="125px" align=left}
 
