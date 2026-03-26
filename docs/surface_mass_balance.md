@@ -3,6 +3,9 @@ og_title: FRICOSIPY | The Surface Mass Balance
 og_description: Explanation of the mass exchange processes of the Surface Mass Balance (SMB)
 ---
 
+!!! attention
+    This page of the FRICOSIPY user manual is currently under active development!
+
 # Surface Mass Balance
 
 The surface mass balance (SMB) is directly coupled to the [surface energy balance](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/) and can be described by the following equation:
