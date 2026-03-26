@@ -22,6 +22,12 @@ $$
 
     By convention, positive values $(+)$ represent mass accumulated on the glacier surface; negative values $(-)$ depict mass ablated from the glacier surface.
 
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #404040; border-radius: 4px; "></span>  Precipitation
+
+![Alt text](icons/Shortwave.png){width="125px" align=left}
+
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
