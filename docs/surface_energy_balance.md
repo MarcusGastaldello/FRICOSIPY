@@ -383,7 +383,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #595959; border-radius: 4px; "></span> Melt Energy Flux
 
-![Alt text](icons/Melt.png){width="125px" align=left}
+![Alt text](icons/Melt_Energy.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
