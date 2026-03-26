@@ -3,6 +3,9 @@ og_title: FRICOSIPY | Differences to the COSIPY Model
 og_description: Explanation of the differences between FRICOSIPY and the original COSIPY model
 ---
 
+!!! attention
+    This page of the FRICOSIPY user manual is currently under active development!
+
 # Differences to the COSIPY Model
 
 The *FRICOSIPY* model has been developed as an adapation of the original [COSIPY v1.4](https://github.com/cryotools/cosipy) model of [Sauter et al. (2020)](https://doi.org/10.5194/gmd-13-5645-2020). This section explains the principal differences between the two models.
