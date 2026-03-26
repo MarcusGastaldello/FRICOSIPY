@@ -26,7 +26,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #595959; border-radius: 4px; "></span>  Precipitation
 
-![Alt text](icons/Shortwave.png){width="125px" align=left}
+![Alt text](icons/Precipitation.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
@@ -38,7 +38,7 @@ $$
 
 ## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #595959; border-radius: 4px; "></span>  Surface Melt
 
-![Alt text](icons/Shortwave.png){width="125px" align=left}
+![Alt text](icons/Surface_Melt.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
