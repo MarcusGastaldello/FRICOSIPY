@@ -42,7 +42,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span> Shortwave Radiation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #595959; border-radius: 4px; "></span> Shortwave Radiation
 
 ![Alt text](icons/Shortwave.png){width="125px" align=left}
 
@@ -157,7 +157,7 @@ The turbulent fluxes represent heat and moisture exchange between the atmosphere
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #404040; border-radius: 4px; "></span> Sensible Heat Flux
+### <span style="display: inline-block; width: 1em; height: 1em;background-color: #F99F6C; border: 2px solid #595959; border-radius: 4px; "></span> Sensible Heat Flux
 
 ![Alt text](icons/Sensible.png){width="125px" align=left}
 
@@ -307,7 +307,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #404040; border-radius: 4px; "></span> Longwave Radiation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #74A0CB; border: 2px solid #595959; border-radius: 4px; "></span> Longwave Radiation
 
 ![Alt text](icons/Longwave.png){width="125px" align=left}
 
@@ -346,7 +346,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #404040; border-radius: 4px; "></span> Rain Heat Flux
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #ACA9D0; border: 2px solid #595959; border-radius: 4px; "></span> Rain Heat Flux
 
 ![Alt text](icons/Rain.png){width="125px" align=left}
 
@@ -368,7 +368,7 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #404040; border-radius: 4px; "></span> Subsurface Heat Flux
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #A6A6A6; border: 2px solid #595959; border-radius: 4px; "></span> Subsurface Heat Flux
 
 The subsurface heat conduction flux (otherwise known as the ground heat flux) is determined based on the near surface temperature gradient $(\frac{\delta T}{\delta z})$:
 
@@ -381,22 +381,13 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #404040; border-radius: 4px; "></span> Melt Energy Flux
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #FDCF8C; border: 2px solid #595959; border-radius: 4px; "></span> Melt Energy Flux
 
 ![Alt text](icons/Melt.png){width="125px" align=left}
 
 <br style="clear: both;" />
 
-When the surface temperature $(T_s)$ is evaluated to 0 $^\circ$C, the residual energy melts the glacier surface – the uppermost subsurface layer of the model. This surface melt, expressed in terms of metre water equivalent (m w.e.) can then be calculated as: 
-
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-$$
-\text{Surface melt} = \frac{Q_{\text{melt}} \:\: dt}{\rho_{w} \: L_{f}}
-$$
-</div>
-<small>where $Q_{\text{melt}}$  is the melt energy flux, $dt$ is the model time step (s), $\rho_{w} = 1000$ kg m$^{-3}$ is the density of water and $L_{f} = 3.34 \times 10^{5}$ J kg$^{-1}$ is the latent heat of fusion.</small>
-
-This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it either refreezes (if there is sufficient cold content) or becomes run-off.
+When the surface temperature $(T_s)$ is evaluated to 0 $^\circ$C, the residual energy $(Q_{\text{melt}})$ melts the glacier surface – the uppermost subsurface layer of the model. This surface melt, combined with any rain or condensation, is then transferred into the percolation routine of the [subsurface model](subsurface_model.md) where it is stored as liquid water in the snow/firn layers, refreezes (if there is sufficient cold content) or becomes run-off.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
