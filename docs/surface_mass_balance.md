@@ -24,9 +24,11 @@ $$
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #404040; border-radius: 4px; "></span>  Precipitation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #595959; border-radius: 4px; "></span>  Precipitation
 
 ![Alt text](icons/Shortwave.png){width="125px" align=left}
+
+<br style="clear: both;" />
 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
