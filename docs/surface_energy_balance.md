@@ -42,7 +42,7 @@ The following section explains each of these energy fluxes in greater detail and
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## <span style="display: inline-block; width: 1em; height: 1em;background-color: #5cb672; border: 2px solid #404040; border-radius: 4px; "></span>  Precipitation
+## <span style="display: inline-block; width: 1em; height: 1em;background-color: #E86853; border: 2px solid #404040; border-radius: 4px; "></span> Shortwave Radiation
 
 ![Alt text](icons/Shortwave.png){width="125px" align=left}
 
