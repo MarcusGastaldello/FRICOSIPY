@@ -20,6 +20,8 @@ from constants import *
 from parameters import *
 from config import * 
 import sys
+import warnings
+warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 # ========================== #
 # Input / Output (IO) Class:
@@ -221,18 +223,21 @@ class IOClass:
         self.RESULT.attrs['Irreducible_water_content_method'] = irreducible_water_content_method 
         self.RESULT.attrs['Snow_metamorphism_method'] = snow_metamorphism_method
 
-        # Subsurface Remeshing Options:    
-        self.RESULT.attrs['Max_layers'] = max_layers
-        self.RESULT.attrs['Minimum_snow_layer_height'] = minimum_snow_layer_height
-        self.RESULT.attrs['Maximum_simulation_layer_height'] = maximum_simulation_layer_height
-        self.RESULT.attrs['Maximum_coarse_layer_height'] = maximum_coarse_layer_height
-        self.RESULT.attrs['Coarse_layer_threshold'] = coarse_layer_threshold
-
-        # Model Parameters (General):
+        # General Model Parameters:
         self.RESULT.attrs['Time_step_input_file_seconds'] = dt
         self.RESULT.attrs['Max_simulation_depth'] = max_depth
-        self.RESULT.attrs['Station_altitude'] = station_altitude
-        self.RESULT.attrs['Z_measurment_height'] = z
+        self.RESULT.attrs['Max_layers'] = max_layers
+
+        # Meteorological Input Parameters:
+        self.RESULT.attrs['Station altitude'] = station_altitude
+        self.RESULT.attrs['Measurement height'] = z
+        self.RESULT.attrs['Air temperature lapse_rate'] = air_temperature_lapse_rate
+        self.RESULT.attrs['Air temperature offset'] = air_temperature_offset
+        self.RESULT.attrs['Precipitation lapse rate'] = precipitation_lapse_rate
+        self.RESULT.attrs['Precipitation multiplier'] = precipitation_multiplier
+        self.RESULT.attrs['Minimum snowfall'] = minimum_snowfall
+
+        # Model Physical Processes Parameters:
         self.RESULT.attrs['Albedo_fresh_snow'] = albedo_fresh_snow
         self.RESULT.attrs['Albedo_firn'] = albedo_firn
         self.RESULT.attrs['Albedo_ice'] = albedo_ice
@@ -245,7 +250,6 @@ class IOClass:
         self.RESULT.attrs['Subsurface_interpolation_depth_1'] = subsurface_interpolation_depth_1
         self.RESULT.attrs['Basal_heat_flux'] = basal_heat_flux
         self.RESULT.attrs['Minimum_snowfall'] = minimum_snowfall
-        self.RESULT.attrs['Pore_close-off_density'] = pore_close_off_density
         self.RESULT.attrs['Snow_ice_threshold'] = snow_ice_threshold
         self.RESULT.attrs['Surface_emission_coeff'] = surface_emission_coeff
 
@@ -274,11 +278,18 @@ class IOClass:
         if irreducible_water_content_method == 'constant':
             self.RESULT.attrs['Constant_irreducible_water_content'] = constant_irreducible_water_content
 
+        # Subsurface Remeshing Options:    
+        self.RESULT.attrs['Minimum_snow_layer_height'] = minimum_snow_layer_height
+        self.RESULT.attrs['Maximum_snow_layer_height'] = maximum_snow_layer_height
+        self.RESULT.attrs['Maximum_coarse_layer_height'] = maximum_coarse_layer_height
+        self.RESULT.attrs['Coarse_layer_threshold'] = coarse_layer_threshold
+        self.RESULT.attrs['Maximum_glacier_layer_height'] = maximum_glacier_layer_height
+
         # Initial Conditions:
         self.RESULT.attrs['Initial_snowheight'] = initial_snowheight
         self.RESULT.attrs['Initial_snow_layer_heights'] = initial_snow_layer_heights
-        self.RESULT.attrs['Initial_grain_size'] = initial_snow_grain_size
-        self.RESULT.attrs['Initial_grain_size'] = initial_ice_grain_size
+        self.RESULT.attrs['Initial_snow_grain_size'] = initial_snow_grain_size
+        self.RESULT.attrs['Initial_ice_grain_size'] = initial_ice_grain_size
         self.RESULT.attrs['Initial_glacier_height'] = initial_glacier_height
         self.RESULT.attrs['Initial_glacier_layer_heights'] = initial_glacier_layer_heights
         self.RESULT.attrs['Initial_upper_snowpack_density'] = initial_upper_snowpack_density
@@ -340,8 +351,10 @@ class IOClass:
         # ========================================= #
 
         self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
+        self.RESULT = self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
         self.RESULT = self.RESULT.rio.write_crs(grid_crs)
-            
+        self.RESULT = self.RESULT.rio.write_coordinate_system()         
+
         return self.RESULT
     
     # =================================================================================================
@@ -353,13 +366,15 @@ class IOClass:
     def create_global_result_arrays(self):
         """ Creates the global result arrays in the RESULT Xarray dataset """
 
-        # Meteorological Variables (5):
+        # Meteorological Variables (6):
         if ('AIR_TEMPERATURE' in self.meteorological_variables):
             self.AIR_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('AIR_PRESSURE' in self.meteorological_variables):
             self.AIR_PRESSURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('RELATIVE_HUMIDITY' in self.meteorological_variables):
             self.RELATIVE_HUMIDITY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SPECIFIC_HUMIDITY' in self.meteorological_variables):
+            self.SPECIFIC_HUMIDITY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)        
         if ('WIND_SPEED' in self.meteorological_variables):
             self.WIND_SPEED = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('FRACTIONAL_CLOUD_COVER' in self.meteorological_variables):
@@ -409,7 +424,7 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
 
-        # Other Information (10):
+        # Other Information (11):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SNOW_WATER_EQUIVALENT' in self.other):
@@ -420,6 +435,8 @@ class IOClass:
             self.SURFACE_ELEVATION = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
+        if ('SURFACE_HUMIDITY' in self.other):
+            self.SURFACE_HUMIDITY = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('SURFACE_ALBEDO' in self.other):
             self.SURFACE_ALBEDO = np.full((self.nt,self.ny,self.nx), np.nan, dtype = precision)
         if ('N_LAYERS' in self.other):
@@ -466,22 +483,24 @@ class IOClass:
     # ================================================= #
     
     def copy_local_to_global(self,y,x,
-        local_AIR_TEMPERATURE,local_AIR_PRESSURE,local_RELATIVE_HUMIDITY,local_WIND_SPEED,local_FRACTIONAL_CLOUD_COVER, \
+        local_AIR_TEMPERATURE,local_AIR_PRESSURE,local_RELATIVE_HUMIDITY,local_SPECIFIC_HUMIDITY,local_WIND_SPEED,local_FRACTIONAL_CLOUD_COVER, \
         local_SHORTWAVE,local_LONGWAVE,local_SENSIBLE,local_LATENT,local_SUBSURFACE,local_RAIN_HEAT_FLUX,local_MELT_ENERGY, \
         local_RAIN,local_SNOWFALL,local_EVAPORATION,local_SUBLIMATION,local_CONDENSATION,local_DEPOSITION,local_SURFACE_MELT,local_SURFACE_MASS_BALANCE, \
         local_REFREEZE,local_SUBSURFACE_MELT,local_RUNOFF,local_MASS_BALANCE, \
-        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_ELEVATION,local_SURFACE_TEMPERATURE,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
+        local_SNOW_HEIGHT,local_SNOW_WATER_EQUIVALENT,local_TOTAL_HEIGHT,local_SURFACE_ELEVATION,local_SURFACE_TEMPERATURE,local_SURFACE_HUMIDITY,local_SURFACE_ALBEDO,local_N_LAYERS,local_FIRN_TEMPERATURE,local_FIRN_TEMPERATURE_CHANGE,local_FIRN_FACIE, \
         local_LAYER_DEPTH,local_LAYER_HEIGHT,local_LAYER_DENSITY,local_LAYER_TEMPERATURE,local_LAYER_WATER_CONTENT,local_LAYER_COLD_CONTENT,local_LAYER_POROSITY,local_LAYER_ICE_FRACTION, \
         local_LAYER_IRREDUCIBLE_WATER,local_LAYER_REFREEZE,local_LAYER_HYDRO_YEAR,local_LAYER_GRAIN_SIZE):
         """ Fills the global result arrays with local variables from each node """
 
-        # Meteorological Variables (5):
+        # Meteorological Variables (6):
         if ('AIR_TEMPERATURE' in self.meteorological_variables):
             self.AIR_TEMPERATURE[:,y,x] = local_AIR_TEMPERATURE
         if ('AIR_PRESSURE' in self.meteorological_variables):
             self.AIR_PRESSURE[:,y,x] = local_AIR_PRESSURE
         if ('RELATIVE_HUMIDITY' in self.meteorological_variables):
             self.RELATIVE_HUMIDITY[:,y,x] = local_RELATIVE_HUMIDITY
+        if ('SPECIFIC_HUMIDITY' in self.meteorological_variables):
+            self.SPECIFIC_HUMIDITY[:,y,x] = local_SPECIFIC_HUMIDITY 
         if ('WIND_SPEED' in self.meteorological_variables):
             self.WIND_SPEED[:,y,x] = local_WIND_SPEED
         if ('FRACTIONAL_CLOUD_COVER' in self.meteorological_variables):
@@ -531,7 +550,7 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.MASS_BALANCE[:,y,x] = local_MASS_BALANCE         
 
-        # Other Information (10):
+        # Other Information (11):
         if ('SNOW_HEIGHT' in self.other):
             self.SNOW_HEIGHT[:,y,x] = local_SNOW_HEIGHT
         if ('SNOW_WATER_EQUIVALENT' in self.other):
@@ -542,6 +561,8 @@ class IOClass:
             self.SURFACE_ELEVATION[:,y,x] = local_SURFACE_ELEVATION     
         if ('SURFACE_TEMPERATURE' in self.other):
             self.SURFACE_TEMPERATURE[:,y,x] = local_SURFACE_TEMPERATURE
+        if ('SURFACE_HUMIDITY' in self.other):
+            self.SURFACE_HUMIDITY[:,y,x] = local_SURFACE_HUMIDITY
         if ('SURFACE_ALBEDO' in self.other):
             self.SURFACE_ALBEDO[:,y,x] = local_SURFACE_ALBEDO
         if ('N_LAYERS' in self.other):
@@ -589,13 +610,15 @@ class IOClass:
     def write_results_to_file(self):
         """ Writes the results into the RESULT Xarray dataset """
 
-        # Meteorological Variables (5):
+        # Meteorological Variables (6):
         if ('AIR_TEMPERATURE' in self.meteorological_variables):
             self.add_variable_along_northingeastingtime(self.RESULT, self.AIR_TEMPERATURE, 'AIR_TEMPERATURE', '°C', 'Air Temperature')
         if ('AIR_PRESSURE' in self.meteorological_variables):
             self.add_variable_along_northingeastingtime(self.RESULT, self.AIR_PRESSURE, 'AIR_PRESSURE', 'hPa', 'Air Pressure')
         if ('RELATIVE_HUMIDITY' in self.meteorological_variables):
             self.add_variable_along_northingeastingtime(self.RESULT, self.RELATIVE_HUMIDITY, 'RELATIVE_HUMIDITY', '%', 'Relative Humidity')
+        if ('SPECIFIC_HUMIDITY' in self.meteorological_variables):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SPECIFIC_HUMIDITY, 'SPECIFIC_HUMIDITY', 'g kg\u207b\xb1', 'Specific Humidity')
         if ('WIND_SPEED' in self.meteorological_variables):
             self.add_variable_along_northingeastingtime(self.RESULT, self.WIND_SPEED, 'WIND_SPEED', 'm s\u207b\xb9', 'Wind Speed')
         if ('FRACTIONAL_CLOUD_COVER' in self.meteorological_variables):
@@ -645,7 +668,7 @@ class IOClass:
         if ('MASS_BALANCE' in self.subsurface_mass_fluxes):
             self.add_variable_along_northingeastingtime(self.RESULT, self.MASS_BALANCE, 'MASS_BALANCE', 'm w.e.', 'Mass Balance')       
 
-        # Other Information (10):
+        # Other Information (11):
         if ('SNOW_HEIGHT' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SNOW_HEIGHT, 'SNOW_HEIGHT', 'm', 'Snow Height')
         if ('SNOW_WATER_EQUIVALENT' in self.other):
@@ -656,6 +679,8 @@ class IOClass:
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_ELEVATION, 'SURFACE_ELEVATION', 'm a.s.l.', 'Surface Elevation')
         if ('SURFACE_TEMPERATURE' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_TEMPERATURE, 'SURFACE_TEMPERATURE', '°C', 'Surface Temperature')
+        if ('SURFACE_HUMIDITY' in self.other):
+            self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_HUMIDITY, 'SURFACE_HUMIDITY', 'g kg\u207b\xb1', 'Surface Humidity')
         if ('SURFACE_ALBEDO' in self.other):
             self.add_variable_along_northingeastingtime(self.RESULT, self.SURFACE_ALBEDO, 'SURFACE_ALBEDO', '-', 'Surface Albedo')
         if ('N_LAYERS' in self.other):
@@ -703,6 +728,7 @@ class IOClass:
     def get_result(self):
         """ Returns the RESULT Xarray dataset """
 
+        self.RESULT = self.RESULT.rio.write_grid_mapping()
         return self.RESULT
     
     # =================================================================================================
@@ -716,6 +742,7 @@ class IOClass:
         ds[name] = (('y','x'), var.data)        
         ds[name].attrs['units'] = units
         ds[name].attrs['long_name'] = long_name
+        ds[name].attrs['grid_mapping'] = 'spatial_ref'
         ds[name].encoding['_FillValue'] = -9999
         return ds
     
@@ -724,6 +751,7 @@ class IOClass:
         ds[name] = (('time','y','x'), var.data)
         ds[name].attrs['units'] = units
         ds[name].attrs['long_name'] = long_name
+        ds[name].attrs['grid_mapping'] = 'spatial_ref'
         ds[name].encoding['_FillValue'] = -9999
         return ds
     
@@ -732,6 +760,7 @@ class IOClass:
         ds[name] = (('time','y','x','layer'), var.data)
         ds[name].attrs['units'] = units
         ds[name].attrs['long_name'] = long_name
+        ds[name].attrs['grid_mapping'] = 'spatial_ref'
         ds[name].encoding['_FillValue'] = -9999
         return ds
     

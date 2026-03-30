@@ -52,6 +52,8 @@ def percolation_refreezing(GRID, hydro_year, surface_water, dt):
 
     else:
         Q , water_refrozen = 0, 0
+        GRID.set_refreeze(np.zeros(GRID.number_nodes, dtype = np.float64))
+        GRID.set_firn_refreeze(np.zeros(GRID.number_nodes, dtype = np.float64))
 
     return Q , water_refrozen
 
@@ -166,13 +168,14 @@ def method_Darcy(GRID, dt):
                     h (z)      ::    Layer height [m]
                     lwc (z)    ::    Layer liquid water content [-] 
                     irr (z)    ::    Layer irreducible water content [-]
-                    theta (z)  ::    Layer unsaturated hydrualic conductivity [m s-1]
+                    theta (z)  ::    Layer effective water saturation [-]
         Output:
                     lwc (z)    ::    Layer liquid water content (updated) [-]
                     Q          ::    Runoff [m w.e.]
     
     """
 
+    Q = 0.0
     dt_cumulative = 0.0
 
     while dt_cumulative < dt:
@@ -180,15 +183,16 @@ def method_Darcy(GRID, dt):
         # Import Sub-surface Grid Information:
         h = np.asarray(GRID.get_height())
         d = np.asarray(GRID.get_grain_size())
-        theta = np.minimum(np.maximum(np.asarray(GRID.get_hydraulic_conductivity()),1e-10), 0.999)
+        K = np.asarray(GRID.get_hydraulic_conductivity())
+        theta = np.minimum(np.maximum(np.asarray(GRID.get_saturation()),1e-10), 0.999)
 
         # Inverse moisture gradient (C)
         n = 15.68 * np.exp(-0.46 * d) + 1
         m = 1 - 1 / n
-        inv_C = (1 / (7.3 * np.exp(1.9) * n * m)) * (theta **(-1 / m - 1)) * ((theta **(-1 / m) - 1)**(1 / n - 1))
+        inv_C = (0.01 / ((7.3 * d + np.exp(1.9)) * n * m)) * (theta ** (-1 / m - 1)) * ((theta ** (-1 / m) - 1) ** (1 / n - 1))
 
         # Determine integration steps required in the solver to ensure numerical stability:
-        dt_stable = max(np.min((0.5 * h**2) / (2 * (theta * inv_C) + 1e-12)), 1) # Courant-Friedrichs-Lewy (CFL) stability criterion     
+        dt_stable = np.min((0.5 * h**2) / (K * inv_C + 1e-12)) # Courant-Friedrichs-Lewy (CFL) stability criterion     
 
         # Integration timestep:
         dt_step = np.minimum(dt_stable, dt - dt_cumulative)
@@ -200,17 +204,12 @@ def method_Darcy(GRID, dt):
         # Surface node:
         GRID.set_node_liquid_water_content(0, (GRID.get_node_liquid_water_content(0) * GRID.get_node_height(0) + - D[0]) / GRID.get_node_height(0))
 
-        # Intermediate nodes:
-        for Idx in range(1, GRID.number_nodes - 1):
+        # Subsurface nodes:
+        for Idx in range(1, GRID.number_nodes):
             GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) + (D[Idx - 1] - D[Idx])) / GRID.get_node_height(Idx))
 
-        # Base node:
-        Idx = GRID.number_nodes - 1
-        GRID.set_node_liquid_water_content(Idx, (GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx) + D[Idx - 1]) / GRID.get_node_height(Idx))
-    
-    # Water in the last sub-surface node is allocated to run-off:
-    Q = GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1)
-    GRID.set_node_liquid_water_content(GRID.number_nodes - 1, 0.0)
+        # Calculate the cumulative discharge from the base node:
+        Q += D[GRID.number_nodes - 1]
 
     return Q
             
@@ -249,19 +248,19 @@ def refreezing(GRID, year):
     hydro_year = np.asarray(GRID.get_hydro_year())
 
     # Volumetric/density limit on refreezing:
-    d_lwc_max_density = ((icf_max - icf) * (ice_density/water_density))
+    d_lwc_max_density = ((icf_max - np.minimum(icf, icf_max)) * (ice_density/water_density))
 
     # Temperature difference between layer and freezing temperature, cold content in temperature
-    dT_max = np.abs(T - zero_temperature) # (Positive T)
+    dT_max = zero_temperature - T
 
     # Compute conversion factor (1/K)
     Conversion = ((specific_heat_ice * ice_density) / (water_density * latent_heat_melting))
 
     # Cold content limit on refreezing:
-    d_lwc_max_coldcontent = np.where(dT_max < 0 , 0, (icf * Conversion * dT_max) / (1 - (Conversion * dT_max * (water_density / ice_density))))
+    d_lwc_max_coldcontent = np.where(dT_max <= 0 , 0, (icf * Conversion * dT_max) / (1 - (Conversion * dT_max * (water_density / ice_density))))
 
     # Water refreeze amount (fractional):
-    d_lwc = np.asarray([min(x,y,z) for x,y,z in zip(lwc, d_lwc_max_density, d_lwc_max_coldcontent)]) # Numba incompatible with np.min(axis = 1)
+    d_lwc = np.minimum(lwc, np.minimum(d_lwc_max_density, d_lwc_max_coldcontent)) 
     
     # Update sub-surface node volumetric ice fraction and liquid water content:
     GRID.set_liquid_water_content((lwc - d_lwc)) 

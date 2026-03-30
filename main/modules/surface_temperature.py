@@ -38,7 +38,7 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
                 PRES         ::    Air pressure [hPa]
                 SWnet        ::    Net shortwave radiation [W m-2]
                 U2           ::    Wind velocity [m s-1]
-                RAIN         ::    Rain [mm]
+                RAIN         ::    Rain [m]
                 SLOPE        ::    Slope of the surface [degree]
                 N            ::    Fractional cloud cover [-]        
                 LWinput      ::    Incoming longwave radiation [W m-2] (as input data)
@@ -51,6 +51,8 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
                 LATENT       ::    Latent heat flux [W m-2]
                 SUBSURFACE   ::    Subsurface heat flux [W m-2]
                 RAIN_HEAT    ::    Rain heat flux [W m-2]
+                q0           ::    Surface humidity / mixing ratio [g kg-1]
+                q2           ::    Absolute humidity / mixing ratio [g kg-1]
         
     """
     
@@ -118,14 +120,14 @@ def update_surface_temperature(GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SLOPE, 
     GRID.set_node_temperature(0, T0)
  
     # Determine the surface energy fluxes:
-    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N,)
+    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT, q0, q2) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N,)
      
     # Consistency check:
     if (T0 > zero_temperature) or (T0 < lower_bound):
         raise ValueError("Error: Surface temperature is out of physical bounds.")
 
     # Return surface energy fluxes:
-    return res.fun, T0, LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT
+    return res.fun, T0, LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT, q0, q2
 
 # ====================================================================================================================
 
@@ -134,7 +136,7 @@ def energy_balance_optimisation(T0, GRID, z0, T2, RH2, PRES, SWnet, U2, RAIN, SL
     """ Optimisation function to resolve the surface temperature (T0) """
 
     # Determine the surface energy fluxes for a given surface temperature (T0):
-    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N)
+    (LWin, LWout, SENSIBLE, LATENT, SUBSURFACE, RAIN_HEAT, q0, q2) = energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWinput, N)
 
     # Return the residual:
     if residual_setting == 'signed':
@@ -160,7 +162,7 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
                 RH2          ::    Relative humidity [%]
                 PRES         ::    Air pressure [hPa]
                 U2           ::    Wind velocity [m s-1]
-                RAIN         ::    RAIN [mm]
+                RAIN         ::    RAIN [m]
                 SLOPE        ::    Slope of the surface [degree]
                 LWinput      ::    Incoming longwave radiation [W m-2] (as input)
                 N            ::    Fractional cloud cover [-]
@@ -183,11 +185,14 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
     T0 = np.asarray(T0).flat[0]
 
     # Saturation vapour pressure [Pa]:
-    saturation_vapour_pressure_methods_allowed = ['Sonntag90']
+    saturation_vapour_pressure_methods_allowed = ['Sonntag94','Murray67']
 
-    if saturation_vapour_pressure_method == 'Sonntag90':
+    if saturation_vapour_pressure_method == 'Sonntag94':
         VPsat2 = method_Sonntag(T2)
         VPsat0 = method_Sonntag(T0)
+    elif saturation_vapour_pressure_method == 'Murray67':
+        VPsat2 = method_Murray(T2)
+        VPsat0 = method_Murray(T0)
     else:
         raise ValueError("Saturation water vapour method = \"{:s}\" is not allowed, must be one of {:s}".format(saturation_vapour_pressure_method, ", ".join(saturation_vapour_pressure_methods_allowed)))
     
@@ -275,11 +280,11 @@ def energy_balance_fluxes(GRID, T0, z0, T2, RH2, PRES, U2, RAIN, SLOPE, Tz, LWin
     # Rain Heat Flux
     # ============== #
 
-    RAIN_HEAT = water_density * specific_heat_water * (RAIN / 1000 / dt) * (T2 - T0)
+    RAIN_HEAT = water_density * specific_heat_water * (RAIN / dt) * (T2 - T0)
 
     # -------------------------------------------------------------------------------------------------------------------- #
 
-    return (LWin.item(), LWout.item(), SENSIBLE.item(), LATENT.item(), SUBSURFACE.item(), RAIN_HEAT.item())
+    return (LWin.item(), LWout.item(), SENSIBLE.item(), LATENT.item(), SUBSURFACE.item(), RAIN_HEAT.item(), q0, q2)
 
 # ==================================================================================================================== # 
 
@@ -320,13 +325,13 @@ def interpolate_Tz(GRID):
     
 # ==================================================================================================================== #
 
-# ========================= #
-# Saturated Vapour Pressure
-# ========================= #
+# ================================================================ #
+# Saturated Vapour Pressure - Murray 1967 (Magnus - Tetens) Method
+# ================================================================ #
 
 @njit
-def method_Sonntag(T):
-    """ Saturated vapour pressure after Sonntag (1994)
+def method_Murray(T):
+    """ Saturated vapour pressure after Murray (1967)
     
     Input:
                 T        ::    Air or surface temperature [K]
@@ -344,4 +349,26 @@ def method_Sonntag(T):
 
 # ==================================================================================================================== #
 
+# =============================================== #
+# Saturated Vapour Pressure - Sonntag 1994 Method
+# =============================================== #
 
+@njit
+def method_Sonntag(T):
+    """ Saturated vapour pressure after Sonntag (1994)
+    
+    Input:
+                T        ::    Air or surface temperature [K]
+
+    Output:
+                VPsat    ::    Saturated vapour pressure [hPa]
+    """
+
+    if T >= zero_temperature:
+        VPsat = np.exp(-6096.9385 / T + 21.2409642 - 0.02711193 * T + 1.673952e-5 * T**2 + 2.433502 * np.log(T)) / 100 # VPsat over water
+    else: 
+        VPsat = np.exp(-6024.5282 / T + 29.32707 + 0.01061386 * T - 1.3198825e-5 * T**2 - 0.4938257 * np.log(T)) / 100 # VPsat over ice
+    
+    return VPsat
+
+# ==================================================================================================================== #
