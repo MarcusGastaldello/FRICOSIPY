@@ -15,10 +15,10 @@
 # ======================= #
 
 # Surface Energy Balance
-albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bougamont05','measured']
+albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bougamont05']
 penetrating_radiation_method = 'Bintanja95'       # Options: ['Bintanja95','disabled']
 surface_roughness_method = 'Moelg12'              # Options: ['Moelg12','constant']
-saturation_vapour_pressure_method = 'Sonntag90'   # Options: ['Sonntag90']
+saturation_vapour_pressure_method = 'Sonntag94'   # Options: ['Sonntag94','Murray67']
 surface_temperature_solver = 'Newton'             # Options: ['SLSQP','Newton'] [slowest <--> fastest]
 
 # Multi-layer Subsurface Model
@@ -63,8 +63,7 @@ LW_emission_constant = 0.42                     # Constant in the longwave emiss
 subsurface_interpolation_depth_1 = 0.06         # First depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m] (default = 0.06)
 subsurface_interpolation_depth_2 = 0.10         # Second depth for temperature interpolation which is used for calculation of subsurface/ground heat flux [m] (default = 0.10)
 basal_heat_flux = 35                            # Basal / Geothermal heat flux [mW m-2] (default = 35)
-pore_close_off_density = 830.0                  # Pore close-off density [kg m-3] (default = 830)
-snow_ice_threshold = 900.0                      # Snow-ice density threshold [kg m-3] (default = 900)
+snow_ice_threshold = 830.0                      # Snow-ice density threshold [kg m-3] (default = 830)
 surface_emission_coeff = 1.0                    # Surface emission coefficient for snow/ice [-] (default = 1.00)
 firn_temperature_depth = 20.0                   # Depth at which firn temperature is measured [m]
 grain_size_fresh_snow = 0.1                     # Grain size of fresh snow [mm] (default = 0.1)
@@ -91,9 +90,10 @@ constant_irreducible_water_content = 0.02       # (Constant - irreducible_water_
 # ============================ #
 
 minimum_snow_layer_height = 0.0005              # Minimum layer height [m]
-maximum_simulation_layer_height = 0.10          # Maximum height of fine layers [m]
-maximum_coarse_layer_height = 0.3               # Maximum height of coarse layers [m]
+maximum_snow_layer_height = 0.10                # Maximum height of fine layers [m]
+maximum_coarse_layer_height = 0.30              # Maximum height of coarse layers [m]
 coarse_layer_threshold = 21.                    # Threshold depth at which fine near surface layers are merged into coarser deep layers [m]
+maximum_glacier_layer_height = 1.00             # Maximum height of glacier layers [m]
 
 # ================== #
 # INITIAL CONDITIONS
@@ -103,7 +103,7 @@ initial_snowheight = 2.00                       # Initial snowheight [m]
 initial_snow_layer_heights = 0.10               # Initial thickness of snow layers [m]
 initial_snow_grain_size = 0.10                  # Initial snow grain size [mm]
 initial_ice_grain_size = 5.0                    # Initial ice grain size [mm]
-initial_glacier_height = 50.0                   # Initial glacier height (without snowlayers) [m]
+initial_glacier_height = 20.0                   # Initial glacier height (without snowlayers) [m]
 initial_glacier_layer_heights = 1.0             # Initial thickness of glacier ice layers [m]
 initial_upper_snowpack_density = 250.0          # Top density for initial snowpack [kg m-3]
 initial_lower_snowpack_density = 275.0          # Bottom density for initial snowpack [kg m-3]

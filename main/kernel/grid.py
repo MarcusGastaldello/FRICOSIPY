@@ -221,38 +221,28 @@ class Grid:
     def merge_nodes(self, idx):
         """ Merges two subsequent nodes (idx & idx + 1) and combines their properties """
 
-        # Updated layer height
-        new_height = self.get_node_height(idx) + self.get_node_height(idx + 1)
+        # Layer heights
+        h0 = self.get_node_height(idx)
+        h1 = self.get_node_height(idx + 1)
 
-        # Updated liquid water content
-        new_liquid_water_content = (self.get_node_liquid_water_content(idx) * self.get_node_height(idx) + \
-                                    self.get_node_liquid_water_content(idx+1) * self.get_node_height(idx + 1)) / new_height
+        # Updated inverse layer height
+        new_height = h0 + h1
+        inverse_new_height = 1 / new_height # (multiplication is significantly faster than division)
 
-        # Updated ice fraction
-        new_ice_fraction = ((self.get_node_ice_fraction(idx) * self.get_node_height(idx) + \
-                            self.get_node_ice_fraction(idx+1) * self.get_node_height(idx + 1)) / new_height)
-
-        # Updated temperature
-        new_temperature = (self.get_node_height(idx)/new_height) * self.get_node_temperature(idx) + \
-                            (self.get_node_height(idx+1)/new_height) * self.get_node_temperature(idx + 1)
-        
-        # Updated average temperature
-        new_average_temperature = (self.get_node_height(idx)/new_height) * self.get_average_node_temperature(idx) + \
-                            (self.get_node_height(idx+1)/new_height) * self.get_average_node_temperature(idx + 1)
-        
-        # Updated refreezing
+        # Updated layer properties
+        new_liquid_water_content = (h0 * self.get_node_liquid_water_content(idx) + h1 * self.get_node_liquid_water_content(idx + 1)) * inverse_new_height
+        new_ice_fraction = (h0 * self.get_node_ice_fraction(idx)  + h1 * self.get_node_ice_fraction(idx + 1)) * inverse_new_height
+        new_temperature =  (h0 * self.get_node_temperature(idx) + h1 * self.get_node_temperature(idx + 1)) * inverse_new_height
+        new_average_temperature = (h0 * self.get_average_node_temperature(idx) + h1 * self.get_average_node_temperature(idx + 1)) * inverse_new_height
+        new_grain_size = (h0 * self.get_node_grain_size(idx) + h1 * self.get_node_grain_size(idx + 1)) * inverse_new_height
         new_refreeze = self.get_node_refreeze(idx) + self.get_node_refreeze(idx + 1)
         new_firn_refreeze = self.get_firn_node_refreeze(idx) + self.get_firn_node_refreeze(idx + 1)
-
-        # Updated grain size
-        new_grain_size = (self.get_node_height(idx)/new_height) * self.get_node_grain_size(idx) + \
-                            (self.get_node_height(idx+1)/new_height) * self.get_node_grain_size(idx + 1)
         
         # Update the node properties
         self.update_node(idx, new_height, new_temperature, new_average_temperature, new_ice_fraction, new_liquid_water_content, new_refreeze, new_firn_refreeze, new_grain_size)
         
         # Remove the second layer
-        self.remove_node([idx+1])
+        self.remove_node([idx + 1])
 
     # =================================================================================================
 
@@ -265,8 +255,6 @@ class Grid:
                      
         self.lagrangian_profile()
 
-    # =================================================================================================
-
     def lagrangian_profile(self):
         """ Remeshes the subsurface numerical mesh / grid according to a threshold height Lagrangian 
         scheme. New snowfall is accumulated in the uppermost layer until a fixed threshold height is
@@ -278,26 +266,25 @@ class Grid:
         # Merge uppermost snow layer with the second snow layer unless it exceeds the maximum snow layer height or they are from different hydrological years
         if self.get_number_snow_layers() >= 2:  
             if ((self.get_node_height(0) + self.get_node_height(1) <= maximum_snow_layer_height) and (self.get_node_hydro_year(0) == self.get_node_hydro_year(1))):
-                self.merge_nodes(0)
-        
+                self.merge_nodes(0)     
+       
+        # Merge into coarser snow layers if a layer goes beyond the region of interest:
+        idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
+        if idx < self.get_number_snow_layers() - 2: 
+            if ((self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height) and (self.get_node_hydro_year(idx) == self.get_node_hydro_year(idx + 1))):
+                self.merge_nodes(idx)
+
+        # Remove layers if they subseed the minimum layer height and become too small  
+        indices = np.where(np.asarray(self.get_height()) < minimum_snow_layer_height)[0]
+        for i in range(len(indices) - 1, -1, -1): # backwards loop to avoid index misalignment
+            idx = indices[i]
+            self.remove_node([idx])        
+
         # Merge uppermost glacier layer with the second glacier layer unless it exceeds the maximum glacier layer height or they are from different hydrological years
         if self.get_number_glacier_layers() >= 2:
             idx = self.get_number_snow_layers() # the index of the first glacier layer
             if ((self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_glacier_layer_height) and (self.get_node_hydro_year(idx) == self.get_node_hydro_year(idx + 1))):
-                self.merge_nodes(idx)            
-
-        # Merge snow layers if they subseed the minimum snow layer height and become too small  
-        indices = np.where(np.asarray(self.get_snow_heights()) < minimum_snow_layer_height)[0]
-        for i in range(len(indices) - 1, -1, -1): # backwards loop to avoid index misalignment
-            idx = indices[i]
-            if idx < self.get_number_snow_layers() - 2:
-                self.merge_nodes(idx)
-        
-        # Merge into coarser layers if a layer goes beyond the region of interest:
-        idx = np.searchsorted(self.get_depth(), coarse_layer_threshold, side="right")
-        if idx < self.get_number_snow_layers() - 2: 
-            if (self.get_node_height(idx) + self.get_node_height(idx + 1) <= maximum_coarse_layer_height):
-                self.merge_nodes(idx)
+                self.merge_nodes(idx)    
 
         # If last layer depth exceeds the desired subsurface measurement depth, remove it:
         idx = self.get_number_layers() - 1
@@ -376,6 +363,10 @@ class Grid:
             if (mass < layer_SWE):
                 self.set_node_height(idx, (layer_SWE - mass) / (self.get_node_density(idx) / water_density))
                 mass = 0.0
+
+                # Remove layer if it subseeds the minimum layer height
+                if self.get_node_height(idx) < minimum_snow_layer_height:
+                    self.remove_node([idx])
 
             # Remove first layer otherwise and continue loop with next layer down
             elif (mass >= layer_SWE):
@@ -728,7 +719,12 @@ class Grid:
 
     def get_number_snow_layers(self):
         """ Returns the number of snow layers in the subsurface grid [n] """
-        nlayers = [1 for idx in range(self.number_nodes) if self.get_node_density(idx)<snow_ice_threshold]
+        nlayers = [1 for idx in range(self.number_nodes) if self.get_node_density(idx) < snow_ice_threshold]
+        return int(np.sum(np.array(nlayers)))
+    
+    def get_number_glacier_layers(self):
+        """ Returns the number of glacier layers in the subsurface grid [n] """
+        nlayers = [1 for idx in range(self.number_nodes) if self.get_node_density(idx) > snow_ice_threshold]
         return int(np.sum(np.array(nlayers)))
 
     def get_number_layers(self):

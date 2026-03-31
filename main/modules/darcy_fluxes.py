@@ -73,6 +73,9 @@ def darcy_fluxes(GRID, dt):
         else:
             D[Idx] = 0
     
+    # Base node flux
+    D[GRID.number_nodes - 1] = min(GRID.get_node_liquid_water_content(GRID.number_nodes - 1) * GRID.get_node_height(GRID.number_nodes - 1), GRID.get_node_hydraulic_conductivity(GRID.number_nodes - 1) * dt) # Free drainage
+    
     return D
 
 # ====================================================================================================================
@@ -130,7 +133,9 @@ def water_flux_q_lim(GRID, Idx):
         q_lim_LB = 0                                                                    # q_lim Lower Bound (LB) 
         q_lim_UB = GRID.get_node_liquid_water_content(Idx) * GRID.get_node_height(Idx)  # q_lim Upper Bound (UB)
 
-        while abs(residual) > 1e-6:
+        i = 0
+        max_iter = 100
+        while abs(residual) > 1e-6 and i < max_iter:
 
             # Calculate updated volumetric liquid water content:
             lwc_1 = GRID.get_node_liquid_water_content(Idx) - q_lim / GRID.get_node_height(Idx)
@@ -154,9 +159,12 @@ def water_flux_q_lim(GRID, Idx):
             # Next guess is the midpoint between the updated bounds / interval points:
             q_lim = (q_lim_UB + q_lim_LB) / 2
 
+            # Increase iteration counter:
+            i += 1
+
     return q_lim
 
-    # Note: this iterative solver uses a basic, robust bisection algorithm but maybe faster by implementing a Newton-Raphson approach!
+    # Note: this iterative solver uses a basic, robust bisection algorithm but may be faster by implementing a Newton-Raphson approach!
 
 # ====================================================================================================================
 
@@ -179,7 +187,7 @@ def hydraulic_head(GRID, theta, Idx):
 
     n = 15.68 * np.exp(-0.46 * GRID.get_node_grain_size(Idx)) + 1
     m = 1 - 1 / n
-    return 1 / (7.3 * np.exp(1.9)) * (max(theta, 1e-12) ** (-1 / m) - 1) ** (1 / n)
+    return (1 / (7.3 * GRID.get_node_grain_size(Idx) + np.exp(1.9)) * max(0.0, (max(theta, 1e-8) ** (-1 / m) - 1)) ** (1 / n)) * 0.01
 
 # ====================================================================================================================
 
@@ -189,7 +197,7 @@ def hydraulic_head(GRID, theta, Idx):
 
 @njit
 def effective_water_saturation(GRID, lwc, Idx):
-    """ Calculates the effective water saturation (Θ) for a single subsurface layer
+    """ Calculates the effective water saturation (ϴ) for a single subsurface layer
         according to Hirashima et al., (2010) (https://doi.org/10.1016/j.coldregions.2010.09.003) - Eq. (5)
         and Yamaguchi et al., (2010) (https://doi.ord/10.1016/j.coldregions.2010.05.008) - residual water content
 

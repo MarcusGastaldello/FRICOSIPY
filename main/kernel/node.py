@@ -226,12 +226,11 @@ class Node:
     # -----------------------------------------------
 
     def get_layer_saturation(self):
-        """ Returns the layer water saturation [-] 
+        """ Returns the layer effective water saturation [-] 
             Hirashima et al., 2010 (https://doi.org/10.1016/j.coldregions.2010.09.003) - Eqn. (5) 
             Yamaguchi et al., 2010 (https://doi.ord/10.1016/j.coldregions.2010.05.008) - """
-        residual_water_content = 0.02
-        return min(1,max(0,((self.get_layer_liquid_water_content() - residual_water_content) / \
-                  (((snow_ice_threshold - self.get_layer_ice_fraction() * ice_density) / water_density) - residual_water_content))))
+        return min(1,max(0,((self.get_layer_liquid_water_content() - self.get_layer_irreducible_water_content()) / \
+                  (((snow_ice_threshold - self.get_layer_ice_fraction() * ice_density) / water_density) - self.get_layer_irreducible_water_content()))))
     
     # -----------------------------------------------
 
@@ -242,7 +241,7 @@ class Node:
         methods_allowed = ['Shimizu70','Calonne12']
         if hydraulic_conductivity_method == 'Shimizu70':
             Ks = 0.077 * (self.get_layer_grain_size() / 10) **2 * np.exp(-0.0078 * self.get_layer_density())
-        if hydraulic_conductivity_method == 'Calonne12':
+        elif hydraulic_conductivity_method == 'Calonne12':
             Ks = 3 * (self.get_layer_grain_size() / 2000) ** 2 * 9.82 / 1.79e-06 * np.exp(-0.013 * self.get_layer_density())
         else:
             raise ValueError("Saturated hydraulic conductivity method = \"{:s}\" is not allowed, must be one of {:s}".format(hydraulic_conductivity_method, ", ".join(methods_allowed)))    
@@ -269,14 +268,13 @@ class Node:
             Hirashima et al., 2010 (http://dx.doi.org/10.1016/j.coldregions.2010.09.003) - Eqns. (9) & (17) """
         n = 15.68 * np.exp(-0.46 * self.get_layer_grain_size()) + 1
         m = 1 - 1 / n
-        return 1 / (7.3 * np.exp(1.9)) * (max(self.get_layer_saturation(), 1e-12) ** (-1 / m) - 1) ** (1 / n)
+        return (1 / (7.3 * self.get_layer_grain_size() + np.exp(1.9)) * max(0.0, (max(self.get_layer_saturation(), 1e-6) ** (-1 / m) - 1)) ** (1 / n)) * 0.01
 
     # ===============================================
 
     # ======================================== #
     # Set Functions for State Layer Variables:
     # ======================================== #
-
 
     def set_layer_height(self, height):
         """ Sets the layer height [m] """
