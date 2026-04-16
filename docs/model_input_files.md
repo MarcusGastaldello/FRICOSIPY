@@ -62,7 +62,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 
 * &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
-* &emsp; **-p** &emsp; 'EPSG:XXXX' &emsp; &ndash; &emsp; *(optional) spatial projection / co-ordinate reference system* ['EPSG:XXXX']
+* &emsp; **-p** &emsp; *'EPSG:&lt;XXXX&gt;'* &emsp; &ndash; &emsp; *(optional) spatial projection / co-ordinate reference system*
 
 ```
 cd utilities/create_STATIC/
