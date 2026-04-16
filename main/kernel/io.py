@@ -350,10 +350,14 @@ class IOClass:
         # Assign Co-ordinate Reference System (CRS)
         # ========================================= #
 
-        self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
-        self.RESULT = self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
-        self.RESULT = self.RESULT.rio.write_crs(grid_crs)
-        self.RESULT = self.RESULT.rio.write_coordinate_system()         
+        self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
+
+        if self.STATIC.rio.crs is not None:
+
+            self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
+            self.RESULT = self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
+            self.RESULT = self.RESULT.rio.write_crs(self.STATIC.rio.crs)
+            self.RESULT = self.RESULT.rio.write_coordinate_system()         
 
         return self.RESULT
     
