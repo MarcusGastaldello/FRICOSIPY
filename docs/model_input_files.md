@@ -79,6 +79,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
+* &emsp; **-r** &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
 
 ```
 cd utilities/create_STATIC/
