@@ -76,10 +76,10 @@ Alternatively, place the input GeoTIFF file in the *data/static/GeoTIFF/* direct
 
 The program is launched, by navigating to the *utilities/create_STATIC/* directory on the command line and executing the program `create_static_netcdf_from_GeoTIFF.py` with the following arguments:
 
-* &emsp; **-g** &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
-* &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
+* &emsp; **-g**  &emsp; *&lt;static_dem&gt;*.tif &emsp; &ndash; &emsp; *input GeoTIFF file name*
+* &emsp; **-s**  &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
-* &emsp; **-r** &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
+* &emsp; **-r**  &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
 
 ```
 cd utilities/create_STATIC/
