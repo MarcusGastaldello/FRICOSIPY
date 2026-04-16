@@ -49,9 +49,6 @@ output_timestamps = None           # CSV file with desired output timestamps (if
 # SPATIAL EXTENT / SUBSET 
 # ======================= #
 
-# Grid Co-ordinate Reference System (CRS)
-grid_crs = 'EPSG:2056'            # EPSG:xxxx (eg. EPSG:2056 - Metric Swiss CH1903+/LV95)
-
 # Reduce Spatial Extent
 spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
 [x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] 
