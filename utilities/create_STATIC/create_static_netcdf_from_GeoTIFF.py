@@ -34,6 +34,8 @@ import fiona
 from rasterio.warp import transform
 from rasterio.features import geometry_mask
 import rioxarray as rio
+import warnings
+warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 # ============================================================================================= #
 
