@@ -34,6 +34,9 @@ import datetime as dt
 import argparse
 import pandas as pd
 import xarray as xr
+import warnings
+warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
+
 
 # ============================================================================================= #
 
