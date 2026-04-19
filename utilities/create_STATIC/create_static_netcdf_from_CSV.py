@@ -34,19 +34,24 @@ import datetime as dt
 import argparse
 import pandas as pd
 import xarray as xr
+import rioxarray as rio
 import warnings
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 
 # ============================================================================================= #
 
-def create_static_input(csv_file, static_file):
+def create_static_input(csv_file, static_file, projection = None):
     """ The create static program creates the input static file:
 
         Input:
                 Static CSV (x,y)    ::    CSV file containing topographic/static data
         Output:
                 STATIC (x,y)        ::    Xarray dataset containing topographic/static data
+
+        Parameters:
+
+                Projection          ::    EPSG projection / co-ordinate reference system for spatial data
 
     """
     print('\n\t ==================')
@@ -178,7 +183,13 @@ def create_static_input(csv_file, static_file):
     # Write Input Static File to Disc 
     # =============================== #
 
-    #ds.rio.write_crs("epsg:2056", inplace=True) # Incompatible with current Python 3.6
+    # Assign Co-ordinate Reference System (CRS):
+    if projection is not None:
+        ds = ds.sortby(['x', 'y'])   
+        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
+        ds = ds.rio.write_crs(projection, inplace = True)
+        ds = ds.rio.write_coordinate_system(inplace = True)
+
     ds.to_netcdf(os.path.join('../../data/static/',static_file))
 
     print('\n\t =========================')
@@ -193,6 +204,7 @@ def add_variable_along_easting_northing(ds, var, name, units, long_name):
     ds[name] = (('y','x'), var)
     ds[name].attrs['units'] = units
     ds[name].attrs['long_name'] = long_name
+    ds[name].attrs['grid_mapping'] = 'spatial_ref'    
     ds[name].encoding['_FillValue'] = -9999
     return ds
 
@@ -203,10 +215,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Create 2D input file from csv file.')
     parser.add_argument('-c', '-csv_file', dest='csv_file', help='Csv file(see readme for file convention)')
     parser.add_argument('-s', '-static_file', dest='static_file', help='Static file containing DEM, Slope etc.')
+    parser.add_argument('-p', '-projection', dest='projection', help='Spatial projection of static file (EPSG:XXXX)')
 
     args = parser.parse_args()
 
-    create_static_input(args.csv_file, args.static_file)
+    create_static_input(args.csv_file, args.static_file, args.projection)
 
 
 # ============================================================================================= #
