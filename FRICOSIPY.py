@@ -99,13 +99,20 @@ def main():
     # ================== #
     # Write Result File:
     # ================== #
-   
+
+    # Specify encoding dictionary and ensure maintenance of CRS co-ordinate reference:
+    RESULT = IO.get_result()
     encoding = dict()
-    for var in IO.get_result().data_vars:
-        encoding[var] = dict(zlib=True, complevel=compression_level)
-  
-    IO.get_result().to_netcdf(os.path.join(data_path,'output',output_netcdf), encoding=encoding, mode = 'w')
+    for var in RESULT.data_vars:
+        encoding[var] = dict(zlib = True, complevel = compression_level)
+        if 'grid_mapping' in RESULT[var].attrs:
+            encoding[var]['grid_mapping'] = RESULT[var].attrs['grid_mapping']
+            del RESULT[var].attrs['grid_mapping']
+    if 'spatial_ref' in RESULT.coords:
+        encoding['spatial_ref'] = dict(zlib = False)
+    RESULT.to_netcdf(os.path.join(data_path,'output',output_netcdf), encoding = encoding, mode = 'w')
     
+    # Record total simulation time:
     simulation_time = int((datetime.now() - simulation_start_time).total_seconds())
     
     print(f"\n\t Total Simulation Duration: {int(simulation_time // 3600):02}:{int((simulation_time % 3600) // 60):02}:{int(simulation_time % 60):02}\n\n")
