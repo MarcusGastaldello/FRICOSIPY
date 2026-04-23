@@ -54,7 +54,7 @@ class IOClass:
         """ Returns the STATIC Xarray dataset """
 
         # Open input static dataset 
-        self.STATIC = xr.open_dataset(os.path.join(data_path,'static',static_netcdf))
+        self.STATIC = xr.open_dataset(os.path.join(data_path,'static',static_netcdf), decode_coords = "all")
 
         # Select spatial extent from config.py
         if spatial_subset == True:
@@ -323,6 +323,19 @@ class IOClass:
         self.RESULT.attrs['Stefan-Boltzmann_constant'] = sigma
         self.RESULT.attrs['Zero_temperature'] = zero_temperature
 
+        # ========================================= #
+        # Assign Co-ordinate Reference System (CRS)
+        # ========================================= #
+
+        # Sort the Xarray dataset and set spatial dimensions
+        self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
+        self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
+
+        # Write the co-ordinate reference system (if provided):
+        if self.STATIC.rio.crs is not None:
+            self.RESULT = self.RESULT.rio.write_crs(self.STATIC.rio.crs)
+            self.RESULT = self.RESULT.rio.write_grid_mapping() 
+
         # ====================================== #
         # Add Static Variables to Result Dataset
         # ====================================== #
@@ -342,22 +355,6 @@ class IOClass:
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Annual Precipitation Climatology')
         if 'THICKNESS' in list(self.STATIC.keys()):    
             self.add_variable_along_northingeasting(self.RESULT, self.STATIC.THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
-
-        # Convert to Dask arrays for efficient computation:
-        self.RESULT = self.RESULT.chunk(chunks='auto')
-
-        # ========================================= #
-        # Assign Co-ordinate Reference System (CRS)
-        # ========================================= #
-
-        self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
-
-        if self.STATIC.rio.crs is not None:
-
-            self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
-            self.RESULT = self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
-            self.RESULT = self.RESULT.rio.write_crs(self.STATIC.rio.crs)
-            self.RESULT = self.RESULT.rio.write_coordinate_system()         
 
         return self.RESULT
     
@@ -479,7 +476,9 @@ class IOClass:
             if ('GRAIN_SIZE' in self.subsurface_variables):
                 self.LAYER_GRAIN_SIZE = np.full((self.nt,self.ny,self.nx,max_layers), np.nan, dtype = precision)
 
-    
+        # Convert to Dask arrays for efficient computation:
+        self.RESULT = self.RESULT.chunk(chunks='auto') 
+
     # =================================================================================================
 
     # ================================================= #
@@ -732,7 +731,29 @@ class IOClass:
     def get_result(self):
         """ Returns the RESULT Xarray dataset """
 
-        self.RESULT = self.RESULT.rio.write_grid_mapping()
+        # Ensure Xarray dataset retains the co-ordinate reference system
+        if self.STATIC.rio.crs is not None:
+            self.RESULT = self.RESULT.rio.write_crs(self.STATIC.rio.crs)
+        self.RESULT = self.RESULT.rio.write_grid_mapping()            
+        self.RESULT = self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
+
+        # Assign co-ordinate attributes:
+        crs = self.RESULT.rio.crs
+        if crs.is_geographic:
+            # For geographic co-ordinate system (eg. latitude / longitude (WGS84))
+            x_attrs = {"standard_name": "longitude", "long_name": "longitude", "units": "degrees_east",  "axis": "X"}
+            y_attrs = {"standard_name": "latitude",  "long_name": "latitude",  "units": "degrees_north", "axis": "Y"}
+        else:
+            # For projected co-ordinate system (eg. Universal Transverse Mercator (UTM))
+            x_attrs = {"standard_name": "projection_x_coordinate", "long_name": "x coordinate of projection", "units": "m", "axis": "X"}
+            y_attrs = {"standard_name": "projection_y_coordinate", "long_name": "y coordinate of projection", "units": "m", "axis": "Y"}
+        self.RESULT.x.attrs.update(x_attrs)
+        self.RESULT.y.attrs.update(y_attrs)    
+
+        # Link variables to co-ordinate reference system:        
+        for var in self.RESULT.data_vars:
+            self.RESULT[var].attrs['grid_mapping'] = 'spatial_ref'
+
         return self.RESULT
     
     # =================================================================================================
