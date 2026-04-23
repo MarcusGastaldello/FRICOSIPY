@@ -187,8 +187,8 @@ def create_static_input(csv_file, static_file, projection = None):
     if projection is not None:
         ds = ds.sortby(['x', 'y'])   
         ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
-        ds = ds.rio.write_crs(projection, inplace = True)
-        ds = ds.rio.write_coordinate_system(inplace = True)
+        ds = ds.rio.write_crs(projection)
+        ds = ds.rio.write_grid_mapping()
 
     ds.to_netcdf(os.path.join('../../data/static/',static_file))
 

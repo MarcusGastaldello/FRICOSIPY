@@ -179,8 +179,8 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # Assign Co-ordinate Reference System (CRS):
         ds = ds.sortby(['x', 'y'])
         ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
-        ds = ds.rio.write_crs(src.crs, inplace = True)
-        ds = ds.rio.write_coordinate_system(inplace = True)
+        ds = ds.rio.write_crs(src.crs)
+        ds = ds.rio.write_grid_mapping()
 
         # Write static NetCDF file:
         ds.to_netcdf(os.path.join('../../data/static/',static_file))
