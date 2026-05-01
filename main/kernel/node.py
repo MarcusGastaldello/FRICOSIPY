@@ -240,9 +240,9 @@ class Node:
             Calonne et al., 2012 (https://doi.org/10.5194/tc-6-939-2012) """
         methods_allowed = ['Shimizu70','Calonne12']
         if hydraulic_conductivity_method == 'Shimizu70':
-            Ks = 0.077 * (self.get_layer_grain_size() / 10) **2 * np.exp(-0.0078 * self.get_layer_density())
+            Ks = 0.077 * (self.get_layer_grain_size() / 10) **2 * np.exp(-0.0078 * self.get_layer_density()) * 1e-4 * (g / 1.79e-06)
         elif hydraulic_conductivity_method == 'Calonne12':
-            Ks = 3 * (self.get_layer_grain_size() / 2000) ** 2 * 9.82 / 1.79e-06 * np.exp(-0.013 * self.get_layer_density())
+            Ks = (3.0 * (self.get_layer_grain_size() / 2000.0)**2 * np.exp(-0.013 * self.get_layer_density())) * (g / 1.79e-06)
         else:
             raise ValueError("Saturated hydraulic conductivity method = \"{:s}\" is not allowed, must be one of {:s}".format(hydraulic_conductivity_method, ", ".join(methods_allowed)))    
         return Ks
