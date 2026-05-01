@@ -67,7 +67,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 ```
 cd utilities/create_STATIC/
 ```
-
+\vspace{0.5cm}
 ```
 python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
 ```
