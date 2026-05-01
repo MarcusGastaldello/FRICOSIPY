@@ -150,6 +150,9 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 
 ```
 cd utilities/create_METEO/
+```
+
+```
 python3 create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
 ```
 
@@ -175,6 +178,9 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 
 ```
 cd utilities/create_ILLUMINATION/
+```
+
+```
 python3 create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
 ```
 
