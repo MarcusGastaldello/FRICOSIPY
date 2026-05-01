@@ -421,10 +421,6 @@ Firn densification $(\frac{\delta \rho}{\delta t})$ is the process by which snow
     \frac{d\rho}{dt} = \left[ \frac{M_s g}{\eta} + c_1 \exp \left[ -c_2 \: (T_m - T_s) - c_3 \max \: (0, \rho - \rho_0 \:) \right] \right] \: \rho
     $$
 
-    $$ 
-    \int_{0}^{\Delta t} \frac{d\rho}{dt} \, dt = \left[ \text{mask} \cdot \rho \left( \frac{M_s g}{\eta} + c_1 e^{-c_2(T_0 - T) - c_3 \max(0, \rho - \rho_0)} \right) \right] \Delta t 
-    $$
-
     $$
     \eta \: (z,t) = \eta_0 \:\: \text{exp} \left[ c_4 \: () + c_5 \: \rho \: \right]
     $$
