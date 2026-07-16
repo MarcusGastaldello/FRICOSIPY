@@ -138,7 +138,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         add_variable_along_easting_northing(ds, ELEVATION, 'ELEVATION', 'm a.s.l.', 'Elevation')   
         add_variable_along_easting_northing(ds, ASPECT, 'ASPECT', 'degree', 'Aspect')
         add_variable_along_easting_northing(ds, SLOPE, 'SLOPE', 'degree', 'Slope')
-        add_variable_along_easting_northing(ds, MASK, 'MASK', 'm a.s.l.', 'Mask') 
+        add_variable_along_easting_northing(ds, MASK, 'MASK', 'boolean', 'Mask') 
         add_variable_along_easting_northing(ds, LATITUDE, 'LATITUDE', 'degree', 'Latitude')
         add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
