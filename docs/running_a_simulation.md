@@ -179,7 +179,7 @@ The user can also directly specify the output timestamps on which the simulation
 The *FRICOSIPY* model, supports multi-thread processing using the *Dask* parallel computing library. By modifying `workers = 1`, the user specifies the number of spatial nodes that the simulation will concurrently simulate
 
 !!! warning
-    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully examine whether they have sufficient memory available for their simulation; those with a large large output dataset will inherently require more memory. Consider reducing the output reporting frequency, using a smaller spatial subset or disabling the reporting of ubsurface variables. 
+    When multi-threading / parallelisation is activated, the total available Random Access Memory (RAM) of your computer is divided between each worker. If insufficient memory is allocated to each worker, the simulation will crash. The user should carefully examine whether they have sufficient memory available for their simulation; those with a large large output dataset will inherently require more memory. Consider reducing the output reporting frequency, using a smaller spatial subset or disabling the reporting of subsurface variables. 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
