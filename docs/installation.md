@@ -19,7 +19,7 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
 
 **$(2)$**     Navigate to the directory where you have downloaded the *FRICOSIPY* model in the command prompt using the 'cd' (change directory) command: Eg.
 
-```python
+```
 cd C:\Users\<username>\Downloads\FRICOSIPY
 ```
 
@@ -33,7 +33,7 @@ cd C:\Users\<username>\Downloads\FRICOSIPY
 
 **$(3)$**    Create the conda environment using the designated packages in the requirements text file.
 
-```python
+```
 conda create --name <env> --file requirements.txt
 ```
 
@@ -43,7 +43,7 @@ conda create --name <env> --file requirements.txt
 
 Henceforth, when running the *FRICOSIPY* model you must always ensure this new conda environment is active on your terminal: 
 
-```python
+```
 conda activate <env>
 ```
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
