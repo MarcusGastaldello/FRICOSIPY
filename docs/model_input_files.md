@@ -66,7 +66,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 
 ```
 cd utilities/create_STATIC/
-python3 create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
+python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
 ```
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
@@ -84,7 +84,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 
 ```
 cd utilities/create_STATIC/
-python3 create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
+python create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
 ```
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
@@ -144,7 +144,7 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 
 ```
 cd utilities/create_METEO/
-python3 create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
+python create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
 ```
 
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
@@ -169,7 +169,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 
 ```
 cd utilities/create_ILLUMINATION/
-python3 create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
+python create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
 ```
 
 !!! attention
