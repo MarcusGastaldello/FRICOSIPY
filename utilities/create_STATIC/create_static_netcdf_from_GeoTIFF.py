@@ -159,7 +159,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
             nx = int(np.round((right - left) / target_resolution))
             ny = int(np.round((top - bottom) / target_resolution))
 
-            print('\t Resampled Grid Spatial Resolution: ',resolution,' m \n')
+            print('\t Resampled Grid Spatial Resolution: ',resolution,' m')
             print('\t ==============================================================')
 
             #
