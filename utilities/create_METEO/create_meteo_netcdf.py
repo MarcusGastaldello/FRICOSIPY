@@ -122,7 +122,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     print('\t ==============================================================')
     
     # Air Temperature [T2]
-    print(f"\t 'T2' - Air Temperature at 2 m [°C]                   Min: {np.round(df['T2'].min(),2)} -- Max: {np.round(df['T2'].max(),2)}")
+    print(f"\t 'T2' - Air Temperature at 2 m [°C]                  Min: {np.round(df['T2'].min(),2)} -- Max: {np.round(df['T2'].max(),2)}")
     T2 = np.asarray(df['T2'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
     add_variable_along_time(ds, T2, 'T2', '°C', 'Air Temperature at 2 m')
 
