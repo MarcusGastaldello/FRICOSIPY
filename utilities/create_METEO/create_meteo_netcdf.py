@@ -104,8 +104,8 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
     print('\t ==============================================================')
     print('\t Temporal range from %s until %s. Time steps: %s ' % (df.index[0],df.index[-1],len(df)))
     print('\t Input Meteorological Data CSV: ',csv_file)
-    print('\t Output Meteorological Dataset: ',meteo_file,'\n')
-    print('\t ==============================================================')
+    print('\t Output Meteorological Dataset: ',meteo_file)
+    print('\t ==============================================================\n')
 
     # ======================= #
     # Create Xarray Dataframe 
