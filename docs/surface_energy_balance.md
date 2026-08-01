@@ -16,7 +16,7 @@ $$
 
 ![FRICOSIPY SEB (Surface Energy Balance)](images/FRICOSIPY-SEB.png)
 
-<center><small> **Figure 2**: FRICOSIPY Surface Energy Balance</small></center>
+<center><small> **Figure 2**: FRICOSIPY Surface Energy Balance (NEW)</small></center>
 
 !!! note
 
