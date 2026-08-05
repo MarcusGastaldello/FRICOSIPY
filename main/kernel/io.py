@@ -209,8 +209,7 @@ class IOClass:
         self.RESULT.attrs['Dry_densification_method'] = dry_densification_method
         self.RESULT.attrs['Penetrating_radiation_method'] = penetrating_radiation_method
         self.RESULT.attrs['Roughness_method'] = surface_roughness_method
-        self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
-        self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
+        self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method      
         
         ## (Multi-layer Subsurface Model):
         self.RESULT.attrs['Precipitation_method'] = precipitation_method
