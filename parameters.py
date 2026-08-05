@@ -19,7 +19,6 @@ albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bou
 penetrating_radiation_method = 'Bintanja95'       # Options: ['Bintanja95','disabled']
 surface_roughness_method = 'Moelg12'              # Options: ['Moelg12','constant']
 saturation_vapour_pressure_method = 'Sonntag94'   # Options: ['Sonntag94','Murray67']
-surface_temperature_solver = 'Newton'             # Options: ['SLSQP','Newton'] [slowest <--> fastest]
 
 # Multi-layer Subsurface Model
 precipitation_method = 'standard'                 # Options: ['standard','Mattea21']
