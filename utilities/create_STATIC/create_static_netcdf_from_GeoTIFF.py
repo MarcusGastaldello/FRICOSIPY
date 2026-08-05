@@ -61,7 +61,6 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # Read CSV Static Data
         # ==================== #
 
-                 
         # Print Information:
         print('\t INFORMATION:')
         print('\t ==============================================================')
@@ -81,11 +80,18 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # Extract Topographic Data
         # ======================== #
 
-        # Easting [EASTING] and Northing [NORTHING]:
-        cols, rows = np.meshgrid(np.arange(src.width), np.arange(src.height))
-        eastings, northings = rasterio.transform.xy(src.transform, rows, cols)
-        EASTING = np.array(eastings)
-        NORTHING = np.array(northings)
+        # Extract 1D spatial coordinates matching GeoTIFF orientation
+        cols, rows = np.arange(src.width), np.arange(src.height)
+        x_coords, _ = rasterio.transform.xy(src.transform, np.zeros_like(cols), cols)
+        _, y_coords = rasterio.transform.xy(src.transform, rows, np.zeros_like(rows))
+        x_coords = np.array(x_coords)
+        y_coords = np.array(y_coords)
+
+        # Extract 2D spatial grids for variable calculations
+        cols_2D, rows_2D = np.meshgrid(cols, rows)
+        eastings, northings = rasterio.transform.xy(src.transform, rows_2D, cols_2D)
+        EASTING = np.array(eastings).reshape(src.height, src.width)
+        NORTHING = np.array(northings).reshape(src.height, src.width)
 
         # Elevation [ELEVATION]:
         ELEVATION = src.read(1).astype('float64')
@@ -113,9 +119,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # ======================= #
 
         # Create Xarray Dataframe:
-        EASTING = np.array(eastings).reshape((src.height, src.width))
-        NORTHING = np.array(northings).reshape((src.height, src.width))
-        ds = xr.Dataset(coords={'x': EASTING[0, :], 'y': NORTHING[:, 0]})
+        ds = xr.Dataset(coords = {'x': x_coords, 'y': y_coords})
 
         # ================ #
         # Static Variables
@@ -138,7 +142,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         add_variable_along_easting_northing(ds, ELEVATION, 'ELEVATION', 'm a.s.l.', 'Elevation')   
         add_variable_along_easting_northing(ds, ASPECT, 'ASPECT', 'degree', 'Aspect')
         add_variable_along_easting_northing(ds, SLOPE, 'SLOPE', 'degree', 'Slope')
-        add_variable_along_easting_northing(ds, MASK, 'MASK', 'boolean', 'Mask') 
+        add_variable_along_easting_northing(ds, MASK, 'MASK', '-', 'Mask') 
         add_variable_along_easting_northing(ds, LATITUDE, 'LATITUDE', 'degree', 'Latitude')
         add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
@@ -153,18 +157,15 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
             print('\t RESAMPLING SPATIAL GRID:')
             print('\t ==============================================================')
 
-            # 
             target_resolution = float(resolution)
-            left, bottom, right, top = src.bounds
-            nx = int(np.round((right - left) / target_resolution))
-            ny = int(np.round((top - bottom) / target_resolution))
 
             print('\t Resampled Grid Spatial Resolution: ',resolution,' m')
             print('\t ==============================================================')
 
-            #
-            resampled_x = np.linspace(left + target_resolution / 2, right - target_resolution / 2, nx)
-            resampled_y = np.linspace(top - target_resolution / 2, bottom + target_resolution / 2, ny)
+            # Resample spatial co-ordinates to the target resolution
+            left, bottom, right, top = src.bounds
+            resampled_x = np.arange(left + target_resolution / 2, right, target_resolution)
+            resampled_y = np.arange(top - target_resolution / 2, bottom, -target_resolution)
 
             # Interpolate data in the Xarray dataset to the new spatial resolution:
             ds = ds.interp(x = resampled_x, y = resampled_y, method = "linear")
@@ -177,10 +178,19 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # =============================== #
 
         # Assign Co-ordinate Reference System (CRS):
-        ds = ds.sortby(['x', 'y'])
-        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
         ds = ds.rio.write_crs(src.crs)
-        ds = ds.rio.write_grid_mapping()
+        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
+        ds = ds.rio.write_grid_mapping(grid_mapping_name = "spatial_ref")
+        if src.crs.is_geographic:
+            # For geographic coordinate systems (eg. Latitude / Longitude (WGS84))
+            x_attrs = {"standard_name": "longitude", "long_name": "longitude", "units": "degrees_east", "axis": "X"}
+            y_attrs = {"standard_name": "latitude",  "long_name": "latitude",  "units": "degrees_north", "axis": "Y"}
+        else:
+            # For projected coordinate systems (eg. Universal Transverse Mercator (UTM))
+            x_attrs = {"standard_name": "projection_x_coordinate", "long_name": "x coordinate of projection", "units": "m", "axis": "X"}
+            y_attrs = {"standard_name": "projection_y_coordinate", "long_name": "y coordinate of projection", "units": "m", "axis": "Y"}
+        ds.x.attrs.update(x_attrs)
+        ds.y.attrs.update(y_attrs)
 
         # Write static NetCDF file:
         ds.to_netcdf(os.path.join('../../data/static/',static_file))
@@ -197,7 +207,6 @@ def add_variable_along_easting_northing(ds, var, name, units, long_name):
     ds[name] = (('y','x'), var)
     ds[name].attrs['units'] = units
     ds[name].attrs['long_name'] = long_name
-    ds[name].attrs['grid_mapping'] = 'spatial_ref'
     ds[name].encoding['_FillValue'] = -9999
     return ds
 
@@ -206,10 +215,10 @@ def add_variable_along_easting_northing(ds, var, name, units, long_name):
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Create 2D input file from a GeoTIFF file.')
-    parser.add_argument('-g', '-geotiff_file', dest='geotiff_file', help='GeoTIFF file containing a Digital Elevation Model (DEM)')
-    parser.add_argument('-m', '-shapefile', dest='shapefile', help='Shapefile demarcating glacier outline')
-    parser.add_argument('-s', '-static_file', dest='static_file', help='Static file containing DEM, Slope etc.')
-    parser.add_argument('-r', '-resolution',  dest='resolution',  help='Spatial resolution of static file')
+    parser.add_argument('-g', '-geotiff_file', dest='geotiff_file', required=True, help='GeoTIFF file containing a Digital Elevation Model (DEM)')
+    parser.add_argument('-m', '-shapefile', dest='shapefile', required=True, help='Shapefile demarcating glacier outline')
+    parser.add_argument('-s', '-static_file', dest='static_file', required=True, help='Static file containing DEM, Slope etc.')
+    parser.add_argument('-r', '-resolution',  dest='resolution', required=True,  help='Spatial resolution of static file')
 
     args = parser.parse_args()
 
