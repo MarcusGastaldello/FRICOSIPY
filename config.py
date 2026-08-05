@@ -79,7 +79,7 @@ local_port = 8786                 # port for local cluster
 # OUTPUT DATASET PRECISION
 # ======================== #
 
-precision = 'single'              # either 'half' (16bit), 'single' (32bit) or 'double' (64bit)
+precision = 'single'              # either 'single' (32bit) or 'double' (64bit)
 
 # ============================ #
 # COMPRESSION of OUTPUT NetCDF
