@@ -117,7 +117,9 @@ def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None
     ds.coords['time'] = df.index.values
 
     # Set Meteorological Station Altitude to Dataset Attributes
-    ds.attrs['station_altitude'] = station_altitude
+    ds = ds.assign_coords(altitude = station_altitude)
+    ds["altitude"].attrs["units"] = "m a.s.l."
+    ds["altitude"].attrs["standard_name"] = "altitude"
 
     # ======================== #
     # Meteorological Variables
