@@ -44,14 +44,15 @@ from itertools import product
 
 # ============================================================================================= #
 
-def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None):
+def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None, end_date = None):
     """ The create meteo program creates the input meteorological (meteo) file:
 
-        Parameters:
+        (Optional) Parameters:
                 Start date       ::    Start date of meterological data subset [yyyy-mm-dd hh:mm]
                 End date         ::    End date of meterological data subset [yyyy-mm-dd hh:mm]
         Input:
                 Meteo CSV (t)    ::    CSV file containing meteorological data
+                Station Altitude ::    Altitude of the meteorological station [m a.s.l.]
         Output:
                 METEO (t)        ::    Xarray dataset containing meteorological data
 
@@ -74,7 +75,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
        ({'N'}.issubset(df.columns) or {'SWin', 'LWin'}.issubset(df.columns)) and \
        ({'RRR'}.issubset(df.columns) or {'D', 'ACC_ANOMALY'}.issubset(df.columns))):    
         print('\t Missing variables. The meteo dataset must have the following variables:\n\n', \
-              '\t DATETIME - Datetime [yyyy-mm-dd hh:mm]\n', \
+              '\t DATETIME - Datetime [yyyy-mm-ddThh:mm]\n', \
               '\t T2       - Air temperature [°C]\n',  \
               '\t U2       - Wind speed [m s\u207b\xb9]\n', \
               '\t RH2      - Relative humidity [%]\n', \
@@ -101,25 +102,29 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         df = df.loc[start_date:end_date] 
 
     print('\t INFORMATION:')
-    print('\t ==============================================================')
+    print('\t ====================================================================================')
     print('\t Temporal range from %s until %s. Time steps: %s ' % (df.index[0],df.index[-1],len(df)))
     print('\t Input Meteorological Data CSV: ',csv_file)
+    print('\t Meteorological Station Altitude: ',station_altitude,' m a.s.l.')
     print('\t Output Meteorological Dataset: ',meteo_file)
-    print('\t ==============================================================\n')
+    print('\t ====================================================================================\n')
 
-    # ======================= #
-    # Create Xarray Dataframe 
-    # ======================= #
+    # ===================== #
+    # Create Xarray Dataset 
+    # ===================== #
 
     ds = xr.Dataset()
     ds.coords['time'] = df.index.values
+
+    # Set Meteorological Station Altitude to Dataset Attributes
+    ds.attrs['station_altitude'] = station_altitude
 
     # ======================== #
     # Meteorological Variables
     # ======================== #
 
     print('\t METEOROLOGICAL VARIABLES:')
-    print('\t ==============================================================')
+    print('\t ====================================================================================')
     
     # Air Temperature [T2]
     print(f"\t 'T2' - Air Temperature at 2 m [°C]                  Min: {np.round(df['T2'].min(),2)} -- Max: {np.round(df['T2'].max(),2)}")
@@ -183,7 +188,7 @@ def create_meteo_input(csv_file, meteo_file, start_date = None, end_date = None)
         PRECIPITATION_ANOMALY = np.asarray(df['PRECIPITATION_ANOMALY'].apply(pd.to_numeric, errors='coerce'), dtype = np.float32)
         add_variable_along_time(ds, PRECIPITATION_ANOMALY, 'PRECIPITATION_ANOMALY', '-', 'Annual Precipitation Anomaly')
 
-    print('\t ==============================================================')
+    print('\t ====================================================================================')
 
     # ============================== #
     # Write Input Meteo File to Disc 
@@ -210,13 +215,14 @@ def add_variable_along_time(ds, var, name, units, long_name):
 if __name__ == "__main__":
     
     parser = argparse.ArgumentParser(description='Create meteo input file from csv file.')
-    parser.add_argument('-c', '-csv_file', dest='csv_file', help='Csv file(see readme for file convention)')
+    parser.add_argument('-c', '-csv_file', dest='csv_file', help='CSV file(see readme for file convention)')
     parser.add_argument('-m', '-meteo_file', dest='meteo_file', help='Meteo file')
+    parser.add_argument('-a', '-station_altitude', dest='station_altitude', help='Altitude of meteorological station [m a.s.l.]')
     parser.add_argument('-s', '-start_date', dest='start_date', help='Start date')
     parser.add_argument('-e', '-end_date', dest='end_date', help='End date')
 
     args = parser.parse_args()
 
-    create_meteo_input(args.csv_file, args.meteo_file, args.start_date, args.end_date) 
+    create_meteo_input(args.csv_file, args.meteo_file, args.station_altitude, args.start_date, args.end_date) 
 
 # ============================================================================================= #
