@@ -228,7 +228,6 @@ class IOClass:
         self.RESULT.attrs['Max_layers'] = max_layers
 
         # Meteorological Input Parameters:
-        self.RESULT.attrs['Station altitude'] = station_altitude
         self.RESULT.attrs['Measurement height'] = z
         self.RESULT.attrs['Air temperature lapse_rate'] = air_temperature_lapse_rate
         self.RESULT.attrs['Air temperature offset'] = air_temperature_offset
