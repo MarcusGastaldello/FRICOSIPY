@@ -149,15 +149,15 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
 
     # Interpolate temperature using an air temperature lapse rate
     if 'T2_LAPSE' in list(METEO.keys()):
-        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - METEO.coords['altitude'].item()) * METEO.T2_LAPSE.values) + air_temperature_offset
+        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - int(METEO.coords['altitude'].item())) * METEO.T2_LAPSE.values) + air_temperature_offset
     else:
-        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - METEO.coords['altitude'].item()) * air_temperature_lapse_rate) + air_temperature_offset
+        T2 = ((METEO.T2.values + zero_temperature) + (ELEVATION - int(METEO.coords['altitude'].item())) * air_temperature_lapse_rate) + air_temperature_offset
 
     # Interpolate atmospheric pressure using the barometric equation
     np.seterr(divide = 'ignore') 
     if 'T2_LAPSE' in list(METEO.keys()):
         PRES = np.where(METEO.T2_LAPSE.values == 0,  
-                        METEO.PRES.values * np.exp(((-g * M) * (ELEVATION - METEO.coords['altitude'].item()))/(R * ((METEO.T2.values + zero_temperature) + air_temperature_offset))),
+                        METEO.PRES.values * np.exp(((-g * M) * (ELEVATION - int(METEO.coords['altitude'].item())))/(R * ((METEO.T2.values + zero_temperature) + air_temperature_offset))),
                         METEO.PRES.values * np.power((T2 / ((METEO.T2.values + zero_temperature) + air_temperature_offset)),((-g * M) / (R * METEO.T2_LAPSE.values))))
     else:
         PRES = METEO.PRES.values * np.power((T2 / ((METEO.T2.values + zero_temperature) + air_temperature_offset)),((-g * M) / (R * air_temperature_lapse_rate)))
@@ -168,7 +168,7 @@ def fricosipy_core(STATIC, METEO, ILLUMINATION, indY, indX, nt):
     # Standard precipiation data [mm] (Van Pelt et al., 2019)
     if precipitation_method == 'standard':
         if 'RRR' in list(METEO.keys()):
-            RRR = METEO.RRR.values * (1 + (ELEVATION - METEO.coords['altitude'].item()) * precipitation_lapse_rate) * precipitation_multiplier
+            RRR = METEO.RRR.values * (1 + (ELEVATION - int(METEO.coords['altitude'].item())) * precipitation_lapse_rate) * precipitation_multiplier
         else:
             raise ValueError("Error: Precipitation ('RRR') [mm] must be supplied in the input METEO file")
 
