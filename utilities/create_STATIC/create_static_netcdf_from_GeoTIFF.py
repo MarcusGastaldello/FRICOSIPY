@@ -114,11 +114,11 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
             mask_bool = geometry_mask(geoms, out_shape = src.shape, transform = src.transform, invert = True)
             MASK = mask_bool.astype(np.float64)
 
-        # ======================= #
-        # Create Xarray Dataframe 
-        # ======================= #
+        # ===================== #
+        # Create Xarray Dataset 
+        # ===================== #
 
-        # Create Xarray Dataframe:
+        # Create Xarray Dataset:
         ds = xr.Dataset(coords = {'x': x_coords, 'y': y_coords})
 
         # ================ #
