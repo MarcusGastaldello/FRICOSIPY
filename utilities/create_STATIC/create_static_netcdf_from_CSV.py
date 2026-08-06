@@ -107,9 +107,9 @@ def create_static_input(csv_file, static_file, projection = None):
     else:
         raise ValueError('Error: Non-rectilinear grid detected!')
 
-    # ======================= #
-    # Create Xarray Dataframe 
-    # ======================= #
+    # ===================== #
+    # Create Xarray Dataset 
+    # ===================== #
 
     ds = xr.Dataset()
     ds.coords['x'] = np.sort(df["EASTING"].unique())
