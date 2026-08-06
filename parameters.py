@@ -42,7 +42,6 @@ max_depth = 50                                  # Maximum simulation depth [m]
 max_layers = 200                                # Maximum number of subsurface layers               
 
 # Meteorological Input Parameters:
-station_altitude = 3000.0                       # Altitude of meteorological station [m a.s.l.]
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
 air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [°C m-1] (default = -0.006)
 air_temperature_offset = 0.0                    # Air temperature offset for adjusting data in meteorlogical forcing [°C] (default = 0.0 - no modification)
