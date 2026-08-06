@@ -76,7 +76,7 @@ class IOClass:
             print('\t Spatial Grid Extent: [X:',x_min,'-',x_max,'| Y: ',y_min,'-',y_max,']. Spatial Resolution:',grid_resolution)
         else:
             print('\t Spatial Grid Extent: [X:',str(self.STATIC.x.values[0]),'-',str(self.STATIC.x.values[-1]),'| Y:',str(self.STATIC.y.values[0]),'-',str(self.STATIC.y.values[-1]),']. Spatial Resolution:',grid_resolution)        
-        print('\t Glacier Grid Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
+        print('\t Spatial Grid Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
 
         return self.STATIC
     
