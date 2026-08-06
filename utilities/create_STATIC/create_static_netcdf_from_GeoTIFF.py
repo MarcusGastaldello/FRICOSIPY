@@ -178,8 +178,8 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         print('\t Minimum Northing: ',ds["NORTHING"].min().item())
         print('\t Maximum Northing: ',ds["NORTHING"].max().item())
         print('\t --------------------------------------------------------------------------------')
-        print('\t Resampled Grid Spatial Resolution: ',resolution,' m')
-        print('\t Glacier Grid Spatial Nodes: ',(ds["MASK"] == 1).sum().item())
+        print('\t Grid Spatial Resolution: ',resolution,' m')
+        print('\t Grid Spatial Nodes: ',(ds["MASK"] == 1).sum().item())
         print('\t ================================================================================')
 
         # =============================== #
