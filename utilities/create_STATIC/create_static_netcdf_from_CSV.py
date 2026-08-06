@@ -84,15 +84,15 @@ def create_static_input(csv_file, static_file, projection = None):
                          
     # Print Information:
     print('\t INFORMATION:')
-    print('\t ==============================================================')
+    print('\t ================================================================================')
     print('\t Input Static Data CSV: ',csv_file)
     print('\t Output Static NetCDF Dataset: ',static_file)
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------')
     print('\t Minimum Easting:  ',np.min(df["EASTING"]))
     print('\t Maximum Easting:  ',np.max(df["EASTING"]))
     print('\t Minimum Northing: ',np.min(df["NORTHING"]))
     print('\t Maximum Northing: ',np.max(df["NORTHING"]))
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------')
 
     # ================== #
     # Spatial Resoultion
@@ -101,8 +101,9 @@ def create_static_input(csv_file, static_file, projection = None):
     # Calculate grid spatial resolution:
     if (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
-        print('\t Grid Spatial Resolution: ',resolution,' m \n')
-        print('\t ==============================================================')
+        print('\t Grid Spatial Resolution: ',resolution,' m')
+        print('\t Glacier Grid Spatial Nodes: ', np.sum(df["MASK"]))
+        print('\t ================================================================================')
     else:
         raise ValueError('Error: Non-rectilinear grid detected!')
 
@@ -111,8 +112,8 @@ def create_static_input(csv_file, static_file, projection = None):
     # ======================= #
 
     ds = xr.Dataset()
-    ds.coords['x'] = df["EASTING"].unique()
-    ds.coords['y'] = df["NORTHING"].unique()
+    ds.coords['x'] = np.sort(df["EASTING"].unique())
+    ds.coords['y'] = np.sort(df["NORTHING"].unique())
 
     # Northing [NORTHING]
     NORTHING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "NORTHING").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
@@ -126,8 +127,8 @@ def create_static_input(csv_file, static_file, projection = None):
     # Static Variables
     # ================ #
 
-    print('\t STATIC VARIABLES:')
-    print('\t ==============================================================')
+    print('\n\t STATIC VARIABLES:')
+    print('\t ================================================================================')
     
     # Elevation [ELEVATION]
     print(f"\t 'ELEVATION' - Elevation [m a.s.l.]                  Min: {np.round(df['ELEVATION'].min(),2)} -- Max: {np.round(df['ELEVATION'].max(),2)}")
@@ -148,7 +149,7 @@ def create_static_input(csv_file, static_file, projection = None):
     print(f"\t 'MASK' - Mask [-]                                   Min: {np.round(df['MASK'].min(),2)} -- Max: {np.round(df['MASK'].max(),2)}")
     MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     MASK[MASK == 0] = -9999
-    add_variable_along_easting_northing(ds, MASK, 'MASK', 'boolean', 'Mask') 
+    add_variable_along_easting_northing(ds, MASK, 'MASK', '-', 'Mask') 
 
     # Latitude [LATITUDE]
     print(f"\t 'LATITUDE' - Latitude [decimal degree]              Min: {np.round(df['LATITUDE'].min(),2)} -- Max: {np.round(df['LATITUDE'].max(),2)}")
@@ -177,7 +178,7 @@ def create_static_input(csv_file, static_file, projection = None):
         print(f"\t 'THICKNESS' - Glacier Thickness [m]                         Min: {np.round(df['THICKNESS'].min(),2)} -- Max: {np.round(df['THICKNESS'].max(),2)}")
         THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
-    print('\t ==============================================================')
+    print('\t ================================================================================')
 
     # =============================== #
     # Write Input Static File to Disc 
@@ -185,10 +186,19 @@ def create_static_input(csv_file, static_file, projection = None):
 
     # Assign Co-ordinate Reference System (CRS):
     if projection is not None:
-        ds = ds.sortby(['x', 'y'])   
-        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
+        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
         ds = ds.rio.write_crs(projection)
         ds = ds.rio.write_grid_mapping()
+        if ds.rio.crs.is_geographic:
+            # For geographic coordinate systems (eg. Latitude / Longitude (WGS84))
+            x_attrs = {"standard_name": "longitude", "long_name": "longitude", "units": "degrees_east", "axis": "X"}
+            y_attrs = {"standard_name": "latitude",  "long_name": "latitude",  "units": "degrees_north", "axis": "Y"}
+        else:
+            # For projected coordinate systems (eg. Universal Transverse Mercator (UTM))
+            x_attrs = {"standard_name": "projection_x_coordinate", "long_name": "x coordinate of projection", "units": "m", "axis": "X"}
+            y_attrs = {"standard_name": "projection_y_coordinate", "long_name": "y coordinate of projection", "units": "m", "axis": "Y"}
+        ds.x.attrs.update(x_attrs)
+        ds.y.attrs.update(y_attrs)
 
     ds.to_netcdf(os.path.join('../../data/static/',static_file))
 
@@ -204,7 +214,6 @@ def add_variable_along_easting_northing(ds, var, name, units, long_name):
     ds[name] = (('y','x'), var)
     ds[name].attrs['units'] = units
     ds[name].attrs['long_name'] = long_name
-    ds[name].attrs['grid_mapping'] = 'spatial_ref'    
     ds[name].encoding['_FillValue'] = -9999
     return ds
 

@@ -63,18 +63,18 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
 
         # Print Information:
         print('\t INFORMATION:')
-        print('\t ==============================================================')
+        print('\t ================================================================================')
         print('\t Input GeoTIFF Digital Elevation Model (DEM): ',geoTIFF_file)
         print('\t Input Glacier Mask Shapefile (SHP): ',shapefile)
         print('\t Output Static NetCDF Dataset: ',static_file)
-        print('\t --------------------------------------------------------------')
+        print('\t --------------------------------------------------------------------------------')
 
         # ================== #
         # Spatial Resoultion
         # ================== #
 
         print('\t Digital Elevation Model (DEM) Spatial Resolution: ',src.res[0],' m')
-        print('\t ==============================================================\n')
+        print('\t ================================================================================\n')
 
         # ======================== #
         # Extract Topographic Data
@@ -126,7 +126,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         # ================ #
 
         print('\t STATIC VARIABLES:')
-        print('\t ==============================================================')
+        print('\t ================================================================================')
     
         # Print information about static variables to the terminal:
         print(f"\t 'ELEVATION' - Elevation [m a.s.l.]                  Min: {np.round(ELEVATION.min(),2)} -- Max: {np.round(ELEVATION.max(),2)}")
@@ -146,7 +146,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         add_variable_along_easting_northing(ds, LATITUDE, 'LATITUDE', 'degree', 'Latitude')
         add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
-        print('\t ==============================================================\n')
+        print('\t ================================================================================\n')
 
         # ========== #
         # Resampling
@@ -155,14 +155,10 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         if resolution is not None:
 
             print('\t RESAMPLING SPATIAL GRID:')
-            print('\t ==============================================================')
-
-            target_resolution = float(resolution)
-
-            print('\t Resampled Grid Spatial Resolution: ',resolution,' m')
-            print('\t ==============================================================')
+            print('\t ================================================================================')
 
             # Resample spatial co-ordinates to the target resolution
+            target_resolution = float(resolution)
             left, bottom, right, top = src.bounds
             resampled_x = np.arange(left + target_resolution / 2, right, target_resolution)
             resampled_y = np.arange(top - target_resolution / 2, bottom, -target_resolution)
@@ -173,6 +169,19 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
             # Round glacier mask values to the nearest interger (boolean):
             ds['MASK'] = np.round(ds['MASK'])
 
+        else:
+            print('\t SPATIAL GRID INFORMATION:')
+            print('\t ================================================================================')
+
+        print('\t Minimum Easting:  ',ds["EASTING"].min().item())
+        print('\t Maximum Easting:  ',ds["EASTING"].max().item())
+        print('\t Minimum Northing: ',ds["NORTHING"].min().item())
+        print('\t Maximum Northing: ',ds["NORTHING"].max().item())
+        print('\t --------------------------------------------------------------------------------')
+        print('\t Resampled Grid Spatial Resolution: ',resolution,' m')
+        print('\t Glacier Grid Spatial Nodes: ',(ds["MASK"] == 1).sum().item())
+        print('\t ================================================================================')
+
         # =============================== #
         # Write Input Static File to Disc 
         # =============================== #
@@ -181,10 +190,12 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         ds = ds.rio.write_crs(src.crs)
         ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
         ds = ds.rio.write_grid_mapping(grid_mapping_name = "spatial_ref")
+
         if src.crs.is_geographic:
             # For geographic coordinate systems (eg. Latitude / Longitude (WGS84))
             x_attrs = {"standard_name": "longitude", "long_name": "longitude", "units": "degrees_east", "axis": "X"}
             y_attrs = {"standard_name": "latitude",  "long_name": "latitude",  "units": "degrees_north", "axis": "Y"}
+
         else:
             # For projected coordinate systems (eg. Universal Transverse Mercator (UTM))
             x_attrs = {"standard_name": "projection_x_coordinate", "long_name": "x coordinate of projection", "units": "m", "axis": "X"}
