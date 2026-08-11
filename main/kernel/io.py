@@ -20,6 +20,8 @@ from constants import *
 from parameters import *
 from config import * 
 import sys
+import fiona
+from rasterio.features import geometry_mask
 import warnings
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
@@ -59,6 +61,14 @@ class IOClass:
         # Select spatial extent from config.py
         if spatial_subset == True:
             self.STATIC = self.STATIC.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
+
+        # Select spatial nodes based on a shapefile mask in
+        if spatial_mask == True:
+            with fiona.open(os.path.join(data_path,'output/SHP/',output_shapefile), "r") as shp:
+                geoms = [feature["geometry"] for feature in shp]
+                mask_boolean = geometry_mask(geoms, out_shape = self.STATIC['MASK'].rio.shape, transform = self.STATIC['MASK'].rio.transform(), invert = True)
+                y_dim, x_dim = self.STATIC['MASK'].rio.y_dim, self.STATIC['MASK'].rio.x_dim
+                self.STATIC['MASK'] = self.STATIC['MASK'] * xr.DataArray(mask_boolean.astype(np.float64), coords = {y_dim: self.STATIC['MASK'][y_dim],x_dim: self.STATIC['MASK'][x_dim]}, dims = (y_dim, x_dim))
         
         # Grid Dimensions
         self.ny = self.STATIC.sizes['y']
@@ -76,7 +86,7 @@ class IOClass:
             print('\t Spatial Grid Extent: [X:',x_min,'-',x_max,'| Y: ',y_min,'-',y_max,']. Spatial Resolution:',grid_resolution)
         else:
             print('\t Spatial Grid Extent: [X:',str(self.STATIC.x.values[0]),'-',str(self.STATIC.x.values[-1]),'| Y:',str(self.STATIC.y.values[0]),'-',str(self.STATIC.y.values[-1]),']. Spatial Resolution:',grid_resolution)        
-        print('\t Spatial Grid Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
+        print('\t Glacier Grid Nodes: %s' %(np.nansum(self.STATIC.MASK >= 1)))
 
         return self.STATIC
     
