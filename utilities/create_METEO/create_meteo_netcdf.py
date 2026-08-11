@@ -36,15 +36,14 @@ import os
 import xarray as xr
 import pandas as pd
 import numpy as np
-import netCDF4 as nc
-import time
-import dateutil
 import argparse
-from itertools import product
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
+from config import *
 
 # ============================================================================================= #
 
-def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None, end_date = None):
+def create_meteo_input(csv_file, meteo_file, station_altitude, data_path, start_date = None, end_date = None):
     """ The create meteo program creates the input meteorological (meteo) file:
 
         (Optional) Parameters:
@@ -67,7 +66,8 @@ def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None
     # ============================ #
 
     # Load meteorological data:
-    df = pd.read_csv(os.path.join('../../data/meteo/CSV/',csv_file), delimiter = ',')
+    resolved_data_path = data_path if os.path.isabs(data_path) else os.path.normpath(os.path.join('../..', data_path))
+    df = pd.read_csv(os.path.join(resolved_data_path,'meteo/CSV',csv_file), delimiter = ',')
 
     # Check input data:
     required_variables = {'DATETIME','T2', 'PRES', 'U2', 'RH2'}
@@ -92,7 +92,7 @@ def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None
         raise ValueError('Error: NaN Values are in the Dataset!')
     
     # Re-load meteorological data with dates parsing:
-    df = pd.read_csv(os.path.join('../../data/meteo/CSV/',csv_file), delimiter = ',', index_col = ['DATETIME'], parse_dates = ['DATETIME'])
+    df = pd.read_csv(os.path.join(resolved_data_path,'meteo/CSV',csv_file), delimiter = ',', index_col = ['DATETIME'], parse_dates = ['DATETIME'])
 
     # ===================== #
     # Select Temporal Range
@@ -196,7 +196,7 @@ def create_meteo_input(csv_file, meteo_file, station_altitude, start_date = None
     # Write Input Meteo File to Disc 
     # ============================== #
 
-    ds.to_netcdf(os.path.join('../../data/meteo/',meteo_file))
+    ds.to_netcdf(os.path.join(resolved_data_path,'meteo/CSV',meteo_file))
 
     print('\n\t =================================')
     print('\t INPUT METEOROLOGICAL FILE CREATED')
@@ -225,6 +225,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    create_meteo_input(args.csv_file, args.meteo_file, args.station_altitude, args.start_date, args.end_date) 
+    create_meteo_input(args.csv_file, args.meteo_file, args.station_altitude, data_path, args.start_date, args.end_date) 
 
 # ============================================================================================= #
