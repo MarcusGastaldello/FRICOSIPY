@@ -17,16 +17,16 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 import netCDF4 as nc
-import time
 import math as mt
-import dateutil
-from itertools import product
+import pathlib
 import argparse
 from numba import njit
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
+from config import *
 
 # ============================================================================================= #
 
-def create_illumindation_file(static_file, illumination_file):
+def create_illumindation_file(static_file, illumination_file, data_path):
     """ The create illumination program creates the input illumination file:
 
     Input:
@@ -44,8 +44,9 @@ def create_illumindation_file(static_file, illumination_file):
     # Load static data
     # ================ #
 
-    ds = xr.open_dataset(os.path.join('../../data/static/',static_file))   
-
+    resolved_data_path = data_path if os.path.isabs(data_path) else os.path.normpath(os.path.join('../..', data_path))
+    ds = xr.open_dataset(os.path.join(resolved_data_path,'static',static_file))
+    
     print('\t INFORMATION:')
     print('\t ==============================================================')
     print('\t Input Static Dataset: ',static_file)
@@ -114,7 +115,7 @@ def create_illumindation_file(static_file, illumination_file):
     Illumination_Leap = Illumination[8760:,:,:]
 
     # Save the Calculated Illumination Matrix:
-    f = nc.Dataset(os.path.join('../../data/illumination/',illumination_file), 'w')
+    f = nc.Dataset(os.path.join(resolved_data_path,'illumination',illumination_file), 'w')
     f.createDimension('HOY', 8784)
     f.createDimension('y', len(ds.y))
     f.createDimension('x', len(ds.x))
@@ -207,37 +208,42 @@ def Topographic_Shading(Northing,Easting,Elevation,Mask,Solar_Elevation,Azimuth)
                         easting_list = np.linspace(start[1], targ[1], nums)   # equally spread points along profile
 
                         # Don't walk outside DEM boundaries
-                        northing_list_reduced = northing_list[(northing_list < max_northing) & (northing_list > min_northing)]
-                        easting_list_reduced  = easting_list[( easting_list  < max_easting)  & (easting_list  > min_easting)]
+                        valid_mask = ((northing_list < max_northing) & (northing_list > min_northing) & (easting_list < max_easting) & (easting_list > min_easting))
+                        northing_list_reduced = northing_list[valid_mask]
+                        easting_list_reduced = easting_list[valid_mask]
 
-                        # Cut to same extent
-                        if (len(northing_list_reduced) > len(easting_list_reduced)):
-                            northing_list_reduced = northing_list_reduced[0:len(easting_list_reduced)]
-                        if (len(easting_list_reduced) > len(northing_list_reduced)):
-                            easting_list_reduced = easting_list_reduced[0:len(northing_list_reduced)]
+                        # Ensure that there are at least 2 points in the profile
+                        if len(northing_list_reduced) > 1:
 
-                        # Find indices (instead of northing/easting) at closets gridpoint
-                        idy = (y, (np.abs(northing_unique  - northing_list_reduced[-1])).argmin())
-                        idx = (x, (np.abs(easting_unique   - easting_list_reduced[-1])).argmin())
+                            # Find indices (instead of northing/easting) at closets gridpoint
+                            idy = (y, (np.abs(northing_unique  - northing_list_reduced[-1])).argmin())
+                            idx = (x, (np.abs(easting_unique   - easting_list_reduced[-1])).argmin())
 
-                        # Points along profile (indices)
-                        y_list = np.round(np.linspace(idy[0], idy[1], len(northing_list_reduced))).astype(np.int32)
-                        x_list = np.round(np.linspace(idx[0], idx[1], len(easting_list_reduced))).astype(np.int32)
+                            # Points along profile (indices)
+                            y_list = np.round(np.linspace(idy[0], idy[1], len(northing_list_reduced))).astype(np.int32)
+                            x_list = np.round(np.linspace(idx[0], idx[1], len(easting_list_reduced))).astype(np.int32)
 
-                        # Calculate altitude along profile
-                        z = np.empty(len(y_list))
-                        for i in range(len(y_list)):
-                            z[i] = Elevation[y_list[i], x_list[i]]
+                            # Calculate altitude along profile
+                            z = np.empty(len(y_list))
+                            for i in range(len(y_list)):
+                                z[i] = Elevation[y_list[i], x_list[i]]
 
-                        # Calclulate DISTANCE along profile
-                        distance = np.sqrt((northing_list_reduced - start[0]) ** 2 + (easting_list_reduced - start[1]) ** 2)
+                            # Calculate distances along profile 
+                            distance = np.sqrt((northing_list_reduced - start[0]) ** 2 + (easting_list_reduced - start[1]) ** 2)
 
-                        # Topography angle
-                        topography_angle = np.degrees(np.arctan((z[1:len(z)] - z[0]) / distance[1:len(distance)]))
+                            # Calculate the elevation difference between each point along the profile and the origin.
+                            dz = z - z[0]
+
+                            # Ensure there are no zero distances to prevent division by zero error.
+                            valid = distance > 0
+
+                            # Topography angle
+                            if np.any(valid):
+                                topography_angle = np.degrees(np.arctan(dz[valid] / distance[valid]))
                         
-                        # Illumination
-                        if np.max(topography_angle) < np.degrees(Solar_Elevation[t]):
-                            Illumination[t,y,x] = 1
+                                # Illumination
+                                if topography_angle.size > 0 and np.max(topography_angle) < np.degrees(Solar_Elevation[t]):
+                                    Illumination[t,y,x] = 1
 
     return Illumination
 
@@ -251,6 +257,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    create_illumindation_file(args.static_file, args.illumination_file) 
+    create_illumindation_file(args.static_file, args.illumination_file, data_path) 
 
 # ============================================================================================= #
