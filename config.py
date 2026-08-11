@@ -49,9 +49,13 @@ output_timestamps = None           # CSV file with desired output timestamps (if
 # SPATIAL EXTENT / SUBSET 
 # ======================= #
 
-# Reduce Spatial Extent
-spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
+# Reduced Spatial Subset:
+spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area by a bounding box.
 [x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] 
+
+# Reduced Spatial Mask:
+spatial_mask = False
+output_shapefile = <shapefile>.nc'   # Reduce the spatial nodes to be simulated by overriding the glacial mask of the input static file.
 
 # ================= #
 # OUTPUT VARIABLES:
