@@ -25,23 +25,23 @@
     ==================================================================
 """
 
-import netCDF4
 import os
 import numpy as np
-import csv
 import sys
-import datetime as dt
 import argparse
 import pandas as pd
 import xarray as xr
-import rioxarray as rio
+import rioxarray
 import warnings
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
+from config import *
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 
 # ============================================================================================= #
 
-def create_static_input(csv_file, static_file, projection = None):
+def create_static_input(csv_file, static_file, data_path, projection = None):
     """ The create static program creates the input static file:
 
         Input:
@@ -62,9 +62,10 @@ def create_static_input(csv_file, static_file, projection = None):
     # Read CSV Static Data
     # ==================== #
 
-    # Check for NaNs:
-    df = pd.read_csv(os.path.join('../../data/static/CSV/',csv_file))
+    resolved_data_path = data_path if os.path.isabs(data_path) else os.path.normpath(os.path.join('../..', data_path))
+    df = pd.read_csv(os.path.join(resolved_data_path,'static/CSV',csv_file))
 
+    # Check for NaN values in the dataset:
     if df.isnull().values.any() == True:
         raise ValueError('Error: NaN Values are in the Dataset!')
     
@@ -200,7 +201,7 @@ def create_static_input(csv_file, static_file, projection = None):
         ds.x.attrs.update(x_attrs)
         ds.y.attrs.update(y_attrs)
 
-    ds.to_netcdf(os.path.join('../../data/static/',static_file))
+    ds.to_netcdf(os.path.join(resolved_data_path,'static',static_file))
 
     print('\n\t =========================')
     print('\t INPUT STATIC FILE CREATED')
@@ -228,7 +229,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    create_static_input(args.csv_file, args.static_file, args.projection)
+    create_static_input(args.csv_file, args.static_file, data_path, args.projection)
 
 
 # ============================================================================================= #

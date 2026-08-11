@@ -20,26 +20,25 @@
     ==================================================================
 """
 
-import netCDF4
 import os
 import numpy as np
-import csv
 import sys
-import datetime as dt
 import argparse
-import pandas as pd
 import xarray as xr
 import rasterio
 import fiona
 from rasterio.warp import transform
 from rasterio.features import geometry_mask
-import rioxarray as rio
+import rioxarray
 import warnings
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
+from config import *
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 # ============================================================================================= #
 
-def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None):
+def create_static_input(geoTIFF_file, shapefile, static_file, data_path, resolution = None):
     """ The create static program creates the input static file:
 
         Input:
@@ -55,7 +54,8 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
     print('\t CREATE STATIC FILE')
     print('\t ==================\n')
 
-    with rasterio.open(os.path.join('../../data/static/GeoTIFF/',geoTIFF_file)) as src:
+    resolved_data_path = data_path if os.path.isabs(data_path) else os.path.normpath(os.path.join('../..', data_path))
+    with rasterio.open(os.path.join(resolved_data_path,'static/GeoTIFF/',geoTIFF_file)) as src:
 
         # ==================== #
         # Read CSV Static Data
@@ -109,13 +109,13 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         LATITUDE = np.array(latitudes).reshape(src.height, src.width)
 
         # Glacier Mask [MASK]
-        with fiona.open(os.path.join('../../data/static/SHP/',shapefile), "r") as shp:
+        with fiona.open(os.path.join(resolved_data_path,'static/SHP/',shapefile), "r") as shp:
             geoms = [feature["geometry"] for feature in shp]
             mask_bool = geometry_mask(geoms, out_shape = src.shape, transform = src.transform, invert = True)
             MASK = mask_bool.astype(np.float64)
 
         # ===================== #
-        # Create Xarray Dataset 
+        # Create Xarray Dataset
         # ===================== #
 
         # Create Xarray Dataset:
@@ -204,7 +204,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, resolution = None)
         ds.y.attrs.update(y_attrs)
 
         # Write static NetCDF file:
-        ds.to_netcdf(os.path.join('../../data/static/',static_file))
+        ds.to_netcdf(os.path.join(resolved_data_path,'static',static_file))
 
         print('\n\t =========================')
         print('\t INPUT STATIC FILE CREATED')
@@ -233,7 +233,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    create_static_input(args.geotiff_file, args.shapefile, args.static_file, args.resolution)
+    create_static_input(args.geotiff_file, args.shapefile, args.static_file, data_path, args.resolution)
 
 # ============================================================================================= #
 
