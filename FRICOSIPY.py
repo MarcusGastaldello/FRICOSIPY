@@ -43,19 +43,13 @@ def main():
 
     # Print FRICOSIPY model title and version:
     print('\n')
-    FRICOSIPY_Title = {
-    'F': ["████████", "██      ", "██████  ", "██      ", "██      "],
-    'R': ["████████", "██    ██", "████████", "██    ██", "██    ██"],
-    'I': ["████████", "   ██   ", "   ██   ", "   ██   ", "████████"],
-    'C': ["████████", "██      ", "██      ", "██      ", "████████"],
-    'O': ["████████", "██    ██", "██    ██", "██    ██", "████████"],
-    'S': ["████████", "██      ", "████████", "      ██", "████████"],
-    'P': ["████████", "██    ██", "████████", "██      ", "██      "],
-    'Y': ["██    ██", "██    ██", "████████", "   ██   ", "   ██   "]}
-    for rows in zip(*(FRICOSIPY_Title[char] for char in "FRICOSIPY")):
-        print("\t " + "  ".join(rows))
-    print('\n\t',' ' * 3,'THE UNIVERSITY OF FRIBOURG COUPLED SNOW AND ICE MODEL IN PYTHON (VERSION 1.3.3)')
-    print('\t'  ,' ' * 3,'===============================================================================\n\n')
+    print('\t ████████  ████████  ████████  ████████  ████████  ████████  ████████  ████████  ██    ██')
+    print('\t ██        ██    ██     ██     ██        ██    ██  ██           ██     ██    ██  ██    ██')
+    print('\t ██████    ████████     ██     ██        ██    ██  ████████     ██     ████████  ████████')
+    print('\t ██        ██    ██     ██     ██        ██    ██        ██     ██     ██           ██   ')
+    print('\t ██        ██    ██  ████████  ████████  ████████  ████████  ████████  ██           ██   \n')
+    print('\t     THE UNIVERSITY OF FRIBOURG COUPLED SNOW AND ICE MODEL IN PYTHON (VERSION 1.3.3)')
+    print('\t     ===============================================================================\n\n')
 
     # Print software reference
     print('\t Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model') 
