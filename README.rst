@@ -23,7 +23,7 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/ <https://fricosipy.read
         :target: https://doi.org/10.5281/zenodo.2579668
 
 :Documentation:
-    .. image:: https://img.shields.io/badge/Docs-FRICOSIPY%20User%20Guide%20v1.3.2-red.svg
+    .. image:: https://img.shields.io/badge/Docs-FRICOSIPY%20User%20Guide%20v1.3.3-red.svg
         :target: https://fricosipy.readthedocs.io/en/latest/ 
 
 :License:
@@ -44,7 +44,7 @@ FRICOSIPY User Guide: `https://fricosipy.readthedocs.io/ <https://fricosipy.read
 Citation
 =======
 
-Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.2.) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
+Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.3.) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY
 
 ----
 
