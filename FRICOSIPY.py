@@ -3,7 +3,7 @@
 """
     ======================================================================================================================================================
 
-                                                                    FRICOSIPY VERSION 1.3.2
+                                                                    FRICOSIPY VERSION 1.3.3
 
     This is the main executable file of the 'FRIbourg COupled Snowpack and Ice surface energy and mass balance glacier model in PYthon' (FRICOSIPY). 
     The original COSIPY model was initially written by Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
@@ -11,7 +11,7 @@
 
     The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
 
-    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice model in Python (Version 1.3.2) [Computer software]. 
+    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model in Python (Version 1.3.3) [Computer software]. 
     https://github.com/MarcusGastaldello/FRICOSIPY
 
     ======================================================================================================================================================
@@ -37,9 +37,29 @@ logging.getLogger("distributed").setLevel(logging.CRITICAL)
 
 def main():
 
-    print('\n\t =========================')
-    print('\t FRICOSIPY MAIN SIMULATION')
-    print('\t =========================\n')
+    # ========================= #
+    # FRICOSIPY MAIN SIMULATION
+    # ========================= #
+
+    # Print FRICOSIPY model title and version:
+    print('\n')
+    FRICOSIPY_Title = {
+    'F': ["████████", "██      ", "██████  ", "██      ", "██      "],
+    'R': ["████████", "██    ██", "████████", "██    ██", "██    ██"],
+    'I': ["████████", "   ██   ", "   ██   ", "   ██   ", "████████"],
+    'C': ["████████", "██      ", "██      ", "██      ", "████████"],
+    'O': ["████████", "██    ██", "██    ██", "██    ██", "████████"],
+    'S': ["████████", "██      ", "████████", "      ██", "████████"],
+    'P': ["████████", "██    ██", "████████", "██      ", "██      "],
+    'Y': ["██    ██", "██    ██", "████████", "   ██   ", "   ██   "]}
+    for rows in zip(*(FRICOSIPY_Title[char] for char in "FRICOSIPY")):
+        print("\t " + "  ".join(rows))
+    print('\n\t',' ' * 3,'THE UNIVERSITY OF FRIBOURG COUPLED SNOW AND ICE MODEL IN PYTHON (VERSION 1.3.3)')
+    print('\t'  ,' ' * 3,'===============================================================================\n\n')
+
+    # Print software reference
+    print('\t Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model') 
+    print('\t in Python (Version 1.3.3) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY\n\n')
 
     # Measure time
     simulation_start_time = datetime.now()
@@ -52,16 +72,17 @@ def main():
 
     # Print information about the input datasets:
     print('\t INPUT DATASET INFORMATION:')
-    print('\t ==============================================================')
+    print('\t ========================================================================================================')
     print('\t Input Static Dataset: ',static_netcdf)
     print('\t Input Meteorological Dataset: ',meteo_netcdf)
     print('\t Input Illumination Dataset: ',illumination_netcdf)
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------------------------------')
 
     # Load Input NetCDF Datasets:
     METEO = IO.load_meteo_file()
     STATIC = IO.load_static_file()
     ILLUMINATION = IO.load_illumination_file()
+    print('\t ========================================================================================================')
 
     # Create Output/Result NetCDF Dataset:
     RESULT = IO.create_result_file()
@@ -71,12 +92,12 @@ def main():
     
     # Print information about the output dataset:
     print('\t OUTPUT DATASET INFORMATION:')
-    print('\t ==============================================================')
+    print('\t ========================================================================================================')
     print('\t Output Dataset: ',output_netcdf)
     if reduced_output == True:
         print('\t Output Timestamps: ',output_timestamps)
     print('\t Output Timesteps: %s '% (timesteps))  
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------------------------------')
     print('\t Meteorological Variables (',len(IO.meteorological_variables),'):',IO.meteorological_variables)
     print('\t Surface Energy Fluxes    (',len(IO.surface_energy_fluxes),'):',IO.surface_energy_fluxes)
     print('\t Surface Mass Fluxes      (',len(IO.surface_mass_fluxes),'):',IO.surface_mass_fluxes)
@@ -87,7 +108,7 @@ def main():
         print('\t Subsurface Variables     (',len(IO.subsurface_variables),'):',IO.subsurface_variables)
     else:
         print('\t Subsurface Variables : (Disabled)')
-    print('\t ==============================================================\n')
+    print('\t ========================================================================================================\n')
 
     # ============================================ #
     # Create a Client for Distributed Calculations
@@ -141,13 +162,13 @@ def run_fricosipy(cluster, IO, STATIC, METEO, ILLUMINATION, simulation_start_tim
         memory_limit = info['workers'][list(info['workers'].keys())[0]]['memory_limit'] / 1e9
 
         print('\t PARALLELISATION:')
-        print('\t ==============================================================')
+        print('\t ========================================================================================================')
         print('\t',cluster)
         print('\t',client)
-        print('\t --------------------------------------------------------------')
+        print('\t --------------------------------------------------------------------------------------------------------')
         print(f'\t Total memory: {(workers * memory_limit):.2f} GB RAM')
         print(f'\t Workers: {workers} ({memory_limit:.2f} GB RAM available per worker)')
-        print('\t ==============================================================\n\n')
+        print('\t ========================================================================================================\n\n')
 
         print('\t ============================================================')
         print('\t Running FRICOSIPY simulation on',workers,'workers in',len(batches),'batches...')
