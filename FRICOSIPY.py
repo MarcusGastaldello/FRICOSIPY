@@ -3,7 +3,7 @@
 """
     ======================================================================================================================================================
 
-                                                                    FRICOSIPY VERSION 1.3.3
+                                                                    FRICOSIPY VERSION 1.4
 
     This is the main executable file of the 'FRIbourg COupled Snowpack and Ice surface energy and mass balance glacier model in PYthon' (FRICOSIPY). 
     The original COSIPY model was initially written by Tobias Sauter and Anselm Ardnt (https://doi.org/10.5194/gmd-13-5645-2020) and developed by 
@@ -11,7 +11,7 @@
 
     The latest version of the FRICOSIPY model can be obtained from : https://github.com/MarcusGastaldello/FRICOSIPY 
 
-    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model in Python (Version 1.3.3) [Computer software]. 
+    Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model in Python (Version 1.4) [Computer software]. 
     https://github.com/MarcusGastaldello/FRICOSIPY
 
     ======================================================================================================================================================
@@ -48,12 +48,12 @@ def main():
     print('\t ██████    ████████     ██     ██        ██    ██  ████████     ██     ████████  ████████')
     print('\t ██        ██    ██     ██     ██        ██    ██        ██     ██     ██           ██   ')
     print('\t ██        ██    ██  ████████  ████████  ████████  ████████  ████████  ██           ██   \n')
-    print('\t     THE UNIVERSITY OF FRIBOURG COUPLED SNOW AND ICE MODEL IN PYTHON (VERSION 1.3.3)')
-    print('\t     ===============================================================================\n\n')
+    print('\t     THE UNIVERSITY OF FRIBOURG COUPLED SNOW AND ICE MODEL IN PYTHON (VERSION 1.4)')
+    print('\t     =============================================================================\n\n')
 
     # Print software reference
     print('\t Gastaldello, M. (2026). FRICOSIPY - University of Fribourg variant of the Coupled Snow and Ice Model') 
-    print('\t in Python (Version 1.3.3) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY\n\n')
+    print('\t in Python (Version 1.4) [Computer software]. https://github.com/MarcusGastaldello/FRICOSIPY\n\n')
 
     # Measure time
     simulation_start_time = datetime.now()
