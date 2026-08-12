@@ -148,8 +148,6 @@ class IOClass:
         if spatial_subset == True:
             self.ILLUMINATION = self.ILLUMINATION.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
 
-        print('\t ==============================================================\n')
-
         return self.ILLUMINATION
     
     # =================================================================================================
