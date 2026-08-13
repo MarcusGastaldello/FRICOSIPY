@@ -64,16 +64,12 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
 * &emsp; **-p** &emsp; *&lt;XXXX&gt;* &emsp; &ndash; &emsp; *(optional) EPSG spatial projection / co-ordinate reference system code*
 
-```
-cd utilities/create_STATIC/
-python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
-```
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">    
-```
+```bash
 cd utilities/create_STATIC/
 python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
-```
+
 </div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
