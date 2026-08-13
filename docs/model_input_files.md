@@ -37,7 +37,10 @@ $(x,y)$ and requires the following variables:
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m yr$^{-1}$] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
-The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables.
+The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables. The spatial extent of the simulation, can be modified later in the `config.py` file prior to launching the FRICOSIPY model.
+
+!!! note
+    Regardless of whether the user ultimately intends to run a simple point or a large-scale spatially distributed simulation across the glacier, the input static file should always be extensive and encompasses all surrounding higher topography. This is to ensure that the topographic shading calculation in the illumination file is accurate
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
