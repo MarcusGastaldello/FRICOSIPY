@@ -187,8 +187,10 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
 
 Once the configuration file is set up, the *FRICOSIPY* model is executed with the command:
 
-<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python FRICOSIPY.py</code>
+<div style="text-align: center;">
+  <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+    <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python FRICOSIPY.py</code>
+  </div> 
 </div>
 <br>
 As the simulation starts, detailed information will be reported into the terminal. Thereafter, progress will be indicated upon the completion of each spatial node until the simulation is complete. 
