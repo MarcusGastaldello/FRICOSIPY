@@ -6,7 +6,7 @@ site_description: "The University of Fribourg Variant of the Coupled Snow & Ice 
 theme:
   name: readthedocs
   highlightjs: false
-  logo: images/FRICOSIPY-logo-blue.png
+  logo: images/FRICOSIPY-logo-grey.png
   custom_dir: docs/custom_theme
 
 extra:
