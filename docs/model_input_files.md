@@ -216,7 +216,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
     !!! example
         The input illumination file for the Findel Glacier can now be produced directly from the previously created input static file. Note that the program creates an illumination file at the native resolution of the input static file and a FRICOSIPY simulation can only be executed if the resolution of both files are consistent. Hence it is prudent to state the resolution in the filename.
 
-        An input illumination NetCDF file can be created by navigating to *utilities/create_ILLUMINATION/*:
+        An illumination NetCDF file can be created by navigating to *utilities/create_ILLUMINATION/*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/</code>
