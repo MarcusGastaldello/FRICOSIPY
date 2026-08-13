@@ -70,6 +70,8 @@ pre {
 .wy-side-nav-search > a img,
 .wy-side-nav-search img {
     margin-bottom: 50px !important;
+}
+
 /* Change the sidebar header background color */
 .wy-side-nav-search {
     background-color: #c8d6ee !important; /* Replace with whatever hex code you want */
