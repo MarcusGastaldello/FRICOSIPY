@@ -66,7 +66,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
 
-python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
+python create_static_netcdf_from_CSV.py -c *&lt;static_csv&gt;*.csv -s *&lt;static_netcdf&gt;*.nc
 
 </div>
 
