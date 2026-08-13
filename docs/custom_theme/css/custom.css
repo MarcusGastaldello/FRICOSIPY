@@ -92,11 +92,17 @@ pre {
     padding: 10px 15px !important;
 }
 
-/* Tighten margins around the logo image */
+/* Remove all margins and padding from the logo image and its anchor link */
+.wy-side-nav-search > a,
 .wy-side-nav-search > a img,
 .wy-side-nav-search img {
-    margin-top: 0 !important;
-    margin-bottom: 10px !important;
+    margin: 0 !important;
     padding: 0 !important;
+    display: block !important;
     max-width: 100% !important;
+}
+
+/* Tighten space between the logo and the search input box below it */
+.wy-side-nav-search div[role="search"] {
+    margin-top: 5px !important; /* Adjust this value if you want it closer or further */
 }
