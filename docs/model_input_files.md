@@ -65,7 +65,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-p** &emsp; *&lt;XXXX&gt;* &emsp; &ndash; &emsp; *(optional) EPSG spatial projection / co-ordinate reference system code*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc -p &lt;XXXXgt;</code>
 </div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
@@ -140,6 +140,10 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 * &emsp; **-a**  &emsp; *&lt;XXXX.XX&gt;* &emsp; &ndash; &emsp; *altitude of meteorological station (m a.s.l.)*
 * &emsp; **-s**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
 * &emsp; **-e**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/<br>python create_meteo_netcdf.py -c &lt;meteo_csv&gt;.csv -m &lt;meteo_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
+</div>
 
 ```
 cd utilities/create_METEO/
