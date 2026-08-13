@@ -164,10 +164,16 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
     !!! example
         Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the FRICOSIPY model.
 
-        An input meteorological NetCDF file can be created by executing the program `create_meteo_netcdf.py` from the command line using the following code:
+        An input meteorological NetCDF file can by navigating to the *utilities/create_METEO/* directory:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/</code>
+        </div> 
+        
+        and then by executing the program `create_meteo_netcdf.py` from the command line using the following code:
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/<br>python create_meteo_netcdf.py -c Meteo_Stockhorn.csv -m Meteo_Stockhorn.nc -a 3410</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_meteo_netcdf.py -c Meteo_Stockhorn.csv -m Meteo_Stockhorn.nc -a 3410</code>
         </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
