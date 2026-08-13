@@ -1,41 +1,26 @@
-:root {
-    /* Main Read the Docs Addon Color Hooks */
-    --readthedocs-color-primary: #55a5d9 !important;
-}
-
 /* ==========================================================================
-   Read the Docs Flyout Adjustments
+   Read the Docs Addons Shadow DOM Overrides
    ========================================================================== */
 
-/* 1. New Read the Docs Addons Web Component Background & Variables */
-:root {
-    --readthedocs-flyout-background: #343131 !important;
-}
-
-readthedocs-flyout {
-    --color-background: #343131 !important;
-    --readthedocs-flyout-background: #343131 !important;
-    --color-header-text: #55a5d9 !important;
-    --color-header-link: #55a5d9 !important;
-}
-
-/* 2. Legacy Sphinx RTD Flyout Background */
-.rst-versions,
-.rst-versions .rst-other-versions {
+/* 1. Force Flyout Container Background */
+readthedocs-flyout,
+readthedocs-flyout::part(flyout),
+readthedocs-flyout::part(panel) {
     background-color: #343131 !important;
     background: #343131 !important;
 }
 
-/* Target ONLY the top "latest" version text and drop-down arrow */
-.rst-versions .rst-current-version {
+/* 2. Target ONLY the top "latest" version text inside the flyout header */
+readthedocs-flyout::part(current-version),
+readthedocs-flyout::part(version),
+readthedocs-flyout::part(header) {
     color: #55a5d9 !important;
-    background-color: #343131 !important;
 }
 
-/* Bottom footer link inside the flyout */
-readthedocs-flyout::part(footer) a,
-.rst-versions a[href*="readthedocs"] {
-    color: #55a5d9 !important;
+/* 3. Global CSS Variables Backup for Read the Docs Web Component */
+:root {
+    --readthedocs-flyout-background: #343131 !important;
+    --readthedocs-color-primary: #55a5d9 !important;
 }
 
 /* ==========================================================================
