@@ -81,6 +81,10 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 * &emsp; **-r**  &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
 
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g &lt;static_dem&gt;.tif -s &lt;static_netcdf&gt;.nc -m &lt;glacier_mask&gt;.shp</code>
+</div>
+
 ```
 cd utilities/create_STATIC/
 python create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
