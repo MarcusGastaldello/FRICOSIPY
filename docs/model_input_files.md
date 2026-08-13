@@ -133,15 +133,15 @@ An exemplar meteo CSV would therefore have the following format:
 | 2024-12-31 22:00   | 268.34 | 1.42 | 82.45 | 643.61 | 0.00 | 0.00 |
 | 2024-12-31 23:00   | 269.21 | 2.20 | 81.56 | 644.22 | 0.00 | 0.00 |
 
-Place the input CSV file in the *data/meteo/CSV/* directory and then the `create_meteo_netcdf.py utility program can then convert it into NetCDF format.
+Place the input CSV file in the *data/meteo/CSV/* directory and then the `create_meteo_netcdf.py` utility program can then convert it into NetCDF format.
 
 The program is launched, by navigating to the *utilities/create_METEO/* directory on the command line and executing the program `create_meteo_netcdf.py` with the following arguments:
 
-* &emsp; **-c** &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
+* &emsp; **-c**  &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
 * &emsp; **-m** &emsp; *&lt;meteo_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output meteo NetCDF file name*
-* &emsp; **-a** &emsp; *&lt;XXXX.XX&gt;*.nc &emsp; &ndash; &emsp; *altitude of meteorological station (m a.s.l.)*
-* &emsp; **-s** &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
-* &emsp; **-e** &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
+* &emsp; **-a**  &emsp; *&lt;XXXX.XX&gt;* &emsp; &ndash; &emsp; *altitude of meteorological station (m a.s.l.)*
+* &emsp; **-s**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
+* &emsp; **-e**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
 ```
 cd utilities/create_METEO/
