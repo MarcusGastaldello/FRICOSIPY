@@ -162,10 +162,12 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
     <br>
     !!! example
-        Within the *data/static/GeoTIFF/* directory , a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+        Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the FRICOSIPY model.
+
+        An input meteorological NetCDF file can be created by executing the program `create_meteo_netcdf.py` from the command line using the following code:
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/<br>python create_meteo_netcdf.py -c Meteo_Stockhorn.csv -m Meteo_Stockhorn.nc -a 3410</code>
         </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
