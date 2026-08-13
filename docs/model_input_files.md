@@ -88,7 +88,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
-??? "***Example - Findel Glacier: Creating a Static File from the Swissalti3D Digital Elevation Model***"
+??? "***Example - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
 
     <br>
     !!! example
@@ -158,6 +158,16 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
 *Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
 
+??? "***Example - Findel Glacier: Creating the Meteo File from Local Meteorological Data***"
+
+    <br>
+    !!! example
+        Within the *data/static/GeoTIFF/* directory , a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
+        </div> 
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## $(3)$ Illumination File
@@ -181,5 +191,15 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 <br>
 !!! note
     In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
+
+??? "***Example - Findel Glacier: Creating the Illumination File***"
+
+    <br>
+    !!! example
+        Within the *data/static/GeoTIFF/* directory , a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
+        </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
