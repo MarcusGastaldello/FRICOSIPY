@@ -65,9 +65,9 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-p** &emsp; *&lt;XXXX&gt;* &emsp; &ndash; &emsp; *(optional) EPSG spatial projection / co-ordinate reference system code*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-
-python create_static_netcdf_from_CSV.py -c *&lt;static_csv&gt;*.csv -s *&lt;static_netcdf&gt;*.nc
-
+    <code style="font-family: Consolas, 'Liberation Mono', Courier, monospace; font-size: 0.9em; color: #404040; background: transparent; border: none;">
+    python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc
+    </code>
 </div>
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
