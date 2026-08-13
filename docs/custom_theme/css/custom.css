@@ -118,5 +118,5 @@ pre {
 
 /* Tighten space between the logo and the search input box below it */
 .wy-side-nav-search div[role="search"] {
-    margin-top: 5px !important; /* Adjust this value if you want it closer or further */
+    margin-top: 15px !important; /* Adjust this value if you want it closer or further */
 }
