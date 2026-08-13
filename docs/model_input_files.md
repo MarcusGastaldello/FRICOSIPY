@@ -73,6 +73,13 @@ python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.n
 
 </div>
 
+<div style="border: 1px solid #e1e4e5; background: #f8f8f8; padding: 12px; text-align: center; border-radius: 4px; max-width: 100%; overflow-x: auto;">
+  <code style="font-family: Consolas, 'Liberation Mono', Courier, monospace; font-size: 0.9em; color: #404040; background: transparent; border: none; padding: 0;">
+    cd utilities/create_STATIC/<br>
+    python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc
+  </code>
+</div>
+
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### $(ii)$ Conversion from GeoTIFF to NetCDF
