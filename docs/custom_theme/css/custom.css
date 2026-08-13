@@ -1,6 +1,15 @@
 :root {
+    /* Main Read the Docs Addon Color Hooks */
+    --readthedocs-color-primary: #55a5d9 !important;
     --readthedocs-flyout-color: #55a5d9 !important;
     --readthedocs-flyout-background: #222222 !important;
+}
+
+/* Force links inside the flyout web component host to adopt the blue color */
+readthedocs-flyout {
+    color: #55a5d9 !important;
+    --color-text: #55a5d9 !important;
+    --color-link: #55a5d9 !important;
 }
 
 /* Customised Warning admonitions */
@@ -63,23 +72,11 @@ pre {
     margin-bottom: 50px !important;
 }
 
-/* 2. Target the Read the Docs Flyout Container */
-readthedocs-flyout,
-div.floating.container.top-left {
-    /* Sticky positioning so it follows on scroll */
-    position: sticky !important;
-    top: 15px !important;
-    z-index: 1000 !important;
-    
-    /* Ensure it displays nicely in the flow */
-    display: block !important;
-    margin-bottom: 15px !important;
-}
-
-/* 3. Style text and links inside the RTD flyout to green */
-readthedocs-flyout,
-dl.versions dt,
-dl.versions dd a {
-    color: #55a5d9 !important; /* blue color */
+/* 3. Style text and links inside the RTD flyout */
+readthedocs-flyout {
+    color: #55a5d9 !important;
+    --color-text: #55a5d9 !important;
+    --color-link: #55a5d9 !important;
+    --readthedocs-color-primary: #55a5d9 !important;
     font-weight: bold !important;
 }
