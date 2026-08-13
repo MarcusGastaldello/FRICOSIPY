@@ -166,7 +166,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc</code>
 </div>
 <br>
 !!! attention
