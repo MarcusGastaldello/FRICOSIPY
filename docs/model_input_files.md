@@ -85,7 +85,6 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g &lt;static_dem&gt;.tif -s &lt;static_netcdf&gt;.nc -m &lt;glacier_mask&gt;.shp</code>
 </div>
 
-<br>
 
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
