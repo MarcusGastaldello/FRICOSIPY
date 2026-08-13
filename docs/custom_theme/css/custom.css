@@ -1,3 +1,8 @@
+:root {
+    --readthedocs-flyout-color: #55a5d9 !important;
+    --readthedocs-flyout-background: #222222 !important;
+}
+
 /* Customised Warning admonitions */
 .admonition.warning > .admonition-title {
     background-color: #f29f97 !important;  
@@ -75,6 +80,6 @@ div.floating.container.top-left {
 readthedocs-flyout,
 dl.versions dt,
 dl.versions dd a {
-    color: #55a5d9 !important; /* Accent green color */
+    color: #55a5d9 !important; /* blue color */
     font-weight: bold !important;
 }
