@@ -53,7 +53,7 @@ An exemplar static CSV would have the following format:
 | 1086800 | 2633800 | 45.93208 | 7.874285 | 4388.20 | 30.26 | 20.12 | 1 |
 | 1086800 | 2633850 | 45.93195 | 7.875026 | 4358.10 | 36.78 | 23.21 | 1 |
 
-!!! attention
+!!! note
     FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
 
 Place the input CSV file in the *data/static/CSV/* directory and then the `create_static_netcdf_from_CSV.py` utility program can then convert it into NetCDF format. 
@@ -87,6 +87,9 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 <br>
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
+
+!!! example
+    The
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -169,10 +172,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc</code>
 </div>
 <br>
-!!! attention
-    In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
-
 !!! note
-    The illumination file is currently limited to a minimum of an hourly temporal resolution.
+    In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
