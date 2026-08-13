@@ -47,3 +47,52 @@ pre {
 .styledcode-box .mi, 
 .styledcode-box .mf { color: #B5CEA8 !important; } /* Light Green: 0.8, 12, 6 */
 .styledcode-box .c1 { color: #6A9955 !important; font-style: italic !important; } /* Green: Comments */
+
+/* Push the search bar down to make room for the dropdown under the logo */
+.wy-side-nav-search > a img,
+.wy-side-nav-search img {
+    margin-bottom: 50px !important; /* Adjust if you need more/less vertical space */
+}
+
+/* Style & Position the Version Switcher Container */
+.version-selector-container,
+.rst-versions,
+.dropdown-wrapper {
+    /* Sticky Positioning to follow while scrolling */
+    position: sticky !important;
+    top: 15px !important;
+    z-index: 100 !important;
+
+    /* Layout & Spacing */
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin: 10px auto 15px auto !important;
+    padding: 6px 12px !important;
+
+    /* Visual Background Styling */
+    background-color: #222222 !important;
+    border-radius: 4px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown Text & Arrow Color (Matching your green v1.3.0) */
+.version-selector-container select,
+.rst-versions select,
+.dropdown-wrapper select,
+.version-selector-container span {
+    color: #10b981 !important; /* Accent Green text */
+    font-weight: bold !important;
+    font-size: 14px !important;
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    cursor: pointer !important;
+}
+
+/* Dropdown options menu styling when clicked open */
+.version-selector-container select option,
+.rst-versions select option {
+    background-color: #222222 !important;
+    color: #ffffff !important;
+}
