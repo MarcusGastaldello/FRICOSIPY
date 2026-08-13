@@ -7,15 +7,29 @@
    Read the Docs Flyout Adjustments
    ========================================================================== */
 
+/* 1. New Read the Docs Addons Web Component Background & Variables */
+:root {
+    --readthedocs-flyout-background: #343131 !important;
+}
+
+readthedocs-flyout {
+    --color-background: #343131 !important;
+    --readthedocs-flyout-background: #343131 !important;
+    --color-header-text: #55a5d9 !important;
+    --color-header-link: #55a5d9 !important;
+}
+
+/* 2. Legacy Sphinx RTD Flyout Background */
+.rst-versions,
+.rst-versions .rst-other-versions {
+    background-color: #343131 !important;
+    background: #343131 !important;
+}
+
 /* Target ONLY the top "latest" version text and drop-down arrow */
 .rst-versions .rst-current-version {
     color: #55a5d9 !important;
-}
-
-/* For the new Read the Docs Addons Web Component */
-readthedocs-flyout {
-    --color-header-text: #55a5d9 !important;
-    --color-header-link: #55a5d9 !important;
+    background-color: #343131 !important;
 }
 
 /* Bottom footer link inside the flyout */
