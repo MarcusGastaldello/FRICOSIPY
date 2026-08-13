@@ -1,31 +1,51 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Wait for Read the Docs to inject the flyout
     const observer = new MutationObserver((mutations, obs) => {
         const flyout = document.querySelector("readthedocs-flyout");
         const sidebarHeader = document.querySelector(".wy-side-nav-search");
 
         if (flyout && sidebarHeader) {
-            // Physically move the flyout element inside the sidebar header
+            // 1. Physically move the element under the logo in the sidebar DOM
             sidebarHeader.appendChild(flyout);
 
-            // Override its fixed positioning to inline/relative layout
-            flyout.style.position = "static";
-            flyout.style.display = "block";
-            flyout.style.margin = "10px 0";
+            // 2. Clear outer fixed-position styles
+            flyout.style.setProperty("position", "relative", "important");
+            flyout.style.setProperty("display", "block", "important");
+            flyout.style.setProperty("margin-top", "15px", "important");
+            flyout.style.setProperty("bottom", "auto", "important");
+            flyout.style.setProperty("right", "auto", "important");
 
-            // Inject blue color styling directly into the shadow root if present
+            // 3. Inject CSS directly into the Shadow DOM to kill internal fixed positioning
             if (flyout.shadowRoot) {
                 const style = document.createElement('style');
                 style.textContent = `
-                    * { color: #55a5d9 !important; }
-                    a, button, span { color: #55a5d9 !important; fill: #55a5d9 !important; }
+                    /* Target internal container wrapper inside Shadow DOM */
+                    :host, 
+                    .floating, 
+                    .container, 
+                    div[class*="container"], 
+                    header, 
+                    main {
+                        position: relative !important;
+                        bottom: auto !important;
+                        right: auto !important;
+                        left: auto !important;
+                        top: auto !important;
+                        margin: 0 !important;
+                        box-shadow: none !important;
+                    }
+                    * { 
+                        color: #55a5d9 !important; 
+                    }
+                    a, button, span { 
+                        color: #55a5d9 !important; 
+                        fill: #55a5d9 !important; 
+                    }
                 `;
                 flyout.shadowRoot.appendChild(style);
             }
 
-            obs.disconnect(); // Stop observing once moved
+            obs.disconnect(); // Stop checking once moved
         }
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-});
