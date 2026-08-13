@@ -34,7 +34,7 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
 **$(3)$**    Create the conda environment using the designated packages in the requirements text file.
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda create --name <env> --file requirements.txt</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda create --name &lt;fricosipyenv&gt; --file requirements.txt</code>
 </div>
 <br>
 !!! note
@@ -44,7 +44,7 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
 Henceforth, when running the *FRICOSIPY* model you must always ensure this new conda environment is active on your terminal: 
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda activate <env></code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda activate &lt;fricosipyenv&gt;</code>
 </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
