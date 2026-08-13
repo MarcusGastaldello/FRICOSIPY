@@ -33,9 +33,10 @@ cd C:\Users\<username>\Downloads\FRICOSIPY
 
 **$(3)$**    Create the conda environment using the designated packages in the requirements text file.
 
-```
-conda create --name <env> --file requirements.txt
-```
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda create --name <env> --file requirements.txt</code>
+</div>
+<br>
 
 !!! note
 
