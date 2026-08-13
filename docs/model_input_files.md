@@ -37,10 +37,10 @@ $(x,y)$ and requires the following variables:
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m yr$^{-1}$] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
-The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables. The spatial extent of the simulation, can be modified later in the `config.py` file prior to launching the FRICOSIPY model.
+The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables. 
 
 !!! note
-    Regardless of whether the user ultimately intends to run a simple point or a large-scale spatially distributed simulation across the glacier, the input static file should always be extensive and encompasses all surrounding higher topography. This is to ensure that the topographic shading calculation in the illumination file is accurate
+    Regardless of whether the user ultimately intends to run a simple point or a large-scale spatially distributed simulation across the glacier, the input static file should always be extensive and encompass all surrounding higher topography. This is to ensure that the topographic shading calculation in the illumination file is accurate. The spatial extent of the simulation, can be modified later in the `config.py` file prior to launching the *FRICOSIPY* model.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -175,7 +175,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
 
     <br>
     !!! example
-        Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the FRICOSIPY model.
+        Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the *FRICOSIPY* model.
 
         An input meteo NetCDF file can be created by navigating to *utilities/create_METEO/*:
 
@@ -211,7 +211,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 </div>
 <br>
 !!! note
-    In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
+    The generated illumination file will possess the same spatial resolution as the input static file used to create it. The *FRICOSIPY* simulation requires that the input static and illumination files have consistent spatial resolutions so it is often prudent to state their resolution in the filename.
 
 ??? "***Example - Findel Glacier: Creating the Illumination File***"
 
