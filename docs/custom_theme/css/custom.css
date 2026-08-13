@@ -66,15 +66,18 @@ pre {
    Read the Docs Flyout & Logo Positioning
    ========================================================================== */
 
-/* 1. Push search bar down under the logo to clear vertical space */
-.wy-side-nav-search > a img,
-.wy-side-nav-search img {
-    margin-bottom: 50px !important;
+.wy-side-nav-search {
+    background-color: #c8d6ee !important; 
+    padding: 10px 15px !important;
 }
 
-/* Change the sidebar header background color */
-.wy-side-nav-search {
-    background-color: #c8d6ee !important; /* Replace with whatever hex code you want */
+/* 2. Tighten margins around the logo image itself */
+.wy-side-nav-search > a img,
+.wy-side-nav-search img {
+    margin-top: 0 !important;
+    margin-bottom: 10px !important; /* Adjust this value if you want more or less space below the logo */
+    padding: 0 !important;
+    max-width: 100% !important; /* Prevents large logos from overflowing */
 }
 
 /* 3. Style text and links inside the RTD flyout */
