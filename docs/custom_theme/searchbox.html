@@ -1,0 +1,17 @@
+<div role="search">
+  <!-- Dynamic Version Selector Dropdown -->
+  <div style="text-align: center; margin-bottom: 12px;">
+    <select 
+      id="rtd-header-version-select" 
+      onchange="window.location.href=this.value" 
+      style="background: transparent; color: rgba(255,255,255,0.85); border: none; font-weight: bold; cursor: pointer; outline: none; font-size: 0.9em;"
+    >
+      <option value="#">latest ▾</option>
+    </select>
+  </div>
+
+  <!-- Standard Search Form -->
+  <form id="rtd-search-form" class="wy-form" action="{{ base_url }}/search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
