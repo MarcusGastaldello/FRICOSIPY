@@ -69,6 +69,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 ```bash
 cd utilities/create_STATIC/
 python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
+```
 
 </div>
 
