@@ -54,6 +54,7 @@ nav:
     - Contact: contact.md
 
 extra_javascript:
+  - js/version-select.js
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
 
 extra_css:
