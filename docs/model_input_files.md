@@ -145,11 +145,6 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/<br>python create_meteo_netcdf.py -c &lt;meteo_csv&gt;.csv -m &lt;meteo_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
 </div>
 
-```
-cd utilities/create_METEO/
-python create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
-```
-
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
 *Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
 
@@ -170,10 +165,9 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
-```
-cd utilities/create_ILLUMINATION/
-python create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
-```
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
+</div>
 
 !!! attention
     In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
