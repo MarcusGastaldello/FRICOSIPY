@@ -174,7 +174,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
     !!! example
         Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the FRICOSIPY model.
 
-        An input meteorological NetCDF file can by created by navigating to the *utilities/create_METEO/* directory:
+        An input meteo NetCDF file can be created by navigating to *utilities/create_METEO/*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/</code>
@@ -214,10 +214,18 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 
     <br>
     !!! example
-        Within the *data/static/GeoTIFF/* directory , a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+        The input illumination file for the Findel Glacier can now be produced directly from the previously created input static file. Note that the program creates an illumination file at the native resolution of the input static file and a FRICOSIPY simulation can only be executed if the resolution of both files are consistent. Hence it is prudent to state the resolution in the filename.
+
+        An input illumination NetCDF file can be created by navigating to *utilities/create_ILLUMINATION/*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/</code>
+        </div> 
+        
+        and then by executing the program `create_illumination_netcdf.py` from the command line:
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
-        </div> 
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_illumination_netcdf.py -s Static_Findel_200m.nc -i Illumination_Findel_200m.nc</code>
+        </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
