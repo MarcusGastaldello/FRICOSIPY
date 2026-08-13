@@ -1,18 +1,34 @@
 :root {
     /* Main Read the Docs Addon Color Hooks */
     --readthedocs-color-primary: #55a5d9 !important;
-    --readthedocs-flyout-color: #55a5d9 !important;
-    --readthedocs-flyout-background: #222222 !important;
 }
 
-/* Force links inside the flyout web component host to adopt the blue color */
-readthedocs-flyout {
+/* ==========================================================================
+   Read the Docs Flyout Adjustments
+   ========================================================================== */
+
+/* Target ONLY the top "latest" version text and drop-down arrow */
+.rst-versions .rst-current-version {
     color: #55a5d9 !important;
-    --color-text: #55a5d9 !important;
-    --color-link: #55a5d9 !important;
 }
 
-/* Customised Warning admonitions */
+/* For the new Read the Docs Addons Web Component */
+readthedocs-flyout {
+    --color-header-text: #55a5d9 !important;
+    --color-header-link: #55a5d9 !important;
+}
+
+/* Bottom footer link inside the flyout */
+readthedocs-flyout::part(footer) a,
+.rst-versions a[href*="readthedocs"] {
+    color: #55a5d9 !important;
+}
+
+/* ==========================================================================
+   Customised Admonitions
+   ========================================================================== */
+
+/* Warning Admonitions */
 .admonition.warning > .admonition-title {
     background-color: #f29f97 !important;  
     color: white !important;               
@@ -22,7 +38,7 @@ readthedocs-flyout {
     border-color: #f29f97 !important;     
 }
 
-/* Customised Example admonitions */
+/* Example Admonitions */
 .admonition.example > .admonition-title {
     background-color: #8b8b8b !important;  
     color: white !important;               
@@ -32,7 +48,11 @@ readthedocs-flyout {
     border-color: #8b8b8b !important;     
 }
 
-/* Global Code Styling (Greyish text) */
+/* ==========================================================================
+   Code Block Styling & Syntax Highlighting
+   ========================================================================== */
+
+/* Global Code Styling */
 .rst-content code, 
 .rst-content tt,
 pre {
@@ -41,7 +61,7 @@ pre {
     border: 1px solid #e1e4e5 !important;
 }
 
-/* Specific Code Styling */
+/* Specific Code Box Styling */
 .styledcode-box pre {
     color: #555555 !important;              
     background-color: #f8f8f8 !important;    
@@ -49,7 +69,7 @@ pre {
     line-height: 1.6 !important;
 }
 
-/* Specific Syntax Highlighting Overrides for this box */
+/* Syntax Highlighting Overrides */
 .styledcode-box .k, 
 .styledcode-box .kn, 
 .styledcode-box .kc { color: #C586B0 !important; } /* Pink: import, from, def */
@@ -63,29 +83,20 @@ pre {
 .styledcode-box .c1 { color: #6A9955 !important; font-style: italic !important; } /* Green: Comments */
 
 /* ==========================================================================
-   Read the Docs Flyout & Logo Positioning
+   Read the Docs Sidebar & Logo Positioning
    ========================================================================== */
 
-/* 1. Header background & inner spacing */
+/* Header background & inner spacing */
 .wy-side-nav-search {
     background-color: #E3E3E3 !important; 
     padding: 10px 15px !important;
 }
 
-/* 2. Tighten margins around the logo image itself */
+/* Tighten margins around the logo image */
 .wy-side-nav-search > a img,
 .wy-side-nav-search img {
     margin-top: 0 !important;
     margin-bottom: 10px !important;
     padding: 0 !important;
     max-width: 100% !important;
-}
-
-/* 3. Style text and links inside the RTD flyout */
-readthedocs-flyout {
-    color: #55a5d9 !important;
-    --color-text: #55a5d9 !important;
-    --color-link: #55a5d9 !important;
-    --readthedocs-color-primary: #55a5d9 !important;
-    font-weight: bold !important;
 }
