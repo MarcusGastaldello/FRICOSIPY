@@ -88,11 +88,11 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
-??? "**Findel Glacier Example: Creating a Static File from the Swissalti3D Digital Elevation Model**"
+??? "***Example - Findel Glacier: Creating a Static File from the Swissalti3D Digital Elevation Model***"
 
     <br>
     !!! example
-        The
+        Within the static folder of the model data directory, a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) has been provided: 'Swissalti3D_Findel.tif'
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; max-width:100%; overflow-x:auto;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
