@@ -23,7 +23,6 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd C:\Users\<username>\Downloads\FRICOSIPY</code>
 </div>
 <br>
-
 !!! note
 
     It is reccomended to move the model to a more suitable working directory.
@@ -38,7 +37,6 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda create --name <env> --file requirements.txt</code>
 </div>
 <br>
-
 !!! note
 
      If you do not have *Miniconda* already installed, you must download and install it first from *Anaconda*: [(https://www.anaconda.com/download)](https://www.anaconda.com/download).
