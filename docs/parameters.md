@@ -24,10 +24,6 @@ The *FRICOSIPY* model enables the user to customise the parameterisations used t
 | [**Surface roughness**](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/#surface-roughness-parameterisation) | [Moelg et al. (2012)](https://doi.org/10.5194/tc-6-1445-2012) | Constant | 
 | [**Saturation vapour pressure**](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/#saturation-vapour-pressure-parameterisation) | [Sonntag (1994)](https://doi.org/10.1127/metz/3/1994/51) | [Murray (1967)](https://doi.org/10.1175/1520-0450(1967)006<0203:OTCOSV>2.0.CO;2) <br> (*Magnus-Tetens*) | 
 | [**Incoming longwave radiation**](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/#longwave-radiation-parameterisation) | [Konzelmann (1994)](https://doi.org/10.1016/0921-8181(94)90013-2) | *(None)* |
-| [**Surface temperature solver**](https://fricosipy.readthedocs.io/en/latest/surface_energy_balance/#) | *Newton* *(faster)* | *SLSQP* *(slower)* | 
-
-!!! note
-    Should the *Newton-Raphson* approach fail to accurately converge on the correct surface temperature and produce a large energy residual, the simulation will automatically revert to using the backup Sequential Least SQuares Programming (SLSQP) algorithm. Therefore, typically the faster *Newton-Raphson* approach is sufficient for most simulations.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -71,7 +67,6 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 
 | Parameter | Value | Units | Description |
 |-----|:---:|:---:|---|
-| `station_altitude` | 3000.0            | m a.s.l. | Altitude of meteorological station |
 | `z` | 2.0                              | m | Meteorological data measurement height |
 | `air_temperature_lapse_rate` | -0.006  | °C m$^{-1}$ | Air temperature lapse rate |
 | `air_temperature_offset`   | 0.0       | °C | Air temperature offset |
