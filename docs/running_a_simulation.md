@@ -21,6 +21,17 @@ For each simulation, the user must specify the [three model input files](https:/
 !!! note
     It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the '*data/*' directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
 
+??? "***Ex. $($5$)$ – Findel Glacier: Selecting the Model Input Files***"
+
+    <br>
+    !!! example
+
+        Having created the model input files for the Findel Glacier simulation, they now must be selected in the `config.py file` as follows:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">`static_netcdf = Static_Findel_200m.nc`<br>`meteo_netcdf = Meteo_Stockhorn.nc`<br>`illumination_netcdf = Illumination_Findel_200m.nc`<br></code>
+        </div> 
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Spatio-temporal Range
