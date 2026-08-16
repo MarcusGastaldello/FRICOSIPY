@@ -72,7 +72,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 </div>
 <br>
 
-??? "***(1A) Example - Findel Glacier: Creating the Static File from a CSV Data File***"
+??? "***Example $(1A)$ - Findel Glacier: Creating the Static File from a CSV Data File***"
 
     <br>
     !!! example
@@ -102,7 +102,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
-??? "***(1B) Example - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
+??? "***Example $(1B)$ - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
 
     <br>
     !!! example
