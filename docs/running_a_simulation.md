@@ -212,18 +212,18 @@ The user can also directly specify the output timestamps on which the simulation
 | 2024-12-31 23:00   |
 | 2025-12-31 23:00   |
 
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
 ??? "***Ex. $($6$)$ – Findel Glacier: Running a Spatially-distributed Simulation ***"
 
     <br>
     !!! example
 
-        Instead, it is important to carefully consider what results are required from the simulation and customise it accordingly. Firstly, try running a point simulation for $x = 2′634′300$, $y = 1′092′500$
+        A spatially-distributed simulation across all nodes of the glacier can also be run, however it is prudent to then reduce the output reporting frequency of the output dataset. Within the *data/output/output_timestapms* directory, a CSV file with datetime values for the end of each month of the 2015 hydrological year has been provided: '*Output_Timestamps_2015H_1M.csv*'. This will reduce the temporal resolution of the output dataset from 8,760 hourly values to 12 aggregated monthly values.
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">reduced_output = True<br>output_timestamps = 'Output_Timestamps_2015H_1M.csv'</code>
         </div>
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Dask Parallelisation
 
