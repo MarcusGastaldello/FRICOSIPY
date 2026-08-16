@@ -172,6 +172,7 @@ def create_static_input(geoTIFF_file, shapefile, static_file, data_path, resolut
         else:
             print('\t SPATIAL GRID INFORMATION:')
             print('\t ================================================================================')
+            resolution = src.res[0]
 
         print('\t Minimum Easting:  ',ds["EASTING"].min().item())
         print('\t Maximum Easting:  ',ds["EASTING"].max().item())
