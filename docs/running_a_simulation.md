@@ -169,8 +169,6 @@ The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max
 
 Alternatively, the user can set `spatial_mask = True` and use a shapefile to override the existing glacier mask layer of the input static file to simulate an irregular pattern of spatial nodes; this can be particularly useful for model validation when the user intends to simulate several specific monitoring points. The referenced shapefile should be placed in the *data/output/SHP/* directory.
 
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
 ??? "***Ex. $($6$)$ – Findel Glacier: Running a Point Simulation ***"
 
     <br>
@@ -212,7 +210,7 @@ The user can also directly specify the output timestamps on which the simulation
 | 2024-12-31 23:00   |
 | 2025-12-31 23:00   |
 
-??? "***Ex. $($6$)$ – Findel Glacier: Running a Spatially-distributed Simulation ***"
+??? "***Ex. $($7$)$ – Findel Glacier: Running a Spatially-distributed Simulation ***"
 
     <br>
     !!! example
