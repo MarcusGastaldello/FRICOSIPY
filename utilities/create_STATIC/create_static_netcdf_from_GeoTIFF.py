@@ -229,7 +229,7 @@ if __name__ == "__main__":
     parser.add_argument('-g', '-geotiff_file', dest='geotiff_file', required=True, help='GeoTIFF file containing a Digital Elevation Model (DEM)')
     parser.add_argument('-m', '-shapefile', dest='shapefile', required=True, help='Shapefile demarcating glacier outline')
     parser.add_argument('-s', '-static_file', dest='static_file', required=True, help='Static file containing DEM, Slope etc.')
-    parser.add_argument('-r', '-resolution',  dest='resolution', required=True,  help='Spatial resolution of static file')
+    parser.add_argument('-r', '-resolution',  dest='resolution', required=False, default=None, help='Spatial resolution of static file')
 
     args = parser.parse_args()
 
