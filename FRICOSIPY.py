@@ -76,7 +76,7 @@ def main():
     METEO = IO.load_meteo_file()
     STATIC = IO.load_static_file()
     ILLUMINATION = IO.load_illumination_file()
-    print('\t ========================================================================================================')
+    print('\t ========================================================================================================\n')
 
     # Create Output/Result NetCDF Dataset:
     RESULT = IO.create_result_file()
