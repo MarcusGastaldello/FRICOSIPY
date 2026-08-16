@@ -105,10 +105,18 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 
     <br>
     !!! example
-        Within the *data/static/GeoTIFF/* directory , a high resolution Digital Elevation Model (DEM) of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+        Alternatively, an identical static file can be produded directly from a Digital Elevation Model (DEM). Within the *data/static/GeoTIFF/* directory, a high resolution DEM of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software. 
+
+        With these files, an input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/</code>
+        </div> 
+
+        and then by executing the program `create_static_netcdf_from_GeoTIFF.py` from the command line:
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
         </div>      
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
