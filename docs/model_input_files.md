@@ -77,7 +77,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
     <br>
     !!! example
 
-    
+        In order to help familiarise new users with the *FRICOSIPY* model, some exemplar data has been provided alongside a step by step walkthrough. The example chosen is the Findel Glacier – a large valley glacier of the Swiss Alps situated in the canton of Valais. Within the *data/static/CSV/* directory, a CSV file for a 200 m spatial resolution grid has been prepared that provides the necessary static variables for the model.
     
         An input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
 
