@@ -154,7 +154,7 @@ The initial condition parameters control how the subsurface grid is initialised 
 !!! note
     For detailed subsurface investigations, it is strongly reccomended to precede the main simulation with a spin-up/initialisation phase; otherwise, the initial years of the simulation will be heavily influenced by these arbitrary initial conditions.
 
-??? "***Ex. $($5$)$ – Findel Glacier: Customising Model Parameters & Parameterisations ***"
+??? "***Ex. $($4$)$ – Findel Glacier: Customising Model Parameters & Parameterisations ***"
 
     <br>
     !!! example
