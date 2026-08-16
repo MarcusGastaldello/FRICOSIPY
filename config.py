@@ -33,6 +33,21 @@ output_netcdf = '<output_file>.nc'
 time_start   = '2014-10-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
 time_end     = '2015-09-30T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
+# ================= #
+# OUTPUT VARIABLES:
+# ================= #    
+
+# 3-D Output Variables:
+meteorological_variables = ['AIR_TEMPERATURE','AIR_PRESSURE','RELATIVE_HUMIDITY','SPECIFIC_HUMIDITY','WIND_SPEED','FRACTIONAL_CLOUD_COVER']
+surface_energy_fluxes  =   ['SHORTWAVE','LONGWAVE','SENSIBLE','LATENT','SUBSURFACE','RAIN_HEAT_FLUX','MELT_ENERGY']
+surface_mass_fluxes =      ['RAIN','SNOWFALL','EVAPORATION','SUBLIMATION','CONDENSATION','DEPOSITION','SURFACE_MELT','SURFACE_MASS_BALANCE']
+subsurface_mass_fluxes =   ['REFREEZE','SUBSURFACE_MELT','RUNOFF','MASS_BALANCE']
+other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT','SURFACE_ELEVATION','SURFACE_TEMPERATURE','SURFACE_HUMIDITY','SURFACE_ALBEDO','N_LAYERS','FIRN_TEMPERATURE','FIRN_TEMPERATURE_CHANGE','FIRN_FACIE']
+
+# 4-D Output Variables:
+full_field = False                                              
+subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR','GRAIN_SIZE']
+
 # ========================== #
 # OUTPUT REPORTING FREQUENCY 
 # ========================== #
@@ -56,21 +71,6 @@ spatial_subset = False            # Reduce the spatial extent of the static and 
 # Reduced Spatial Mask:
 spatial_mask = False
 output_shapefile = '<shapefile>.nc'   # Reduce the spatial nodes to be simulated by overriding the glacial mask of the input static file.
-
-# ================= #
-# OUTPUT VARIABLES:
-# ================= #    
-
-# 3-D Output Variables:
-meteorological_variables = ['AIR_TEMPERATURE','AIR_PRESSURE','RELATIVE_HUMIDITY','SPECIFIC_HUMIDITY','WIND_SPEED','FRACTIONAL_CLOUD_COVER']
-surface_energy_fluxes  =   ['SHORTWAVE','LONGWAVE','SENSIBLE','LATENT','SUBSURFACE','RAIN_HEAT_FLUX','MELT_ENERGY']
-surface_mass_fluxes =      ['RAIN','SNOWFALL','EVAPORATION','SUBLIMATION','CONDENSATION','DEPOSITION','SURFACE_MELT','SURFACE_MASS_BALANCE']
-subsurface_mass_fluxes =   ['REFREEZE','SUBSURFACE_MELT','RUNOFF','MASS_BALANCE']
-other =                    ['SNOW_HEIGHT','SNOW_WATER_EQUIVALENT','TOTAL_HEIGHT','SURFACE_ELEVATION','SURFACE_TEMPERATURE','SURFACE_HUMIDITY','SURFACE_ALBEDO','N_LAYERS','FIRN_TEMPERATURE','FIRN_TEMPERATURE_CHANGE','FIRN_FACIE']
-
-# 4-D Output Variables:
-full_field = False                                              
-subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR','GRAIN_SIZE']
 
 # ========================== #
 # SIMULATION PARALLELIZATION 
