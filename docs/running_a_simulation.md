@@ -40,6 +40,12 @@ The temporal range of the simulation must be specified by providing datetime val
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">static_netcdf = Static_Findel_200m.nc<br>meteo_netcdf = Meteo_Stockhorn.nc<br>illumination_netcdf = Illumination_Findel_200m.nc</code>
         </div>
 
+        The user must also specify an appropriate output filename:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">output_netcdf = Findel_Glacier_2015H.nc</code>
+        </div>
+
         Similiary, the simulation temporal range should be set to the bounding datetime values for the 2015 hydrological year (equivalent to the range of the input meteorological file):
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
