@@ -71,7 +71,8 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
   <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc -p &lt;XXXX&gt;</code>
 </div>
 <br>
-??? "***Example - Findel Glacier: Creating the Static File from a CSV Data File***"
+
+??? "***(1A) Example - Findel Glacier: Creating the Static File from a CSV Data File***"
 
     <br>
     !!! example
@@ -101,7 +102,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
-??? "***Example - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
+??? "***(1B) Example - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
 
     <br>
     !!! example
