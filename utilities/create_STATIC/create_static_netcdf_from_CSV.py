@@ -103,7 +103,7 @@ def create_static_input(csv_file, static_file, data_path, projection = None):
     if (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
         print('\t Grid Spatial Resolution: ',resolution,' m')
-        print('\t Glacier Grid Spatial Nodes: ', np.sum(df["MASK"]))
+        print('\t Grid Spatial Nodes: ', np.sum(df["MASK"]))
         print('\t ================================================================================')
     else:
         raise ValueError('Error: Non-rectilinear grid detected!')
