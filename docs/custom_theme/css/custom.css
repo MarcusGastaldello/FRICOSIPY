@@ -21,6 +21,7 @@ readthedocs-flyout::part(header) {
 :root {
     --readthedocs-flyout-background: #343131 !important;
     --readthedocs-color-primary: #55a5d9 !important;
+  
 }
 
 /* ==========================================================================
@@ -105,3 +106,14 @@ pre {
 .wy-side-nav-search div[role="search"] {
     margin-top: 15px !important; /* Adjust this value if you want it closer or further */
 }
+
+/* 4. Change the background color of the mobile header bar */
+.wy-nav-top {
+    background: #e3e3e3 !important;
+}
+
+/* 5. Update icon and text color to dark grey so it remains readable */
+.wy-nav-top a,
+.wy-nav-top i {
+    color: #595959 !important;
+   
