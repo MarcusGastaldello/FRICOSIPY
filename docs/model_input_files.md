@@ -106,7 +106,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-r**  &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_GeoTIFF.py -g &lt;static_dem&gt;.tif -s &lt;static_netcdf&gt;.nc -m &lt;glacier_mask&gt;.shp</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC<br>python create_static_netcdf_from_GeoTIFF.py -g &lt;static_dem&gt;.tif -s &lt;static_netcdf&gt;.nc -m &lt;glacier_mask&gt;.shp</code>
 </div>
 <br>
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
@@ -118,10 +118,10 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
     !!! example
         Alternatively, an identical static file can be produded directly from a Digital Elevation Model (DEM). Within the *data/static/GeoTIFF/* directory, a high resolution DEM of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software: '*Findel_Glacier.shp*'. Using the native 2 m resolution of the DEM would create an extremely large computational grid, therefore it is reccomended to resample to 200 m grid spacing for this exercise.
 
-        An input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
+        An input static NetCDF file can be created by navigating to *utilities/create_STATIC*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC</code>
         </div> 
 
         and then by executing the program `create_static_netcdf_from_GeoTIFF.py` from the command line:
@@ -184,7 +184,7 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 * &emsp; **-e**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/<br>python create_meteo_netcdf.py -c &lt;meteo_csv&gt;.csv -m &lt;meteo_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO<br>python create_meteo_netcdf.py -c &lt;meteo_csv&gt;.csv -m &lt;meteo_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
 </div>
 <br>
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
@@ -199,7 +199,7 @@ In *Switzerland*, hourly resolution meteorological data is readily available fro
         An input meteo NetCDF file can be created by navigating to *utilities/create_METEO/*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO</code>
         </div> 
         
         and then by executing the program `create_meteo_netcdf.py` from the command line:
@@ -226,7 +226,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
 <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc</code>
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc</code>
 </div>
 <br>
 !!! note
@@ -239,7 +239,7 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
         The input illumination file for the Findel Glacier can now be produced directly from the previously created input static file by navigating to *utilities/create_ILLUMINATION/*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION/</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION</code>
         </div> 
         
         and then by executing the program `create_illumination_netcdf.py` from the command line:
