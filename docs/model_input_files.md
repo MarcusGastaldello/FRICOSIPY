@@ -72,7 +72,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 </div>
 <br>
 
-??? "***Example $(1A)$ - Findel Glacier: Creating the Static File from a CSV Data File***"
+??? "***$($1a$)$ Example - Findel Glacier: Creating the Static File from a CSV Data File***"
 
     <br>
     !!! example
@@ -102,7 +102,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
 
-??? "***Example $(1B)$ - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
+??? "***$(1)$ Example - Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
 
     <br>
     !!! example
@@ -180,7 +180,7 @@ The program is launched, by navigating to the *utilities/create_METEO/* director
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
 *Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
 
-??? "***Example - Findel Glacier: Creating the Meteo File from Local Meteorological Data***"
+??? "***$(2)$ Example - Findel Glacier: Creating the Meteo File from Local Meteorological Data***"
 
     <br>
     !!! example
@@ -220,9 +220,9 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 </div>
 <br>
 !!! note
-    The generated illumination file will possess the same spatial resolution as the input static file used to create it. The *FRICOSIPY* simulation requires that the input static and illumination files have consistent spatial resolutions so it is often prudent to state their resolution in the filename.
+    The generated illumination file will possess the same spatial resolution as the input static file used to create it. The *FRICOSIPY* simulation requires that the input static and illumination files have consistent spatial resolutions, so it is often prudent to state their resolution in the filename.
 
-??? "***Example - Findel Glacier: Creating the Illumination File***"
+??? "***$(3)$ Example - Findel Glacier: Creating the Illumination File***"
 
     <br>
     !!! example
