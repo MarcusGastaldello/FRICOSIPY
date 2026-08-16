@@ -46,6 +46,32 @@ The temporal range of the simulation must be specified by providing datetime val
 
 The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
 
+## Output Reporting Frequency
+
+By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a few methods to customise the reporting frequency for the output dataset. 
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### $(i)$ Model Initialisation / Spin-up
+
+In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting <br> `model_spin_up = True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### $(ii)$ Output Timestamps
+
+The user can also directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output = True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
+
+<small> *Ex. An exemplar output timestamps CSV file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
+
+|          |
+|:---:|
+| 2000-12-31 23:00   |
+| 2001-12-31 23:00   |
+| ⋮ |
+| 2024-12-31 23:00   |
+| 2025-12-31 23:00   |
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Output Variables
@@ -157,34 +183,6 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## Output Reporting Frequency
-
-By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a few methods to customise the reporting frequency for the output dataset. 
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
-### $(i)$ Model Initialisation / Spin-up
-
-In particular for subsurface investigations, it is customary to precede a simulation with an initialisation phase / spin-up to attain steady-state conditions. Therefore, by setting <br> `model_spin_up = True` and stating an inital timestamp in datetime format [yyyy-mm-dd hh:mm], the user can specify an initial time period of the simulation where output variable data is neither aggregated nor recorded.
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
-
-### $(ii)$ Output Timestamps
-
-The user can also directly specify the output timestamps on which the simulation reports output variables. The user must simply set `reduced_output = True` and place a CSV with the desired timestamps, expressed in datetime format [yyyy-mm-dd hh:mm], in the '*data/output/output_timestamps/*' directory. Inbetween the reported values, variables are aggregated: meteorological conditions and energy fluxes are averaged, mass fluxes are summated and state variables are reported as their instantaneous values.
-
-<small> *Ex. An exemplar output timestamps CSV file showing yearly timestamps for the time period 2000 – 2025, which would reduce the output dataset from 219,150 hourly values to 25 aggregated annual values.* </small>
-
-|          |
-|:---:|
-| 2000-12-31 23:00   |
-| 2001-12-31 23:00   |
-| ⋮ |
-| 2024-12-31 23:00   |
-| 2025-12-31 23:00   |
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
 ## Dask Parallelisation
 
 The *FRICOSIPY* model, supports multi-thread processing using the *Dask* parallel computing library. By modifying `workers = 1`, the user specifies the number of spatial nodes that the simulation will concurrently simulate
@@ -204,7 +202,7 @@ Once the configuration file is set up, the *FRICOSIPY* model is executed with th
 <br>
 As the simulation starts, detailed information will be reported into the terminal. Thereafter, progress will be indicated upon the completion of each spatial node until the simulation is complete. 
 
-!!! attention
+!!! note
     Remember that your conda environment must be active `conda activate <env>` and you must be in the root directory in order to launch the *FRICOSIPY* model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
