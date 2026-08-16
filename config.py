@@ -55,7 +55,7 @@ spatial_subset = False            # Reduce the spatial extent of the static and 
 
 # Reduced Spatial Mask:
 spatial_mask = False
-output_shapefile = <shapefile>.nc'   # Reduce the spatial nodes to be simulated by overriding the glacial mask of the input static file.
+output_shapefile = '<shapefile>.nc'   # Reduce the spatial nodes to be simulated by overriding the glacial mask of the input static file.
 
 # ================= #
 # OUTPUT VARIABLES:
