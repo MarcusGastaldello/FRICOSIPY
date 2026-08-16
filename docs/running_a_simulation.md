@@ -9,7 +9,9 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## File Selection
+## Simulation Configuration
+
+### File Selection
 
 For each simulation, the user must specify the [three model input files](https://fricosipy.readthedocs.io/en/latest/model_input_files/):
 
@@ -21,7 +23,13 @@ For each simulation, the user must specify the [three model input files](https:/
 !!! note
     It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the '*data/*' directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
 
-??? "***Ex. $($5$)$ – Findel Glacier: Selecting the Model Input Files***"
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Temporal Range
+
+The temporal range of the simulation must be specified by providing datetime values [yyyy-mm-dd hh:mm] indicating the starting and ending timestamp (which must be within the datetime range of the input meteorological file).
+
+??? "***Ex. $($5$)$ – Findel Glacier: Selecting the Model Input Files & Simulation Temporal Range ***"
 
     <br>
     !!! example
@@ -33,14 +41,6 @@ For each simulation, the user must specify the [three model input files](https:/
         </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-## Spatio-temporal Range
-
-### Temporal Range
-
-The temporal range of the simulation must be specified by providing datetime values [yyyy-mm-dd hh:mm] indicating the starting and ending timestamp (which must be within the datetime range of the input meteorological file).
-
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ## Output Variables
 
