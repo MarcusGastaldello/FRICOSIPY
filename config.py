@@ -30,8 +30,8 @@ output_netcdf = '<output_file>.nc'
 # ================= #
 
 # Date Range:
-time_start   = '2000-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
-time_end     = '2024-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
+time_start   = '2014-10-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
+time_end     = '2015-09-30T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
 # ========================== #
 # OUTPUT REPORTING FREQUENCY 
