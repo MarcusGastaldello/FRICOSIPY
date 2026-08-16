@@ -176,7 +176,7 @@ Alternatively, the user can set `spatial_mask = True` and use a shapefile to ove
 
         Running the *FRICOSIPY* simulation for the entirety of the *Findel Glacier* with an unaltered output dataset will likely exceed the computational resources of most personal computers; requesting a 4-dimensional output dataset reporting 45 output variables across a 25 x 30 node spatial domain over 8,760 hourly timesteps with 200 subsurface layers will require several gigabytes of memory and utilise a large amount of disc space.
        
-        Instead, it is important to carefully consider what results are required from the simulation and customise it accordingly. Try running a point simulation for $x$ = 2′634′300$, $y$ = 1′092′500.
+        Instead, it is important to carefully consider what results are required from the simulation and customise it accordingly. Try running a point simulation for $x$ = 2′634′300, $y$ = 1′092′500.
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">spatial_subset = True<br>[x_min, x_max, y_min, y_max] = [2634200, 2634400, 1092400, 1092600]    </code>
