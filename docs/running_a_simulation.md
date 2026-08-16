@@ -161,13 +161,13 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 ### Spatial Subset
 
-The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
+The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> However, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of excess surrounding terrain needed to accurately create the input illumination file.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Spatial Mask
 
-The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
+Alternatively, the user can set `spatial_mask = True` and use a shapefile to override the existing glacier mask layer of the input static file to simulate an irregular pattern of spatial nodes; this can be particularly useful for model validation when the user intends to simulate several specific monitoring points. The referenced shapefile should be placed in the *data/output/SHP/* directory.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -196,8 +196,6 @@ The user can also directly specify the output timestamps on which the simulation
 | ⋮ |
 | 2024-12-31 23:00   |
 | 2025-12-31 23:00   |
-
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
