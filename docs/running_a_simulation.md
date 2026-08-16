@@ -9,7 +9,9 @@ In order to run the *FRICOSIPY* model, the user must first configure the simulat
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
-## File Selection
+## Simulation Configuration
+
+### File Selection
 
 For each simulation, the user must specify the [three model input files](https://fricosipy.readthedocs.io/en/latest/model_input_files/):
 
@@ -21,19 +23,34 @@ For each simulation, the user must specify the [three model input files](https:/
 !!! note
     It is only necessary to specify the filename of the input static, meteo & illumination files; they will automatically be loaded in their respective folders in the '*data/*' directory – the same directory in which the model input file creation programs (eg. `create_meteo_netcdf.py`) will have placed them.
 
-<hr style="height:2px; background-color:#8b8b8b; border:none;" />
-
-## Spatio-temporal Range
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
 ### Temporal Range
 
 The temporal range of the simulation must be specified by providing datetime values [yyyy-mm-dd hh:mm] indicating the starting and ending timestamp (which must be within the datetime range of the input meteorological file).
 
-<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+??? "***Ex. $($5$)$ – Findel Glacier: Selecting the Model Input Files & Simulation Temporal Range ***"
 
-### Spatial Subset:
+    <br>
+    !!! example
 
-The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
+        Having created the model input files for the *Findel Glacier* simulation, they now must be selected in the `config.py` file in order to run the *FRICOSIPY* model:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">static_netcdf = Static_Findel_200m.nc<br>meteo_netcdf = Meteo_Stockhorn.nc<br>illumination_netcdf = Illumination_Findel_200m.nc</code>
+        </div>
+
+        The user must also specify an appropriate output filename:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">output_netcdf = Findel_Glacier_2015H.nc</code>
+        </div>
+
+        Similiary, the simulation temporal range should be set to the bounding datetime values for the 2015 hydrological year (equivalent to the range of the input meteorological file):
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">time_start = '2014-10-01T00:00'<br>time_end = '2015-09-30T23:00'</code>
+        </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -146,6 +163,33 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
+## Spatial Extent
+
+### Spatial Subset
+
+The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> However, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of excess surrounding terrain needed to accurately create the input illumination file.
+
+<hr style="height:1px; background-color:#8b8b8b; border:none;" />
+
+### Spatial Mask
+
+Alternatively, the user can set `spatial_mask = True` and use a shapefile to override the existing glacier mask layer of the input static file to simulate an irregular pattern of spatial nodes; this can be particularly useful for model validation when the user intends to simulate several specific monitoring points. The referenced shapefile should be placed in the *data/output/SHP/* directory.
+
+??? "***Ex. $($6$)$ – Findel Glacier: Running a Point Simulation ***"
+
+    <br>
+    !!! example
+
+        Running the *FRICOSIPY* simulation for the entirety of the *Findel Glacier* with an unaltered output dataset will likely exceed the computational resources of most personal computers; requesting a 4-dimensional output dataset reporting 45 output variables across a 25 x 30 node spatial domain over 8,760 hourly timesteps with 200 subsurface layers will require several gigabytes of memory and utilise a large amount of disc space.
+       
+        Instead, it is important to carefully consider what results are required from the simulation and customise it accordingly. Try running a point simulation for $x$ = 2′634′300, $y$ = 1′092′500.
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">spatial_subset = True<br>[x_min, x_max, y_min, y_max] = [2634200, 2634400, 1092400, 1092600]    </code>
+        </div>
+        
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
 ## Output Reporting Frequency
 
 By default, as with the original *COSIPY* model, *FRICOSIPY* reports each output variable for every simulation timestep. However, this can produce extremely large output datasets when operating with a long simulation time period. Therefore, the *FRICOSIPY* model offers a few methods to customise the reporting frequency for the output dataset. 
@@ -172,6 +216,21 @@ The user can also directly specify the output timestamps on which the simulation
 | 2024-12-31 23:00   |
 | 2025-12-31 23:00   |
 
+??? "***Ex. $($7$)$ – Findel Glacier: Running a Spatially-distributed Simulation ***"
+
+    <br>
+    !!! example
+
+        A spatially-distributed simulation across all nodes of the glacier can also be run, however it is prudent to then reduce the output reporting frequency of the output dataset. 
+        
+        Within the *data/output/output_timestamps* directory, a CSV file with datetime values for the end of each month of the 2015 hydrological year has been provided: '*Output_Timestamps_2015H_1M.csv*'. This will reduce the temporal resolution of the output dataset from 8,760 hourly values to 12 aggregated monthly values.
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">reduced_output = True<br>output_timestamps = 'Output_Timestamps_2015H_1M.csv'</code>
+        </div>
+
+        Note that these simulations will need to be run seperately and that the output filename (`output_netcdf`) should be changed so that the result file is not overwritten.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Dask Parallelisation
@@ -187,13 +246,13 @@ The *FRICOSIPY* model, supports multi-thread processing using the *Dask* paralle
 
 Once the configuration file is set up, the *FRICOSIPY* model is executed with the command:
 
-```
-python FRICOSIPY.py
-```
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python FRICOSIPY.py</code>
+</div>
+<br>
 As the simulation starts, detailed information will be reported into the terminal. Thereafter, progress will be indicated upon the completion of each spatial node until the simulation is complete. 
 
-!!! attention
+!!! note
     Remember that your conda environment must be active `conda activate <env>` and you must be in the root directory in order to launch the *FRICOSIPY* model.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />

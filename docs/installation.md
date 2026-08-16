@@ -19,31 +19,32 @@ The *FRICOSIPY* model can be installed by following the proceeding three basic s
 
 **$(2)$**     Navigate to the directory where you have downloaded the *FRICOSIPY* model in the command prompt using the 'cd' (change directory) command: Eg.
 
-```
-cd C:\Users\<username>\Downloads\FRICOSIPY
-```
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd C:\Users\<username>\Downloads\FRICOSIPY</code>
+</div>
+<br>
 !!! note
 
     It is reccomended to move the model to a more suitable working directory.
 
-<hr style="height🕛px; background-color:#8b8b8b; border:none;" />
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Creating the *Conda* Environment
 
 **$(3)$**    Create the conda environment using the designated packages in the requirements text file.
 
-```
-conda create --name <env> --file requirements.txt
-```
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda create --name &lt;fricosipyenv&gt; --file requirements.txt</code>
+</div>
+<br>
 !!! note
 
      If you do not have *Miniconda* already installed, you must download and install it first from *Anaconda*: [(https://www.anaconda.com/download)](https://www.anaconda.com/download).
 
 Henceforth, when running the *FRICOSIPY* model you must always ensure this new conda environment is active on your terminal: 
 
-```
-conda activate <env>
-```
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">conda activate &lt;fricosipyenv&gt;</code>
+</div>
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />

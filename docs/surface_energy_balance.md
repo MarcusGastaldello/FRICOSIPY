@@ -36,7 +36,7 @@ However, since the surface temperature of a glacier is physically constrained to
 </div>
 <div style="height: 20px;"></div>
 
-The *FRICOSIPY* model uses an iterative approach to equalise the energy fluxes; the user can select either a Sequential Least SQuares Programming (SLSQP) algorithm or the *Newton*-*Raphson* method.
+The *FRICOSIPY* model uses an iterative *Newton*-*Raphson* approach to equalise the energy fluxes, however should this algorithm fail to converge it will revert to the Sequential Least SQuares Programming (SLSQP) approach.
 
 The following section explains each of these energy fluxes in greater detail and how they are parameterised in the *FRICOSIPY* model.
 
@@ -402,6 +402,20 @@ Visualising the Surface Energy Balance (SEB) is important for understanding and 
 !!! note
 
     The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface energy balance graph (akin to the figure above) for any output dataset.
+
+<hr style="height:2px; background-color:#8b8b8b; border:none;" />
+
+## Exemplar Surface Mass Balance
+
+The Surface Mass Balance (SMB) illustrates the mass exchange occuring at the surface – either accumulation $(+)$ or ablation $(-)$. In contrast to the energy balance, the monthly mass fluxes do not need to be balanced. **Figure 4** shows an exemplar point surface mass balance for *Colle Gnifetti* at the summit of the *Grenz* glacier, *Valais*, *Switzerland* produced from the *FRICOSIPY* model. For *Colle Gnifetti*, being situated in a high-altitude accumulation area, the net mass exchange is positive.
+
+![Exemplar FRICOSIPY SMB (Surface Mass Balance) Colle Gnifetti](images/Exemplar-SMB.png)
+
+<center><small> **Figure 4**: Exemplar point Surface Mass Balance (SMB) for *Colle Gnifetti* (*Grenz* glacier), *Valais*, *Switzerland* </small></center>
+
+!!! note
+
+    The [*FRICOSIPY result viewer*](result_viewer.md) contains a plotting function that can automatically produce a surface mass balance graph (akin to the figure above) for any output dataset.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 

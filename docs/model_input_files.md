@@ -37,7 +37,10 @@ $(x,y)$ and requires the following variables:
     * **PRECIPITATION_CLIMATIOLOGY** – Precipitation climatology [m yr$^{-1}$] <br> *(annual precipitation climatology for the three-phase anomaly model)*
 
 <br>
-The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables.
+The static file can either be directly created point grid data in .CSV format or from a Digital Elevation Model (DEM) in .GeoTIFF format. The latter approach is easier and does not require the use of Geographic Information System (GIS) software but it is less versatile and does not enable the inclusion of any optional static variables. 
+
+!!! note
+    Regardless of whether the user ultimately intends to run a simple point or a large-scale spatially distributed simulation across the glacier, the input static file should always be extensive and encompass all surrounding higher topography. This is to ensure that the topographic shading calculation in the illumination file is accurate. The spatial extent of the simulation, can be modified later in the `config.py` file prior to launching the *FRICOSIPY* model.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -53,7 +56,7 @@ An exemplar static CSV would have the following format:
 | 1086800 | 2633800 | 45.93208 | 7.874285 | 4388.20 | 30.26 | 20.12 | 1 |
 | 1086800 | 2633850 | 45.93195 | 7.875026 | 4358.10 | 36.78 | 23.21 | 1 |
 
-!!! attention
+!!! note
     FRICOSIPY requires a standard rectilinear grid. However, the northing and easting values can simply be substituted for a locally referenced grid since they simply form the spatial structure of the model and do not influence the physical processes.
 
 Place the input CSV file in the *data/static/CSV/* directory and then the `create_static_netcdf_from_CSV.py` utility program can then convert it into NetCDF format. 
@@ -62,12 +65,32 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 
 * &emsp; **-c** &emsp; *&lt;static_csv&gt;*.csv &emsp; &ndash; &emsp; *input static CSV file name*
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output static NetCDF file name*
-* &emsp; **-p** &emsp; *'EPSG:&lt;XXXX&gt;'* &emsp; &ndash; &emsp; *(optional) spatial projection / co-ordinate reference system*
+* &emsp; **-p** &emsp; *&lt;XXXX&gt;* &emsp; &ndash; &emsp; *(optional) EPSG spatial projection / co-ordinate reference system code*
 
-```
-cd utilities/create_STATIC/
-python create_static_netcdf_from_CSV.py -c <static_csv>.csv -s <static_netcdf>.nc
-```
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/<br>python create_static_netcdf_from_CSV.py -c &lt;static_csv&gt;.csv -s &lt;static_netcdf&gt;.nc -p &lt;XXXX&gt;</code>
+</div>
+<br>
+
+??? "***Ex. $($1a$)$ – Findel Glacier: Creating the Static File from a CSV Data File***"
+
+    <br>
+    !!! example
+
+        In order to help familiarise new users with the *FRICOSIPY* model, some exemplar data has been provided alongside a step by step walkthrough that details all processing steps up to the main simulation. The example chosen is the Findel Glacier – a large valley glacier of the Swiss Alps situated in the canton of Valais.
+        
+        Within the *data/static/CSV/* directory, a CSV file for a 200 m spatial resolution grid has been prepared that provides the necessary static variables for the model.
+    
+        An input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/</code>
+        </div> 
+
+        and then by executing the program `create_static_netcdf_from_CSV.py` from the command line:
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_static_netcdf_from_CSV.py -c Static_Findel_200m.csv -s Static_Findel_200m.nc -p 2056</code> 
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -82,13 +105,30 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 * &emsp; **-m** &emsp; *&lt;mask&gt;*.shp &emsp; &ndash; &emsp; *input glacier mask shapefile name*
 * &emsp; **-r**  &emsp; *&lt;value&gt;* &emsp; &ndash; &emsp; *(optional) resampled static file spatial resolution*
 
-```
-cd utilities/create_STATIC/
-python create_static_netcdf_from_GeoTIFF.py -g <static_dem>.tif -s <static_netcdf>.nc -m <glacier_mask>.shp
-```
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC<br>python create_static_netcdf_from_GeoTIFF.py -g &lt;static_dem&gt;.tif -s &lt;static_netcdf&gt;.nc -m &lt;glacier_mask&gt;.shp</code>
+</div>
+<br>
 In *Switzerland*, high resolution topographic data is available through the [*SwissAlti3D* Digital Elevation Model (DEM) product of the 
 *Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d).
+
+??? "***Ex. $($1b$)$ – Findel Glacier: Creating the Static File from the Swissalti3D Digital Elevation Model***"
+
+    <br>
+    !!! example
+        Alternatively, an identical static file can be produded directly from a Digital Elevation Model (DEM). Within the *data/static/GeoTIFF/* directory, a high resolution DEM of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software: '*Findel_Glacier.shp*'. Using the native 2 m resolution of the DEM would create an extremely large computational grid, therefore it is reccomended to resample to 200 m grid spacing for this exercise.
+
+        An input static NetCDF file can be created by navigating to *utilities/create_STATIC*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC</code>
+        </div> 
+
+        and then by executing the program `create_static_netcdf_from_GeoTIFF.py` from the command line:
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_static_netcdf_from_GeoTIFF.py -g Swissalti3D_Findel.tif -s Static_Findel_200m.nc -m Findel_Glacier.shp -r 200</code>
+        </div>      
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -133,22 +173,40 @@ An exemplar meteo CSV would therefore have the following format:
 | 2024-12-31 22:00   | 268.34 | 1.42 | 82.45 | 643.61 | 0.00 | 0.00 |
 | 2024-12-31 23:00   | 269.21 | 2.20 | 81.56 | 644.22 | 0.00 | 0.00 |
 
-Place the input CSV file in the *data/meteo/CSV/* directory and then the `create_meteo_netcdf.py utility program can then convert it into NetCDF format.
+Place the input CSV file in the *data/meteo/CSV/* directory and then the `create_meteo_netcdf.py` utility program can then convert it into NetCDF format.
 
 The program is launched, by navigating to the *utilities/create_METEO/* directory on the command line and executing the program `create_meteo_netcdf.py` with the following arguments:
 
-* &emsp; **-c** &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
+* &emsp; **-c**  &emsp; *&lt;meteo_csv&gt;*.csv &emsp; &ndash; &emsp; *input meteo CSV file name*
 * &emsp; **-m** &emsp; *&lt;meteo_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output meteo NetCDF file name*
-* &emsp; **-s** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
-* &emsp; **-e** &emsp; *&lt;yyyy-mm-dd hh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
+* &emsp; **-a**  &emsp; *&lt;XXXX.XX&gt;* &emsp; &ndash; &emsp; *altitude of meteorological station (m a.s.l.)*
+* &emsp; **-s**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) start datetime*
+* &emsp; **-e**  &emsp; *&lt;yyyy-mm-ddThh:mm:ss&gt;* &emsp; &ndash; &emsp; *(optional) end datetime*
 
-```
-cd utilities/create_METEO/
-python create_meteo_netcdf.py -c <meteo_csv>.csv -m <meteo_netcdf>.nc
-```
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO<br>python create_meteo_netcdf.py -c &lt;meteo_csv&gt;.csv -m &lt;meteo_netcdf&gt;.nc -a &lt;XXXX.XX&gt;</code>
+</div>
+<br>
 In *Switzerland*, hourly resolution meteorological data is readily available from a variety of stations on the [*Open Data* platform of the 
 *Federal Office of Meteorology & Climatology* (*Meteo Swiss*)](https://www.meteosuisse.admin.ch/services-et-publications/service/open-data.html).
+
+??? "***Ex. $($2$)$ – Findel Glacier: Creating the Meteo File from Local Meteorological Data***"
+
+    <br>
+    !!! example
+        Within the *data/static/GeoTIFF/* directory, some hypothetical data from the [Swiss Permafrost Network (PERMOS)](https://www.permos.ch/) station at Stockhorn (3,410 m a.sl.) has been provided: '*Meteo_Stockhorn.csv*'. This CSV file contains hourly meteorological data for the 2015 hydrological year including all the necessary variables for the *FRICOSIPY* model.
+
+        An input meteo NetCDF file can be created by navigating to *utilities/create_METEO/*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO</code>
+        </div> 
+        
+        and then by executing the program `create_meteo_netcdf.py` from the command line:
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_meteo_netcdf.py -c Meteo_Stockhorn.csv -m Meteo_Stockhorn.nc -a 3410</code>
+        </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
@@ -167,15 +225,27 @@ The program is launched, by navigating to the *utilities/create_ILLUMINATION/* d
 * &emsp; **-s** &emsp; *&lt;static_netcdf&gt;*.csv &emsp; &ndash; &emsp; *input static NetCDF file name*
 * &emsp; **-i** &emsp; *&lt;illumination_netcdf&gt;*.nc &emsp; &ndash; &emsp; *output illumination NetCDF file name*
 
-```
-cd utilities/create_ILLUMINATION/
-python create_illumination_netcdf.py -s <static_netcdf>.nc -i <illumination_netcdf>.nc
-```
-
-!!! attention
-    In order for the illumination file to be accurate, the static file should include all surrounding high-altitude terrain so that it can be determined whether they may obscure direct insolation onto the glacier. Glacier nodes (mask = 1) should also not be placed on the periphery of the static file.
-
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION<br>python create_illumination_netcdf.py -c &lt;static_netcdf&gt;.csv -m &lt;illumination_netcdf&gt;.nc</code>
+</div>
+<br>
 !!! note
-    The illumination file is currently limited to a minimum of an hourly temporal resolution.
+    The generated illumination file will possess the same spatial resolution as the input static file used to create it. The *FRICOSIPY* simulation requires that the input static and illumination files have consistent spatial resolutions, so it is often prudent to state their resolution in the filename.
+
+??? "***Ex. $($3$)$ – Findel Glacier: Creating the Illumination File***"
+
+    <br>
+    !!! example
+        The input illumination file for the Findel Glacier can now be produced directly from the previously created input static file by navigating to *utilities/create_ILLUMINATION/*:
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_ILLUMINATION</code>
+        </div> 
+        
+        and then by executing the program `create_illumination_netcdf.py` from the command line:
+        
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">python create_illumination_netcdf.py -s Static_Findel_200m.nc -i Illumination_Findel_200m.nc</code>
+        </div>
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />

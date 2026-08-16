@@ -7,6 +7,14 @@ og_description: A brief overview of the plotting functions available on the Jupy
 
 The *FRICOSIPY* result viewer is a *Jupyter Notebook* interactive workbook that contains a few plotting functions to help visualise results of the model. It is designed to provide a few examples of how to manipulate Network Common Data Format (NetCDF) files using the *Xarray* python computing package and provide greater accessibility to those less familiar with programming.
 
+The *Jupyter Notebook* can be launched with the command:
+
+<div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+  <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">jupyter notebook</code>
+</div>
+<br>
+This will automatically open a local server on your default web browser showing the model directory. Here you can launch the `result_viewer.ipynb` interactive workbook.
+
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
 ## Visualising an Xarray Dataset

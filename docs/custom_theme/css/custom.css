@@ -1,4 +1,34 @@
-/* Customised Warning admonitions */
+/* ==========================================================================
+   Read the Docs Addons Shadow DOM Overrides
+   ========================================================================== */
+
+/* 1. Force Flyout Container Background */
+readthedocs-flyout,
+readthedocs-flyout::part(flyout),
+readthedocs-flyout::part(panel) {
+    background-color: #343131 !important;
+    background: #343131 !important;
+}
+
+/* 2. Target ONLY the top "latest" version text inside the flyout header */
+readthedocs-flyout::part(current-version),
+readthedocs-flyout::part(version),
+readthedocs-flyout::part(header) {
+    color: #55a5d9 !important;
+}
+
+/* 3. Global CSS Variables Backup for Read the Docs Web Component */
+:root {
+    --readthedocs-flyout-background: #343131 !important;
+    --readthedocs-color-primary: #55a5d9 !important;
+  
+}
+
+/* ==========================================================================
+   Customised Admonitions
+   ========================================================================== */
+
+/* Warning Admonitions */
 .admonition.warning > .admonition-title {
     background-color: #f29f97 !important;  
     color: white !important;               
@@ -8,7 +38,7 @@
     border-color: #f29f97 !important;     
 }
 
-/* Customised Example admonitions */
+/* Example Admonitions */
 .admonition.example > .admonition-title {
     background-color: #8b8b8b !important;  
     color: white !important;               
@@ -18,7 +48,11 @@
     border-color: #8b8b8b !important;     
 }
 
-/* Global Code Styling (Greyish text) */
+/* ==========================================================================
+   Code Block Styling & Syntax Highlighting
+   ========================================================================== */
+
+/* Global Code Styling */
 .rst-content code, 
 .rst-content tt,
 pre {
@@ -27,7 +61,7 @@ pre {
     border: 1px solid #e1e4e5 !important;
 }
 
-/* Specific Code Styling */
+/* Specific Code Box Styling */
 .styledcode-box pre {
     color: #555555 !important;              
     background-color: #f8f8f8 !important;    
@@ -35,7 +69,7 @@ pre {
     line-height: 1.6 !important;
 }
 
-/* Specific Syntax Highlighting Overrides for this box */
+/* Syntax Highlighting Overrides */
 .styledcode-box .k, 
 .styledcode-box .kn, 
 .styledcode-box .kc { color: #C586B0 !important; } /* Pink: import, from, def */
@@ -47,3 +81,39 @@ pre {
 .styledcode-box .mi, 
 .styledcode-box .mf { color: #B5CEA8 !important; } /* Light Green: 0.8, 12, 6 */
 .styledcode-box .c1 { color: #6A9955 !important; font-style: italic !important; } /* Green: Comments */
+
+/* ==========================================================================
+   Read the Docs Sidebar & Logo Positioning
+   ========================================================================== */
+
+/* Header background & inner spacing */
+.wy-side-nav-search {
+    background-color: #E3E3E3 !important; 
+    padding: 10px 15px !important;
+}
+
+/* Remove all margins and padding from the logo image and its anchor link */
+.wy-side-nav-search > a,
+.wy-side-nav-search > a img,
+.wy-side-nav-search img {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    max-width: 100% !important;
+}
+
+/* Tighten space between the logo and the search input box below it */
+.wy-side-nav-search div[role="search"] {
+    margin-top: 15px !important; /* Adjust this value if you want it closer or further */
+}
+
+/* 4. Change the background color of the mobile header bar */
+.wy-nav-top {
+    background: #e3e3e3 !important;
+}
+
+/* 5. Update icon and text color to dark grey so it remains readable */
+.wy-nav-top a,
+.wy-nav-top i {
+    color: #595959 !important;
+   
