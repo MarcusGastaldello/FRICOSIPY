@@ -121,7 +121,7 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
         An input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_METEO/</code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">cd utilities/create_STATIC/</code>
         </div> 
 
         and then by executing the program `create_static_netcdf_from_GeoTIFF.py` from the command line:
