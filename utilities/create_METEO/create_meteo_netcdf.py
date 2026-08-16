@@ -196,7 +196,7 @@ def create_meteo_input(csv_file, meteo_file, station_altitude, data_path, start_
     # Write Input Meteo File to Disc 
     # ============================== #
 
-    ds.to_netcdf(os.path.join(resolved_data_path,'meteo/CSV',meteo_file))
+    ds.to_netcdf(os.path.join(resolved_data_path,'meteo',meteo_file))
 
     print('\n\t =================================')
     print('\t INPUT METEOROLOGICAL FILE CREATED')
