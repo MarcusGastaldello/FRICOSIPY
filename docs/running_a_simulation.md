@@ -215,11 +215,15 @@ The user can also directly specify the output timestamps on which the simulation
     <br>
     !!! example
 
-        A spatially-distributed simulation across all nodes of the glacier can also be run, however it is prudent to then reduce the output reporting frequency of the output dataset. Within the *data/output/output_timestapms* directory, a CSV file with datetime values for the end of each month of the 2015 hydrological year has been provided: '*Output_Timestamps_2015H_1M.csv*'. This will reduce the temporal resolution of the output dataset from 8,760 hourly values to 12 aggregated monthly values.
+        A spatially-distributed simulation across all nodes of the glacier can also be run, however it is prudent to then reduce the output reporting frequency of the output dataset. 
+        
+        Within the *data/output/output_timestamps* directory, a CSV file with datetime values for the end of each month of the 2015 hydrological year has been provided: '*Output_Timestamps_2015H_1M.csv*'. This will reduce the temporal resolution of the output dataset from 8,760 hourly values to 12 aggregated monthly values.
         
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
           <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">reduced_output = True<br>output_timestamps = 'Output_Timestamps_2015H_1M.csv'</code>
         </div>
+
+        Note that these simulations will need to be run seperately and that the output filename (`output_netcdf`) should be changed so that the result file is not overwritten.
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
 
