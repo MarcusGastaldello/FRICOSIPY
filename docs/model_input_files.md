@@ -72,7 +72,7 @@ The program is launched, by navigating to the *utilities/create_STATIC/* directo
 </div>
 <br>
 
-??? "***Ex. 1a &emsp; Findel Glacier: Creating the Static File from a CSV Data File***"
+??? "***Ex. $($1a$)$ – Findel Glacier: Creating the Static File from a CSV Data File***"
 
     <br>
     !!! example
