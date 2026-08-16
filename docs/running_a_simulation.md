@@ -37,7 +37,12 @@ The temporal range of the simulation must be specified by providing datetime val
         Having created the model input files for the *Findel Glacier* simulation, they now must be selected in the `config.py file` in order to run the *FRICOSIPY* model:
 
         <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
-          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">static_netcdf = Static_Findel_200m.nc<br>meteo_netcdf = Meteo_Stockhorn.nc<br>illumination_netcdf = Illumination_Findel_200m.nc<br></code>
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">static_netcdf = Static_Findel_200m.nc<br>meteo_netcdf = Meteo_Stockhorn.nc<br>illumination_netcdf = Illumination_Findel_200m.nc</code>
+
+        Similiary, the simulation temporal range should be set to the bounding datetime values for the 2015 hydrological year (our meteorological data):
+
+        <div style="border:1px solid #ccc; padding:10px; background:#f9f9f9; display:inline-block; max-width:100%; overflow-x:auto; text-align:left;">
+          <code style="background:none !important; border:none !important; padding:0 !important; color:#404040; font-family:Consolas, 'Liberation Mono', Courier, monospace;">time_start = '2014-10-01T00:00'<br>time_end = '2015-09-30T23:00'</code>
         </div> 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
