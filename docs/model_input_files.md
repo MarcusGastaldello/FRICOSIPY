@@ -114,7 +114,7 @@ In *Switzerland*, high resolution topographic data is available through the [*Sw
 
     <br>
     !!! example
-        Alternatively, an identical static file can be produded directly from a Digital Elevation Model (DEM). Within the *data/static/GeoTIFF/* directory, a high resolution DEM of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software: '*Findel_Glacier.shp*'.
+        Alternatively, an identical static file can be produded directly from a Digital Elevation Model (DEM). Within the *data/static/GeoTIFF/* directory, a high resolution DEM of the Findel Glacier (Valais, Switzerland) sourced from the [*Federal Office of Topography* (*Swiss Topo*)](https://www.swisstopo.admin.ch/en/height-model-swissalti3d) has been provided: '*Swissalti3D_Findel.tif*'. In addition, a shapefile within the *data/static/GeoTIFF/* directory which demarcates the glacier outline has been created on GIS software: '*Findel_Glacier.shp*'. Using the native 2 m resolution of the DEM would create an extremely large computational grid, therefore it is reccomended to resample to 200 m grid spacing for this exercise.
 
         An input static NetCDF file can be created by navigating to *utilities/create_STATIC/*:
 
