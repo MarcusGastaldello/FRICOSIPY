@@ -59,7 +59,7 @@ The following tables list all the parameters in the *FRICOSIPY* model alongside 
 |:---|:---:|:---:|---|
 | `dt`          | 3600 | s | Simulation time step |
 | `max_depth`   | 50   | m | Maximum simulation depth |
-| `max_layers`  | 500 | – | Maximum number of subsurface layers |
+| `max_layers`  | 200 | – | Maximum number of subsurface layers |
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
@@ -159,7 +159,7 @@ The initial condition parameters control how the subsurface grid is initialised 
     <br>
     !!! example
 
-        For this *Findel Glacier* example, it is sufficient for demonstration purposes to simply retain all the current parameter & parameterisation settings at their default values.
+        For this *Findel Glacier* example, it is sufficient for demonstration purposes to simply retain all the current parameter & parameterisation settings at their default values. However, consider that for running a real simulation with the objective of attaining verifiable results, it will often be very important to carefully consider your choices here. In most cases, parameters need to be appropriately set to local observational data, with the remainder suitably calibrated in order for the model to produce the best results.
 
 
 <hr style="height:2px; background-color:#8b8b8b; border:none;" />
