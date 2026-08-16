@@ -159,13 +159,13 @@ If the user sets `full_field == True`, then the *FRICOSIPY* model will also repo
 
 ## Spatial Extent
 
-## Spatial Subset
+### Spatial Subset
 
 The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
 
 <hr style="height:1px; background-color:#8b8b8b; border:none;" />
 
-# Spatial Mask
+### Spatial Mask
 
 The default setting of `spatial_subset = False` and `[x_min, x_max, y_min, y_max] = None` uses the entirity of the spatial domain of the input static file. <br> <br> Alternatively, the user can set `spatial_subset = True` and define a bounding box of easting $(x)$ and northing $(y)$ values to reduce the spatial extent of the simulation. Modifying the spatial extent enables the user to run point or domain-wide simulations using the same static file and enables the clipping of surrounding terrain needed to accurately create the input illumination file.
 
