@@ -114,14 +114,14 @@ def create_static_input(csv_file, static_file, data_path, projection = None):
 
     ds = xr.Dataset()
     ds.coords['x'] = np.sort(df["EASTING"].unique())
-    ds.coords['y'] = np.sort(df["NORTHING"].unique())
+    ds.coords['y'] = np.sort(df["NORTHING"].unique())[::-1]
 
     # Northing [NORTHING]
-    NORTHING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "NORTHING").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    NORTHING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "NORTHING").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, NORTHING, 'NORTHING', 'm', 'Y Co-ordinate of Projection')
 
     # Easting [EASTING]
-    EASTING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "EASTING").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    EASTING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "EASTING").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, EASTING, 'EASTING', 'm', 'X Co-ordinate of Projection')
 
     # ================ #
@@ -133,51 +133,51 @@ def create_static_input(csv_file, static_file, data_path, projection = None):
     
     # Elevation [ELEVATION]
     print(f"\t 'ELEVATION' - Elevation [m a.s.l.]                  Min: {np.round(df['ELEVATION'].min(),2)} -- Max: {np.round(df['ELEVATION'].max(),2)}")
-    ELEVATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ELEVATION").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    ELEVATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ELEVATION").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, ELEVATION, 'ELEVATION', 'm a.s.l.', 'Elevation')
 
     # Aspect [ASPECT]
     print(f"\t 'ASPECT' - Aspect [degree]                          Min: {np.round(df['ASPECT'].min(),2)} -- Max: {np.round(df['ASPECT'].max(),2)}")
-    ASPECT = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ASPECT").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    ASPECT = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ASPECT").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, ASPECT, 'ASPECT', 'degree', 'Aspect')
 
     # Slope [SLOPE]
     print(f"\t 'SLOPE' - Slope [degree]                            Min: {np.round(df['SLOPE'].min(),2)} -- Max: {np.round(df['SLOPE'].max(),2)}")
-    SLOPE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "SLOPE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    SLOPE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "SLOPE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, SLOPE, 'SLOPE', 'degree', 'Slope')
 
     # Mask [MASK]
     print(f"\t 'MASK' - Mask [-]                                   Min: {np.round(df['MASK'].min(),2)} -- Max: {np.round(df['MASK'].max(),2)}")
-    MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     MASK[MASK == 0] = -9999
     add_variable_along_easting_northing(ds, MASK, 'MASK', '-', 'Mask') 
 
     # Latitude [LATITUDE]
     print(f"\t 'LATITUDE' - Latitude [decimal degree]              Min: {np.round(df['LATITUDE'].min(),2)} -- Max: {np.round(df['LATITUDE'].max(),2)}")
-    LATITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LATITUDE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    LATITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LATITUDE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, LATITUDE, 'LATITUDE', 'degree', 'Latitude')
 
     # Longitude [LONGITUDE]
     print(f"\t 'LONGITUDE' - Longitude [decimal degree]            Min: {np.round(df['LONGITUDE'].min(),2)} -- Max: {np.round(df['LONGITUDE'].max(),2)}")
-    LONGITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LONGITUDE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    LONGITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LONGITUDE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
     # Precipitation Climatology [PRECIPITATION_CLIMATOLOGY]
     if 'PRECIPITATION_CLIMATOLOGY' in df.columns:
         print(f"\t 'PRECIPITATION_CLIMATOLOGY' - Precipitation Climatology [m a\u207b\xb9]   Min: {np.round(df['PRECIPITATION_CLIMATOLOGY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_CLIMATOLOGY'].max(),2)}")
-        PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Precipitation Climatology')
 
     # Basal Heat Flux [BASAL]
     if 'BASAL' in df.columns:
         print(f"\t 'BASAL' - Basal Heat Flux [mW m\u207b\xb2]                  Min: {np.round(df['BASAL'].min(),2)} -- Max: {np.round(df['BASAL'].max(),2)}")
-        BASAL = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "BASAL").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        BASAL = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "BASAL").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, BASAL, 'BASAL', 'mW m\u207b\xb2', 'Basal Heat Flux')
     
     # Glacier Thickness [THICKNESS]
     if 'THICKNESS' in df.columns:
         print(f"\t 'THICKNESS' - Glacier Thickness [m]                         Min: {np.round(df['THICKNESS'].min(),2)} -- Max: {np.round(df['THICKNESS'].max(),2)}")
-        THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
     print('\t ================================================================================')
 
