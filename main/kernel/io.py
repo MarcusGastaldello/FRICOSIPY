@@ -80,7 +80,7 @@ class IOClass:
         elif self.nx > 1:
             grid_resolution = str(abs(self.STATIC.x.values[1] - self.STATIC.x.values[0])) + ' m'
         else:
-            grid_resolution = 'N/A (Point simulation)'
+            grid_resolution = 'N/A'
 
         if spatial_subset == True:
             print('\t Spatial Grid Extent: [X:',x_min,'-',x_max,'| Y: ',y_min,'-',y_max,']. Spatial Resolution:',grid_resolution)
