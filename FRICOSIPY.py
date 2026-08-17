@@ -22,6 +22,7 @@ import os
 from datetime import datetime
 from itertools import product
 import sys
+import textwrap
 from config import *
 import dask.config
 from main.kernel.fricosipy_core import * 
@@ -92,14 +93,13 @@ def main():
         print('\t Output Timestamps: ',output_timestamps)
     print('\t Output Timesteps: %s '% (timesteps))  
     print('\t --------------------------------------------------------------------------------------------------------')
-    print('\t Meteorological Variables (',len(IO.meteorological_variables),'):',IO.meteorological_variables)
-    print('\t Surface Energy Fluxes    (',len(IO.surface_energy_fluxes),'):',IO.surface_energy_fluxes)
-    print('\t Surface Mass Fluxes      (',len(IO.surface_mass_fluxes),'):',IO.surface_mass_fluxes)
-    print('\t Subsurface Mass Fluxes   (',len(IO.subsurface_mass_fluxes),'):',IO.subsurface_mass_fluxes)
-    print('\t Other Variables          (',len(IO.other),'):',IO.other)
-        
+    print(textwrap.fill(f"\t Meteorological Variables ( {len(IO.meteorological_variables)} ):  {IO.meteorological_variables}", width = 107, subsequent_indent='\t                                   '))
+    print(textwrap.fill(f"\t Surface Energy Fluxes    ( {len(IO.surface_energy_fluxes)} ):  {IO.surface_energy_fluxes}",   width = 107, subsequent_indent='\t                                   '))
+    print(textwrap.fill(f"\t Surface Mass Fluxes      ( {len(IO.surface_mass_fluxes)} ):  {IO.surface_mass_fluxes}"      , width = 107, subsequent_indent='\t                                   '))
+    print(textwrap.fill(f"\t Subsurface Mass Fluxes   ( {len(IO.subsurface_mass_fluxes)} ):  {IO.subsurface_mass_fluxes}", width = 107, subsequent_indent='\t                                   '))
+    print(textwrap.fill(f"\t Other Variables          ( {len(IO.other)} ): {IO.other}", width = 107, subsequent_indent='\t                                   '))
     if full_field == True:
-        print('\t Subsurface Variables     (',len(IO.subsurface_variables),'):',IO.subsurface_variables)
+        print(textwrap.fill(f"\t Subsurface Variables     ( {len(IO.subsurface_variables)} ): {IO.subsurface_variables}", width = 107, subsequent_indent='\t                                   '))
     else:
         print('\t Subsurface Variables : (Disabled)')
     print('\t ========================================================================================================\n')
