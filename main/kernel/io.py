@@ -20,6 +20,8 @@ from constants import *
 from parameters import *
 from config import * 
 import sys
+import fiona
+from rasterio.features import geometry_mask
 import warnings
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
@@ -59,6 +61,14 @@ class IOClass:
         # Select spatial extent from config.py
         if spatial_subset == True:
             self.STATIC = self.STATIC.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
+
+        # Select spatial nodes based on a shapefile mask in
+        if spatial_mask == True:
+            with fiona.open(os.path.join(data_path,'output/SHP/',output_shapefile), "r") as shp:
+                geoms = [feature["geometry"] for feature in shp]
+                mask_boolean = geometry_mask(geoms, out_shape = self.STATIC['MASK'].rio.shape, transform = self.STATIC['MASK'].rio.transform(), invert = True)
+                y_dim, x_dim = self.STATIC['MASK'].rio.y_dim, self.STATIC['MASK'].rio.x_dim
+                self.STATIC['MASK'] = self.STATIC['MASK'] * xr.DataArray(mask_boolean.astype(np.float64), coords = {y_dim: self.STATIC['MASK'][y_dim],x_dim: self.STATIC['MASK'][x_dim]}, dims = (y_dim, x_dim))
         
         # Grid Dimensions
         self.ny = self.STATIC.sizes['y']
@@ -70,7 +80,7 @@ class IOClass:
         elif self.nx > 1:
             grid_resolution = str(abs(self.STATIC.x.values[1] - self.STATIC.x.values[0])) + ' m'
         else:
-            grid_resolution = 'N/A (Point simulation)'
+            grid_resolution = 'N/A'
 
         if spatial_subset == True:
             print('\t Spatial Grid Extent: [X:',x_min,'-',x_max,'| Y: ',y_min,'-',y_max,']. Spatial Resolution:',grid_resolution)
@@ -137,8 +147,6 @@ class IOClass:
         # Select spatial extent from config.py
         if spatial_subset == True:
             self.ILLUMINATION = self.ILLUMINATION.sel(y = slice(y_min,y_max), x = slice(x_min,x_max))
-
-        print('\t ==============================================================\n')
 
         return self.ILLUMINATION
     
@@ -210,8 +218,7 @@ class IOClass:
         self.RESULT.attrs['Penetrating_radiation_method'] = penetrating_radiation_method
         self.RESULT.attrs['Roughness_method'] = surface_roughness_method
         self.RESULT.attrs['Saturation_vapour_pressure_method'] = saturation_vapour_pressure_method
-        self.RESULT.attrs['Surface_temperature_solver'] = surface_temperature_solver        
-        
+
         ## (Multi-layer Subsurface Model):
         self.RESULT.attrs['Precipitation_method'] = precipitation_method
         self.RESULT.attrs['Snow_density_method'] = snow_density_method
@@ -229,7 +236,6 @@ class IOClass:
         self.RESULT.attrs['Max_layers'] = max_layers
 
         # Meteorological Input Parameters:
-        self.RESULT.attrs['Station altitude'] = station_altitude
         self.RESULT.attrs['Measurement height'] = z
         self.RESULT.attrs['Air temperature lapse_rate'] = air_temperature_lapse_rate
         self.RESULT.attrs['Air temperature offset'] = air_temperature_offset
@@ -247,7 +253,7 @@ class IOClass:
         self.RESULT.attrs['Clouds_emissivity_constant'] = cloud_emissivity
         self.RESULT.attrs['Longwave_emission_constant'] = LW_emission_constant
         self.RESULT.attrs['Subsurface_interpolation_depth_1'] = subsurface_interpolation_depth_1
-        self.RESULT.attrs['Subsurface_interpolation_depth_1'] = subsurface_interpolation_depth_1
+        self.RESULT.attrs['Subsurface_interpolation_depth_2'] = subsurface_interpolation_depth_2
         self.RESULT.attrs['Basal_heat_flux'] = basal_heat_flux
         self.RESULT.attrs['Minimum_snowfall'] = minimum_snowfall
         self.RESULT.attrs['Snow_ice_threshold'] = snow_ice_threshold
@@ -328,7 +334,8 @@ class IOClass:
         # ========================================= #
 
         # Sort the Xarray dataset and set spatial dimensions
-        self.RESULT = self.RESULT.sortby(['time', 'x', 'y'])
+        self.RESULT = self.RESULT.sortby(['time', 'x'])
+        self.RESULT = self.RESULT.sortby('y', ascending = False)
         self.RESULT.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
 
         # Write the co-ordinate reference system (if provided):
@@ -346,7 +353,7 @@ class IOClass:
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.SLOPE, 'SLOPE', 'degrees', 'Terrain slope')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.ASPECT, 'ASPECT', 'degrees', 'Aspect of slope')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.EASTING, 'EASTING', 'm', 'X Co-ordinate of Projection')
-        self.add_variable_along_northingeasting(self.RESULT, self.STATIC.NORTHING, 'NORTHING', 'm', 'X Co-ordinate of Projection')
+        self.add_variable_along_northingeasting(self.RESULT, self.STATIC.NORTHING, 'NORTHING', 'm', 'Y Co-ordinate of Projection')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.LONGITUDE, 'LONGITUDE', 'm', 'degrees')
         self.add_variable_along_northingeasting(self.RESULT, self.STATIC.LATITUDE, 'LATITUDE', 'm', 'degrees')
         if 'BASAL' in list(self.STATIC.keys()):

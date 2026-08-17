@@ -25,23 +25,23 @@
     ==================================================================
 """
 
-import netCDF4
 import os
 import numpy as np
-import csv
 import sys
-import datetime as dt
 import argparse
 import pandas as pd
 import xarray as xr
-import rioxarray as rio
+import rioxarray
 import warnings
+import pathlib
+sys.path.append(str(pathlib.Path(__file__).resolve().parents[2]))
+from config import *
 warnings.filterwarnings("ignore", message = "angle from rectified to skew grid parameter lost")
 
 
 # ============================================================================================= #
 
-def create_static_input(csv_file, static_file, projection = None):
+def create_static_input(csv_file, static_file, data_path, projection = None):
     """ The create static program creates the input static file:
 
         Input:
@@ -62,9 +62,10 @@ def create_static_input(csv_file, static_file, projection = None):
     # Read CSV Static Data
     # ==================== #
 
-    # Check for NaNs:
-    df = pd.read_csv(os.path.join('../../data/static/CSV/',csv_file))
+    resolved_data_path = data_path if os.path.isabs(data_path) else os.path.normpath(os.path.join('../..', data_path))
+    df = pd.read_csv(os.path.join(resolved_data_path,'static/CSV',csv_file))
 
+    # Check for NaN values in the dataset:
     if df.isnull().values.any() == True:
         raise ValueError('Error: NaN Values are in the Dataset!')
     
@@ -84,15 +85,15 @@ def create_static_input(csv_file, static_file, projection = None):
                          
     # Print Information:
     print('\t INFORMATION:')
-    print('\t ==============================================================')
+    print('\t ================================================================================')
     print('\t Input Static Data CSV: ',csv_file)
     print('\t Output Static NetCDF Dataset: ',static_file)
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------')
     print('\t Minimum Easting:  ',np.min(df["EASTING"]))
     print('\t Maximum Easting:  ',np.max(df["EASTING"]))
     print('\t Minimum Northing: ',np.min(df["NORTHING"]))
     print('\t Maximum Northing: ',np.max(df["NORTHING"]))
-    print('\t --------------------------------------------------------------')
+    print('\t --------------------------------------------------------------------------------')
 
     # ================== #
     # Spatial Resoultion
@@ -101,83 +102,84 @@ def create_static_input(csv_file, static_file, projection = None):
     # Calculate grid spatial resolution:
     if (np.unique(np.diff(np.unique(df["EASTING"]))).size == 1) and (np.unique(np.diff(np.unique(df["NORTHING"]))).size == 1):
         resolution = np.unique(np.diff(np.unique(df["EASTING"])))[0]
-        print('\t Grid Spatial Resolution: ',resolution,' m \n')
-        print('\t ==============================================================')
+        print('\t Grid Spatial Resolution: ',resolution,' m')
+        print('\t Grid Spatial Nodes: ', np.sum(df["MASK"]))
+        print('\t ================================================================================')
     else:
         raise ValueError('Error: Non-rectilinear grid detected!')
 
-    # ======================= #
-    # Create Xarray Dataframe 
-    # ======================= #
+    # ===================== #
+    # Create Xarray Dataset 
+    # ===================== #
 
     ds = xr.Dataset()
-    ds.coords['x'] = df["EASTING"].unique()
-    ds.coords['y'] = df["NORTHING"].unique()
+    ds.coords['x'] = np.sort(df["EASTING"].unique())
+    ds.coords['y'] = np.sort(df["NORTHING"].unique())[::-1]
 
     # Northing [NORTHING]
-    NORTHING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "NORTHING").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    NORTHING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "NORTHING").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, NORTHING, 'NORTHING', 'm', 'Y Co-ordinate of Projection')
 
     # Easting [EASTING]
-    EASTING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "EASTING").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    EASTING = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "EASTING").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, EASTING, 'EASTING', 'm', 'X Co-ordinate of Projection')
 
     # ================ #
     # Static Variables
     # ================ #
 
-    print('\t STATIC VARIABLES:')
-    print('\t ==============================================================')
+    print('\n\t STATIC VARIABLES:')
+    print('\t ================================================================================')
     
     # Elevation [ELEVATION]
     print(f"\t 'ELEVATION' - Elevation [m a.s.l.]                  Min: {np.round(df['ELEVATION'].min(),2)} -- Max: {np.round(df['ELEVATION'].max(),2)}")
-    ELEVATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ELEVATION").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    ELEVATION = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ELEVATION").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, ELEVATION, 'ELEVATION', 'm a.s.l.', 'Elevation')
 
     # Aspect [ASPECT]
     print(f"\t 'ASPECT' - Aspect [degree]                          Min: {np.round(df['ASPECT'].min(),2)} -- Max: {np.round(df['ASPECT'].max(),2)}")
-    ASPECT = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ASPECT").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    ASPECT = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "ASPECT").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, ASPECT, 'ASPECT', 'degree', 'Aspect')
 
     # Slope [SLOPE]
     print(f"\t 'SLOPE' - Slope [degree]                            Min: {np.round(df['SLOPE'].min(),2)} -- Max: {np.round(df['SLOPE'].max(),2)}")
-    SLOPE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "SLOPE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    SLOPE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "SLOPE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, SLOPE, 'SLOPE', 'degree', 'Slope')
 
     # Mask [MASK]
     print(f"\t 'MASK' - Mask [-]                                   Min: {np.round(df['MASK'].min(),2)} -- Max: {np.round(df['MASK'].max(),2)}")
-    MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    MASK = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "MASK").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     MASK[MASK == 0] = -9999
-    add_variable_along_easting_northing(ds, MASK, 'MASK', 'boolean', 'Mask') 
+    add_variable_along_easting_northing(ds, MASK, 'MASK', '-', 'Mask') 
 
     # Latitude [LATITUDE]
     print(f"\t 'LATITUDE' - Latitude [decimal degree]              Min: {np.round(df['LATITUDE'].min(),2)} -- Max: {np.round(df['LATITUDE'].max(),2)}")
-    LATITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LATITUDE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    LATITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LATITUDE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, LATITUDE, 'LATITUDE', 'degree', 'Latitude')
 
     # Longitude [LONGITUDE]
     print(f"\t 'LONGITUDE' - Longitude [decimal degree]            Min: {np.round(df['LONGITUDE'].min(),2)} -- Max: {np.round(df['LONGITUDE'].max(),2)}")
-    LONGITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LONGITUDE").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+    LONGITUDE = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "LONGITUDE").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
     add_variable_along_easting_northing(ds, LONGITUDE, 'LONGITUDE', 'degree', 'Longitude')
 
     # Precipitation Climatology [PRECIPITATION_CLIMATOLOGY]
     if 'PRECIPITATION_CLIMATOLOGY' in df.columns:
         print(f"\t 'PRECIPITATION_CLIMATOLOGY' - Precipitation Climatology [m a\u207b\xb9]   Min: {np.round(df['PRECIPITATION_CLIMATOLOGY'].min(),2)} -- Max: {np.round(df['PRECIPITATION_CLIMATOLOGY'].max(),2)}")
-        PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        PRECIPITATION_CLIMATOLOGY = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "PRECIPITATION_CLIMATOLOGY").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, PRECIPITATION_CLIMATOLOGY, 'PRECIPITATION_CLIMATOLOGY', 'm a\u207b\xb9', 'Precipitation Climatology')
 
     # Basal Heat Flux [BASAL]
     if 'BASAL' in df.columns:
         print(f"\t 'BASAL' - Basal Heat Flux [mW m\u207b\xb2]                  Min: {np.round(df['BASAL'].min(),2)} -- Max: {np.round(df['BASAL'].max(),2)}")
-        BASAL = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "BASAL").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        BASAL = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "BASAL").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, BASAL, 'BASAL', 'mW m\u207b\xb2', 'Basal Heat Flux')
     
     # Glacier Thickness [THICKNESS]
     if 'THICKNESS' in df.columns:
         print(f"\t 'THICKNESS' - Glacier Thickness [m]                         Min: {np.round(df['THICKNESS'].min(),2)} -- Max: {np.round(df['THICKNESS'].max(),2)}")
-        THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
+        THICKNESS = np.asarray(df.pivot(index = "NORTHING", columns = "EASTING", values = "THICKNESS").reindex(index = ds.coords['y']).apply(pd.to_numeric, errors='coerce'), dtype = np.float64)
         add_variable_along_easting_northing(ds, THICKNESS, 'THICKNESS', 'm', 'Glacier Thickness')
-    print('\t ==============================================================')
+    print('\t ================================================================================')
 
     # =============================== #
     # Write Input Static File to Disc 
@@ -185,12 +187,21 @@ def create_static_input(csv_file, static_file, projection = None):
 
     # Assign Co-ordinate Reference System (CRS):
     if projection is not None:
-        ds = ds.sortby(['x', 'y'])   
-        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y", inplace = True)
+        ds = ds.rio.set_spatial_dims(x_dim = "x", y_dim = "y")
         ds = ds.rio.write_crs(projection)
         ds = ds.rio.write_grid_mapping()
+        if ds.rio.crs.is_geographic:
+            # For geographic coordinate systems (eg. Latitude / Longitude (WGS84))
+            x_attrs = {"standard_name": "longitude", "long_name": "longitude", "units": "degrees_east", "axis": "X"}
+            y_attrs = {"standard_name": "latitude",  "long_name": "latitude",  "units": "degrees_north", "axis": "Y"}
+        else:
+            # For projected coordinate systems (eg. Universal Transverse Mercator (UTM))
+            x_attrs = {"standard_name": "projection_x_coordinate", "long_name": "x coordinate of projection", "units": "m", "axis": "X"}
+            y_attrs = {"standard_name": "projection_y_coordinate", "long_name": "y coordinate of projection", "units": "m", "axis": "Y"}
+        ds.x.attrs.update(x_attrs)
+        ds.y.attrs.update(y_attrs)
 
-    ds.to_netcdf(os.path.join('../../data/static/',static_file))
+    ds.to_netcdf(os.path.join(resolved_data_path,'static',static_file))
 
     print('\n\t =========================')
     print('\t INPUT STATIC FILE CREATED')
@@ -204,7 +215,6 @@ def add_variable_along_easting_northing(ds, var, name, units, long_name):
     ds[name] = (('y','x'), var)
     ds[name].attrs['units'] = units
     ds[name].attrs['long_name'] = long_name
-    ds[name].attrs['grid_mapping'] = 'spatial_ref'    
     ds[name].encoding['_FillValue'] = -9999
     return ds
 
@@ -219,7 +229,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    create_static_input(args.csv_file, args.static_file, args.projection)
+    create_static_input(args.csv_file, args.static_file, data_path, args.projection)
 
 
 # ============================================================================================= #

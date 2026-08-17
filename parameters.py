@@ -19,7 +19,6 @@ albedo_method = 'Oerlemans98'                     # Options: ['Oerlemans98','Bou
 penetrating_radiation_method = 'Bintanja95'       # Options: ['Bintanja95','disabled']
 surface_roughness_method = 'Moelg12'              # Options: ['Moelg12','constant']
 saturation_vapour_pressure_method = 'Sonntag94'   # Options: ['Sonntag94','Murray67']
-surface_temperature_solver = 'Newton'             # Options: ['SLSQP','Newton'] [slowest <--> fastest]
 
 # Multi-layer Subsurface Model
 precipitation_method = 'standard'                 # Options: ['standard','Mattea21']
@@ -43,7 +42,6 @@ max_depth = 50                                  # Maximum simulation depth [m]
 max_layers = 200                                # Maximum number of subsurface layers               
 
 # Meteorological Input Parameters:
-station_altitude = 3000.0                       # Altitude of meteorological station [m a.s.l.]
 z = 2.0                                         # Meteorological data measurement height [m] (typically 2m)
 air_temperature_lapse_rate = -0.006             # Air temperature lapse rate [°C m-1] (default = -0.006)
 air_temperature_offset = 0.0                    # Air temperature offset for adjusting data in meteorlogical forcing [°C] (default = 0.0 - no modification)

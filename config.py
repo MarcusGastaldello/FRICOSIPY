@@ -30,28 +30,8 @@ output_netcdf = '<output_file>.nc'
 # ================= #
 
 # Date Range:
-time_start   = '2000-01-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
-time_end     = '2024-12-31T23:00' # Datetime (yyyy-mm-ddThh:mm)
-
-# ========================== #
-# OUTPUT REPORTING FREQUENCY 
-# ========================== #
-
-# Model Spin-up
-model_spin_up = False              # Output variables are not aggregated during an initialisation / spin-up phase.
-initial_timestamp  = None          # (Datetime (yyyy-mm-ddThh:mm) , if unused - 'None')
-
-# Output Timestamps:
-reduced_output = False             # Only report output variables on user-defined output timestamps.
-output_timestamps = None           # CSV file with desired output timestamps (if unused - 'None').
-
-# ======================= #
-# SPATIAL EXTENT / SUBSET 
-# ======================= #
-
-# Reduce Spatial Extent
-spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area.
-[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] 
+time_start   = '2014-10-01T00:00' # Datetime (yyyy-mm-ddThh:mm)
+time_end     = '2015-09-30T23:00' # Datetime (yyyy-mm-ddThh:mm)
 
 # ================= #
 # OUTPUT VARIABLES:
@@ -69,6 +49,30 @@ full_field = False
 subsurface_variables =     ['DEPTH','HEIGHT','DENSITY','TEMPERATURE','WATER_CONTENT','COLD_CONTENT','POROSITY','ICE_FRACTION','IRREDUCIBLE_WATER','REFREEZE','HYDRO_YEAR','GRAIN_SIZE']
 
 # ========================== #
+# OUTPUT REPORTING FREQUENCY 
+# ========================== #
+
+# Model Spin-up
+model_spin_up = False              # Output variables are not aggregated during an initialisation / spin-up phase.
+initial_timestamp  = None          # (Datetime (yyyy-mm-ddThh:mm) , if unused - 'None')
+
+# Output Timestamps:
+reduced_output = False             # Only report output variables on user-defined output timestamps.
+output_timestamps = None           # CSV file with desired output timestamps (if unused - 'None').
+
+# ======================= #
+# SPATIAL EXTENT / SUBSET 
+# ======================= #
+
+# Reduced Spatial Subset:
+spatial_subset = False            # Reduce the spatial extent of the static and illumination files to a single point or smaller computational area by a bounding box.
+[x_min, x_max, y_min, y_max] = [2604300, 2604400, 1136500, 1136600] 
+
+# Reduced Spatial Mask:
+spatial_mask = False
+output_shapefile = '<shapefile>.nc'   # Reduce the spatial nodes to be simulated by overriding the glacial mask of the input static file.
+
+# ========================== #
 # SIMULATION PARALLELIZATION 
 # ========================== #
 
@@ -79,7 +83,7 @@ local_port = 8786                 # port for local cluster
 # OUTPUT DATASET PRECISION
 # ======================== #
 
-precision = 'single'              # either 'half' (16bit), 'single' (32bit) or 'double' (64bit)
+precision = 'single'              # either 'single' (32bit) or 'double' (64bit)
 
 # ============================ #
 # COMPRESSION of OUTPUT NetCDF
