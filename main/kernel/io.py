@@ -278,7 +278,7 @@ class IOClass:
             self.RESULT.attrs['Surface_roughness_firn'] = surface_roughness_firn
             self.RESULT.attrs['Surface_roughness_timescale'] = surface_roughness_timescale
         elif surface_roughness_method == 'constant':
-            self.RESULT.attrs['Constant_fresh_snow_density'] = constant_surface_roughness
+            self.RESULT.attrs['Constant_surface_roughness'] = constant_surface_roughness
         if preferential_percolation_method == 'Marchenko17':
             self.RESULT.attrs['Characteristic_preferential_percolation_depth'] = preferential_percolation_depth
         if irreducible_water_content_method == 'constant':
